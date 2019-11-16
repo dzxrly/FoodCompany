@@ -258,7 +258,7 @@ public class SessionFailoverTest extends DevApiBaseTestCase {
         Session sess = this.fact.getSession(buildConnectionString(this.testsHost) + "?" + makeParam(PropertyKey.xdevapiConnectTimeout, "3000", true));
         sess.sql("SELECT SLEEP(11)").execute();
         long end = System.currentTimeMillis() - begin;
-        assertTrue("Expected: " + 11000 + ".." + 12000 + ". Got " + end, end >= 11000 && end < 12000);
+        assertTrue("Expected: " + 11000 + "" + 12000 + ". Got " + end, end >= 11000 && end < 12000);
 
         // TS11_1 Set connection property xdevapi.connect-timeout=null, try to create Session, check that WrongArgumentException is thrown
         // with message "The connection property 'xdevapi.connect-timeout' only accepts integer values. The value 'null' can not be converted to an integer."
@@ -299,7 +299,7 @@ public class SessionFailoverTest extends DevApiBaseTestCase {
         long begin = System.currentTimeMillis();
         assertThrows(throwable, () -> this.fact.getSession(url));
         long end = System.currentTimeMillis() - begin;
-        assertTrue("Expected: " + expLowLimit + ".." + expUpLimit + ". Got " + end, end >= expLowLimit && end < expUpLimit);
+        assertTrue("Expected: " + expLowLimit + "" + expUpLimit + ". Got " + end, end >= expLowLimit && end < expUpLimit);
     }
 
     private void testConnectionTimeout_assertFailureTimeout(String url, int expLowLimit, int expUpLimit) {
@@ -310,7 +310,7 @@ public class SessionFailoverTest extends DevApiBaseTestCase {
         long begin = System.currentTimeMillis();
         this.fact.getSession(url);
         long end = System.currentTimeMillis() - begin;
-        assertTrue("Expected: " + expLowLimit + ".." + expUpLimit + ". Got " + end, end >= expLowLimit && end < expUpLimit);
+        assertTrue("Expected: " + expLowLimit + "" + expUpLimit + ". Got " + end, end >= expLowLimit && end < expUpLimit);
     }
 
 }

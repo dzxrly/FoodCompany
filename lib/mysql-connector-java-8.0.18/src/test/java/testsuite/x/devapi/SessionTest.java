@@ -1070,7 +1070,7 @@ public class SessionTest extends DevApiBaseTestCase {
         long begin = System.currentTimeMillis();
         assertThrows(throwable, message, () -> cli.getSession());
         long end = System.currentTimeMillis() - begin;
-        assertTrue("Expected: " + expLowLimit + ".." + expUpLimit + ". Got " + end, end >= expLowLimit && end < expUpLimit);
+        assertTrue("Expected: " + expLowLimit + "" + expUpLimit + ". Got " + end, end >= expLowLimit && end < expUpLimit);
     }
 
     @Test
