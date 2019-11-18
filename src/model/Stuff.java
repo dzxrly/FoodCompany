@@ -15,7 +15,7 @@ public class Stuff {
     private StringProperty personalID; //身份证
     private StringProperty address; //住址
     private StringProperty phoneNumber; //手机号
-    private StringProperty type;//员工类型
+    private StringProperty type;//员工类型for sign up
     private ObjectProperty<LocalDate> birthday; //生日
 
 
