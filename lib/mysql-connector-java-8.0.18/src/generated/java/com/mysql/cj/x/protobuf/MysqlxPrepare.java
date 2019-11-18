@@ -81,7 +81,7 @@ public final class MysqlxPrepare {
    *     client &lt;- server: Error
    *   end
    * :param stmt_id: client side assigned statement id, which is going to identify the result of preparation
-   * :param stmt: defines one of following messages to be prepared - Crud.Find, Crud.Insert, Crud.Delete, Crud.Upsert, Sql.StmtExecute
+   * :param stmt: defines one of following messages to be prepared - Crud.Find, Crud.Insert, Crud.Delete, Crud.Upsert, sql.StmtExecute
    * :Returns: :protobuf:msg:`Mysqlx.Ok|Mysqlx.Error`
    * </pre>
    *
@@ -240,15 +240,15 @@ public final class MysqlxPrepare {
       com.mysql.cj.x.protobuf.MysqlxCrud.DeleteOrBuilder getDeleteOrBuilder();
 
       /**
-       * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+       * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
        */
       boolean hasStmtExecute();
       /**
-       * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+       * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
        */
       com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute getStmtExecute();
       /**
-       * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+       * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
        */
       com.mysql.cj.x.protobuf.MysqlxSql.StmtExecuteOrBuilder getStmtExecuteOrBuilder();
     }
@@ -628,19 +628,19 @@ public final class MysqlxPrepare {
       public static final int STMT_EXECUTE_FIELD_NUMBER = 6;
       private com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute stmtExecute_;
       /**
-       * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+       * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
        */
       public boolean hasStmtExecute() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+       * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
        */
       public com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute getStmtExecute() {
         return stmtExecute_ == null ? com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute.getDefaultInstance() : stmtExecute_;
       }
       /**
-       * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+       * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
        */
       public com.mysql.cj.x.protobuf.MysqlxSql.StmtExecuteOrBuilder getStmtExecuteOrBuilder() {
         return stmtExecute_ == null ? com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute.getDefaultInstance() : stmtExecute_;
@@ -1705,13 +1705,13 @@ public final class MysqlxPrepare {
         private com.google.protobuf.SingleFieldBuilderV3<
             com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute, com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute.Builder, com.mysql.cj.x.protobuf.MysqlxSql.StmtExecuteOrBuilder> stmtExecuteBuilder_;
         /**
-         * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+         * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
          */
         public boolean hasStmtExecute() {
           return ((bitField0_ & 0x00000020) == 0x00000020);
         }
         /**
-         * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+         * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
          */
         public com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute getStmtExecute() {
           if (stmtExecuteBuilder_ == null) {
@@ -1721,7 +1721,7 @@ public final class MysqlxPrepare {
           }
         }
         /**
-         * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+         * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
          */
         public Builder setStmtExecute(com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute value) {
           if (stmtExecuteBuilder_ == null) {
@@ -1737,7 +1737,7 @@ public final class MysqlxPrepare {
           return this;
         }
         /**
-         * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+         * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
          */
         public Builder setStmtExecute(
             com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute.Builder builderForValue) {
@@ -1751,7 +1751,7 @@ public final class MysqlxPrepare {
           return this;
         }
         /**
-         * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+         * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
          */
         public Builder mergeStmtExecute(com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute value) {
           if (stmtExecuteBuilder_ == null) {
@@ -1771,7 +1771,7 @@ public final class MysqlxPrepare {
           return this;
         }
         /**
-         * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+         * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
          */
         public Builder clearStmtExecute() {
           if (stmtExecuteBuilder_ == null) {
@@ -1784,7 +1784,7 @@ public final class MysqlxPrepare {
           return this;
         }
         /**
-         * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+         * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
          */
         public com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute.Builder getStmtExecuteBuilder() {
           bitField0_ |= 0x00000020;
@@ -1792,7 +1792,7 @@ public final class MysqlxPrepare {
           return getStmtExecuteFieldBuilder().getBuilder();
         }
         /**
-         * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+         * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
          */
         public com.mysql.cj.x.protobuf.MysqlxSql.StmtExecuteOrBuilder getStmtExecuteOrBuilder() {
           if (stmtExecuteBuilder_ != null) {
@@ -1803,7 +1803,7 @@ public final class MysqlxPrepare {
           }
         }
         /**
-         * <code>optional .Mysqlx.Sql.StmtExecute stmt_execute = 6;</code>
+         * <code>optional .Mysqlx.sql.StmtExecute stmt_execute = 6;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
             com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute, com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute.Builder, com.mysql.cj.x.protobuf.MysqlxSql.StmtExecuteOrBuilder> 
@@ -2108,7 +2108,7 @@ public final class MysqlxPrepare {
      *     client &lt;- server: Error
      *   end
      * :param stmt_id: client side assigned statement id, which is going to identify the result of preparation
-     * :param stmt: defines one of following messages to be prepared - Crud.Find, Crud.Insert, Crud.Delete, Crud.Upsert, Sql.StmtExecute
+     * :param stmt: defines one of following messages to be prepared - Crud.Find, Crud.Insert, Crud.Delete, Crud.Upsert, sql.StmtExecute
      * :Returns: :protobuf:msg:`Mysqlx.Ok|Mysqlx.Error`
      * </pre>
      *
@@ -4084,7 +4084,7 @@ public final class MysqlxPrepare {
       "Mysqlx.Crud.Insert\022#\n\006update\030\004 \001(\0132\023.Mys" +
       "qlx.Crud.Update\022#\n\006delete\030\005 \001(\0132\023.Mysqlx" +
       ".Crud.Delete\022-\n\014stmt_execute\030\006 \001(\0132\027.Mys" +
-      "qlx.Sql.StmtExecute\">\n\004Type\022\010\n\004FIND\020\000\022\n\n" +
+      "qlx.sql.StmtExecute\">\n\004Type\022\010\n\004FIND\020\000\022\n\n" +
       "\006INSERT\020\001\022\n\n\006UPDATE\020\002\022\n\n\006DELETE\020\004\022\010\n\004STM" +
       "T\020\005:\004\210\3520(\"f\n\007Execute\022\017\n\007stmt_id\030\001 \002(\r\022#\n" +
       "\004args\030\002 \003(\0132\025.Mysqlx.Datatypes.Any\022\037\n\020co" +

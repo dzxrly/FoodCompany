@@ -1,4 +1,4 @@
-package Sql;
+package sql;
 
 public class sss {
     //占位符1

@@ -45,7 +45,7 @@ public final class MysqlxSql {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface StmtExecuteOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Mysqlx.Sql.StmtExecute)
+      // @@protoc_insertion_point(interface_extends:Mysqlx.sql.StmtExecute)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -119,14 +119,14 @@ public final class MysqlxSql {
    * :param args: values for wildcard replacements
    * :param compact_metadata: send only type information for :protobuf:msg:`Mysqlx.Resultset::ColumnMetadata`, skipping names and others
    * :returns:
-   *    * zero or one :protobuf:msg:`Mysqlx.Resultset::` followed by :protobuf:msg:`Mysqlx.Sql::StmtExecuteOk`
+   *    * zero or one :protobuf:msg:`Mysqlx.Resultset::` followed by :protobuf:msg:`Mysqlx.sql::StmtExecuteOk`
    * </pre>
    *
-   * Protobuf type {@code Mysqlx.Sql.StmtExecute}
+   * Protobuf type {@code Mysqlx.sql.StmtExecute}
    */
   public  static final class StmtExecute extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Mysqlx.Sql.StmtExecute)
+      // @@protoc_insertion_point(message_implements:Mysqlx.sql.StmtExecute)
       StmtExecuteOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use StmtExecute.newBuilder() to construct.
@@ -563,14 +563,14 @@ public final class MysqlxSql {
      * :param args: values for wildcard replacements
      * :param compact_metadata: send only type information for :protobuf:msg:`Mysqlx.Resultset::ColumnMetadata`, skipping names and others
      * :returns:
-     *    * zero or one :protobuf:msg:`Mysqlx.Resultset::` followed by :protobuf:msg:`Mysqlx.Sql::StmtExecuteOk`
+     *    * zero or one :protobuf:msg:`Mysqlx.Resultset::` followed by :protobuf:msg:`Mysqlx.sql::StmtExecuteOk`
      * </pre>
      *
-     * Protobuf type {@code Mysqlx.Sql.StmtExecute}
+     * Protobuf type {@code Mysqlx.sql.StmtExecute}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Mysqlx.Sql.StmtExecute)
+        // @@protoc_insertion_point(builder_implements:Mysqlx.sql.StmtExecute)
         com.mysql.cj.x.protobuf.MysqlxSql.StmtExecuteOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -1184,10 +1184,10 @@ public final class MysqlxSql {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:Mysqlx.Sql.StmtExecute)
+      // @@protoc_insertion_point(builder_scope:Mysqlx.sql.StmtExecute)
     }
 
-    // @@protoc_insertion_point(class_scope:Mysqlx.Sql.StmtExecute)
+    // @@protoc_insertion_point(class_scope:Mysqlx.sql.StmtExecute)
     private static final com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute();
@@ -1225,7 +1225,7 @@ public final class MysqlxSql {
   }
 
   public interface StmtExecuteOkOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Mysqlx.Sql.StmtExecuteOk)
+      // @@protoc_insertion_point(interface_extends:Mysqlx.sql.StmtExecuteOk)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
@@ -1233,11 +1233,11 @@ public final class MysqlxSql {
    * statement executed successful
    * </pre>
    *
-   * Protobuf type {@code Mysqlx.Sql.StmtExecuteOk}
+   * Protobuf type {@code Mysqlx.sql.StmtExecuteOk}
    */
   public  static final class StmtExecuteOk extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Mysqlx.Sql.StmtExecuteOk)
+      // @@protoc_insertion_point(message_implements:Mysqlx.sql.StmtExecuteOk)
       StmtExecuteOkOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use StmtExecuteOk.newBuilder() to construct.
@@ -1452,11 +1452,11 @@ public final class MysqlxSql {
      * statement executed successful
      * </pre>
      *
-     * Protobuf type {@code Mysqlx.Sql.StmtExecuteOk}
+     * Protobuf type {@code Mysqlx.sql.StmtExecuteOk}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Mysqlx.Sql.StmtExecuteOk)
+        // @@protoc_insertion_point(builder_implements:Mysqlx.sql.StmtExecuteOk)
         com.mysql.cj.x.protobuf.MysqlxSql.StmtExecuteOkOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -1604,10 +1604,10 @@ public final class MysqlxSql {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:Mysqlx.Sql.StmtExecuteOk)
+      // @@protoc_insertion_point(builder_scope:Mysqlx.sql.StmtExecuteOk)
     }
 
-    // @@protoc_insertion_point(class_scope:Mysqlx.Sql.StmtExecuteOk)
+    // @@protoc_insertion_point(class_scope:Mysqlx.sql.StmtExecuteOk)
     private static final com.mysql.cj.x.protobuf.MysqlxSql.StmtExecuteOk DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new com.mysql.cj.x.protobuf.MysqlxSql.StmtExecuteOk();
@@ -1663,7 +1663,7 @@ public final class MysqlxSql {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020mysqlx_sql.proto\022\nMysqlx.Sql\032\014mysqlx.p" +
+      "\n\020mysqlx_sql.proto\022\nMysqlx.sql\032\014mysqlx.p" +
       "roto\032\026mysqlx_datatypes.proto\"\177\n\013StmtExec" +
       "ute\022\026\n\tnamespace\030\003 \001(\t:\003sql\022\014\n\004stmt\030\001 \002(" +
       "\014\022#\n\004args\030\002 \003(\0132\025.Mysqlx.Datatypes.Any\022\037" +
