@@ -8,10 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.loginUIController">
+<AnchorPane prefHeight="130.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.loginUIController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="350.0" layoutX="25.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <GridPane layoutX="90.0" layoutY="195.0" prefHeight="50.0" prefWidth="220.0">
+      <GridPane layoutX="90.0" layoutY="33.0" prefHeight="50.0" prefWidth="220.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="47.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="10.0" prefWidth="173.0" />
@@ -35,7 +34,7 @@
             <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <HBox layoutX="220.0" layoutY="256.0" spacing="10.0">
+      <HBox layoutX="220.0" layoutY="94.0" spacing="10.0">
          <children>
             <Button layoutX="173.0" layoutY="263.0" mnemonicParsing="false" text="登录" />
             <Button layoutX="240.0" layoutY="263.0" mnemonicParsing="false" text="注册" />
