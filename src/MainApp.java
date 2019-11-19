@@ -72,6 +72,7 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
         initLoginMainUIPane();
+
         showLoginProgressBar();
     }
 }
