@@ -20,6 +20,7 @@ public class MainApp extends Application {
     private Stage primaryStage;
     private AnchorPane progressBarPane;
     private BorderPane mainPane;
+    private AnchorPane loginPane;
 
     Service<Integer> service = new Service<Integer>() {
         @Override
@@ -28,19 +29,12 @@ public class MainApp extends Application {
                 @Override
                 protected Integer call() throws Exception {
                     //---------------------------------
-                    //临时代码，替换连接数据库操作
-                    for (int i = 0; i < 30; i++) {
-                        Thread.sleep(100);
-                        System.out.println(i + 1);
-                    }
+                    //连接数据库操作
+                    initializeDB();
                     //---------------------------------
-                    Platform.runLater(()->{
+                    Platform.runLater(() -> {
                         primaryStage.hide();
-                        try {
-                            showMainPane();//跳转至主页面
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        showUserLoginPane();//跳转至登陆页面
                     });
                     return null;
                 }
@@ -56,32 +50,30 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("食品公司管理系统");
-        //initializeDB();
         showLoginProgressBar();
     }
 
-    public void initializeDB(){
+    public void initializeDB() {
         Connection con;
         //jdbc驱动
-        String driver="com.mysql.cj.jdbc.Driver";
+        String driver = "com.mysql.cj.jdbc.Driver";
         //数据库是FoodCompany todo：做一个前端得到域名填充
-        String url="jdbc:mysql://47.102.218.224:3306/FoodCompany?&useSSL=false&serverTimezone=UTC";
-        String user="root";
-        String password="cb990204";
-        try{
+        String url = "jdbc:mysql://47.102.218.224:3306/FoodCompany?&useSSL=false&serverTimezone=UTC";
+        String user = "root";
+        String password = "cb990204";
+        try {
             //注册jdbc驱动程序
             Class.forName(driver);
             //建立连接
-            con= DriverManager.getConnection(url,user,password);
-            if(!con.isClosed()){
+            con = DriverManager.getConnection(url, user, password);
+            if (!con.isClosed()) {
                 System.out.println("successfully connected!");
-            }
-            else System.out.println("bad!");
+            } else System.out.println("bad!");
             con.close();
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             System.out.println("database driver was not loaded!");
 
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("database connection failed");
         }
@@ -89,6 +81,20 @@ public class MainApp extends Application {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public void showUserLoginPane() {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(MainApp.class.getResource("view/userLoginPane.fxml"));
+        try {
+            loginPane = (AnchorPane) fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(loginPane);
+        new JMetro(scene, Style.LIGHT);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public void showLoginProgressBar() {
