@@ -6,12 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
+import java.beans.EventHandler;
 import java.io.IOException;
 
 public class userLoginPaneController {
@@ -27,9 +32,11 @@ public class userLoginPaneController {
     @FXML
     private AnchorPane loginUI;
 
+
     @FXML
     private void initialize() {
-        loginBtn.textProperty().addListener((observable, oldValue, newValue) -> {
+        loginBtn.setDisable(true);
+        inputNumber.textProperty().addListener((observable, oldValue, newValue) -> {
             loginBtn.setDisable(newValue.trim().isEmpty());
         });
     }
@@ -39,7 +46,7 @@ public class userLoginPaneController {
         if (inputNumber.getText() != null && inputPW.getText() != null) {
             userNumber = inputNumber.getText();
             userPassword = inputPW.getText();
-
+            //验证密码 TODO
             Platform.runLater(() -> {
                 Stage nowStage = (Stage) loginUI.getScene().getWindow();
                 nowStage.hide();
@@ -67,6 +74,13 @@ public class userLoginPaneController {
             mainWindowStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleEnterInput(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER) {
+            handleLoginBtn();
         }
     }
 }

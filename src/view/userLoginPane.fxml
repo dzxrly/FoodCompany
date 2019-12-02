@@ -34,7 +34,7 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="inputPW" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <PasswordField fx:id="inputPW" onKeyReleased="#handleEnterInput" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>

@@ -94,8 +94,9 @@ public class MainApp extends Application {
         Scene scene = new Scene(loginPane);
         new JMetro(scene, Style.LIGHT);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
-    }
+    }//显示登陆页面
 
     public void showLoginProgressBar() {
         try {
@@ -106,6 +107,7 @@ public class MainApp extends Application {
             Scene scene = new Scene(progressBarPane);
             new JMetro(scene, Style.LIGHT);
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
             service.restart();
         } catch (IOException e) {
@@ -121,6 +123,7 @@ public class MainApp extends Application {
         Scene scene = new Scene(mainPane);
         new JMetro(scene, Style.LIGHT);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }//主页面
 }
