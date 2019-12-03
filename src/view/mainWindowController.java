@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -98,6 +99,9 @@ public class mainWindowController {
         fxmlLoader.setLocation(getClass().getResource(fxmlPath));
         AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
         mainUI.setCenter(anchorPane);
+        Stage nowStage = (Stage) mainUI.getScene().getWindow();
+        anchorPane.prefWidthProperty().bind(nowStage.widthProperty());
+        anchorPane.prefHeightProperty().bind(nowStage.heightProperty());
         currentNode = (Node) anchorPane;
     }
 }
