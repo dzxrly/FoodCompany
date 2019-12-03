@@ -8,6 +8,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +19,7 @@ import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
 import java.beans.EventHandler;
+import java.io.File;
 import java.io.IOException;
 
 public class userLoginPaneController {
@@ -31,10 +34,13 @@ public class userLoginPaneController {
     private javafx.scene.control.Button loginBtn;
     @FXML
     private AnchorPane loginUI;
-
+    @FXML
+    private ImageView imgView;
 
     @FXML
     private void initialize() {
+        Image img = new Image("img/loginBG.jpg");
+        imgView.setImage(img);
         loginBtn.setDisable(true);
         inputNumber.textProperty().addListener((observable, oldValue, newValue) -> {
             loginBtn.setDisable(newValue.trim().isEmpty());
@@ -46,12 +52,15 @@ public class userLoginPaneController {
         if (inputNumber.getText() != null && inputPW.getText() != null) {
             userNumber = inputNumber.getText();
             userPassword = inputPW.getText();
-            //验证密码 TODO
-            Platform.runLater(() -> {
-                Stage nowStage = (Stage) loginUI.getScene().getWindow();
-                nowStage.hide();
-                showMainPane();
-            });
+            if (checkPW(userNumber, userPassword)) {
+                Platform.runLater(() -> {
+                    Stage nowStage = (Stage) loginUI.getScene().getWindow();
+                    nowStage.hide();
+                    showMainPane();
+                });
+            } else {
+                //TODO
+            }
             //Test
             System.out.println(userNumber + "," + userPassword);
         }
@@ -81,8 +90,14 @@ public class userLoginPaneController {
 
     @FXML
     private void handleEnterInput(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER) {
+        if (event.getCode() == KeyCode.ENTER) {
             handleLoginBtn();
         }
+    }
+
+    //密码验证
+    private boolean checkPW(String number, String pw) {
+        //TODO
+        return true;
     }
 }

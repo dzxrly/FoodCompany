@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import java.util.regex.*;
 
 public class saleDepClientCreatorPaneController {
     //创建客户页面控制类
@@ -63,7 +64,8 @@ public class saleDepClientCreatorPaneController {
 
     @FXML
     private void handlePushBtn() {
-        System.out.println("PUSHED");
+        if (formCheck()) System.out.println("PUSHED");
+        else System.out.println("REFUSED");
         //TODO
     }
 
@@ -71,6 +73,46 @@ public class saleDepClientCreatorPaneController {
     private void handleEnterInput(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             handlePushBtn();
+        }
+    }
+
+    private boolean formCheck() {
+        String phoneNumberRegex = "\\d+";
+        String emailRegex = "\\w+@\\w+";
+        if (returnCustomerTypeByIndex(customerType.getSelectionModel().getSelectedIndex()) != null &&
+                returnCustomerLevelByIndex(customerLevel.getSelectionModel().getSelectedIndex()) != null &&
+                !personalName.getText().equals("") &&
+                phoneNumber.getText().matches(phoneNumberRegex) &&
+                email.getText().matches(emailRegex)) {
+            return true;
+        } else return false;
+    }//表单验证
+
+    private String returnCustomerTypeByIndex(int index) {
+        switch (index) {
+            default:
+                return null;
+            case 0:
+                return "个人";
+            case 1:
+                return "公司/企业";
+        }
+    }
+
+    private String returnCustomerLevelByIndex(int index) {
+        switch (index) {
+            default:
+                return null;
+            case 0:
+                return "一星";
+            case 1:
+                return "二星";
+            case 2:
+                return "三星";
+            case 3:
+                return "四星";
+            case 4:
+                return "五星";
         }
     }
 }
