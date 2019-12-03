@@ -71,6 +71,8 @@ public class userLoginPaneController {
             new JMetro(scene, Style.LIGHT);
             Stage mainWindowStage = new Stage();
             mainWindowStage.setScene(scene);
+            mainWindowStage.setResizable(true);
+            mainWindowStage.setTitle("食品公司管理系统");
             mainWindowStage.show();
         } catch (IOException e) {
             e.printStackTrace();

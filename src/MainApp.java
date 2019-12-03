@@ -49,7 +49,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("食品公司管理系统");
+        this.primaryStage.setTitle("连接数据库...");
         showLoginProgressBar();
     }
 
@@ -95,6 +95,7 @@ public class MainApp extends Application {
         new JMetro(scene, Style.LIGHT);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
+        primaryStage.setTitle("登录");
         primaryStage.show();
     }//显示登陆页面
 
@@ -114,18 +115,6 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }//加载页面
-
-    public void showMainPane() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(MainApp.class.getResource("view/mainWindow.fxml"));
-        mainPane = (BorderPane) fxmlLoader.load();
-
-        Scene scene = new Scene(mainPane);
-        new JMetro(scene, Style.LIGHT);
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(true);
-        primaryStage.show();
-    }//主页面
 }
 
 

@@ -26,6 +26,8 @@ public class mainWindowController {
     @FXML
     private TreeView<String> sideMenu;
 
+    private Node currentNode;
+
     @FXML
     private void initialize() {
         //创建侧边栏
@@ -69,25 +71,33 @@ public class mainWindowController {
                 if (currentSelectedItem != null) {
                     System.out.println(currentSelectedItem.getValue());
 
-                    if(currentSelectedItem.getValue().equals("创建客户")) {
+                    if (currentSelectedItem.getValue().equals("创建客户")) {
                         try {
-                            showSaleDepClientCreatorPane();
+                            showInsidePane("saleDepClientCreatorPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    } else if (currentSelectedItem.getValue().equals("客户信息查询")) {
+                        try {
+                            showInsidePane("saleDepClientInfoSearchPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        mainUI.getChildren().remove(currentNode); //清空主面板
                     }
                 }
-
                 //TODO
             }
         });
     }
 
-    //显示创建客户页面
-    private void showSaleDepClientCreatorPane() throws IOException {
+    //显示内部页面
+    private void showInsidePane(String fxmlPath) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("saleDepClientCreatorPane.fxml"));
-        AnchorPane sdccpAnchorPane = (AnchorPane) fxmlLoader.load();
-        mainUI.setCenter(sdccpAnchorPane);
+        fxmlLoader.setLocation(getClass().getResource(fxmlPath));
+        AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
+        mainUI.setCenter(anchorPane);
+        currentNode = (Node) anchorPane;
     }
 }

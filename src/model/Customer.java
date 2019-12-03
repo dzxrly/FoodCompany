@@ -7,13 +7,12 @@ import java.time.LocalDate;
 
 //顾客
 public class Customer {
-    private StringProperty firstName; //姓
-    private StringProperty lastName; //名
+    private StringProperty personalName; //姓名
+    private StringProperty companyName; //公司名
     private StringProperty number; //顾客ID
-    private StringProperty password; //登陆密码
-    private StringProperty level; //客户星级，用数字表示，0为最高
-    private StringProperty personalID; //身份证
+    private StringProperty level; //客户星级，用数字表示，分为1~5，5为最高
     private StringProperty address; //住址
+    private StringProperty email; //邮箱
     private StringProperty phoneNumber; //手机号
     private StringProperty type;//顾客类型
     private ObjectProperty<LocalDate> birthday; //生日
