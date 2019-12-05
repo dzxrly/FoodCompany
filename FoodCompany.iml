@@ -3,7 +3,24 @@
   <component name="FacetManager">
     <facet type="hibernate" name="Hibernate">
       <configuration>
-        <datasource-map />
+        <datasource-map>
+          <unit-entry name="foo" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:documentation:src:main:asciidoc:quickstart:tutorials:annotations:src:test:resources:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:documentation:src:main:asciidoc:quickstart:tutorials:basic:src:test:resources:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:documentation:src:main:asciidoc:quickstart:tutorials:osgi:unmanaged-native:src:main:resources:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-core:src:test:bundles:cfgxmlpar:org:hibernate:jpa:test:pack:cfgxmlpar:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-core:src:test:java:org:hibernate:test:boot:cfgXml:badnamespace.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-core:src:test:java:org:hibernate:test:cfg:cache:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-core:src:test:resources:org:hibernate:jpa:test:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-core:src:test:resources:org:hibernate:orm:test:bootstrap:jpa:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-core:src:test:resources:org:hibernate:test:annotations:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-core:src:test:resources:org:hibernate:test:schematoolsnaming:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-ehcache:src:test:resources:hibernate-config:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-envers:src:test:resources:hibernate.test.session-cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-jcache:src:test:resources:hibernate-config:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-jipijapa:src:test:bundles:cfgxmlpar:org:hibernate:jpa:test:pack:cfgxmlpar:hibernate.cfg.xml" />
+          <unit-entry name="lib:hibernate-release-5.4.9.Final:project:hibernate-osgi:src:test:resources:hibernate.cfg.xml" />
+        </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/lib/hibernate-release-5.4.9.Final/project/documentation/src/main/asciidoc/quickstart/tutorials/annotations/src/test/resources/hibernate.cfg.xml" />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/lib/hibernate-release-5.4.9.Final/project/documentation/src/main/asciidoc/quickstart/tutorials/basic/src/test/resources/hibernate.cfg.xml" />
@@ -29,7 +46,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="manager1" />
+        </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/lib/hibernate-release-5.4.9.Final/project/hibernate-core/src/test/bundles/explicitpar/META-INF/persistence.xml" />
       </configuration>
     </facet>
