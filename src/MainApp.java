@@ -1,3 +1,4 @@
+import DAO.HibernateTest1;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -31,6 +32,7 @@ public class MainApp extends Application {
                     //---------------------------------
                     //连接数据库操作
                     initializeDB();
+                    //test();
                     //---------------------------------
                     Platform.runLater(() -> {
                         primaryStage.hide();
@@ -41,6 +43,12 @@ public class MainApp extends Application {
             };
         }
     };
+
+    public void test() {
+        HibernateTest1 h1 =new HibernateTest1();
+        h1.saveCustomerTest();
+        System.out.println("111");
+    }
 
     public static void main(String[] args) {
         launch(args);
