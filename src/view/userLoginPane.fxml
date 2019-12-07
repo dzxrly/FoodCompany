@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -15,10 +16,15 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <HBox layoutX="242.0" layoutY="226.0" spacing="10.0">
+      <HBox layoutX="195.0" layoutY="226.0" spacing="10.0">
          <children>
             <Button fx:id="loginBtn" layoutX="135.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleLoginBtn" text="登录" />
             <Button layoutX="203.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleCancel" text="取消" />
+            <Button fx:id="setBtn" mnemonicParsing="false" onAction="#handleSet" prefHeight="23.0" prefWidth="29.0">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
       <VBox layoutX="192.0" layoutY="77.0" spacing="10.0">
@@ -46,5 +52,10 @@
          </children>
       </VBox>
       <ImageView fx:id="imgView" fitHeight="315.0" fitWidth="190.0" layoutX="-5.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="192.0" layoutY="272.0" text="powered by JavaFX11 and JMetro">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

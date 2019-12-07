@@ -4,10 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -36,9 +33,12 @@ public class userLoginPaneController {
     private AnchorPane loginUI;
     @FXML
     private ImageView imgView;
+    @FXML
+    private Button setBtn;
 
     @FXML
     private void initialize() {
+        setBtn.setGraphic(new ImageView(new Image("img/setting.png", 16, 16, false, false)));
         Image img = new Image("img/loginBG.jpg");
         imgView.setImage(img);
         loginBtn.setDisable(true);
@@ -101,5 +101,10 @@ public class userLoginPaneController {
     private boolean checkPW(String number, String pw) {
         //TODO
         return true;
+    }
+
+    @FXML
+    private void handleSet() {
+        //TODO
     }
 }

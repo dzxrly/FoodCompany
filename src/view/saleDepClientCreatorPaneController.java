@@ -5,10 +5,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
 import java.util.regex.*;
 
 public class saleDepClientCreatorPaneController {
@@ -27,9 +31,16 @@ public class saleDepClientCreatorPaneController {
     private ComboBox customerType;
     @FXML
     private ComboBox customerLevel;
+    @FXML
+    private Button upBtn;
+    @FXML
+    private Button clearBtn;
 
     @FXML
     private void initialize() {
+        upBtn.setGraphic(new ImageView(new Image("img/check.png", 16, 16, false, false)));
+        clearBtn.setGraphic(new ImageView(new Image("img/close.png", 16, 16, false, false)));
+
         ObservableList<String> customerTypeOptions = FXCollections.observableArrayList("个人", "公司/企业");
         customerType.getItems().addAll(customerTypeOptions);
         customerType.getSelectionModel().select(0);
