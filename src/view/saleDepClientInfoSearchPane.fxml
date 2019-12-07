@@ -19,25 +19,25 @@
          <children>
             <ComboBox fx:id="searchIndexType" layoutX="35.0" layoutY="60.0" prefHeight="28.0" prefWidth="167.0" styleClass="searchIndexType" />
             <TextField fx:id="searchIndexInput" layoutX="185.0" layoutY="60.0" prefHeight="22.0" prefWidth="286.0" promptText="请输入查询内容" styleClass="searchIndexInput" />
-            <Button fx:id="searchBtn" layoutX="471.0" layoutY="60.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="64.0" styleClass="searchBtn" text="搜索" />
+            <Button fx:id="searchBtn" layoutX="471.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="28.0" prefWidth="64.0" styleClass="searchBtn" text="搜索" />
          </children>
       </HBox>
-      <VBox layoutX="731.0" layoutY="143.0" prefHeight="396.0" prefWidth="335.0" spacing="10.0">
+      <VBox fx:id="customerInfo" layoutX="731.0" layoutY="143.0" prefHeight="396.0" prefWidth="335.0" spacing="10.0">
          <children>
             <Label layoutX="26.0" layoutY="129.0" text="客户类型：" />
-            <TextField editable="false" layoutX="26.0" layoutY="157.0" />
+            <TextField fx:id="customerTypeText" editable="false" layoutX="26.0" layoutY="157.0" />
             <Label layoutX="26.0" layoutY="192.0" text="客户星级：" />
-            <TextField editable="false" layoutX="26.0" layoutY="218.0" />
+            <TextField fx:id="customerLevelText" editable="false" layoutX="26.0" layoutY="218.0" />
             <Label layoutX="26.0" layoutY="262.0" text="公司名称：" />
-            <TextField editable="false" layoutX="14.0" layoutY="287.0" />
+            <TextField fx:id="companyNameText" editable="false" layoutX="14.0" layoutY="287.0" />
             <Label layoutX="26.0" layoutY="330.0" text="负责人名称：" />
-            <TextField editable="false" layoutX="18.0" layoutY="360.0" />
+            <TextField fx:id="personalNameText" editable="false" layoutX="18.0" layoutY="360.0" />
             <Label layoutX="31.0" layoutY="410.0" text="联系电话:：" />
-            <TextField editable="false" layoutX="26.0" layoutY="440.0" />
+            <TextField fx:id="phoneText" editable="false" layoutX="26.0" layoutY="440.0" />
             <Label layoutX="41.0" layoutY="486.0" text="地址：" />
-            <TextField editable="false" layoutX="31.0" layoutY="510.0" />
+            <TextField fx:id="addressText" editable="false" layoutX="31.0" layoutY="510.0" />
             <Label layoutX="26.0" layoutY="554.0" text="邮箱：" />
-            <TextField editable="false" layoutX="31.0" layoutY="583.0" />
+            <TextField fx:id="emailText" editable="false" layoutX="31.0" layoutY="583.0" />
          </children>
       </VBox>
       <ScrollPane layoutX="14.0" layoutY="143.0" prefHeight="444.0" prefWidth="689.0">
@@ -49,11 +49,6 @@
             </TableView>
          </content>
       </ScrollPane>
-      <HBox layoutX="966.0" layoutY="564.0" spacing="20.0">
-         <children>
-            <Button layoutX="829.0" layoutY="583.0" mnemonicParsing="false" text="导出" />
-            <Button layoutX="897.0" layoutY="583.0" mnemonicParsing="false" text="打印" />
-         </children>
-      </HBox>
+      <Button layoutX="955.0" layoutY="564.0" mnemonicParsing="false" onAction="#handlePrint" text="导出为PDF并打印" />
    </children>
 </AnchorPane>

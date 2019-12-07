@@ -10,10 +10,11 @@ import java.time.LocalDate;
 
 public class HibernateTest1 {
 
-    public void saveCustomerTest(){
-        Customer c=new Customer();
+    public void saveCustomerTest() {
+        Customer c = new Customer();
         c.setAccumulatedAmount("0");
-        c.setAddress("浙江");;
+        c.setAddress("浙江");
+        ;
         c.setBirthday(LocalDate.now());
         c.setCompanyName("山东大学威海");
         c.setEmail("530153667@qq.com");
@@ -21,13 +22,14 @@ public class HibernateTest1 {
         c.setNumber("10000");
         c.setOrderQuantity("0");
         c.setPersonalName("陈博");
-        c.setPhoneNumber("13857756176");;
+        c.setPhoneNumber("13857756176");
+        ;
         c.setType("老板");
 
         //使用hibernate中的API完成将Customer信息保存到mysql数据库的操作
-        Configuration config =new Configuration().configure();
+        Configuration config = new Configuration().configure();
         SessionFactory sf = config.buildSessionFactory();
-        Session se=sf.openSession();
+        Session se = sf.openSession();
         //开启事务
         se.beginTransaction();
         //操作
