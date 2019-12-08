@@ -1,28 +1,26 @@
 package model;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
 //顾客
 public class Customer {
-    private StringProperty personalName = new SimpleStringProperty(); //姓名
+    //private IntegerProperty id = new SimpleIntegerProperty();//表的编号 自动增长 用于数据库的查询
+    private StringProperty personalName = new SimpleStringProperty(); //姓名.
     private StringProperty companyName = new SimpleStringProperty(); //公司名
-    private StringProperty number = new SimpleStringProperty(); //顾客ID
-    private StringProperty level = new SimpleStringProperty(); //客户星级，用数字表示，分为1~5，5为最高
+    private IntegerProperty  number = new SimpleIntegerProperty(); //顾客ID
+    private IntegerProperty level = new SimpleIntegerProperty(); //客户星级，用数字表示，分为1~5，5为最高.
     private StringProperty address = new SimpleStringProperty(); //住址
-    private StringProperty email = new SimpleStringProperty(); //邮箱
-    private StringProperty phoneNumber = new SimpleStringProperty(); //手机号
-    private StringProperty type = new SimpleStringProperty();//顾客类型
-    private ObjectProperty<LocalDate> birthday; //生日
-    private StringProperty accumulatedAmount;//累计交易额
-    private StringProperty orderQuantity;//客户完成的订单数量
+    private StringProperty email = new SimpleStringProperty(); //邮箱.
+    private StringProperty phoneNumber = new SimpleStringProperty(); //手机号.
+    private IntegerProperty type = new SimpleIntegerProperty();//顾客类型.
+    private DoubleProperty accumulatedAmount = new SimpleDoubleProperty();//累计交易额
+    private DoubleProperty orderQuantity = new SimpleDoubleProperty();;//客户完成的订单数量
 
     public Customer() {
     }
-
+/*
     public Customer(String personalName, String companyName, String level, String address, String email, String phoneNumber, String type) {
         setPersonalName(personalName);
         setCompanyName(companyName);
@@ -32,6 +30,9 @@ public class Customer {
         setPhoneNumber(phoneNumber);
         setType(type);
     } //构造函数 测试用
+
+
+ */
 
     public String getPersonalName() {
         return personalName.get();
@@ -57,27 +58,27 @@ public class Customer {
         this.companyName.set(companyName);
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number.get();
     }
 
-    public StringProperty numberProperty() {
+    public IntegerProperty numberProperty() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(int number) {
         this.number.set(number);
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level.get();
     }
 
-    public StringProperty levelProperty() {
+    public IntegerProperty levelProperty() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level.set(level);
     }
 
@@ -117,51 +118,41 @@ public class Customer {
         this.phoneNumber.set(phoneNumber);
     }
 
-    public String getType() {
+    public int getType() {
         return type.get();
     }
 
-    public StringProperty typeProperty() {
+    public IntegerProperty typeProperty() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type.set(type);
     }
 
-    public LocalDate getBirthday() {
-        return birthday.get();
-    }
+        public double getAccumulatedAmount() {
+            return accumulatedAmount.get();
+        }
 
-    public ObjectProperty<LocalDate> birthdayProperty() {
-        return birthday;
-    }
+        public DoubleProperty accumulatedAmountProperty() {
+            return accumulatedAmount;
+        }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday.set(birthday);
-    }
+        public void setAccumulatedAmount(double accumulatedAmount) {
+            this.accumulatedAmount.set(accumulatedAmount);
+        }
 
-    public String getAccumulatedAmount() {
-        return accumulatedAmount.get();
-    }
 
-    public StringProperty accumulatedAmountProperty() {
-        return accumulatedAmount;
-    }
 
-    public void setAccumulatedAmount(String accumulatedAmount) {
-        this.accumulatedAmount.set(accumulatedAmount);
-    }
-
-    public String getOrderQuantity() {
+    public double getOrderQuantity() {
         return orderQuantity.get();
     }
 
-    public StringProperty orderQuantityProperty() {
+    public DoubleProperty orderQuantityProperty() {
         return orderQuantity;
     }
 
-    public void setOrderQuantity(String orderQuantity) {
+    public void setOrderQuantity(double orderQuantity) {
         this.orderQuantity.set(orderQuantity);
     }
 
@@ -176,7 +167,6 @@ public class Customer {
                 ", email=" + email +
                 ", phoneNumber=" + phoneNumber +
                 ", type=" + type +
-                ", birthday=" + birthday +
                 ", accumulatedAmount=" + accumulatedAmount +
                 ", orderQuantity=" + orderQuantity +
                 '}';

@@ -44,14 +44,12 @@ public class MainApp extends Application {
         }
     };
 
-    public void test() {
-        HibernateTest1 h1 =new HibernateTest1();
-        h1.saveCustomerTest();
-        System.out.println("111");
-    }
 
     public static void main(String[] args) {
         launch(args);
+        HibernateTest1 h1=new HibernateTest1();
+        h1.findCustomerByIdTest();
+        h1.saveCustomerTest();;
     }
 
     @Override

@@ -108,8 +108,8 @@ public class SaleDepClientInfoSearchPaneController {
         searchResTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Customer>() {
             @Override
             public void changed(ObservableValue<? extends Customer> observable, Customer oldValue, Customer newValue) {
-                customerTypeComboBox.getSelectionModel().select(returnTypeIndexByString(newValue.getType()));
-                customerLevelComboBox.getSelectionModel().select(returnLevelIndexByString(newValue.getLevel()));
+                //customerTypeComboBox.getSelectionModel().select(returnTypeIndexByString(newValue.getType()));
+                //customerLevelComboBox.getSelectionModel().select(returnLevelIndexByString(newValue.getLevel()));
                 companyNameText.setText(newValue.getCompanyName());
                 personalNameText.setText(newValue.getPersonalName());
                 phoneText.setText(newValue.getPhoneNumber());
@@ -149,6 +149,7 @@ public class SaleDepClientInfoSearchPaneController {
         //TODO
     }
 
+    /*n
     @FXML
     private void handleSearch() {
         //test
@@ -158,6 +159,8 @@ public class SaleDepClientInfoSearchPaneController {
         );
         //TODO
     }
+
+     */
 
     @FXML
     private void handlePrint() {
