@@ -18,7 +18,7 @@ import javafx.util.Pair;
 import java.io.IOException;
 import java.util.Optional;
 
-public class mainWindowController {
+public class MainWindowController {
     //主页面控制类
 
     @FXML
@@ -40,7 +40,6 @@ public class mainWindowController {
         TreeItem<String> clientManage = new TreeItem<>("客户管理");
         clientManage.getChildren().add(new TreeItem<>("创建客户"));
         clientManage.getChildren().add(new TreeItem<>("客户信息查询"));
-        clientManage.getChildren().add(new TreeItem<>("客户信息修改"));
         itemSaleDep.getChildren().add(clientManage);
 
         TreeItem<String> orderManage = new TreeItem<>("订单管理");
@@ -74,13 +73,13 @@ public class mainWindowController {
 
                     if (currentSelectedItem.getValue().equals("创建客户")) {
                         try {
-                            showInsidePane("saleDepClientCreatorPane.fxml");
+                            showInsidePane("SaleDepClientCreatorPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     } else if (currentSelectedItem.getValue().equals("客户信息查询")) {
                         try {
-                            showInsidePane("saleDepClientInfoSearchPane.fxml");
+                            showInsidePane("SaleDepClientInfoSearchPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

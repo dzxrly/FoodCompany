@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1720.0" stylesheets="@saleDepClientInfoSearchPane.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.saleDepClientInfoSearchPaneController">
+<AnchorPane prefHeight="1080.0" prefWidth="1720.0" stylesheets="@SaleDepClientInfoSearchPane.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SaleDepClientInfoSearchPaneController">
    <children>
       <Label alignment="CENTER" layoutX="14.0" layoutY="47.0" text="查找已有客户" textAlignment="CENTER">
          <font>
@@ -39,7 +40,16 @@
             <TextField fx:id="addressText" editable="false" layoutX="31.0" layoutY="510.0" />
             <Label layoutX="26.0" layoutY="554.0" text="邮箱：" />
             <TextField fx:id="emailText" editable="false" layoutX="31.0" layoutY="583.0" />
-            <Button fx:id="expBtn" mnemonicParsing="false" onAction="#handlePrint" text="导出为PDF并打印" />
+            <HBox spacing="5.0">
+               <children>
+                  <Button fx:id="expBtn" mnemonicParsing="false" onAction="#handlePrint" text="导出为PDF并打印" />
+                  <Button fx:id="saveBtn" layoutX="1388.0" layoutY="813.0" mnemonicParsing="false" onAction="#handleSave" text="保存">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="deleteBtn" layoutX="1468.0" layoutY="813.0" mnemonicParsing="false" onAction="#handleDelete" text="删除" />
+               </children>
+            </HBox>
          </children>
       </VBox>
       <ScrollPane layoutX="14.0" layoutY="143.0" prefHeight="757.0" prefWidth="1208.0">

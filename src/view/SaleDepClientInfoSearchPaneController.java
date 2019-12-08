@@ -17,7 +17,7 @@ import org.controlsfx.control.ToggleSwitch;
 import service.AlertDialog;
 import service.Printer;
 
-public class saleDepClientInfoSearchPaneController {
+public class SaleDepClientInfoSearchPaneController {
     //客户信息查询控制类
 
     @FXML
@@ -46,6 +46,10 @@ public class saleDepClientInfoSearchPaneController {
     private VBox customerInfo;
     @FXML
     private Button expBtn;
+    @FXML
+    private Button saveBtn;
+    @FXML
+    private Button deleteBtn;
 
     private HBox toggleSwitchBox;
     private ToggleSwitch infoOrChangeBtn;
@@ -64,8 +68,18 @@ public class saleDepClientInfoSearchPaneController {
         customerInfo.getChildren().add(0, toggleSwitchBox);
         searchBtn.setGraphic(new ImageView(new Image("img/search.png", 16, 16, false, false)));
         expBtn.setGraphic(new ImageView(new Image("img/download.png", 16, 16, false, false)));
+        saveBtn.setGraphic(new ImageView(new Image("img/check.png", 16, 16, false, false)));
+        deleteBtn.setGraphic(new ImageView(new Image("img/close.png", 16, 16, false, false)));
         customerTypeComboBox.getItems().addAll(customerTypeOptions);
         customerLevelComboBox.getItems().addAll(customerLevelOptions);
+        customerTypeComboBox.setDisable(true);
+        customerLevelComboBox.setDisable(true);
+        expBtn.setVisible(true);
+        expBtn.setDisable(false);
+        saveBtn.setVisible(false);
+        saveBtn.setDisable(true);
+        deleteBtn.setVisible(false);
+        deleteBtn.setDisable(true);
 
         TableColumn customerType = new TableColumn("客户类型");
         customerType.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -107,8 +121,28 @@ public class saleDepClientInfoSearchPaneController {
         infoOrChangeBtn.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) toggleSwitchStatus.setText("修改模式");
-                else toggleSwitchStatus.setText("查询模式");
+                if (newValue) {
+                    toggleSwitchStatus.setText("修改模式");
+                    customerTypeComboBox.setDisable(false);
+                    customerLevelComboBox.setDisable(false);
+                    expBtn.setVisible(false);
+                    expBtn.setDisable(true);
+                    saveBtn.setVisible(true);
+                    saveBtn.setDisable(false);
+                    deleteBtn.setVisible(true);
+                    deleteBtn.setDisable(false);
+
+                } else {
+                    toggleSwitchStatus.setText("查询模式");
+                    customerTypeComboBox.setDisable(true);
+                    customerLevelComboBox.setDisable(true);
+                    expBtn.setVisible(true);
+                    expBtn.setDisable(false);
+                    saveBtn.setVisible(false);
+                    saveBtn.setDisable(true);
+                    deleteBtn.setVisible(false);
+                    deleteBtn.setDisable(true);
+                }
                 //TODO
             }
         });
@@ -154,6 +188,16 @@ public class saleDepClientInfoSearchPaneController {
             alertDialog.createAlert(Alert.AlertType.ERROR, "ERROR", "打印错误！", "客户详细信息不存在！");
             alertDialog.showAlert();
         }
+    }
+
+    @FXML
+    private void handleSave() {
+        //TODO
+    }
+
+    @FXML
+    private void handleDelete() {
+        //TODO
     }
 
     private int returnTypeIndexByString(String input) {

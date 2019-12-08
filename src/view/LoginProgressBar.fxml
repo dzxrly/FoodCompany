@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="130.0" prefWidth="400.0" stylesheets="@loginProgressBar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.loginProgressBarController">
+<AnchorPane fx:id="anchorPane" prefHeight="130.0" prefWidth="400.0" stylesheets="@LoginProgressBar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginProgressBarController">
    <children>
       <Label layoutX="177.0" layoutY="65.0" text="加载中...">
          <font>

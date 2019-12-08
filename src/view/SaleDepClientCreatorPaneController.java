@@ -15,7 +15,7 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.regex.*;
 
-public class saleDepClientCreatorPaneController {
+public class SaleDepClientCreatorPaneController {
     //创建客户页面控制类
     @FXML
     private TextField companyName;

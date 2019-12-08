@@ -93,7 +93,7 @@ public class MainApp extends Application {
 
     public void showUserLoginPane() {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(MainApp.class.getResource("view/userLoginPane.fxml"));
+        fxmlLoader.setLocation(MainApp.class.getResource("view/UserLoginPane.fxml"));
         try {
             loginPane = (AnchorPane) fxmlLoader.load();
         } catch (IOException e) {
@@ -110,7 +110,7 @@ public class MainApp extends Application {
     public void showLoginProgressBar() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(MainApp.class.getResource("view/loginProgressBar.fxml"));
+            fxmlLoader.setLocation(MainApp.class.getResource("view/LoginProgressBar.fxml"));
             progressBarPane = (AnchorPane) fxmlLoader.load();
 
             Scene scene = new Scene(progressBarPane);

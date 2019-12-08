@@ -8,7 +8,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class loginProgressBarController {
+public class LoginProgressBarController {
 
     @FXML
     private ProgressBar connectDBProgress;

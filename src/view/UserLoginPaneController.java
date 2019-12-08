@@ -19,7 +19,7 @@ import java.beans.EventHandler;
 import java.io.File;
 import java.io.IOException;
 
-public class userLoginPaneController {
+public class UserLoginPaneController {
     //登陆页面控制类
     private String userNumber;
     private String userPassword;
@@ -74,7 +74,7 @@ public class userLoginPaneController {
     private void showMainPane() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("mainWindow.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("MainWindow.fxml"));
             BorderPane mainWindow = (BorderPane) fxmlLoader.load();
             Scene scene = new Scene(mainWindow);
             new JMetro(scene, Style.LIGHT);
