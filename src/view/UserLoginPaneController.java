@@ -49,6 +49,7 @@ public class UserLoginPaneController {
 
     @FXML
     private void handleLoginBtn() {
+
         if (inputNumber.getText() != null && inputPW.getText() != null) {
             userNumber = inputNumber.getText();
             userPassword = inputPW.getText();

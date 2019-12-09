@@ -48,6 +48,7 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
         HibernateTest1 h1=new HibernateTest1();
+
         h1.findCustomerByIdTest();
         h1.saveCustomerTest();;
     }
