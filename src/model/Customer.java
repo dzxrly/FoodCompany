@@ -1,6 +1,7 @@
 package model;
 
 import javafx.beans.property.*;
+import service.CustomerIndexAndStringSwitch;
 
 import java.time.LocalDate;
 
@@ -9,19 +10,20 @@ public class Customer {
     //private IntegerProperty id = new SimpleIntegerProperty();//表的编号 自动增长 用于数据库的查询
     private StringProperty personalName = new SimpleStringProperty(); //姓名.
     private StringProperty companyName = new SimpleStringProperty(); //公司名
-    private IntegerProperty  number = new SimpleIntegerProperty(); //顾客ID
+    private IntegerProperty number = new SimpleIntegerProperty(); //顾客ID
     private IntegerProperty level = new SimpleIntegerProperty(); //客户星级，用数字表示，分为1~5，5为最高.
     private StringProperty address = new SimpleStringProperty(); //住址
     private StringProperty email = new SimpleStringProperty(); //邮箱.
     private StringProperty phoneNumber = new SimpleStringProperty(); //手机号.
     private IntegerProperty type = new SimpleIntegerProperty();//顾客类型.
     private DoubleProperty accumulatedAmount = new SimpleDoubleProperty();//累计交易额
-    private DoubleProperty orderQuantity = new SimpleDoubleProperty();;//客户完成的订单数量
+    private DoubleProperty orderQuantity = new SimpleDoubleProperty();//客户完成的订单数量
+    private CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();//过滤器类
 
     public Customer() {
     }
-/*
-    public Customer(String personalName, String companyName, String level, String address, String email, String phoneNumber, String type) {
+
+    public Customer(String personalName, String companyName, int level, String address, String email, String phoneNumber, int type) {
         setPersonalName(personalName);
         setCompanyName(companyName);
         setLevel(level);
@@ -29,10 +31,7 @@ public class Customer {
         setEmail(email);
         setPhoneNumber(phoneNumber);
         setType(type);
-    } //构造函数 测试用
-
-
- */
+    }//构造函数 测试用
 
     public String getPersonalName() {
         return personalName.get();
@@ -74,8 +73,9 @@ public class Customer {
         return level.get();
     }
 
-    public IntegerProperty levelProperty() {
-        return level;
+    public StringProperty levelProperty() {
+        StringProperty tempLevel = new SimpleStringProperty(customerIndexAndStringSwitch.returnCustomerLevelByIndex(this.level.get()));
+        return tempLevel;
     }
 
     public void setLevel(int level) {
@@ -122,26 +122,26 @@ public class Customer {
         return type.get();
     }
 
-    public IntegerProperty typeProperty() {
-        return type;
+    public StringProperty typeProperty() {
+        StringProperty tempType = new SimpleStringProperty(customerIndexAndStringSwitch.returnCustomerTypeByIndex(this.type.get()));
+        return tempType;
     }
 
     public void setType(int type) {
         this.type.set(type);
     }
 
-        public double getAccumulatedAmount() {
-            return accumulatedAmount.get();
-        }
+    public double getAccumulatedAmount() {
+        return accumulatedAmount.get();
+    }
 
-        public DoubleProperty accumulatedAmountProperty() {
-            return accumulatedAmount;
-        }
+    public DoubleProperty accumulatedAmountProperty() {
+        return accumulatedAmount;
+    }
 
-        public void setAccumulatedAmount(double accumulatedAmount) {
-            this.accumulatedAmount.set(accumulatedAmount);
-        }
-
+    public void setAccumulatedAmount(double accumulatedAmount) {
+        this.accumulatedAmount.set(accumulatedAmount);
+    }
 
 
     public double getOrderQuantity() {

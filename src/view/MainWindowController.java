@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -38,11 +40,13 @@ public class MainWindowController {
         TreeItem<String> itemSaleDep = new TreeItem<>("销售部");
 
         TreeItem<String> clientManage = new TreeItem<>("客户管理");
+        clientManage.setGraphic(new ImageView(new Image("img/sub_account.png", 16, 16, false, false)));
         clientManage.getChildren().add(new TreeItem<>("创建客户"));
         clientManage.getChildren().add(new TreeItem<>("客户信息查询"));
         itemSaleDep.getChildren().add(clientManage);
 
         TreeItem<String> orderManage = new TreeItem<>("订单管理");
+        orderManage.setGraphic(new ImageView(new Image("img/order.png", 16, 16, false, false)));
         orderManage.getChildren().add(new TreeItem<>("订单录入"));
         orderManage.getChildren().add(new TreeItem<>("订单信息"));
         itemSaleDep.getChildren().add(orderManage);

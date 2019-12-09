@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import service.CustomerIndexAndStringSwitch;
 
 import java.util.regex.*;
 
@@ -35,6 +36,8 @@ public class SaleDepClientCreatorPaneController {
     private Button upBtn;
     @FXML
     private Button clearBtn;
+
+    private CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
 
     @FXML
     private void initialize() {
@@ -90,40 +93,12 @@ public class SaleDepClientCreatorPaneController {
     private boolean formCheck() {
         String phoneNumberRegex = "\\d+";
         String emailRegex = "\\w+@\\w+";
-        if (returnCustomerTypeByIndex(customerType.getSelectionModel().getSelectedIndex()) != null &&
-                returnCustomerLevelByIndex(customerLevel.getSelectionModel().getSelectedIndex()) != null &&
+        if (customerIndexAndStringSwitch.returnCustomerTypeByIndex(customerType.getSelectionModel().getSelectedIndex()) != null &&
+                customerIndexAndStringSwitch.returnCustomerLevelByIndex(customerLevel.getSelectionModel().getSelectedIndex()) != null &&
                 !personalName.getText().equals("") &&
                 phoneNumber.getText().matches(phoneNumberRegex) &&
                 email.getText().matches(emailRegex)) {
             return true;
         } else return false;
     }//表单验证
-
-    private String returnCustomerTypeByIndex(int index) {
-        switch (index) {
-            default:
-                return null;
-            case 0:
-                return "个人";
-            case 1:
-                return "公司/企业";
-        }
-    }
-
-    private String returnCustomerLevelByIndex(int index) {
-        switch (index) {
-            default:
-                return null;
-            case 0:
-                return "一星";
-            case 1:
-                return "二星";
-            case 2:
-                return "三星";
-            case 3:
-                return "四星";
-            case 4:
-                return "五星";
-        }
-    }
 }

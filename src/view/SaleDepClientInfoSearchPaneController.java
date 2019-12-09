@@ -12,9 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 import model.Customer;
 import org.controlsfx.control.ToggleSwitch;
 import service.AlertDialog;
+import service.CustomerIndexAndStringSwitch;
 import service.Printer;
 
 public class SaleDepClientInfoSearchPaneController {
@@ -50,6 +52,8 @@ public class SaleDepClientInfoSearchPaneController {
     private Button saveBtn;
     @FXML
     private Button deleteBtn;
+
+    private CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
 
     private HBox toggleSwitchBox;
     private ToggleSwitch infoOrChangeBtn;
@@ -108,8 +112,8 @@ public class SaleDepClientInfoSearchPaneController {
         searchResTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Customer>() {
             @Override
             public void changed(ObservableValue<? extends Customer> observable, Customer oldValue, Customer newValue) {
-                //customerTypeComboBox.getSelectionModel().select(returnTypeIndexByString(newValue.getType()));
-                //customerLevelComboBox.getSelectionModel().select(returnLevelIndexByString(newValue.getLevel()));
+                customerTypeComboBox.getSelectionModel().select(newValue.getType());
+                customerLevelComboBox.getSelectionModel().select(newValue.getLevel());
                 companyNameText.setText(newValue.getCompanyName());
                 personalNameText.setText(newValue.getPersonalName());
                 phoneText.setText(newValue.getPhoneNumber());
@@ -149,18 +153,17 @@ public class SaleDepClientInfoSearchPaneController {
         //TODO
     }
 
-    /*n
+
     @FXML
     private void handleSearch() {
         //test
         searchData.addAll(
-                new Customer("a", "A", "一星", "test1", "123@qq.com", "123456", "个人"),
-                new Customer("b", "B", "二星", "test2", "456@qq.com", "231321", "公司/企业")
+                new Customer("a", "A", 0, "test1", "123@qq.com", "123456", 0),
+                new Customer("b", "B", 1, "test2", "456@qq.com", "231321", 1)
         );
         //TODO
     }
 
-     */
 
     @FXML
     private void handlePrint() {
@@ -201,34 +204,6 @@ public class SaleDepClientInfoSearchPaneController {
     @FXML
     private void handleDelete() {
         //TODO
-    }
-
-    private int returnTypeIndexByString(String input) {
-        switch (input) {
-            default:
-                return 0;
-            case "个人":
-                return 0;
-            case "公司/企业":
-                return 1;
-        }
-    }
-
-    private int returnLevelIndexByString(String input) {
-        switch (input) {
-            default:
-                return 0;
-            case "一星":
-                return 0;
-            case "二星":
-                return 1;
-            case "三星":
-                return 2;
-            case "四星":
-                return 3;
-            case "五星":
-                return 4;
-        }
     }
 }
 
