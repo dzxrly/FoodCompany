@@ -21,11 +21,6 @@ import service.AlertDialog;
 import service.UserInfoCheck;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class UserLoginPaneController {
     //登陆页面控制类
@@ -113,8 +108,6 @@ public class UserLoginPaneController {
 
     //密码验证
     private int checkPW(String number, String pw) {
-        //TODO
-        System.out.println(userInfoCheck.isValidNumber(number, pw));
         if (userInfoCheck.isValidNumber(number, pw) == 0) return 0;
         else if (userInfoCheck.isValidNumber(number, pw) == 1) return 1;
         else return 2;
@@ -122,6 +115,7 @@ public class UserLoginPaneController {
 
     @FXML
     private void handleSet() {
+        System.out.println("set");
         //TODO
     }
 
