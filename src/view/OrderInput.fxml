@@ -14,9 +14,9 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="14.0" layoutY="120.0" prefHeight="663.0" prefWidth="946.0">
+      <ScrollPane layoutX="14.0" layoutY="120.0" prefHeight="580.0" prefWidth="617.0">
          <content>
-            <TableView fx:id="goodsTable" prefHeight="661.0" prefWidth="944.0">
+            <TableView fx:id="goodsTable" prefHeight="578.0" prefWidth="615.0">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
@@ -37,12 +37,12 @@
             </HBox>
          </children>
       </VBox>
-      <Label layoutX="992.0" layoutY="149.0" text="添加商品">
+      <Label layoutX="642.0" layoutY="142.0" text="添加商品">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="992.0" layoutY="184.0" spacing="10.0">
+      <VBox layoutX="642.0" layoutY="175.0" spacing="10.0">
          <children>
             <Label layoutX="1114.0" layoutY="184.0" text="商品名：">
                <font>
@@ -57,21 +57,21 @@
             </HBox>
          </children>
       </VBox>
-      <ScrollPane layoutX="992.0" layoutY="252.0" prefHeight="417.0" prefWidth="548.0">
+      <ScrollPane layoutX="642.0" layoutY="242.0" prefHeight="417.0" prefWidth="396.0">
          <content>
-            <TableView fx:id="searchResTable" prefHeight="415.0" prefWidth="546.0">
+            <TableView fx:id="searchResTable" prefHeight="415.0" prefWidth="394.0">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
          </content></ScrollPane>
-      <HBox layoutX="992.0" layoutY="684.0" spacing="10.0">
+      <HBox layoutX="642.0" layoutY="669.0" spacing="10.0">
          <children>
             <Button fx:id="addSelectedToTable" layoutX="1077.0" layoutY="688.0" mnemonicParsing="false" onAction="#handleAddSelectedBtn" text="添加所选项至订单" />
             <Button fx:id="addAllToTable" layoutX="1199.0" layoutY="688.0" mnemonicParsing="false" onAction="#handleAddAllBtn" text="添加全部项至订单" />
          </children>
       </HBox>
-      <HBox layoutX="14.0" layoutY="796.0" spacing="10.0">
+      <HBox layoutX="14.0" layoutY="720.0" spacing="10.0">
          <children>
             <Button fx:id="deleteSelectedGoodFromTable" layoutX="189.0" layoutY="845.0" mnemonicParsing="false" onAction="#handleDeleteSelectedGood" text="移除所选商品" />
             <Button fx:id="clearGoodsTable" layoutX="72.0" layoutY="833.0" mnemonicParsing="false" onAction="#handleClearAllGoods" text="清空商品列表" />
