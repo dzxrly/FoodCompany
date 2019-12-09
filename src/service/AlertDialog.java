@@ -16,4 +16,8 @@ public class AlertDialog {
     public void showAlert() {
         alert.showAndWait();
     }
+
+    public void show() {
+        alert.show();
+    }
 }

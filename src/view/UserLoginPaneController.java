@@ -1,6 +1,5 @@
 package view;
 
-import DAO.HibernateTest1;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -14,21 +13,25 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import service.AlertDialog;
 import service.UserInfoCheck;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class UserLoginPaneController {
     //登陆页面控制类
     private String userNumber;
     private String userPassword;
-    private UserInfoCheck userInfoCheck=new UserInfoCheck();
+    private UserInfoCheck userInfoCheck = new UserInfoCheck();
     @FXML
     private TextField inputNumber;
     @FXML
@@ -45,6 +48,8 @@ public class UserLoginPaneController {
     private BorderPane progressBarPane;
     @FXML
     private ProgressBar progressBar;
+    @FXML
+    private Label loginInfoLabel;
 
     @FXML
     private void initialize() {
@@ -63,25 +68,15 @@ public class UserLoginPaneController {
     private void handleLoginBtn() {
         progressBar.setVisible(true);
         loginBtn.setDisable(true);
-        service.restart();
-        if (inputNumber.getText() != null && inputPW.getText() != null) {
+        if (inputNumber.getText().equals("") || inputPW.getText().equals("")) {
+            loginInfoLabel.setTextFill(Color.web("#F56C6C"));
+            loginInfoLabel.setText("请输入用户名和密码");
+            progressBar.setVisible(false);
+            loginBtn.setDisable(false);
+        } else {
             userNumber = inputNumber.getText();
             userPassword = inputPW.getText();
-            //0表示成功 1表示用户名不存在 2表示用户名有效但是密码错误
-            if (checkPW(userNumber, userPassword)==0) {
-                Platform.runLater(() -> {
-                    Stage nowStage = (Stage) loginUI.getScene().getWindow();
-                    nowStage.hide();
-                    showMainPane();
-                });
-            }else if(checkPW(userNumber, userPassword)==1) {
-                //用户名不存在
-
-            }else if(checkPW(userNumber, userPassword)==2) {
-                //密码错误
-            }
-            //Test
-            System.out.println(userNumber + "," + userPassword);
+            service.restart();
         }
     }
 
@@ -119,41 +114,15 @@ public class UserLoginPaneController {
     //密码验证
     private int checkPW(String number, String pw) {
         //TODO
-        System.out.println(userInfoCheck.isValidNumber(number,pw));
-        if(userInfoCheck.isValidNumber(number,pw)==0) return 0;
-        else if(userInfoCheck.isValidNumber(number,pw)==1) return 1;
-        else  return 2;
+        System.out.println(userInfoCheck.isValidNumber(number, pw));
+        if (userInfoCheck.isValidNumber(number, pw) == 0) return 0;
+        else if (userInfoCheck.isValidNumber(number, pw) == 1) return 1;
+        else return 2;
     }
 
     @FXML
     private void handleSet() {
         //TODO
-    }
-
-    public void initializeDB() {
-        Connection con;
-        //jdbc驱动
-        String driver = "com.mysql.cj.jdbc.Driver";
-        //数据库是FoodCompany todo：做一个前端得到域名填充
-        String url = "jdbc:mysql://47.102.218.224:3306/FoodCompany?&useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String password = "cb990204";
-        try {
-            //注册jdbc驱动程序
-            Class.forName(driver);
-            //建立连接
-            con = DriverManager.getConnection(url, user, password);
-            if (!con.isClosed()) {
-                System.out.println("successfully connected!");
-            } else System.out.println("bad!");
-            con.close();
-        } catch (ClassNotFoundException e) {
-            System.out.println("database driver was not loaded!");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("database connection failed");
-        }
     }
 
     Service<Integer> service = new Service<Integer>() {
@@ -162,9 +131,32 @@ public class UserLoginPaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-//                    HibernateTest1 h1 = new HibernateTest1();
-//                    h1.findCustomerByIdTest();
-//                    h1.saveCustomerTest();
+                    //0表示成功 1表示用户名不存在 2表示用户名有效但是密码错误
+                    if (checkPW(userNumber, userPassword) == 0) {
+                        Platform.runLater(() -> {
+                            loginInfoLabel.setTextFill(Color.web("#67C23A"));
+                            loginInfoLabel.setText("登陆成功！");
+                            Stage nowStage = (Stage) loginUI.getScene().getWindow();
+                            nowStage.hide();
+                            showMainPane();
+                        });
+                    } else if (checkPW(userNumber, userPassword) == 1) {
+                        progressBar.setVisible(false);
+                        loginBtn.setDisable(false);
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "用户不存在！", "用户不存在！");
+                            alertDialog.show();
+                        });
+                    } else if (checkPW(userNumber, userPassword) == 2) {
+                        progressBar.setVisible(false);
+                        loginBtn.setDisable(false);
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "密码错误！", "密码错误！");
+                            alertDialog.show();
+                        });
+                    }
                     return null;
                 }
             };

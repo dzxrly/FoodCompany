@@ -61,5 +61,10 @@
          <center>
             <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER" />
          </center></BorderPane>
+      <Label fx:id="loginInfoLabel" layoutX="197.0" layoutY="199.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
