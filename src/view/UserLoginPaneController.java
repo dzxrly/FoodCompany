@@ -107,10 +107,10 @@ public class UserLoginPaneController {
     }
 
     //密码验证
-    private int checkPW(String number, String pw) {
-        if (userInfoCheck.isValidNumber(number, pw) == 0) return 0;
-        else if (userInfoCheck.isValidNumber(number, pw) == 1) return 1;
-        else return 2;
+    private String checkPW(String number, String pw) {
+        String res = userInfoCheck.isValidNumber(number, pw);
+        String type = res.substring(1);
+        return res;
     }
 
     @FXML
@@ -126,7 +126,7 @@ public class UserLoginPaneController {
                 @Override
                 protected Integer call() throws Exception {
                     //0表示成功 1表示用户名不存在 2表示用户名有效但是密码错误
-                    if (checkPW(userNumber, userPassword) == 0) {
+                    if (checkPW(userNumber, userPassword).charAt(0) == '0') {
                         Platform.runLater(() -> {
                             loginInfoLabel.setTextFill(Color.web("#67C23A"));
                             loginInfoLabel.setText("登陆成功！");
@@ -134,7 +134,7 @@ public class UserLoginPaneController {
                             nowStage.hide();
                             showMainPane();
                         });
-                    } else if (checkPW(userNumber, userPassword) == 1) {
+                    } else if (checkPW(userNumber, userPassword).charAt(0) == '1') {
                         progressBar.setVisible(false);
                         loginBtn.setDisable(false);
                         Platform.runLater(() -> {
@@ -142,7 +142,7 @@ public class UserLoginPaneController {
                             alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "用户不存在！", "用户不存在！");
                             alertDialog.show();
                         });
-                    } else if (checkPW(userNumber, userPassword) == 2) {
+                    } else if (checkPW(userNumber, userPassword).charAt(0) == '2') {
                         progressBar.setVisible(false);
                         loginBtn.setDisable(false);
                         Platform.runLater(() -> {
