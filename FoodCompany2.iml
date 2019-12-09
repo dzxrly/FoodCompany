@@ -13,6 +13,25 @@
     <orderEntry type="library" name="jmetro-11.5.11" level="project" />
     <orderEntry type="library" name="log4j-1.2.16" level="project" />
     <orderEntry type="library" name="slf4j-log4j12-1.7.2" level="project" />
-    <orderEntry type="library" name="javafx.graphics" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib" />
+          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib/src/javafx.base" />
+          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib/src/javafx.controls" />
+          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib/src/javafx.fxml" />
+          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib/src/javafx.graphics" />
+          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib/src/javafx.media" />
+          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib/src/javafx.swing" />
+          <root url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib/src/javafx.web" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/lib/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
