@@ -22,22 +22,24 @@ public class HibernateTest1 {
     public void saveCustomerTest() {
         // 创建一个Customer
         Customer c = new Customer();
-        c.setPersonalName("肖扬");
+        c.setPersonalName("陈博");
         c.setCompanyName("Park");
         c.setLevel(1);
         c.setAddress("浙江-温州");
-        c.setEmail("66qwe66@163.com");
-        c.setPhoneNumber("131651239");
-        c.setType(1);
-        c.setAccumulatedAmount(232.123);
-        c.setOrderQuantity(10);
+        c.setEmail("530153667@qq.com");
+        c.setPhoneNumber("13857756176");
+        c.setType(0);
+        c.setAccumulatedAmount(1000.10);
+        c.setOrderQuantity(8);
 
 
         // 使用Hibernate的API来完成将Customer信息保存到mysql数据库中的操作
 
+
         Configuration config = new Configuration().configure(); // Hibernate框架加载hibernate.cfg.xml文件
         SessionFactory sessionFactory = config.buildSessionFactory();
         Session session = sessionFactory.openSession(); // 相当于得到一个Connection
+
         // 开启事务
         session.beginTransaction();
 

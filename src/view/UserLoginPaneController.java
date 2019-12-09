@@ -17,9 +17,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import service.UserInfoCheck;
 
-import java.beans.EventHandler;
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,6 +28,7 @@ public class UserLoginPaneController {
     //登陆页面控制类
     private String userNumber;
     private String userPassword;
+    private UserInfoCheck userInfoCheck=new UserInfoCheck();
     @FXML
     private TextField inputNumber;
     @FXML
@@ -67,14 +67,18 @@ public class UserLoginPaneController {
         if (inputNumber.getText() != null && inputPW.getText() != null) {
             userNumber = inputNumber.getText();
             userPassword = inputPW.getText();
-            if (checkPW(userNumber, userPassword)) {
+            //0表示成功 1表示用户名不存在 2表示用户名有效但是密码错误
+            if (checkPW(userNumber, userPassword)==0) {
                 Platform.runLater(() -> {
                     Stage nowStage = (Stage) loginUI.getScene().getWindow();
                     nowStage.hide();
                     showMainPane();
                 });
-            } else {
-                //TODO
+            }else if(checkPW(userNumber, userPassword)==1) {
+                //用户名不存在
+
+            }else if(checkPW(userNumber, userPassword)==2) {
+                //密码错误
             }
             //Test
             System.out.println(userNumber + "," + userPassword);
@@ -113,9 +117,12 @@ public class UserLoginPaneController {
     }
 
     //密码验证
-    private boolean checkPW(String number, String pw) {
+    private int checkPW(String number, String pw) {
         //TODO
-        return true;
+        System.out.println(userInfoCheck.isValidNumber(number,pw));
+        if(userInfoCheck.isValidNumber(number,pw)==0) return 0;
+        else if(userInfoCheck.isValidNumber(number,pw)==1) return 1;
+        else  return 2;
     }
 
     @FXML
@@ -155,9 +162,9 @@ public class UserLoginPaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-                    HibernateTest1 h1 = new HibernateTest1();
-                    h1.findCustomerByIdTest();
-                    h1.saveCustomerTest();
+//                    HibernateTest1 h1 = new HibernateTest1();
+//                    h1.findCustomerByIdTest();
+//                    h1.saveCustomerTest();
                     return null;
                 }
             };
