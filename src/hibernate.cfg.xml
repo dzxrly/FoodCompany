@@ -6,9 +6,9 @@
     <session-factory>
         <!-- 配置关于数据库连接的四个项：driverClass  url username password -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://47.102.218.224:3306/FoodCompany</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">cb990204</property>
+        <property name="hibernate.connection.url">jdbc:mysql://47.102.218.224:3306/FoodCompany</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">cb990204</property>
 
         <!-- 可以将向数据库发送的SQL语句显示出来 -->
         <property name="hibernate.show_sql">true</property>
@@ -18,8 +18,10 @@
         <!-- hibernate的方言 -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
         <!-- 配置hibernate的映射文件所在的位置 -->
-        <mapping resource="model/Customer.hbm.xml" />
+        <mapping resource="model/Customer.hbm.xml"/>
         <mapping resource="model/Stuff.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

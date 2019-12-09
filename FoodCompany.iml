@@ -40,6 +40,7 @@
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/lib/hibernate-release-5.4.9.Final/project/hibernate-jcache/src/test/resources/hibernate-config/hibernate.cfg.xml" />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/lib/hibernate-release-5.4.9.Final/project/hibernate-jipijapa/src/test/bundles/cfgxmlpar/org/hibernate/jpa/test/pack/cfgxmlpar/hibernate.cfg.xml" />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/lib/hibernate-release-5.4.9.Final/project/hibernate-osgi/src/test/resources/hibernate.cfg.xml" />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/hibernate.cfg.xml" />
       </configuration>
     </facet>
     <facet type="jpa" name="JPA">
