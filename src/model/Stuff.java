@@ -14,6 +14,9 @@ public class Stuff {
     private StringProperty address = new SimpleStringProperty(); //住址
     private StringProperty phoneNumber =new SimpleStringProperty(); //手机号
     private StringProperty email = new SimpleStringProperty(); //邮箱.
+
+    //0表示老板拥有全部权限 1表示销售部经理 2表示财务部经理 3表示生产计划科经理 4表示生产车间经理 5表示成品库管理员 6表示原料库管理员
+    //11表示销售部职员 22表示财务部职员 33表示生产计划科职员 44表示生产车间职员 55表示成品库职员 66表示原料库职员
     private IntegerProperty type =new SimpleIntegerProperty();//员工类型
 
     public String getPersonalName() {
