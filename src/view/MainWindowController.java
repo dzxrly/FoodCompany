@@ -42,7 +42,7 @@ public class MainWindowController {
         TreeItem<String> clientManage = new TreeItem<>("客户管理");
         clientManage.setGraphic(new ImageView(new Image("img/sub_account.png", 16, 16, false, false)));
         clientManage.getChildren().add(new TreeItem<>("创建客户"));
-        clientManage.getChildren().add(new TreeItem<>("客户信息查询"));
+        clientManage.getChildren().add(new TreeItem<>("客户信息查询/修改"));
         itemSaleDep.getChildren().add(clientManage);
 
         TreeItem<String> orderManage = new TreeItem<>("订单管理");
@@ -81,9 +81,15 @@ public class MainWindowController {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    } else if (currentSelectedItem.getValue().equals("客户信息查询")) {
+                    } else if (currentSelectedItem.getValue().equals("客户信息查询/修改")) {
                         try {
                             showInsidePane("SaleDepClientInfoSearchPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("订单录入")) {
+                        try {
+                            showInsidePane("OrderInput.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

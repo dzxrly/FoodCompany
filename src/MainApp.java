@@ -23,67 +23,36 @@ public class MainApp extends Application {
     private BorderPane mainPane;
     private AnchorPane loginPane;
 
-    Service<Integer> service = new Service<Integer>() {
-        @Override
-        protected Task<Integer> createTask() {
-            return new Task<Integer>() {
-                @Override
-                protected Integer call() throws Exception {
-                    //---------------------------------
-                    //连接数据库操作
-                    initializeDB();
-                    //test();
-                    //---------------------------------
-                    Platform.runLater(() -> {
-                        primaryStage.hide();
-                        showUserLoginPane();//跳转至登陆页面
-                    });
-                    return null;
-                }
-            };
-        }
-    };
+//    Service<Integer> service = new Service<Integer>() {
+//        @Override
+//        protected Task<Integer> createTask() {
+//            return new Task<Integer>() {
+//                @Override
+//                protected Integer call() throws Exception {
+//                    //---------------------------------
+//                    //连接数据库操作
+//                    initializeDB();
+//                    //test();
+//                    //---------------------------------
+//                    Platform.runLater(() -> {
+//                        primaryStage.hide();
+//                    });
+//                    return null;
+//                }
+//            };
+//        }
+//    };
 
 
     public static void main(String[] args) {
         launch(args);
-        HibernateTest1 h1=new HibernateTest1();
-
-        h1.findCustomerByIdTest();
-        h1.saveCustomerTest();;
     }
 
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("连接数据库...");
-        showLoginProgressBar();
-    }
-
-    public void initializeDB() {
-        Connection con;
-        //jdbc驱动
-        String driver = "com.mysql.cj.jdbc.Driver";
-        //数据库是FoodCompany todo：做一个前端得到域名填充
-        String url = "jdbc:mysql://47.102.218.224:3306/FoodCompany?&useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String password = "cb990204";
-        try {
-            //注册jdbc驱动程序
-            Class.forName(driver);
-            //建立连接
-            con = DriverManager.getConnection(url, user, password);
-            if (!con.isClosed()) {
-                System.out.println("successfully connected!");
-            } else System.out.println("bad!");
-            con.close();
-        } catch (ClassNotFoundException e) {
-            System.out.println("database driver was not loaded!");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("database connection failed");
-        }
+        this.primaryStage.setTitle("登录");
+        showUserLoginPane();
     }
 
     public Stage getPrimaryStage() {
@@ -105,23 +74,6 @@ public class MainApp extends Application {
         primaryStage.setTitle("登录");
         primaryStage.show();
     }//显示登陆页面
-
-    public void showLoginProgressBar() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(MainApp.class.getResource("view/LoginProgressBar.fxml"));
-            progressBarPane = (AnchorPane) fxmlLoader.load();
-
-            Scene scene = new Scene(progressBarPane);
-            new JMetro(scene, Style.LIGHT);
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
-            primaryStage.show();
-            service.restart();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }//加载页面
 }
 
 
