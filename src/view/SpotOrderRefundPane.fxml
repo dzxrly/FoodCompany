@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SpotOrderRefundPaneController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="现货订单退款">
+      <Label layoutX="14.0" layoutY="14.0" text="订单退款">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -19,6 +19,20 @@
       <Button fx:id="searchBtn" layoutX="263.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="84.0" text="查询" />
       <VBox layoutX="68.0" layoutY="138.0" prefHeight="200.0" prefWidth="682.0" spacing="20.0">
          <children>
+            <HBox>
+               <children>
+                  <Label layoutX="540.0" layoutY="78.0" text="订单类型：">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="orderTypeLabel" layoutX="623.0" layoutY="83.0" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <HBox layoutX="68.0" layoutY="115.0">
                <children>
                   <Label layoutX="68.0" layoutY="115.0" text="订单编号：">
@@ -55,6 +69,20 @@
                      </font>
                   </Label>
                   <Label fx:id="customerNameLabel" layoutX="158.0" layoutY="212.0" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="585.0" layoutY="85.0" text="退款通过时间：">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="orderTimeLabel" layoutX="711.0" layoutY="90.0" text="Label">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -146,7 +174,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="68.0" layoutY="451.0" spacing="20.0">
+      <VBox layoutX="68.0" layoutY="534.0" spacing="15.0">
          <children>
             <HBox layoutX="160.0" layoutY="478.0">
                <children>

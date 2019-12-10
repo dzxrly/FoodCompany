@@ -40,6 +40,10 @@ public class SpotOrderRefundPaneController {
     private Label finaceDepOperatorLabel;
     @FXML
     private Button uploadBtn;
+    @FXML
+    private Label orderTimeLabel;
+    @FXML
+    private Label orderTypeLabel;
 
     private String costRegex = "[0-9.]+";
 
