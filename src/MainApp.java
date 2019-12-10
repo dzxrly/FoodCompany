@@ -10,15 +10,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
-import model.Customer;
-import org.osgi.service.useradmin.User;
-import service.CustomerCreator;
+
 import service.CustomerSearch;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 
 public class MainApp extends Application {
@@ -28,50 +23,12 @@ public class MainApp extends Application {
     private BorderPane mainPane;
     private AnchorPane loginPane;
 
-//    Service<Integer> service = new Service<Integer>() {
-//        @Override
-//        protected Task<Integer> createTask() {
-//            return new Task<Integer>() {
-//                @Override
-//                protected Integer call() throws Exception {
-//                    //---------------------------------
-//                    //连接数据库操作
-//                    initializeDB();
-//                    //test();
-//                    //---------------------------------
-//                    Platform.runLater(() -> {
-//                        primaryStage.hide();
-//                    });
-//                    return null;
-//                }
-//            };
-//        }
-//    };
-
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        //test search
-        CustomerSearch cs=new CustomerSearch();
-        List list= cs.EmailFuzzySearch("7@qq.c");
-        List list1=cs.AllSearch();
-
-        //fuzzy search
-//        for(int i=0; i<list.size();i++){
-//            Customer customer=(Customer) list.get(i);
-//            System.out.println("________________"+customer+"_____________________");
-//        }
-        //all search
-//        for(int i=0;i<list1.size();i++){
-//            Customer customer=(Customer) list1.get(i);
-//            System.out.println("________________"+customer+"_____________________");
-//        }
-
-//
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
         showUserLoginPane();

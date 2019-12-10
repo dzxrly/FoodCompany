@@ -66,7 +66,8 @@ public class SaleDepClientInfoSearchPaneController {
     private ObservableList<Customer> searchData = FXCollections.observableArrayList();
     private ObservableList<String> customerTypeOptions = FXCollections.observableArrayList("个人", "公司/企业");
     private ObservableList<String> customerLevelOptions = FXCollections.observableArrayList("一星", "二星", "三星", "四星", "五星");
-    private String searchByName;
+    private String searchByInput;
+    private int searchOptionsIndex;
 
     @FXML
     private void initialize() {
@@ -92,18 +93,25 @@ public class SaleDepClientInfoSearchPaneController {
         deleteBtn.setDisable(true);
 
         TableColumn customerType = new TableColumn("客户类型");
+        customerType.setSortable(false);
         customerType.setCellValueFactory(new PropertyValueFactory<>("type"));
         TableColumn customerLevel = new TableColumn("客户星级");
+        customerLevel.setSortable(true);
         customerLevel.setCellValueFactory(new PropertyValueFactory<>("level"));
         TableColumn companyNameCol = new TableColumn("公司名称");
+        companyNameCol.setSortable(false);
         companyNameCol.setCellValueFactory(new PropertyValueFactory<>("companyName"));
         TableColumn personalNameCol = new TableColumn("负责人名称");
+        personalNameCol.setSortable(false);
         personalNameCol.setCellValueFactory(new PropertyValueFactory<>("personalName"));
         TableColumn phoneCol = new TableColumn("联系电话");
+        phoneCol.setSortable(false);
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         TableColumn addressCol = new TableColumn("地址");
+        addressCol.setSortable(false);
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         TableColumn emailCol = new TableColumn("邮箱");
+        emailCol.setSortable(false);
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         searchResTable.setItems(searchData);
         searchResTable.getColumns().addAll(customerType, customerLevel, companyNameCol, personalNameCol, phoneCol, addressCol, emailCol);
@@ -163,7 +171,8 @@ public class SaleDepClientInfoSearchPaneController {
     @FXML
     private void handleSearch() {
         searchData.clear();
-        searchByName = searchIndexInput.getText();
+        searchByInput = searchIndexInput.getText();
+        searchOptionsIndex = searchIndexType.getSelectionModel().getSelectedIndex();
         service_search.restart();
     }
 
@@ -200,6 +209,11 @@ public class SaleDepClientInfoSearchPaneController {
     }
 
     @FXML
+    private void handleSearchAll() {
+        service_searchAll.restart();
+    }
+
+    @FXML
     private void handleSave() {
         //TODO
     }
@@ -216,7 +230,41 @@ public class SaleDepClientInfoSearchPaneController {
                 @Override
                 protected Integer call() throws Exception {
                     CustomerSearch customerSearch = new CustomerSearch();
-                    List<Customer> list = customerSearch.NameFuzzySearch(searchByName);
+                    if (searchOptionsIndex == 0) {
+                        List<Customer> list = customerSearch.NameFuzzySearch(searchByInput);
+                        for (int i = 0; i < list.size(); i++) {
+                            searchData.add((Customer) list.get(i));
+                        }
+                    } else if (searchOptionsIndex == 1) {
+                        List<Customer> list = customerSearch.CompanyFuzzySearch(searchByInput);
+                        for (int i = 0; i < list.size(); i++) {
+                            searchData.add((Customer) list.get(i));
+                        }
+                    } else if (searchOptionsIndex == 2) {
+                        List<Customer> list = customerSearch.PhoneNumberFuzzySearch(searchByInput);
+                        for (int i = 0; i < list.size(); i++) {
+                            searchData.add((Customer) list.get(i));
+                        }
+                    } else {
+                        List<Customer> list = customerSearch.EmailFuzzySearch(searchByInput);
+                        for (int i = 0; i < list.size(); i++) {
+                            searchData.add((Customer) list.get(i));
+                        }
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_searchAll = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    CustomerSearch customerSearch = new CustomerSearch();
+                    List<Customer> list = customerSearch.AllSearch();
                     for (int i = 0; i < list.size(); i++) {
                         searchData.add((Customer) list.get(i));
                     }

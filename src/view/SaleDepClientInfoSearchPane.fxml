@@ -21,7 +21,7 @@
             <ComboBox fx:id="searchIndexType" layoutX="35.0" layoutY="60.0" prefHeight="28.0" prefWidth="167.0" styleClass="searchIndexType" />
             <TextField fx:id="searchIndexInput" layoutX="185.0" layoutY="60.0" prefHeight="22.0" prefWidth="286.0" promptText="请输入查询内容" styleClass="searchIndexInput" />
             <Button fx:id="searchBtn" layoutX="471.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="28.0" prefWidth="64.0" styleClass="searchBtn" text="搜索" />
-            <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="111.0" text="查询全部" />
+            <Button mnemonicParsing="false" onAction="#handleSearchAll" prefHeight="28.0" prefWidth="111.0" text="查询全部" />
          </children>
       </HBox>
       <VBox fx:id="customerInfo" layoutX="802.0" layoutY="143.0" prefHeight="499.0" prefWidth="220.0" spacing="15.0">
