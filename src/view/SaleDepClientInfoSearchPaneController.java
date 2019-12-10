@@ -216,7 +216,7 @@ public class SaleDepClientInfoSearchPaneController {
                 @Override
                 protected Integer call() throws Exception {
                     CustomerSearch customerSearch = new CustomerSearch();
-                    List<Customer> list = customerSearch.FuzzySearch(searchByName);
+                    List<Customer> list = customerSearch.NameFuzzySearch(searchByName);
                     for (int i = 0; i < list.size(); i++) {
                         searchData.add((Customer) list.get(i));
                     }

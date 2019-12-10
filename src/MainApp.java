@@ -10,6 +10,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import model.Customer;
+import org.osgi.service.useradmin.User;
+import service.CustomerCreator;
+import service.CustomerSearch;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -51,15 +55,10 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        //test create Customer
-//        CustomerCreator c = null;
-//        c.createCustomer("李天添"," ",2,"山东大学","9999@ltt.com","13111313131")
-//        c.createCustomer("秦逸然"," ",3,"山东大学","9998@ltt.com","13111313131");
-
         //test search
-//        CustomerSearch cs=new CustomerSearch();
-//        List list= cs.FuzzySearch("肖");
-//        List list1=cs.AllSearch();
+        CustomerSearch cs=new CustomerSearch();
+        List list= cs.EmailFuzzySearch("7@qq.c");
+        List list1=cs.AllSearch();
 
         //fuzzy search
 //        for(int i=0; i<list.size();i++){
@@ -72,7 +71,7 @@ public class MainApp extends Application {
 //            System.out.println("________________"+customer+"_____________________");
 //        }
 
-
+//
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
         showUserLoginPane();
