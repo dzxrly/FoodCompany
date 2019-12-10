@@ -24,8 +24,14 @@
             <Button mnemonicParsing="false" onAction="#handleSearchAll" prefHeight="28.0" prefWidth="111.0" text="查询全部" />
          </children>
       </HBox>
-      <VBox fx:id="customerInfo" layoutX="802.0" layoutY="143.0" prefHeight="499.0" prefWidth="220.0" spacing="15.0">
+      <VBox fx:id="customerInfo" layoutX="806.0" layoutY="113.0" prefHeight="499.0" prefWidth="220.0" spacing="15.0">
          <children>
+            <HBox>
+               <children>
+                  <Label layoutX="795.0" layoutY="40.0" text="客户编号：" />
+                  <Label fx:id="customerNumberLabel" layoutX="865.0" layoutY="40.0" />
+               </children>
+            </HBox>
             <Label layoutX="26.0" layoutY="129.0" text="客户类型：" />
             <ComboBox fx:id="customerTypeComboBox" prefWidth="150.0" />
             <Label layoutX="26.0" layoutY="192.0" text="客户星级：" />

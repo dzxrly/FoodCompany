@@ -57,6 +57,8 @@ public class SaleDepClientInfoSearchPaneController {
     private Button saveBtn;
     @FXML
     private Button deleteBtn;
+    @FXML
+    private Label customerNumberLabel;
 
     private CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
 
@@ -92,6 +94,9 @@ public class SaleDepClientInfoSearchPaneController {
         deleteBtn.setVisible(false);
         deleteBtn.setDisable(true);
 
+        TableColumn customerNumber = new TableColumn("客户编号");
+        customerNumber.setSortable(true);
+        customerNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         TableColumn customerType = new TableColumn("客户类型");
         customerType.setSortable(false);
         customerType.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -114,7 +119,7 @@ public class SaleDepClientInfoSearchPaneController {
         emailCol.setSortable(false);
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         searchResTable.setItems(searchData);
-        searchResTable.getColumns().addAll(customerType, customerLevel, companyNameCol, personalNameCol, phoneCol, addressCol, emailCol);
+        searchResTable.getColumns().addAll(customerNumber, customerType, customerLevel, companyNameCol, personalNameCol, phoneCol, addressCol, emailCol);
 
         searchResTable.setPlaceholder(new Label("没有搜索结果"));
         searchResTable.setEditable(true);
@@ -126,6 +131,7 @@ public class SaleDepClientInfoSearchPaneController {
         searchResTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Customer>() {
             @Override
             public void changed(ObservableValue<? extends Customer> observable, Customer oldValue, Customer newValue) {
+                customerNumberLabel.setText(String.valueOf(newValue.getNumber()));
                 customerTypeComboBox.getSelectionModel().select(newValue.getType());
                 customerLevelComboBox.getSelectionModel().select(newValue.getLevel());
                 companyNameText.setText(newValue.getCompanyName());
@@ -149,6 +155,11 @@ public class SaleDepClientInfoSearchPaneController {
                     saveBtn.setDisable(false);
                     deleteBtn.setVisible(true);
                     deleteBtn.setDisable(false);
+                    companyNameText.setEditable(true);
+                    personalNameText.setEditable(true);
+                    phoneText.setEditable(true);
+                    emailText.setEditable(true);
+                    addressText.setEditable(true);
 
                 } else {
                     toggleSwitchStatus.setText("查询模式");
@@ -160,6 +171,11 @@ public class SaleDepClientInfoSearchPaneController {
                     saveBtn.setDisable(true);
                     deleteBtn.setVisible(false);
                     deleteBtn.setDisable(true);
+                    companyNameText.setEditable(false);
+                    personalNameText.setEditable(false);
+                    phoneText.setEditable(false);
+                    emailText.setEditable(false);
+                    addressText.setEditable(false);
                 }
                 //TODO
             }
@@ -233,6 +249,7 @@ public class SaleDepClientInfoSearchPaneController {
                     if (searchOptionsIndex == 0) {
                         List<Customer> list = customerSearch.NameFuzzySearch(searchByInput);
                         for (int i = 0; i < list.size(); i++) {
+//                            System.out.println(list.get(i));
                             searchData.add((Customer) list.get(i));
                         }
                     } else if (searchOptionsIndex == 1) {
