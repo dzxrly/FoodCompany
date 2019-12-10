@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import service.CustomerCreator;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -50,6 +51,10 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        //test create Customer
+//        CustomerCreator c = null;
+//        c.createCustomer("李天添"," ",2,"山东大学","9999@ltt.com","13111313131");
+
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
         showUserLoginPane();
