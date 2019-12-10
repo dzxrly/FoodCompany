@@ -77,6 +77,20 @@
             </HBox>
             <HBox>
                <children>
+                  <Label layoutX="577.0" layoutY="85.0" text="客户星级：">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="customerLevelLabel" layoutX="675.0" layoutY="90.0" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
                   <Label layoutX="585.0" layoutY="85.0" text="退款通过时间：">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -174,15 +188,20 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="68.0" layoutY="534.0" spacing="15.0">
+      <VBox layoutX="68.0" layoutY="571.0" spacing="15.0">
          <children>
             <HBox layoutX="160.0" layoutY="478.0">
                <children>
                   <Label layoutX="160.0" layoutY="478.0" text="财务部操作人：" />
-                  <Label fx:id="finaceDepOperatorLabel" layoutX="248.0" layoutY="478.0" text="Label" />
+                  <Label fx:id="fianceDepOperatorLabel" layoutX="248.0" layoutY="478.0" text="Label" />
                </children>
             </HBox>
-            <Button fx:id="uploadBtn" layoutX="160.0" layoutY="509.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="78.0" text="提交" />
+            <HBox spacing="10.0">
+               <children>
+                  <Button fx:id="uploadBtn" layoutX="103.0" layoutY="671.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="78.0" text="提交" />
+                  <Button fx:id="printBtn" layoutX="183.0" layoutY="671.0" mnemonicParsing="false" onAction="#handlePrint" prefHeight="23.0" prefWidth="78.0" text="打印" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

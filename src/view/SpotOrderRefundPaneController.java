@@ -37,13 +37,17 @@ public class SpotOrderRefundPaneController {
     @FXML
     private TextField needPayTotalCostText;
     @FXML
-    private Label finaceDepOperatorLabel;
+    private Label fianceDepOperatorLabel;
     @FXML
     private Button uploadBtn;
     @FXML
     private Label orderTimeLabel;
     @FXML
     private Label orderTypeLabel;
+    @FXML
+    private Label customerLevelLabel;
+    @FXML
+    private Button printBtn;
 
     private String costRegex = "[0-9.]+";
 
@@ -51,9 +55,10 @@ public class SpotOrderRefundPaneController {
     private void initialize() {
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         uploadBtn.setGraphic((new AddImageForComponent("img/upload14x14.png", 14)).getImageView());
+        printBtn.setGraphic((new AddImageForComponent("img/download.png", 14)).getImageView());
         String operatorName = (new PropertiesOperation()).readValue("userConfig.properties", "LoginUserName");
         String operatorNumber = (new PropertiesOperation()).readValue("userConfig.properties", "LoginUserNumber");
-        finaceDepOperatorLabel.setText(operatorName + " [" + operatorNumber + "]");
+        fianceDepOperatorLabel.setText(operatorName + " [" + operatorNumber + "]");
         needPayPrepaymentText.setText("0.0");
         needPayResPaymentText.setText("0.0");
         needPayTotalCostText.setText("0.0");
@@ -88,6 +93,11 @@ public class SpotOrderRefundPaneController {
 
     @FXML
     private void handleUpload() {
+        //TODO
+    }
+
+    @FXML
+    private void handlePrint() {
         //TODO
     }
 }

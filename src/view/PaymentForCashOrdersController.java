@@ -2,6 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.hibernate.annotations.FilterDef;
 import service.AddImageForComponent;
 import service.PropertiesOperation;
 
@@ -41,6 +42,8 @@ public class PaymentForCashOrdersController {
     private Label orderTimeLabel;
     @FXML
     private Label orderTypeLabel;
+    @FXML
+    private Button printBtn;
 
     private String operator;
     private String operatorNumber;
@@ -53,6 +56,7 @@ public class PaymentForCashOrdersController {
         operatorLabel.setText(operator + " [" + operatorNumber + "]");
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         upload.setGraphic((new AddImageForComponent("img/upload14x14.png", 14)).getImageView());
+        printBtn.setGraphic((new AddImageForComponent("img/download.png", 14)).getImageView());
         //TODO
     }
 
@@ -63,6 +67,11 @@ public class PaymentForCashOrdersController {
 
     @FXML
     private void handleSearchBtn() {
+        //TODO
+    }
+
+    @FXML
+    private void handlePrint() {
         //TODO
     }
 }
