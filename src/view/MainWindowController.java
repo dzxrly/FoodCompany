@@ -154,6 +154,12 @@ public class MainWindowController {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    } else if (currentSelectedItem.getValue().equals("现货订单退款")) {
+                        try {
+                            showInsidePane("SpotOrderRefundPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         mainUI.getChildren().remove(currentNode); //清空主面板
                     }
