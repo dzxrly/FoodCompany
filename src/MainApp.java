@@ -10,12 +10,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import model.Customer;
+import org.osgi.service.useradmin.User;
 import service.CustomerCreator;
+import service.CustomerSearch;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 public class MainApp extends Application {
 
@@ -53,7 +57,25 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         //test create Customer
 //        CustomerCreator c = null;
-//        c.createCustomer("李天添"," ",2,"山东大学","9999@ltt.com","13111313131");
+//        c.createCustomer("李天添"," ",2,"山东大学","9999@ltt.com","13111313131")
+//        c.createCustomer("秦逸然"," ",3,"山东大学","9998@ltt.com","13111313131");
+
+        //test search
+//        CustomerSearch cs=new CustomerSearch();
+//        List list= cs.FuzzySearch("肖");
+//        List list1=cs.AllSearch();
+
+        //fuzzy search
+//        for(int i=0; i<list.size();i++){
+//            Customer customer=(Customer) list.get(i);
+//            System.out.println("________________"+customer+"_____________________");
+//        }
+        //all search
+//        for(int i=0;i<list1.size();i++){
+//            Customer customer=(Customer) list1.get(i);
+//            System.out.println("________________"+customer+"_____________________");
+//        }
+
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
