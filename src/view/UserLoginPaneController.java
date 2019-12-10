@@ -70,6 +70,7 @@ public class UserLoginPaneController {
     private void handleLoginBtn() {
         progressBar.setVisible(true);
         loginBtn.setDisable(true);
+        setBtn.setDisable(true);
         if (inputNumber.getText().equals("") || inputPW.getText().equals("")) {
             loginInfoLabel.setTextFill(Color.web("#F56C6C"));
             loginInfoLabel.setText("请输入用户名和密码");
@@ -79,6 +80,23 @@ public class UserLoginPaneController {
             userNumber = inputNumber.getText();
             userPassword = inputPW.getText();
             service.restart();
+        }
+    }
+
+    private void showSettingPane() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("SettingPane.fxml"));
+            AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
+            new JMetro(scene, Style.LIGHT);
+            Stage settingStage = new Stage();
+            settingStage.setScene(scene);
+            settingStage.setResizable(false);
+            settingStage.setTitle("设置");
+            settingStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -122,8 +140,9 @@ public class UserLoginPaneController {
 
     @FXML
     private void handleSet() {
-        System.out.println("set");
-        //TODO
+        Platform.runLater(() -> {
+            showSettingPane();
+        });
     }
 
     Service<Integer> service = new Service<Integer>() {
