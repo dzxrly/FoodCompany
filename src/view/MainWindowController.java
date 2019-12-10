@@ -49,6 +49,7 @@ public class MainWindowController {
         orderManage.setGraphic(new ImageView(new Image("img/order.png", 16, 16, false, false)));
         orderManage.getChildren().add(new TreeItem<>("订单录入"));
         orderManage.getChildren().add(new TreeItem<>("订单信息"));
+        orderManage.getChildren().add(new TreeItem<>("退货处理"));
         itemSaleDep.getChildren().add(orderManage);
         //侧边栏财务部
         TreeItem<String> itemFianceDep = new TreeItem<>("财务部");
@@ -90,6 +91,18 @@ public class MainWindowController {
                     } else if (currentSelectedItem.getValue().equals("订单录入")) {
                         try {
                             showInsidePane("OrderInput.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("订单信息")) {
+                        try {
+                            showInsidePane("OrderInfoSearch.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("退货处理")) {
+                        try {
+                            showInsidePane("OrderCancelPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

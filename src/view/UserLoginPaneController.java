@@ -86,7 +86,7 @@ public class UserLoginPaneController {
             mainWindowStage.setScene(scene);
             mainWindowStage.setResizable(true);
             mainWindowStage.setTitle("食品公司管理系统");
-            mainWindowStage.setMinHeight(720);
+            mainWindowStage.setMinHeight(768);
             mainWindowStage.setMinWidth(1280);
             mainWindowStage.show();
         } catch (IOException e) {

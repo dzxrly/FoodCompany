@@ -1,5 +1,7 @@
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -29,9 +31,28 @@ public class OrderInputController {
     private Button clearGoodsTable;
     @FXML
     private Button deleteSelectedGoodFromTable;
+    @FXML
+    private Button uploadOrder;
+    @FXML
+    private TextField customerName;
+    @FXML
+    private TextField customerPhone;
+    @FXML
+    private TextField customerAddress;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private Button printBtn;
+    @FXML
+    private TextField totalPrice;
+
+    private ObservableList<String> orderTypeOptions = FXCollections.observableArrayList("现货订单", "预定订单");
 
     @FXML
     private void initialize() {
+        orderType.setItems(orderTypeOptions);
+        orderType.getSelectionModel().select(0);
+        uploadOrder.setDisable(true);
         lockStatus.setText("订单类型未锁定");
         orderType.setDisable(false);
         lockStatus.setGraphic(new ImageView(new Image("img/unlock.png", 16, 16, false, false)));
@@ -49,6 +70,7 @@ public class OrderInputController {
         lockStatus.setGraphic(new ImageView(new Image("img/lock.png", 16, 16, false, false)));
         lockStatus.setText("订单类型已锁定，解锁请移除所有所选商品");
         orderType.setDisable(true);
+        uploadOrder.setDisable(false);
         //TODO
     }
 
@@ -57,6 +79,7 @@ public class OrderInputController {
         lockStatus.setGraphic(new ImageView(new Image("img/lock.png", 16, 16, false, false)));
         lockStatus.setText("订单类型已锁定，解锁请移除所有所选商品");
         orderType.setDisable(true);
+        uploadOrder.setDisable(false);
         //TODO
     }
 
@@ -70,6 +93,7 @@ public class OrderInputController {
         lockStatus.setGraphic(new ImageView(new Image("img/unlock.png", 16, 16, false, false)));
         lockStatus.setText("订单类型未锁定");
         orderType.setDisable(false);
+        uploadOrder.setDisable(true);
         //TODO
     }
 
@@ -78,5 +102,15 @@ public class OrderInputController {
         if (e.getCode() == KeyCode.ENTER) {
             handleSearch();
         }
+    }
+
+    @FXML
+    private void handleUploadOrder() {
+        //TODO
+    }
+
+    @FXML
+    private void handlePrint() {
+        //TODO
     }
 }

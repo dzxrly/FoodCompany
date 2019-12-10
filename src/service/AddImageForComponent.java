@@ -7,7 +7,11 @@ public class AddImageForComponent {
     //为控件添加图标
     private ImageView imageView;
 
-    public AddImageForComponent(String URL) {
-        imageView = new ImageView(new Image(URL, 16, 16, false, false));
+    public AddImageForComponent(String URL, int size) {
+        imageView = new ImageView(new Image(URL, size, size, false, false));
+    }
+
+    public ImageView getImageView() {
+        return imageView;
     }
 }

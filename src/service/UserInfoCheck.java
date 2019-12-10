@@ -15,7 +15,7 @@ public class UserInfoCheck {
         //int res = 1;
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
-        String ans="1";
+        String ans = "1";
         try {
 
             tx = session.beginTransaction();
@@ -23,13 +23,13 @@ public class UserInfoCheck {
             System.out.println("_____________________________________" + stuff.getPassword());
             if (stuff.getPassword().equals(pw)) {
                 //res = 0;
-                ans="0";
+                ans = "0";
                 System.out.println("_____________________________________" + ans);
                 //得到登录状态码和权限状态码组成最后输出的字符串
-                System.out.println("--------------------------------"+stuff.getType());
-                ans+=stuff.getType();
+                System.out.println("--------------------------------" + stuff.getType());
+                ans += stuff.getType();
                 //权限写进properties
-            } else if (!stuff.getPassword().equals(pw)) ans="2";
+            } else if (!stuff.getPassword().equals(pw)) ans = "2";
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();
