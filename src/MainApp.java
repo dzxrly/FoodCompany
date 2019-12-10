@@ -30,8 +30,6 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-//        CustomerUpdate cu=new CustomerUpdate();
-//        cu.updateCustomer("饭哈哈","Hose",1,2,"黑水","7478374@qq.com","17868192738",10);
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
         showUserLoginPane();
