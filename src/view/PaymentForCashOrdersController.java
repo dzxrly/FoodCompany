@@ -37,6 +37,10 @@ public class PaymentForCashOrdersController {
     private TableView goodsList;
     @FXML
     private Button upload;
+    @FXML
+    private Label orderTimeLabel;
+    @FXML
+    private Label orderTypeLabel;
 
     private String operator;
     private String operatorNumber;
