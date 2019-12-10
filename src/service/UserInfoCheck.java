@@ -29,6 +29,10 @@ public class UserInfoCheck {
                 System.out.println("--------------------------------" + stuff.getType());
                 ans += stuff.getType();
                 //权限写进properties
+                PropertiesOperation propertiesOperation = new PropertiesOperation();
+                propertiesOperation.writeProperties("userConfig.properties", "UserLevel", String.valueOf(stuff.getType()));
+                propertiesOperation.writeProperties("userConfig.properties", "LoginUserName", stuff.getPersonalName());
+                propertiesOperation.writeProperties("userConfig.properties", "LoginUserNumber", String.valueOf(stuff.getNumber()));
             } else if (!stuff.getPassword().equals(pw)) ans = "2";
             tx.commit();
         } catch (RuntimeException e) {

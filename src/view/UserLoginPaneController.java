@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import service.AlertDialog;
+import service.PropertiesOperation;
 import service.UserInfoCheck;
 
 import java.io.IOException;
@@ -54,6 +55,12 @@ public class UserLoginPaneController {
         Image img = new Image("img/loginBG.jpg");
         imgView.setImage(img);
         loginBtn.setDisable(true);
+
+        PropertiesOperation propertiesOperation = new PropertiesOperation();
+        propertiesOperation.writeProperties("userConfig.properties", "UserLevel", "999");
+        propertiesOperation.writeProperties("userConfig.properties", "LoginUserName", "null");
+        propertiesOperation.writeProperties("userConfig.properties", "LoginUserNumber", "null");
+
         inputNumber.textProperty().addListener((observable, oldValue, newValue) -> {
             loginBtn.setDisable(newValue.trim().isEmpty());
         });
