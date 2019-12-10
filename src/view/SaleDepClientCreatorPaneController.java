@@ -1,10 +1,14 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -12,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import service.AlertDialog;
+import service.CustomerCreator;
 import service.CustomerIndexAndStringSwitch;
 
 import java.util.regex.*;
@@ -38,6 +44,7 @@ public class SaleDepClientCreatorPaneController {
     private Button clearBtn;
 
     private CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
+    int pushRes = 0;
 
     @FXML
     private void initialize() {
@@ -78,9 +85,14 @@ public class SaleDepClientCreatorPaneController {
 
     @FXML
     private void handlePushBtn() {
-        if (formCheck()) System.out.println("PUSHED");
-        else System.out.println("REFUSED");
-        //TODO
+        if (formCheck()) {
+            service.restart();
+        } else {
+            System.out.println("error!");
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR,"错误","提交失败！","填写信息有误！");
+            alertDialog.show();
+        }
     }
 
     @FXML
@@ -92,7 +104,7 @@ public class SaleDepClientCreatorPaneController {
 
     private boolean formCheck() {
         String phoneNumberRegex = "\\d+";
-        String emailRegex = "\\w+@\\w+";
+        String emailRegex = "\\w+@[A-Za-z0-9_.]+";
         if (customerIndexAndStringSwitch.returnCustomerTypeByIndex(customerType.getSelectionModel().getSelectedIndex()) != null &&
                 customerIndexAndStringSwitch.returnCustomerLevelByIndex(customerLevel.getSelectionModel().getSelectedIndex()) != null &&
                 !personalName.getText().equals("") &&
@@ -101,4 +113,31 @@ public class SaleDepClientCreatorPaneController {
             return true;
         } else return false;
     }//表单验证
+
+    Service<Integer> service = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    CustomerCreator customerCreator = new CustomerCreator();
+                    pushRes = customerCreator.createCustomer(personalName.getText(), companyName.getText(), customerType.getSelectionModel().getSelectedIndex(), customerLevel.getSelectionModel().getSelectedIndex(), address.getText(), email.getText(), phoneNumber.getText());
+                    if (pushRes == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION,"信息","提交成功！","提交成功！");
+                            alertDialog.show();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR,"错误","提交失败！","填写信息有误！");
+                            alertDialog.show();
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
 }

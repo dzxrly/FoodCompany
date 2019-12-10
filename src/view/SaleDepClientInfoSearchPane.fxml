@@ -24,7 +24,7 @@
             <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="111.0" text="查询全部" />
          </children>
       </HBox>
-      <VBox fx:id="customerInfo" layoutX="811.0" layoutY="190.0" prefHeight="499.0" prefWidth="220.0" spacing="15.0">
+      <VBox fx:id="customerInfo" layoutX="802.0" layoutY="143.0" prefHeight="499.0" prefWidth="220.0" spacing="15.0">
          <children>
             <Label layoutX="26.0" layoutY="129.0" text="客户类型：" />
             <ComboBox fx:id="customerTypeComboBox" prefWidth="150.0" />

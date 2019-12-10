@@ -78,6 +78,16 @@ public class MainWindowController {
         itemSaleDep.getChildren().add(orderManage);
         //侧边栏财务部
         TreeItem<String> itemFianceDep = new TreeItem<>("财务部");
+
+        TreeItem<String> existGoods = new TreeItem<>("现货订单管理");
+        existGoods.getChildren().add(new TreeItem<>("现货订单付款"));
+        existGoods.getChildren().add(new TreeItem<>("现货订单退款"));
+        itemFianceDep.getChildren().add(existGoods);
+
+        TreeItem<String> preorderGoods = new TreeItem<>("预定订单管理");
+        preorderGoods.getChildren().add(new TreeItem<>("预定订单付款"));
+        preorderGoods.getChildren().add(new TreeItem<>("预定订单退款"));
+        itemFianceDep.getChildren().add(preorderGoods);
         //侧边栏生产计划科
         TreeItem<String> itemProductionPlanDep = new TreeItem<>("生产计划科");
         //侧边栏生产车间
@@ -135,6 +145,12 @@ public class MainWindowController {
                     } else if (currentSelectedItem.getValue().equals("退货处理")) {
                         try {
                             showInsidePane("OrderCancelPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("现货订单付款")) {
+                        try {
+                            showInsidePane("PaymentForCashOrders.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
