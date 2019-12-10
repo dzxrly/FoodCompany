@@ -4,6 +4,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,7 +19,10 @@ import model.Customer;
 import org.controlsfx.control.ToggleSwitch;
 import service.AlertDialog;
 import service.CustomerIndexAndStringSwitch;
+import service.CustomerSearch;
 import service.Printer;
+
+import java.util.List;
 
 public class SaleDepClientInfoSearchPaneController {
     //客户信息查询控制类
@@ -61,6 +66,7 @@ public class SaleDepClientInfoSearchPaneController {
     private ObservableList<Customer> searchData = FXCollections.observableArrayList();
     private ObservableList<String> customerTypeOptions = FXCollections.observableArrayList("个人", "公司/企业");
     private ObservableList<String> customerLevelOptions = FXCollections.observableArrayList("一星", "二星", "三星", "四星", "五星");
+    private String searchByName;
 
     @FXML
     private void initialize() {
@@ -156,12 +162,9 @@ public class SaleDepClientInfoSearchPaneController {
 
     @FXML
     private void handleSearch() {
-        //test
-        searchData.addAll(
-                new Customer("a", "A", 0, "test1", "123@qq.com", "123456", 0),
-                new Customer("b", "B", 1, "test2", "456@qq.com", "231321", 1)
-        );
-        //TODO
+        searchData.clear();
+        searchByName = searchIndexInput.getText();
+        service_search.restart();
     }
 
 
@@ -205,5 +208,22 @@ public class SaleDepClientInfoSearchPaneController {
     private void handleDelete() {
         //TODO
     }
+
+    Service<Integer> service_search = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    CustomerSearch customerSearch = new CustomerSearch();
+                    List<Customer> list = customerSearch.FuzzySearch(searchByName);
+                    for (int i = 0; i < list.size(); i++) {
+                        searchData.add((Customer) list.get(i));
+                    }
+                    return null;
+                }
+            };
+        }
+    };
 }
 

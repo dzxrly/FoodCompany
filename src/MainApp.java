@@ -10,10 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
-import model.Customer;
-import org.osgi.service.useradmin.User;
-import service.CustomerCreator;
-import service.CustomerSearch;
 
 import java.io.IOException;
 import java.sql.Connection;
