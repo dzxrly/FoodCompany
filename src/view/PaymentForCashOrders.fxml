@@ -177,7 +177,12 @@
                   <Label fx:id="operatorLabel" layoutX="138.0" layoutY="563.0" text="Label" />
                </children>
             </HBox>
-            <Button fx:id="upload" layoutX="84.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="79.0" text="提交" />
+            <HBox spacing="10.0">
+               <children>
+                  <Button fx:id="upload" layoutX="86.0" layoutY="650.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="79.0" text="提交" />
+                  <Button fx:id="printBtn" layoutX="187.0" layoutY="650.0" mnemonicParsing="false" onAction="#handlePrint" prefHeight="23.0" prefWidth="79.0" text="打印" />
+               </children>
+            </HBox>
          </children>
       </VBox>
       <ScrollPane layoutX="374.0" layoutY="121.0" prefHeight="558.0" prefWidth="675.0">

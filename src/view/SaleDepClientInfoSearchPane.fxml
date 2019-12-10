@@ -32,25 +32,28 @@
                   <Label fx:id="customerNumberLabel" layoutX="865.0" layoutY="40.0" />
                </children>
             </HBox>
-            <Label layoutX="26.0" layoutY="129.0" text="客户类型：" />
+            <Label layoutX="26.0" layoutY="129.0" text="客户类型*：" />
             <ComboBox fx:id="customerTypeComboBox" prefWidth="150.0" />
-            <Label layoutX="26.0" layoutY="192.0" text="客户星级：" />
+            <Label layoutX="26.0" layoutY="192.0" text="客户星级*：" />
             <ComboBox fx:id="customerLevelComboBox" prefWidth="150.0" />
             <Label layoutX="26.0" layoutY="262.0" text="公司名称：" />
             <TextField fx:id="companyNameText" editable="false" layoutX="14.0" layoutY="287.0" />
-            <Label layoutX="26.0" layoutY="330.0" text="负责人名称：" />
+            <Label layoutX="26.0" layoutY="330.0" text="负责人名称*：" />
             <TextField fx:id="personalNameText" editable="false" layoutX="18.0" layoutY="360.0" />
-            <Label layoutX="31.0" layoutY="410.0" text="联系电话:：" />
+            <Label layoutX="31.0" layoutY="410.0" text="联系电话*：" />
             <TextField fx:id="phoneText" editable="false" layoutX="26.0" layoutY="440.0" />
             <Label layoutX="41.0" layoutY="486.0" text="地址：" />
             <TextField fx:id="addressText" editable="false" layoutX="31.0" layoutY="510.0" />
-            <Label layoutX="26.0" layoutY="554.0" text="邮箱：" />
+            <Label layoutX="26.0" layoutY="554.0" text="邮箱*：" />
             <TextField fx:id="emailText" editable="false" layoutX="31.0" layoutY="583.0" />
-            <Button fx:id="expBtn" mnemonicParsing="false" onAction="#handlePrint" prefHeight="23.0" prefWidth="163.0" text="导出为PDF并打印" />
-            <HBox spacing="5.0">
+            <HBox prefHeight="23.0" prefWidth="127.0" spacing="5.0">
                <children>
-                  <Button fx:id="saveBtn" layoutX="950.0" layoutY="721.0" mnemonicParsing="false" onAction="#handleSave" text="保存" />
-                  <Button fx:id="deleteBtn" layoutX="995.0" layoutY="719.0" mnemonicParsing="false" onAction="#handleDelete" text="删除" />
+                  <Button fx:id="expBtn" mnemonicParsing="false" onAction="#handlePrint" prefHeight="25.0" prefWidth="80.0" text="打印" />
+                  <Button fx:id="saveBtn" layoutX="950.0" layoutY="721.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="25.0" prefWidth="80.0" text="保存">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Button>
+                  <Button fx:id="deleteBtn" layoutX="995.0" layoutY="719.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="25.0" prefWidth="80.0" text="删除" />
                </children>
             </HBox>
             <HBox spacing="5.0" />

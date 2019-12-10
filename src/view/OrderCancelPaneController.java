@@ -2,6 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import service.AddImageForComponent;
 
 public class OrderCancelPaneController {
     //订单退货处理控制类
@@ -34,6 +35,13 @@ public class OrderCancelPaneController {
     private Button uploadBtn;
     @FXML
     private Button clearBtn;
+
+    @FXML
+    private void initialize() {
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/upload14x14.png", 14)).getImageView());
+        clearBtn.setGraphic((new AddImageForComponent("img/close.png", 14)).getImageView());
+    }
 
     @FXML
     private void handleSearch() {

@@ -9,10 +9,10 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OrderCancelPaneController">
    <children>
-      <HBox layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="244.0">
+      <HBox layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="307.0">
          <children>
-            <TextField fx:id="orderNumberInput" layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="193.0" promptText="请输入订单号" />
-            <Button fx:id="searchBtn" layoutX="175.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="70.0" text="搜索" />
+            <TextField fx:id="orderNumberInput" layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="223.0" promptText="请输入订单号" />
+            <Button fx:id="searchBtn" layoutX="175.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="111.0" text="搜索" />
          </children>
       </HBox>
       <VBox layoutX="41.0" layoutY="116.0" prefHeight="251.0" prefWidth="407.0" spacing="10.0">

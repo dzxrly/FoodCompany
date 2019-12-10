@@ -231,7 +231,13 @@ public class SaleDepClientInfoSearchPaneController {
 
     @FXML
     private void handleSave() {
-        //TODO
+        if (formCheck()) {
+            //TODO
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "填写信息有误！", "填写信息有误！");
+            alertDialog.showAlert();
+        }
     }
 
     @FXML
@@ -290,5 +296,18 @@ public class SaleDepClientInfoSearchPaneController {
             };
         }
     };
+
+    //表单验证
+    private boolean formCheck() {
+        String phoneNumberRegex = "\\d+";
+        String emailRegex = "\\w+@[A-Za-z0-9_.]+";
+        System.out.println(emailText.getText());
+        if (!personalNameText.getText().equals("") &&
+                !phoneText.getText().equals("") &&
+                !emailText.getText().equals("") &&
+                phoneText.getText().matches(phoneNumberRegex) &&
+                emailText.getText().matches(emailRegex)) return true;
+        else return false;
+    }
 }
 
