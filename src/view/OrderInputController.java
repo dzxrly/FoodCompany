@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import service.AddImageForComponent;
 
 public class OrderInputController {
     //订单信息录入控制类
@@ -56,6 +57,10 @@ public class OrderInputController {
         lockStatus.setText("订单类型未锁定");
         orderType.setDisable(false);
         lockStatus.setGraphic(new ImageView(new Image("img/unlock.png", 16, 16, false, false)));
+        uploadOrder.setGraphic((new AddImageForComponent("img/check.png", 16)).getImageView());
+        printBtn.setGraphic((new AddImageForComponent("img/download.png", 16)).getImageView());
+        addSelectedToTable.setGraphic((new AddImageForComponent("img/cart_empty.png", 16)).getImageView());
+        addAllToTable.setGraphic((new AddImageForComponent("img/cart.png", 16)).getImageView());
         //TODO
     }
 

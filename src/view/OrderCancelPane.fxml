@@ -1,13 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OrderCancelPaneController">
+   <children>
+      <HBox layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="244.0">
+         <children>
+            <TextField fx:id="orderNumberInput" layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="193.0" promptText="请输入订单号" />
+            <Button fx:id="searchBtn" layoutX="175.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="70.0" text="搜索" />
+         </children>
+      </HBox>
+      <VBox layoutX="41.0" layoutY="116.0" prefHeight="251.0" prefWidth="407.0" spacing="10.0">
+         <children>
+            <HBox layoutX="190.0" layoutY="107.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="81.0" text="订单编号：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="orderNumberLabel" layoutX="82.0" layoutY="81.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="184.0" layoutY="135.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="101.0" text="订单类型：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="orderTypeLabel" layoutX="86.0" layoutY="101.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="190.0" layoutY="173.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="129.0" text="发货状态：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="transportationStatus" layoutX="82.0" layoutY="129.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="184.0" layoutY="211.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="157.0" text="是否已进行生产：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="productionStatus" layoutX="113.0" layoutY="157.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="191.0" layoutY="252.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="182.0" text="退货截止日期：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="deadline" layoutX="105.0" layoutY="182.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="106.0" layoutY="352.0" text="客户姓名：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="customerNameLabel" layoutX="186.0" layoutY="354.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="71.0" layoutY="346.0" text="客户联系方式：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="customerPhoneLabel" layoutX="169.0" layoutY="348.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="73.0" layoutY="369.0" text="客户地址：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="customerAddressLabel" layoutX="147.0" layoutY="371.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="41.0" layoutY="352.0" text="是否存在质量问题：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="isHasProblem" layoutX="167.0" layoutY="350.0" prefHeight="23.0" prefWidth="84.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="14.0" layoutY="14.0" text="退货处理">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="note" layoutX="41.0" layoutY="409.0" prefHeight="203.0" prefWidth="559.0" />
+      <Label layoutX="41.0" layoutY="384.0" text="退款备注：" />
+      <HBox layoutX="394.0" layoutY="630.0" spacing="10.0">
+         <children>
+            <Button fx:id="uploadBtn" layoutX="502.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="23.0" prefWidth="98.0" text="提交" />
+            <Button fx:id="clearBtn" layoutX="621.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleClear" prefHeight="23.0" prefWidth="98.0" text="清空" />
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>
