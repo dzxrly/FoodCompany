@@ -36,7 +36,7 @@ public class GoodsSearch {
 //                System.out.println(s1 + s2 + s3 + s4 + s5);
 //            }
         } catch (RuntimeException e) {
-            System.out.println("_____________Can not_____________________");
+            System.out.println("_____________Can not search_____________________");
         } finally {
             session.close();
             return list;

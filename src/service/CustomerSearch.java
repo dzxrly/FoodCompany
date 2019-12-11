@@ -1,6 +1,7 @@
 package service;
 
 import DAO.HibernateUtils;
+import model.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
