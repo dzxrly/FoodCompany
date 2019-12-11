@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Goods;
 import service.AddImageForComponent;
+import service.AlertDialog;
 import service.GoodsSearch;
 
 import java.util.List;
@@ -61,6 +62,7 @@ public class OrderInputController {
     private ObservableList<String> orderTypeOptions = FXCollections.observableArrayList("现货订单", "预定订单");
     private ObservableList<GoodsInfo> rightGoodsListData = FXCollections.observableArrayList();
     private String searchInput;
+    private ObservableList<GoodsInfo> leftGoodsListData = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
@@ -94,6 +96,27 @@ public class OrderInputController {
         searchResTable.getColumns().addAll(goodsIDCol, goodsNameCol, goodPriceCol, goodsQualityTimeCol, stocksCol);
         searchResTable.setPlaceholder(new Label("没有搜索结果"));
         searchResTable.setEditable(true);
+        searchResTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        TableColumn left_goodsIDCol = new TableColumn("编号");
+        left_goodsIDCol.setSortable(true);
+        left_goodsIDCol.setCellValueFactory(new PropertyValueFactory<>("goodsId"));
+        TableColumn left_goodsNameCol = new TableColumn("商品名");
+        left_goodsNameCol.setSortable(false);
+        left_goodsNameCol.setCellValueFactory(new PropertyValueFactory<>("goodsName"));
+        TableColumn left_goodPriceCol = new TableColumn("单价");
+        left_goodPriceCol.setSortable(true);
+        left_goodPriceCol.setCellValueFactory(new PropertyValueFactory<>("goodsPrice"));
+        TableColumn left_goodsQualityTimeCol = new TableColumn("保质期");
+        left_goodsQualityTimeCol.setSortable(false);
+        left_goodsQualityTimeCol.setCellValueFactory(new PropertyValueFactory<>("goodsQualityTime"));
+        TableColumn left_stocksCol = new TableColumn("库存");
+        left_stocksCol.setSortable(true);
+        left_stocksCol.setCellValueFactory(new PropertyValueFactory<>("stocks"));
+        goodsTable.setItems(leftGoodsListData);
+        goodsTable.getColumns().addAll(left_goodsIDCol, left_goodsNameCol, left_goodPriceCol, left_goodsQualityTimeCol, left_stocksCol);
+        goodsTable.setPlaceholder(new Label("没有结果"));
+        goodsTable.setEditable(true);
         //TODO
     }
 
@@ -106,25 +129,50 @@ public class OrderInputController {
 
     @FXML
     private void handleAddSelectedBtn() {
-        lockStatus.setGraphic(new ImageView(new Image("img/lock.png", 16, 16, false, false)));
-        lockStatus.setText("订单类型已锁定，解锁请移除所有所选商品");
-        orderType.setDisable(true);
-        uploadOrder.setDisable(false);
-        //TODO
+        if (rightGoodsListData.size() != 0) {
+            lockStatus.setGraphic(new ImageView(new Image("img/lock.png", 16, 16, false, false)));
+            lockStatus.setText("订单类型已锁定，解锁请移除所有所选商品");
+            orderType.setDisable(true);
+            uploadOrder.setDisable(false);
+
+            for (int i = 0; i < searchResTable.getSelectionModel().getSelectedIndices().size(); i++) {
+                leftGoodsListData.add((GoodsInfo) rightGoodsListData.get((int) searchResTable.getSelectionModel().getSelectedIndices().get(i)));
+            }
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有信息！", "列表中没有信息！");
+            alertDialog.showAlert();
+        }
     }
 
     @FXML
     private void handleAddAllBtn() {
-        lockStatus.setGraphic(new ImageView(new Image("img/lock.png", 16, 16, false, false)));
-        lockStatus.setText("订单类型已锁定，解锁请移除所有所选商品");
-        orderType.setDisable(true);
-        uploadOrder.setDisable(false);
-        //TODO
+        if (rightGoodsListData.size() != 0) {
+            lockStatus.setGraphic(new ImageView(new Image("img/lock.png", 16, 16, false, false)));
+            lockStatus.setText("订单类型已锁定，解锁请移除所有所选商品");
+            orderType.setDisable(true);
+            uploadOrder.setDisable(false);
+
+            for (int i = 0; i < rightGoodsListData.size(); i++) {
+                leftGoodsListData.add(rightGoodsListData.get(i));
+            }
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有信息！", "列表中没有信息！");
+            alertDialog.showAlert();
+        }
     }
 
     @FXML
     private void handleDeleteSelectedGood() {
-        //TODO
+        int selectedIndex = goodsTable.getSelectionModel().getSelectedIndex();
+        leftGoodsListData.remove(selectedIndex, selectedIndex + 1);
+        if (leftGoodsListData.size() == 0) {
+            lockStatus.setGraphic(new ImageView(new Image("img/unlock.png", 16, 16, false, false)));
+            lockStatus.setText("订单类型未锁定");
+            orderType.setDisable(false);
+            uploadOrder.setDisable(true);
+        }
     }
 
     @FXML
@@ -133,7 +181,7 @@ public class OrderInputController {
         lockStatus.setText("订单类型未锁定");
         orderType.setDisable(false);
         uploadOrder.setDisable(true);
-        //TODO
+        leftGoodsListData.clear();
     }
 
     @FXML
