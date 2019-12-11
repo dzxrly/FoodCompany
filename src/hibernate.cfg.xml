@@ -17,6 +17,8 @@
     <property name="hibernate.hbm2ddl.auto">update</property>  
     <!-- 配置hibernate的映射文件所在的位置 -->  
     <mapping resource="model/Customer.hbm.xml"/>  
-    <mapping resource="model/Stuff.hbm.xml"/> 
+    <mapping resource="model/Stuff.hbm.xml"/>
+    <mapping resource="model/Goods.hbm.xml"/>
+    <mapping resource="model/ShippingDepartment.hbm.xml"/>
   </session-factory> 
 </hibernate-configuration>
