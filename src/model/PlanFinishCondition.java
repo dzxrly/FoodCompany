@@ -10,6 +10,7 @@ public class PlanFinishCondition {
     private IntegerProperty conditionId = new SimpleIntegerProperty();
     private IntegerProperty planId = new SimpleIntegerProperty();
     private DoubleProperty  productQuantity= new SimpleDoubleProperty();
+    //0为未完成 1为完成
     private IntegerProperty finishState = new SimpleIntegerProperty();
 
     public int getConditionId() {
