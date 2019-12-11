@@ -84,8 +84,16 @@ public class MainWindowController {
         existGoods.getChildren().add(new TreeItem<>("订单付款"));
         existGoods.getChildren().add(new TreeItem<>("订单退款"));
         itemFianceDep.getChildren().add(existGoods);
+
+        TreeItem<String> financialTreatment = new TreeItem<>("公司财务处理");
+        financialTreatment.getChildren().add(new TreeItem<>("账单管理"));
+        financialTreatment.getChildren().add(new TreeItem<>("财务报表"));
+
+        itemFianceDep.getChildren().add(financialTreatment);
         //侧边栏生产计划科
         TreeItem<String> itemProductionPlanDep = new TreeItem<>("生产计划科");
+
+
         //侧边栏生产车间
         TreeItem<String> itemWorkshop = new TreeItem<>("生产车间");
         //侧边栏成品库
@@ -100,9 +108,15 @@ public class MainWindowController {
         } else if (userLevel.equals("1")) {
             rootItem.getChildren().add(itemSaleDep);
             rootItem.getChildren().add(itemFinishedProductionDep);
+        } else if (userLevel.equals("2")) {
+            rootItem.getChildren().add(itemSaleDep);
+            rootItem.getChildren().add(itemFianceDep);
+            rootItem.getChildren().add(itemProductionPlanDep);
+            rootItem.getChildren().add(itemFinishedProductionDep);
         } else {
             rootItem.getChildren().add(itemWarning);
         }
+        //TODO
         sideMenu.setRoot(rootItem);
 
         //侧边栏监听器
@@ -159,6 +173,18 @@ public class MainWindowController {
                     } else if (currentSelectedItem.getValue().equals("订单退款")) {
                         try {
                             showInsidePane("SpotOrderRefundPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("账单管理")) {
+                        try {
+                            showInsidePane("BillManagement.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("财务报表")) {
+                        try {
+                            showInsidePane("FinancialStatementsPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
