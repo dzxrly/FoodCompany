@@ -38,6 +38,7 @@ public class ProductionPlansManagementPaneController {
         orderTypeComboBox.getSelectionModel().select(0);
         planTypeComboBox.setItems(planTypeOptions);
         planTypeComboBox.getSelectionModel().select(0);
+
         //TODO
     }
 
