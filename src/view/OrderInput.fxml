@@ -73,7 +73,7 @@
       </HBox>
       <HBox layoutX="14.0" layoutY="692.0" spacing="10.0">
          <children>
-            <Button fx:id="deleteSelectedGoodFromTable" layoutX="189.0" layoutY="845.0" mnemonicParsing="false" onAction="#handleDeleteSelectedGood" text="移除所选商品" />
+            <Button fx:id="deleteSelectedGoodFromTable" layoutX="189.0" layoutY="845.0" mnemonicParsing="false" onAction="#handleDeleteSelectedGood" text="逐个移除所选商品" />
             <Button fx:id="clearGoodsTable" layoutX="72.0" layoutY="833.0" mnemonicParsing="false" onAction="#handleClearAllGoods" text="清空商品列表" />
          </children>
       </HBox>
