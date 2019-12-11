@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,10 +18,7 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import model.Customer;
 import org.controlsfx.control.ToggleSwitch;
-import service.AlertDialog;
-import service.CustomerIndexAndStringSwitch;
-import service.CustomerSearch;
-import service.Printer;
+import service.*;
 
 import java.util.List;
 
@@ -197,7 +195,9 @@ public class SaleDepClientInfoSearchPaneController {
     private void handlePrint() {
         if (!personalNameText.getText().equals("")) {
             TextArea tempPrintTextArea = new TextArea();
-            tempPrintTextArea.setText("客户类型：\n" +
+            tempPrintTextArea.setText("客户编号：\n" +
+                    customerNumberLabel.getText() + "\n" +
+                    "客户类型：\n" +
                     customerTypeComboBox.getValue().toString() + "\n" +
                     "客户星级：\n" +
                     customerLevelComboBox.getValue().toString() + "\n" +
@@ -232,7 +232,7 @@ public class SaleDepClientInfoSearchPaneController {
     @FXML
     private void handleSave() {
         if (formCheck()) {
-            //TODO
+            service_save.restart();
         } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "填写信息有误！", "填写信息有误！");
@@ -291,6 +291,25 @@ public class SaleDepClientInfoSearchPaneController {
                     for (int i = 0; i < list.size(); i++) {
                         searchData.add((Customer) list.get(i));
                     }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_save = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    CustomerUpdate customerUpdate = new CustomerUpdate();
+                    customerUpdate.updateCustomer(Integer.parseInt(customerNumberLabel.getText()), personalNameText.getText(), companyNameText.getText(), customerTypeComboBox.getSelectionModel().getSelectedIndex(), customerLevelComboBox.getSelectionModel().getSelectedIndex(), addressText.getText(), emailText.getText(), phoneText.getText());
+                    Platform.runLater(() -> {
+                        AlertDialog alertDialog = new AlertDialog();
+                        alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "保存成功！", "信息更改已录入！");
+                        alertDialog.show();
+                    });
                     return null;
                 }
             };
