@@ -2,7 +2,7 @@ package model;
 
 import javafx.beans.property.*;
 
-//原料表
+//原料表 。
 public class Material {
     private IntegerProperty materialId = new SimpleIntegerProperty();
     private StringProperty materialName = new SimpleStringProperty();
