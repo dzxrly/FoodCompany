@@ -4,7 +4,10 @@ import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -35,8 +38,6 @@ public class OrderInputController {
     @FXML
     private Button addSelectedToTable;
     @FXML
-    private Button addAllToTable;
-    @FXML
     private TableView searchResTable;
     @FXML
     private TableView goodsTable;
@@ -58,6 +59,8 @@ public class OrderInputController {
     private Button printBtn;
     @FXML
     private TextField totalPrice;
+    @FXML
+    private TextField payNumberText;
 
     private ObservableList<String> orderTypeOptions = FXCollections.observableArrayList("现货订单", "预定订单");
     private ObservableList<GoodsInfo> rightGoodsListData = FXCollections.observableArrayList();
@@ -75,7 +78,6 @@ public class OrderInputController {
         uploadOrder.setGraphic((new AddImageForComponent("img/check.png", 16)).getImageView());
         printBtn.setGraphic((new AddImageForComponent("img/download.png", 16)).getImageView());
         addSelectedToTable.setGraphic((new AddImageForComponent("img/cart_empty.png", 16)).getImageView());
-        addAllToTable.setGraphic((new AddImageForComponent("img/cart.png", 16)).getImageView());
 
         TableColumn goodsIDCol = new TableColumn("编号");
         goodsIDCol.setSortable(true);
@@ -113,10 +115,27 @@ public class OrderInputController {
         TableColumn left_stocksCol = new TableColumn("库存");
         left_stocksCol.setSortable(true);
         left_stocksCol.setCellValueFactory(new PropertyValueFactory<>("stocks"));
+        TableColumn left_payNumber = new TableColumn("购买数量");
+        left_payNumber.setSortable(true);
+        left_payNumber.setCellValueFactory(new PropertyValueFactory<>("payNumber"));
         goodsTable.setItems(leftGoodsListData);
-        goodsTable.getColumns().addAll(left_goodsIDCol, left_goodsNameCol, left_goodPriceCol, left_goodsQualityTimeCol, left_stocksCol);
+        goodsTable.getColumns().addAll(left_goodsIDCol, left_goodsNameCol, left_goodPriceCol, left_goodsQualityTimeCol, left_stocksCol, left_payNumber);
         goodsTable.setPlaceholder(new Label("没有结果"));
         goodsTable.setEditable(true);
+
+        leftGoodsListData.addListener(new ListChangeListener<GoodsInfo>() {
+            @Override
+            public void onChanged(Change<? extends GoodsInfo> c) {
+                Double sum = 0.0;
+                for (int i = 0; i < leftGoodsListData.size(); i++) {
+                    GoodsInfo tempGoodsInfo = (GoodsInfo) leftGoodsListData.get(i);
+                    Double goodPrice = tempGoodsInfo.getGoodsPrice();
+                    Double number = tempGoodsInfo.getPayNumber();
+                    sum += goodPrice * number;
+                }
+                totalPrice.setText(String.valueOf(sum));
+            }
+        });
         //TODO
     }
 
@@ -129,36 +148,20 @@ public class OrderInputController {
 
     @FXML
     private void handleAddSelectedBtn() {
-        if (rightGoodsListData.size() != 0) {
+        if (rightGoodsListData.size() != 0 && !payNumberText.getText().equals("")) {
             lockStatus.setGraphic(new ImageView(new Image("img/lock.png", 16, 16, false, false)));
             lockStatus.setText("订单类型已锁定，解锁请移除所有所选商品");
             orderType.setDisable(true);
             uploadOrder.setDisable(false);
 
             for (int i = 0; i < searchResTable.getSelectionModel().getSelectedIndices().size(); i++) {
-                leftGoodsListData.add((GoodsInfo) rightGoodsListData.get((int) searchResTable.getSelectionModel().getSelectedIndices().get(i)));
+                GoodsInfo tempGoodsInfo = (GoodsInfo) rightGoodsListData.get((int) searchResTable.getSelectionModel().getSelectedIndices().get(i));
+                tempGoodsInfo.setPayNumber(Double.valueOf(payNumberText.getText()));
+                leftGoodsListData.add(tempGoodsInfo);
             }
         } else {
             AlertDialog alertDialog = new AlertDialog();
-            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有信息！", "列表中没有信息！");
-            alertDialog.showAlert();
-        }
-    }
-
-    @FXML
-    private void handleAddAllBtn() {
-        if (rightGoodsListData.size() != 0) {
-            lockStatus.setGraphic(new ImageView(new Image("img/lock.png", 16, 16, false, false)));
-            lockStatus.setText("订单类型已锁定，解锁请移除所有所选商品");
-            orderType.setDisable(true);
-            uploadOrder.setDisable(false);
-
-            for (int i = 0; i < rightGoodsListData.size(); i++) {
-                leftGoodsListData.add(rightGoodsListData.get(i));
-            }
-        } else {
-            AlertDialog alertDialog = new AlertDialog();
-            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有信息！", "列表中没有信息！");
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "无效数据！", "列表中没有信息或购买数量未填写！");
             alertDialog.showAlert();
         }
     }
@@ -212,7 +215,7 @@ public class OrderInputController {
                     for (int i = 0; i < list.size(); i++) {
                         Object[] obj = (Object[]) list.get(i);
                         System.out.println((String) obj[1]);
-                        rightGoodsListData.add(new GoodsInfo((int) obj[0], (String) obj[1], (Double) obj[2], (int) obj[3], (int) obj[4]));
+                        rightGoodsListData.add(new GoodsInfo((int) obj[0], (String) obj[1], (Double) obj[2], (int) obj[3], (int) obj[4], 0.0));
                     }
                     return null;
                 }
@@ -226,13 +229,27 @@ public class OrderInputController {
         private SimpleDoubleProperty goodsPrice;
         private SimpleIntegerProperty goodsQualityTime;
         private SimpleIntegerProperty stocks;
+        private SimpleDoubleProperty payNumber;
 
-        private GoodsInfo(int goodsId, String goodsName, Double goodsPrice, int goodsQualityTime, int stocks) {
+        private GoodsInfo(int goodsId, String goodsName, Double goodsPrice, int goodsQualityTime, int stocks, Double payNumber) {
             this.goodsId = new SimpleIntegerProperty(goodsId);
             this.goodsName = new SimpleStringProperty(goodsName);
             this.goodsPrice = new SimpleDoubleProperty(goodsPrice);
             this.goodsQualityTime = new SimpleIntegerProperty(goodsQualityTime);
             this.stocks = new SimpleIntegerProperty(stocks);
+            this.payNumber = new SimpleDoubleProperty(payNumber);
+        }
+
+        public double getPayNumber() {
+            return payNumber.get();
+        }
+
+        public SimpleDoubleProperty payNumberProperty() {
+            return payNumber;
+        }
+
+        public void setPayNumber(double payNumber) {
+            this.payNumber.set(payNumber);
         }
 
         public int getGoodsId() {
