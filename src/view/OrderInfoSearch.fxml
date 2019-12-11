@@ -45,9 +45,9 @@
             <TextField fx:id="customerPhoneText" />
             <Label text="地址：" />
             <TextField fx:id="customerAddressText" />
-            <Label text="发货日期：" />
+            <Label text="截至日期：" />
             <DatePicker fx:id="orderDatePicker" prefHeight="23.0" prefWidth="220.0" />
-            <Label text="商品l列表：" />
+            <Label text="商品列表：" />
          </children>
       </VBox>
       <ScrollPane layoutX="688.0" layoutY="350.0" prefHeight="328.0" prefWidth="373.0">

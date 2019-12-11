@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OrderProductionCheckPaneController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="订单需求量检查">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <HBox layoutX="14.0" layoutY="64.0">
+         <children>
+            <TextField layoutX="14.0" layoutY="65.0" prefHeight="27.0" prefWidth="200.0" promptText="请输入订单号" />
+            <Button layoutX="214.0" layoutY="67.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="92.0" text="搜索" />
+            <Button layoutX="269.0" layoutY="67.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="139.0" text="查询全部预订订单" />
+         </children>
+      </HBox>
+      <ScrollPane layoutX="14.0" layoutY="104.0" prefHeight="578.0" prefWidth="523.0">
+         <content>
+            <TableView prefHeight="576.0" prefWidth="521.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <Label layoutX="570.0" layoutY="104.0" text="订单信息">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
