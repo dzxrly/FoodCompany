@@ -233,6 +233,7 @@ public class SaleDepClientInfoSearchPaneController {
     private void handleSave() {
         if (formCheck()) {
             service_save.restart();
+            searchData.clear();
         } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "填写信息有误！", "填写信息有误！");
