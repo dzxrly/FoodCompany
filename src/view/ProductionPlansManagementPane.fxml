@@ -7,7 +7,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProductionPlansManagementPaneController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="生产计划管理">
@@ -15,5 +14,71 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <HBox layoutX="14.0" layoutY="62.0" prefHeight="23.0" prefWidth="317.0">
+         <children>
+            <ComboBox fx:id="orderTypeComboBox" layoutX="55.0" layoutY="72.0" prefHeight="23.0" prefWidth="199.0" />
+            <Button fx:id="searchBtn" layoutX="205.0" layoutY="72.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="126.0" text="查询订单" />
+         </children>
+      </HBox>
+      <ScrollPane layoutX="14.0" layoutY="100.0" prefHeight="576.0" prefWidth="606.0">
+         <content>
+            <TableView fx:id="orderList" prefHeight="574.0" prefWidth="604.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <Button fx:id="exportBtn" layoutX="460.0" layoutY="688.0" mnemonicParsing="false" onAction="#handleExport" prefHeight="23.0" prefWidth="160.0" text="导出所选项至右侧" />
+      <Label layoutX="648.0" layoutY="100.0" text="新增生产计划">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="648.0" layoutY="131.0" text="订单列表：" />
+      <ScrollPane layoutX="648.0" layoutY="159.0" prefHeight="343.0" prefWidth="418.0">
+         <content>
+            <TableView fx:id="selectedOrderList" prefHeight="341.0" prefWidth="416.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <VBox layoutX="648.0" layoutY="514.0" spacing="5.0">
+         <children>
+            <HBox layoutX="648.0" layoutY="514.0">
+               <children>
+                  <Label layoutX="650.0" layoutY="550.0" prefWidth="90.0" text="订单数量：" />
+                  <Label fx:id="orderNumberLabel" layoutX="753.0" layoutY="565.0" text="Label" />
+               </children>
+            </HBox>
+            <VBox layoutX="648.0" layoutY="541.0" prefHeight="52.0" prefWidth="175.0" spacing="5.0">
+               <children>
+                  <Label layoutX="650.0" layoutY="581.0" text="计划类型：" />
+                  <ComboBox fx:id="planTypeComboBox" layoutX="650.0" layoutY="606.0" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <Label layoutX="648.0" layoutY="593.0" prefWidth="90.0" text="生产周期：" />
+            <HBox layoutX="648.0" layoutY="617.0" spacing="5.0">
+               <children>
+                  <DatePicker fx:id="beginDate" layoutX="647.0" layoutY="653.0" />
+                  <Label layoutX="844.0" layoutY="657.0" text="至">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="endDate" layoutX="871.0" layoutY="653.0" />
+               </children>
+            </HBox>
+            <HBox layoutX="648.0" layoutY="651.0">
+               <children>
+                  <Label layoutX="648.0" layoutY="651.0" text="操作人：" />
+                  <Label fx:id="operatorLabel" layoutX="708.0" layoutY="651.0" text="Label" />
+               </children>
+            </HBox>
+            <Button fx:id="uploadBtn" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="90.0" text="提交" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
