@@ -93,7 +93,19 @@ public class MainWindowController {
         //侧边栏生产计划科
         TreeItem<String> itemProductionPlanDep = new TreeItem<>("生产计划科");
 
+        TreeItem<String> orderProductionCheck = new TreeItem<>("订单需求量检查");
+        itemProductionPlanDep.getChildren().add(orderProductionCheck);
 
+        TreeItem<String> produceNumberManagement = new TreeItem<>("生产管理");
+        produceNumberManagement.getChildren().add(new TreeItem<>("生产财务规划"));
+        produceNumberManagement.getChildren().add(new TreeItem<>("生产计划管理"));
+        itemProductionPlanDep.getChildren().add(produceNumberManagement);
+
+        TreeItem<String> rawMaterialManage = new TreeItem<>("原料管理");
+        itemProductionPlanDep.getChildren().add(rawMaterialManage);
+
+        TreeItem<String> productionsManage = new TreeItem<>("成品交付管理");
+        itemProductionPlanDep.getChildren().add(productionsManage);
         //侧边栏生产车间
         TreeItem<String> itemWorkshop = new TreeItem<>("生产车间");
         //侧边栏成品库
