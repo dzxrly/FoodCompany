@@ -45,7 +45,7 @@
             <TextField fx:id="customerPhoneText" />
             <Label text="地址：" />
             <TextField fx:id="customerAddressText" />
-            <Label text="截至日期：" />
+            <Label text="截止日期：" />
             <DatePicker fx:id="orderDatePicker" prefHeight="23.0" prefWidth="220.0" />
             <Label text="商品列表：" />
          </children>

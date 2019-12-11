@@ -1,6 +1,7 @@
 package view;
 
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +24,7 @@ import service.AddImageForComponent;
 import service.PropertiesOperation;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class MainWindowController {
@@ -197,6 +199,18 @@ public class MainWindowController {
                     } else if (currentSelectedItem.getValue().equals("财务报表")) {
                         try {
                             showInsidePane("FinancialStatementsPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("订单需求量检查")) {
+                        try {
+                            showInsidePane("OrderProductionCheckPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("生产财务规划")) {
+                        try {
+                            showInsidePane("ProductionFiancePlanPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

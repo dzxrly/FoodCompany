@@ -91,7 +91,7 @@
             <TextField fx:id="customerPhone" layoutX="643.0" layoutY="535.0" />
             <Label layoutX="643.0" layoutY="575.0" text="客户地址：" />
             <TextField fx:id="customerAddress" layoutX="643.0" layoutY="597.0" />
-            <Label text="截至日期：" />
+            <Label text="截止日期：" />
             <DatePicker fx:id="datePicker" prefHeight="23.0" prefWidth="241.0" />
          </children>
       </VBox>

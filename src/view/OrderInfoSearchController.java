@@ -2,6 +2,8 @@ package view;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -47,9 +49,12 @@ public class OrderInfoSearchController {
     private Label modelLabel;
 
     private ToggleSwitch toggleSwitch = new ToggleSwitch();
+    private ObservableList<String> searchTypeOptions = FXCollections.observableArrayList("订单号", "客户名称", "公司/企业名称");
 
     @FXML
     private void initialize() {
+        searchIndexComboBox.setItems(searchTypeOptions);
+        searchIndexComboBox.getSelectionModel().select(0);
         toggleSwitch.setSelected(false);
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         hBox.getChildren().add(1, toggleSwitch);
