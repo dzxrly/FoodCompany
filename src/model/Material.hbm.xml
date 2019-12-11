@@ -22,7 +22,7 @@
         <property name="materialName" column="materialName" type="java.lang.String" length="20"></property>
         <property name="materialPrice" column="materialPrice" type="java.lang.Double" length="0"></property>
         <property name="stuffNumber" column="stuffNumber" type="java.lang.Integer" length="11"></property>
-        <property name="materialQualityTime" column="materialQualityTime" type="java.lang.String" length="20"></property>
+        <property name="materialQualityTime" column="materialQualityTime" type="java.lang.Integer" length="11"></property>
         <property name="stocks" column="stocks" type="java.lang.Double" length="0"></property>
         <property name="storeTime" column="storeTime" type="java.lang.String" length="20"></property>
         <property name="materialType" column="materialType" type="java.lang.Integer" length="11"></property>

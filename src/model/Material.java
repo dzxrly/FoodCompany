@@ -11,8 +11,8 @@ public class Material {
     private IntegerProperty materialQualityTime = new SimpleIntegerProperty();
     //0为添加剂，1为非添加剂
     private IntegerProperty materialType = new SimpleIntegerProperty();
-    private DoubleProperty stock = new SimpleDoubleProperty();
-    private StringProperty stockTime = new SimpleStringProperty();
+    private DoubleProperty stocks = new SimpleDoubleProperty();
+    private StringProperty storeTime = new SimpleStringProperty();
 
     public int getMaterialId() {
         return materialId.get();
@@ -53,7 +53,7 @@ public class Material {
     public int getStuffNumber() {
         return stuffNumber.get();
     }
-    
+
     public IntegerProperty stuffNumberProperty() {
         return stuffNumber;
     }
@@ -86,28 +86,28 @@ public class Material {
         this.materialType.set(materialType);
     }
 
-    public double getStock() {
-        return stock.get();
+    public double getStocks() {
+        return stocks.get();
     }
 
-    public DoubleProperty stockProperty() {
-        return stock;
+    public DoubleProperty stocksProperty() {
+        return stocks;
     }
 
-    public void setStock(double stock) {
-        this.stock.set(stock);
+    public void setStocks(double stocks) {
+        this.stocks.set(stocks);
     }
 
-    public String getStockTime() {
-        return stockTime.get();
+    public String getStoreTime() {
+        return storeTime.get();
     }
 
-    public StringProperty stockTimeProperty() {
-        return stockTime;
+    public StringProperty storeTimeProperty() {
+        return storeTime;
     }
 
-    public void setStockTime(String stockTime) {
-        this.stockTime.set(stockTime);
+    public void setStoreTime(String storeTime) {
+        this.storeTime.set(storeTime);
     }
 
     @Override
@@ -119,8 +119,8 @@ public class Material {
                 ", stuffNumber=" + stuffNumber +
                 ", materialQualityTime=" + materialQualityTime +
                 ", materialType=" + materialType +
-                ", stock=" + stock +
-                ", stockTime=" + stockTime +
+                ", stocks=" + stocks +
+                ", storeTime=" + storeTime +
                 '}';
     }
 }
