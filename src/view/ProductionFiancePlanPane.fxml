@@ -7,7 +7,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProductionFiancePlanPaneController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="生产财务规划">
@@ -15,5 +14,55 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <HBox layoutX="14.0" layoutY="58.0">
+         <children>
+            <ComboBox fx:id="productionPlanDateComboBox" layoutX="14.0" layoutY="58.0" prefWidth="150.0" />
+            <Button fx:id="searchBtn" layoutX="164.0" layoutY="58.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="78.0" text="查询" />
+         </children>
+      </HBox>
+      <SplitPane layoutX="14.0" layoutY="87.0" prefHeight="593.0" prefWidth="707.0">
+         <items>
+            <TableView fx:id="planList" prefHeight="591.0" prefWidth="700.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </items>
+      </SplitPane>
+      <Button fx:id="exportBtn" layoutX="502.0" layoutY="693.0" mnemonicParsing="false" onAction="#handleExport" prefHeight="23.0" prefWidth="219.0" text="导出所选项至右侧" />
+      <VBox layoutX="748.0" layoutY="296.0" prefHeight="109.0" prefWidth="298.0" spacing="15.0">
+         <children>
+            <Label text="财务信息">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox layoutX="755.0" layoutY="222.0">
+               <children>
+                  <Label layoutX="755.0" layoutY="229.0" prefWidth="90.0" text="生产计划数量：" />
+                  <Label fx:id="planCountLabel" layoutX="874.0" layoutY="222.0" text="Label" />
+               </children>
+            </HBox>
+            <HBox layoutX="755.0" layoutY="253.0">
+               <children>
+                  <Label layoutX="755.0" layoutY="253.0" prefWidth="90.0" text="生产总成本：" />
+                  <Label fx:id="produceCostLabel" layoutX="845.0" layoutY="253.0" text="Label" />
+               </children>
+            </HBox>
+            <HBox layoutX="755.0" layoutY="294.0">
+               <children>
+                  <Label layoutX="755.0" layoutY="294.0" prefWidth="90.0" text="原料总成本：" />
+                  <Label fx:id="rawMaterialLabel" layoutX="867.0" layoutY="294.0" text="Label" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="737.0" layoutY="418.0" prefWidth="90.0" text="操作人：" />
+                  <Label fx:id="operatorLabel" layoutX="856.0" layoutY="426.0" text="Label" />
+               </children>
+            </HBox>
+            <Button fx:id="uploadBtn" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="84.0" text="提交" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
