@@ -21,5 +21,9 @@
     <mapping resource="model/Goods.hbm.xml"/>
     <mapping resource="model/ShippingDepartment.hbm.xml"/>
     <mapping resource="model/ProductPlan.hbm.xml"/>
+    <mapping resource="model/Logistics.hbm.xml"/>
+    <mapping resource="model/Orders.hbm.xml"/>
+    <mapping resource="model/OrderSpotGoods.hbm.xml"/>
+    <mapping resource="model/OrderBookGoods.hbm.xml"/>
   </session-factory> 
 </hibernate-configuration>

@@ -8,10 +8,10 @@
         table：映射到数据库里面的那个表的名称
         catalog：数据库的名称
      -->
-    <class name="ShippingDepartment" table="shippingDepartment" catalog="FoodCompany">
+    <class name="Logistics" table="logistics" catalog="FoodCompany">
         <!-- class下必须要有一个id的子元素 -->
         <!-- id是用于描述主键的 -->
-        <id name="goodsId" column="goodsId" type="java.lang.Integer">
+        <id name="logisticsId" column="logisticsId" type="java.lang.Integer">
             <!-- 主键生成策略 -->
             <generator class="native"></generator>
         </id>
@@ -19,8 +19,11 @@
             使用property来描述属性与字段的对应关系
             如果length忽略不写，且你的表是自动创建这种方案，那么length的默认长度是255
         -->
-        <property name="productTime" column="productTime" type="java.lang.String" length="20"></property>
-        <property name="goodsQualityTime" column="goodsQualityTime" type="java.lang.Integer" length="11"></property>
-        <property name="stocks" column="stocks" type="java.lang.Integer" length="11"></property>
+        <property name="logisticsNumber" column="logisticsNumber" type="java.lang.String" length="100"></property>
+        <property name="logisticsType" column="logisticsType" type="java.lang.Integer" length="11"></property>
+        <property name="companyName" column="companyName" type="java.lang.String" length="100"></property>
+        <property name="deliveryDate" column="deliveryDate" type="java.lang.String" length="20"></property>
+        <property name="destination" column="destination" type="java.lang.String" length="100"></property>
+        <property name="orderId" column="orderId" type="java.lang.Integer" length="11"></property>
     </class>
 </hibernate-mapping>
