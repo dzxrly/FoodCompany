@@ -20,16 +20,13 @@
             如果length忽略不写，且你的表是自动创建这种方案，那么length的默认长度是255
         -->
         <property name="orderType" column="orderType" type="java.lang.Integer" length="11"></property>
-        <property name="stuffNumber" column="stuffNumber" type="java.lang.Integer" length="20"></property>
-        <property name="customerName" column="customerName" type="java.lang.String" length="11"></property>
-        <property name="customerNumber" column="customerNumber" type="java.lang.String" length="20"></property>
-        <property name="companyName" column="companyName" type="java.lang.String" length="30"></property>
-        <property name="customerPhone" column="customerPhone" type="java.lang.String" length="100"></property>
+        <property name="customerName" column="customerName" type="java.lang.String" length="20"></property>
+        <property name="customerNumber" column="customerNumber" type="java.lang.Integer" length="11"></property>
+        <property name="customerPhone" column="customerPhone" type="java.lang.String" length="20"></property>
         <property name="customerAddress" column="customerAddress" type="java.lang.String" length="100"></property>
-        <property name="buildDate" column="buildDate" type="java.lang.String" length="13"></property>
+        <property name="buildDate" column="buildDate" type="java.lang.String" length="20"></property>
         <property name="totalSum" column="totalSum" type="java.lang.Double" length="0"></property>
         <property name="orderState" column="orderState" type="java.lang.Integer" length="11"></property>
         <property name="paymentState" column="paymentState" type="java.lang.Integer" length="11"></property>
-
     </class>
 </hibernate-mapping>

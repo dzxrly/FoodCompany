@@ -106,7 +106,7 @@ public class MainWindowController {
         TreeItem<String> rawMaterialManage = new TreeItem<>("原料管理");
         itemProductionPlanDep.getChildren().add(rawMaterialManage);
 
-        TreeItem<String> productionsManage = new TreeItem<>("成品交付管理");
+        TreeItem<String> productionsManage = new TreeItem<>("生产计划交付");
         itemProductionPlanDep.getChildren().add(productionsManage);
         //侧边栏生产车间
         TreeItem<String> itemWorkshop = new TreeItem<>("生产车间");

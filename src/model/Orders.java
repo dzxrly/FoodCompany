@@ -25,6 +25,7 @@ public class Orders {
         return orderId;
     }
 
+<<<<<<< HEAD
     public String getCompanyName() {
         return companyName.get();
     }
@@ -37,6 +38,8 @@ public class Orders {
         this.companyName.set(companyName);
     }
 
+=======
+>>>>>>> origin/master
     public void setOrderId(int orderId) {
         this.orderId.set(orderId);
     }
@@ -53,6 +56,7 @@ public class Orders {
         this.orderType.set(orderType);
     }
 
+<<<<<<< HEAD
     public int getStuffNumber() {
         return stuffNumber.get();
     }
@@ -65,6 +69,8 @@ public class Orders {
         this.stuffNumber.set(stuffNumber);
     }
 
+=======
+>>>>>>> origin/master
     public String getCustomerName() {
         return customerName.get();
     }
@@ -77,6 +83,7 @@ public class Orders {
         this.customerName.set(customerName);
     }
 
+<<<<<<< HEAD
     public String getCustomerNumber() {
         return customerNumber.get();
     }
@@ -86,6 +93,17 @@ public class Orders {
     }
 
     public void setCustomerNumber(String customerNumber) {
+=======
+    public int getCustomerNumber() {
+        return customerNumber.get();
+    }
+
+    public IntegerProperty customerNumberProperty() {
+        return customerNumber;
+    }
+
+    public void setCustomerNumber(int customerNumber) {
+>>>>>>> origin/master
         this.customerNumber.set(customerNumber);
     }
 
@@ -166,9 +184,13 @@ public class Orders {
         return "Orders{" +
                 "orderId=" + orderId +
                 ", orderType=" + orderType +
+<<<<<<< HEAD
                 ", stuffNumber=" + stuffNumber +
                 ", customerName=" + customerName +
                 ", companyName=" + companyName +
+=======
+                ", customerName=" + customerName +
+>>>>>>> origin/master
                 ", customerNumber=" + customerNumber +
                 ", customerPhone=" + customerPhone +
                 ", customerAddress=" + customerAddress +

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProductionManagePaneController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="生产计划交付">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <HBox layoutX="14.0" layoutY="66.0">
+         <children>
+            <TextField layoutX="31.0" layoutY="93.0" prefHeight="27.0" prefWidth="200.0" promptText="请输入生产计划编号" />
+            <Button layoutX="226.0" layoutY="104.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="80.0" text="搜索" />
+            <Button layoutX="281.0" layoutY="104.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="80.0" text="查询全部" />
+         </children>
+      </HBox>
+      <ScrollPane layoutX="14.0" layoutY="107.0" prefHeight="575.0" prefWidth="716.0">
+         <content>
+            <TableView prefHeight="574.0" prefWidth="714.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
