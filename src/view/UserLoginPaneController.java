@@ -3,6 +3,7 @@ package view;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import service.AlertDialog;
@@ -120,6 +122,12 @@ public class UserLoginPaneController {
             mainWindowStage.setMinHeight(768);
             mainWindowStage.setMinWidth(1280);
             mainWindowStage.show();
+            mainWindowStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    System.exit(-1);
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

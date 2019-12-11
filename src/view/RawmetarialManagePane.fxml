@@ -1,12 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RawmetarialManagePaneController">
-
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="原料管理">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <HBox layoutX="14.0" layoutY="57.0" prefHeight="27.0" prefWidth="360.0">
+         <children>
+            <TextField fx:id="searchInputText" layoutX="86.0" layoutY="77.0" prefHeight="27.0" prefWidth="200.0" />
+            <Button fx:id="searchBtn" layoutX="336.0" layoutY="79.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="74.0" text="搜索" />
+            <Button fx:id="searchAllBtn" layoutX="409.0" layoutY="79.0" mnemonicParsing="false" onAction="#handleSearchAll" prefHeight="23.0" prefWidth="75.0" text="查询全部" />
+         </children>
+      </HBox>
+      <ScrollPane layoutX="14.0" layoutY="99.0" prefHeight="572.0" prefWidth="630.0">
+         <content>
+            <TableView fx:id="metarialList" prefHeight="570.0" prefWidth="628.0" />
+         </content>
+      </ScrollPane>
+      <HBox layoutX="686.0" layoutY="142.0" prefHeight="16.0" prefWidth="260.0" spacing="10.0">
+         <children>
+            <RadioButton fx:id="searchModel" layoutX="710.0" layoutY="145.0" mnemonicParsing="false" text="查询" />
+            <RadioButton fx:id="addModel" layoutX="811.0" layoutY="145.0" mnemonicParsing="false" text="添加" />
+            <RadioButton fx:id="changeModel" layoutX="925.0" layoutY="145.0" mnemonicParsing="false" text="修改" />
+         </children>
+      </HBox>
+      <VBox layoutX="686.0" layoutY="185.0" prefHeight="401.0" prefWidth="250.0" spacing="10.0">
+         <children>
+            <VBox layoutX="686.0" layoutY="142.0" prefHeight="35.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Label layoutX="751.0" layoutY="207.0" prefWidth="80.0" text="原料编号：" />
+                  <Label fx:id="metarialNumberLabel" layoutX="913.0" layoutY="198.0" text="Label" />
+               </children>
+            </VBox>
+            <VBox layoutX="683.0" layoutY="190.0" prefHeight="38.0" prefWidth="250.0" spacing="5.0">
+               <children>
+                  <Label layoutX="686.0" layoutY="190.0" prefWidth="80.0" text="原料名称：" />
+                  <TextField fx:id="metarialNameText" layoutX="683.0" layoutY="217.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="683.0" layoutY="266.0" spacing="5.0">
+               <children>
+                  <Label layoutX="683.0" layoutY="334.0" text="最低数量限度：" />
+                  <TextField fx:id="metarialMinText" layoutX="683.0" layoutY="361.0" prefHeight="23.0" prefWidth="250.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="683.0" layoutY="341.0" spacing="5.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label layoutX="686.0" layoutY="255.0" prefWidth="80.0" text="库存数量：" />
+                        <Label fx:id="numberWarningLabel" text="Label" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="resNumberLabel" layoutX="683.0" layoutY="290.0" prefHeight="23.0" prefWidth="250.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="683.0" layoutY="402.0" spacing="5.0">
+               <children>
+                  <Label layoutX="686.0" layoutY="402.0" text="原料类型：" />
+                  <ComboBox fx:id="metarialTypeComboBox" layoutX="683.0" layoutY="430.0" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="683.0" layoutY="471.0" spacing="5.0">
+               <children>
+                  <Label layoutX="683.0" layoutY="471.0" text="单价：" />
+                  <TextField fx:id="priceText" layoutX="683.0" layoutY="501.0" prefHeight="23.0" prefWidth="250.0" />
+                  <VBox spacing="5.0">
+                     <children>
+                        <Label layoutX="918.0" layoutY="577.0" text="操作人：" />
+                        <Label fx:id="operatorLabel" layoutX="921.0" layoutY="621.0" text="Label" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <HBox spacing="10.0">
+               <children>
+                  <Button fx:id="uploadBtn" layoutX="761.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleUpload" prefWidth="70.0" text="提交" />
+                  <Button fx:id="printBtn" layoutX="834.0" layoutY="635.0" mnemonicParsing="false" onAction="#handlePrint" prefWidth="70.0" text="打印" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
