@@ -1,21 +1,23 @@
 package model;
 
 import javafx.beans.property.*;
-import org.hibernate.internal.util.StringHelper;
+import javassist.Loader;
+import org.hibernate.envers.enhanced.SequenceIdTrackingModifiedEntitiesRevisionEntity;
 
+//订单总表
 public class Orders {
-    private IntegerProperty orderId=new SimpleIntegerProperty();
-    private IntegerProperty orderType = new SimpleIntegerProperty();//0表示现货订单 1表示预售订单
-    private  IntegerProperty stuffNumber=new SimpleIntegerProperty();
-    private StringProperty customerName =new SimpleStringProperty();
-    private  StringProperty companyName=new SimpleStringProperty();
-    private StringProperty customerNumber=new SimpleStringProperty();
-    private StringProperty customerPhone=new SimpleStringProperty();
-    private StringProperty customerAddress=new SimpleStringProperty();
-    private StringProperty buildDate=new SimpleStringProperty();
-    private DoubleProperty totalSum=new SimpleDoubleProperty();
-    private IntegerProperty orderState=new SimpleIntegerProperty();//0生产中、1运输中、2已到达
-    private IntegerProperty paymentState=new SimpleIntegerProperty();//0表示预付款，1表示付全款
+    private IntegerProperty orderId = new SimpleIntegerProperty();
+    private IntegerProperty orderType = new SimpleIntegerProperty(); //0为现货订单 1为预定订单
+    private StringProperty companyName = new SimpleStringProperty();
+    private StringProperty customerName = new SimpleStringProperty();
+    private IntegerProperty customerNumber = new SimpleIntegerProperty();
+    private StringProperty customerPhone = new SimpleStringProperty();
+    private StringProperty customerAddress = new SimpleStringProperty();
+    private StringProperty buildDate =new SimpleStringProperty();
+    private DoubleProperty totalSum= new SimpleDoubleProperty();
+    private IntegerProperty orderState =new SimpleIntegerProperty();//订单状态 0为未生产，1为生产中，2为运输中，3为已到达
+    private IntegerProperty paymentState= new SimpleIntegerProperty(); //支付状态 0为未付款 1为付了预付款 2为付了全款
+    private IntegerProperty stuffNumber = new SimpleIntegerProperty();
 
     public int getOrderId() {
         return orderId.get();
@@ -25,21 +27,6 @@ public class Orders {
         return orderId;
     }
 
-<<<<<<< HEAD
-    public String getCompanyName() {
-        return companyName.get();
-    }
-
-    public StringProperty companyNameProperty() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName.set(companyName);
-    }
-
-=======
->>>>>>> origin/master
     public void setOrderId(int orderId) {
         this.orderId.set(orderId);
     }
@@ -56,21 +43,18 @@ public class Orders {
         this.orderType.set(orderType);
     }
 
-<<<<<<< HEAD
-    public int getStuffNumber() {
-        return stuffNumber.get();
+    public String getCompanyName() {
+        return companyName.get();
     }
 
-    public IntegerProperty stuffNumberProperty() {
-        return stuffNumber;
+    public StringProperty companyNameProperty() {
+        return companyName;
     }
 
-    public void setStuffNumber(int stuffNumber) {
-        this.stuffNumber.set(stuffNumber);
+    public void setCompanyName(String companyName) {
+        this.companyName.set(companyName);
     }
 
-=======
->>>>>>> origin/master
     public String getCustomerName() {
         return customerName.get();
     }
@@ -83,17 +67,6 @@ public class Orders {
         this.customerName.set(customerName);
     }
 
-<<<<<<< HEAD
-    public String getCustomerNumber() {
-        return customerNumber.get();
-    }
-
-    public StringProperty customerNumberProperty() {
-        return customerNumber;
-    }
-
-    public void setCustomerNumber(String customerNumber) {
-=======
     public int getCustomerNumber() {
         return customerNumber.get();
     }
@@ -103,7 +76,6 @@ public class Orders {
     }
 
     public void setCustomerNumber(int customerNumber) {
->>>>>>> origin/master
         this.customerNumber.set(customerNumber);
     }
 
@@ -179,18 +151,24 @@ public class Orders {
         this.paymentState.set(paymentState);
     }
 
+    public int getStuffNumber() {
+        return stuffNumber.get();
+    }
+
+    public IntegerProperty stuffNumberProperty() {
+        return stuffNumber;
+    }
+
+    public void setStuffNumber(int stuffNumber) {
+        this.stuffNumber.set(stuffNumber);
+    }
+
     @Override
     public String toString() {
         return "Orders{" +
                 "orderId=" + orderId +
                 ", orderType=" + orderType +
-<<<<<<< HEAD
-                ", stuffNumber=" + stuffNumber +
                 ", customerName=" + customerName +
-                ", companyName=" + companyName +
-=======
-                ", customerName=" + customerName +
->>>>>>> origin/master
                 ", customerNumber=" + customerNumber +
                 ", customerPhone=" + customerPhone +
                 ", customerAddress=" + customerAddress +

@@ -7,7 +7,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProductionManagePaneController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="生产计划交付">
@@ -17,15 +16,81 @@
       </Label>
       <HBox layoutX="14.0" layoutY="66.0">
          <children>
-            <TextField layoutX="31.0" layoutY="93.0" prefHeight="27.0" prefWidth="200.0" promptText="请输入生产计划编号" />
-            <Button layoutX="226.0" layoutY="104.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="80.0" text="搜索" />
-            <Button layoutX="281.0" layoutY="104.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="80.0" text="查询全部" />
+            <TextField fx:id="searchInputText" layoutX="31.0" layoutY="93.0" prefHeight="27.0" prefWidth="200.0" promptText="请输入生产计划编号" />
+            <Button fx:id="searchBtn" layoutX="226.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="80.0" text="搜索" />
+            <Button fx:id="searchAllBtn" layoutX="281.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleSearchAll" prefHeight="23.0" prefWidth="80.0" text="查询全部" />
          </children>
       </HBox>
       <ScrollPane layoutX="14.0" layoutY="107.0" prefHeight="575.0" prefWidth="716.0">
          <content>
-            <TableView prefHeight="574.0" prefWidth="714.0" />
+            <TableView fx:id="planList" prefHeight="574.0" prefWidth="714.0" />
          </content>
       </ScrollPane>
+      <Label layoutX="769.0" layoutY="280.0" text="生产计划信息">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <VBox layoutX="769.0" layoutY="324.0" spacing="15.0">
+         <children>
+            <HBox layoutX="756.0" layoutY="146.0">
+               <children>
+                  <Label layoutX="756.0" layoutY="146.0" prefWidth="100.0" text="生产计划编号：">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="planNumberLabel" layoutX="891.0" layoutY="148.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="756.0" layoutY="184.0">
+               <children>
+                  <Label layoutX="756.0" layoutY="184.0" prefWidth="100.0" text="商品数量：">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="numberLabel" layoutX="871.0" layoutY="186.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="756.0" layoutY="234.0">
+               <children>
+                  <Label layoutX="756.0" layoutY="234.0" prefWidth="100.0" text="计划类型：">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="typeLabe" layoutX="849.0" layoutY="234.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="779.0" layoutY="301.0">
+               <children>
+                  <Label layoutX="779.0" layoutY="308.0" prefWidth="100.0" text="生产周期：">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cycleLebal" layoutX="864.0" layoutY="301.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Button fx:id="uploadBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="136.0" text="交付至成品库" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
