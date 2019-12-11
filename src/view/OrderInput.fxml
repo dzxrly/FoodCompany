@@ -65,12 +65,7 @@
                </columnResizePolicy>
             </TableView>
          </content></ScrollPane>
-      <HBox layoutX="643.0" layoutY="401.0" spacing="10.0">
-         <children>
-            <Button fx:id="addSelectedToTable" layoutX="1077.0" layoutY="688.0" mnemonicParsing="false" onAction="#handleAddSelectedBtn" text="添加所选项至订单" />
-            <Button fx:id="addAllToTable" layoutX="1199.0" layoutY="688.0" mnemonicParsing="false" onAction="#handleAddAllBtn" text="添加全部项至订单" />
-         </children>
-      </HBox>
+      <HBox layoutX="804.0" layoutY="401.0" spacing="10.0" />
       <HBox layoutX="14.0" layoutY="692.0" spacing="10.0">
          <children>
             <Button fx:id="deleteSelectedGoodFromTable" layoutX="189.0" layoutY="845.0" mnemonicParsing="false" onAction="#handleDeleteSelectedGood" text="逐个移除所选商品" />
@@ -105,5 +100,8 @@
             <TextField fx:id="totalPrice" layoutX="417.0" layoutY="692.0" />
          </children>
       </HBox>
+      <Label layoutX="643.0" layoutY="405.0" text="购买数量：" />
+      <TextField fx:id="payNumberText" layoutX="702.0" layoutY="401.0" />
+      <Button fx:id="addSelectedToTable" layoutX="892.0" layoutY="401.0" mnemonicParsing="false" onAction="#handleAddSelectedBtn" text="添加所选项至订单" />
    </children>
 </AnchorPane>
