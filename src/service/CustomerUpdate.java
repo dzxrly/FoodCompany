@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CustomerUpdate {
-    public int updateCustomer(String personalName, String companyName, Integer type, Integer level, String address, String email, String phoneNumber, int number) {
+    public int updateCustomer(int number, String personalName, String companyName, Integer type, Integer level, String address, String email, String phoneNumber) {
         int ans = 1;
         Session session = HibernateUtils.openSession();
         Transaction tx = null;

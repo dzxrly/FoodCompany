@@ -175,10 +175,8 @@ public class SaleDepClientInfoSearchPaneController {
                     emailText.setEditable(false);
                     addressText.setEditable(false);
                 }
-                //TODO
             }
         });
-        //TODO
     }
 
 
@@ -256,7 +254,6 @@ public class SaleDepClientInfoSearchPaneController {
                     if (searchOptionsIndex == 0) {
                         List<Customer> list = customerSearch.NameFuzzySearch(searchByInput);
                         for (int i = 0; i < list.size(); i++) {
-//                            System.out.println(list.get(i));
                             searchData.add((Customer) list.get(i));
                         }
                     } else if (searchOptionsIndex == 1) {
@@ -305,11 +302,17 @@ public class SaleDepClientInfoSearchPaneController {
                 @Override
                 protected Integer call() throws Exception {
                     CustomerUpdate customerUpdate = new CustomerUpdate();
-                    customerUpdate.updateCustomer(Integer.parseInt(customerNumberLabel.getText()), personalNameText.getText(), companyNameText.getText(), customerTypeComboBox.getSelectionModel().getSelectedIndex(), customerLevelComboBox.getSelectionModel().getSelectedIndex(), addressText.getText(), emailText.getText(), phoneText.getText());
+                    int updateRes = customerUpdate.updateCustomer(Integer.parseInt(customerNumberLabel.getText()), personalNameText.getText(), companyNameText.getText(), customerTypeComboBox.getSelectionModel().getSelectedIndex(), customerLevelComboBox.getSelectionModel().getSelectedIndex(), addressText.getText(), emailText.getText(), phoneText.getText());
                     Platform.runLater(() -> {
-                        AlertDialog alertDialog = new AlertDialog();
-                        alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "保存成功！", "信息更改已录入！");
-                        alertDialog.show();
+                        if (updateRes == 1) {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "保存成功！", "信息更改已录入！");
+                            alertDialog.show();
+                        } else {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "插入失败！", "信息更新失败！");
+                            alertDialog.show();
+                        }
                     });
                     return null;
                 }

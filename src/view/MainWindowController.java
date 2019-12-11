@@ -74,6 +74,7 @@ public class MainWindowController {
         TreeItem<String> orderManage = new TreeItem<>("订单管理");
         orderManage.getChildren().add(new TreeItem<>("订单录入"));
         orderManage.getChildren().add(new TreeItem<>("订单信息"));
+        orderManage.getChildren().add(new TreeItem<>("物流信息"));
         orderManage.getChildren().add(new TreeItem<>("退货处理"));
         itemSaleDep.getChildren().add(orderManage);
         //侧边栏财务部
@@ -134,6 +135,12 @@ public class MainWindowController {
                     } else if (currentSelectedItem.getValue().equals("订单信息")) {
                         try {
                             showInsidePane("OrderInfoSearch.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("物流信息")) {
+                        try {
+                            showInsidePane("TransportInformation.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
