@@ -13,6 +13,7 @@ import jfxtras.styles.jmetro.Style;
 
 import service.CustomerSearch;
 import service.CustomerUpdate;
+import service.GoodsSearch;
 
 import java.io.IOException;
 import java.util.List;
