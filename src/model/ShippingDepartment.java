@@ -14,6 +14,7 @@ public class ShippingDepartment {
     private StringProperty productTime = new SimpleStringProperty();
     private IntegerProperty goodsQualityTime = new SimpleIntegerProperty();
     private IntegerProperty stocks = new SimpleIntegerProperty();
+    private StringProperty storeTime = new SimpleStringProperty();
 
     public int getGoodsId() {
         return goodsId.get();
@@ -63,6 +64,18 @@ public class ShippingDepartment {
         this.stocks.set(stocks);
     }
 
+    public String getStoreTime() {
+        return storeTime.get();
+    }
+
+    public StringProperty storeTimeProperty() {
+        return storeTime;
+    }
+
+    public void setStoreTime(String storeTime) {
+        this.storeTime.set(storeTime);
+    }
+
     @Override
     public String toString() {
         return "ShippingDepartment{" +
@@ -70,6 +83,7 @@ public class ShippingDepartment {
                 ", productTime=" + productTime +
                 ", goodsQualityTime=" + goodsQualityTime +
                 ", stocks=" + stocks +
+                ", storeTime=" + storeTime +
                 '}';
     }
 }
