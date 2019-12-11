@@ -22,6 +22,8 @@ import service.PropertiesOperation;
 import service.UserInfoCheck;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class UserLoginPaneController {
     //登陆页面控制类
@@ -46,6 +48,8 @@ public class UserLoginPaneController {
     private ProgressBar progressBar;
     @FXML
     private Label loginInfoLabel;
+
+    private Timer timer = new Timer();
 
     @FXML
     private void initialize() {
@@ -77,6 +81,8 @@ public class UserLoginPaneController {
             progressBar.setVisible(false);
             loginBtn.setDisable(false);
         } else {
+//            LoginTimeOutCheck loginTimeOutCheck = new LoginTimeOutCheck();
+//            timer.schedule(loginTimeOutCheck, 500, 90000);
             userNumber = inputNumber.getText();
             userPassword = inputPW.getText();
             service.restart();
@@ -182,4 +188,24 @@ public class UserLoginPaneController {
             };
         }
     };
+
+    class LoginTimeOutCheck extends TimerTask {
+        private int timedOutCheckCount = 0;
+
+        @Override
+        public void run() {
+            if (timedOutCheckCount < 1) {
+                Platform.runLater(() -> {
+                    AlertDialog alertDialog = new AlertDialog();
+                    alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "无法连接数据库", "请检查网络连接！");
+                    alertDialog.show();
+                });
+                timedOutCheckCount++;
+            } else {
+                progressBar.setVisible(false);
+                loginBtn.setDisable(false);
+                timer.cancel();
+            }
+        }
+    }
 }

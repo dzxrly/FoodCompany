@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 //成品库表
 public class ShippingDepartment {
     private IntegerProperty goodsId = new SimpleIntegerProperty();
-    private ObjectProperty<LocalDate> productTime = new SimpleObjectProperty<>();
+    private StringProperty productTime = new SimpleStringProperty();
     private IntegerProperty goodsQualityTime = new SimpleIntegerProperty();
     private IntegerProperty stocks = new SimpleIntegerProperty();
 
@@ -27,15 +27,15 @@ public class ShippingDepartment {
         this.goodsId.set(goodsId);
     }
 
-    public LocalDate getProductTime() {
+    public String getProductTime() {
         return productTime.get();
     }
 
-    public ObjectProperty<LocalDate> productTimeProperty() {
+    public StringProperty productTimeProperty() {
         return productTime;
     }
 
-    public void setProductTime(LocalDate productTime) {
+    public void setProductTime(String productTime) {
         this.productTime.set(productTime);
     }
 
