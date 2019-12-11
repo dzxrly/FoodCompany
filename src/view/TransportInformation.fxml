@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 
 <AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TransportInformationController">
    <children>
@@ -17,9 +17,172 @@
       </Label>
       <HBox layoutX="14.0" layoutY="48.0">
          <children>
-            <TextField layoutX="86.0" layoutY="76.0" prefHeight="27.0" prefWidth="257.0" promptText="请输入订单号" />
-            <Button layoutX="343.0" layoutY="76.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="75.0" text="查询" />
+            <TextField fx:id="orderNumberInput" layoutX="86.0" layoutY="76.0" prefHeight="27.0" prefWidth="257.0" promptText="请输入订单号" />
+            <Button fx:id="searchBtn" layoutX="343.0" layoutY="76.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="75.0" text="查询" />
          </children>
       </HBox>
+      <VBox layoutX="368.0" layoutY="44.0" prefHeight="681.0" prefWidth="422.0" spacing="15.0">
+         <children>
+            <Label layoutX="91.0" layoutY="129.0" text="订单信息">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <HBox layoutX="91.0" layoutY="178.0">
+               <children>
+                  <Label layoutX="91.0" layoutY="178.0" prefHeight="19.0" prefWidth="80.0" text="订单编号：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="orderNumberLabel" layoutX="203.0" layoutY="180.0" prefWidth="120.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="91.0" layoutY="252.0">
+               <children>
+                  <Label layoutX="91.0" layoutY="252.0" prefWidth="80.0" text="客户编号：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="customerNumberLabel" layoutX="176.0" layoutY="254.0" prefWidth="120.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="91.0" layoutY="215.0">
+               <children>
+                  <Label layoutX="91.0" layoutY="215.0" prefWidth="80.0" text="客户名称：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="customerNameLabel" layoutX="165.0" layoutY="217.0" prefWidth="120.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="149.0" layoutY="384.0" prefWidth="80.0" text="客户星级：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="customerLevelLabel" layoutX="229.0" layoutY="386.0" prefWidth="120.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="225.0" layoutY="518.0" prefWidth="80.0" text="联系电话：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="phoneLabel" layoutX="305.0" layoutY="520.0" prefWidth="120.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="591.0" layoutY="392.0" prefWidth="80.0" text="客户邮箱：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="emailLabel" layoutX="671.0" layoutY="394.0" prefWidth="120.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox prefHeight="63.0" prefWidth="422.0" spacing="5.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="345.0" prefWidth="80.0" text="地址：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="38.0" prefWidth="422.0">
+                     <children>
+                        <ComboBox fx:id="addressComboBox" layoutX="39.0" layoutY="418.0" prefHeight="23.0" prefWidth="200.0" />
+                        <TextField fx:id="addressText" layoutX="180.0" layoutY="418.0" prefHeight="27.0" prefWidth="223.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="48.0" prefWidth="422.0" spacing="5.0">
+               <children>
+                  <Label layoutX="627.0" layoutY="411.0" text="物流公司：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="transportCompanyComboBox" layoutX="627.0" layoutY="440.0" prefHeight="23.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <Label layoutX="721.0" layoutY="535.0" text="发货日期：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="datePicker" layoutX="733.0" layoutY="563.0" prefHeight="23.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <Label layoutX="698.0" layoutY="531.0" text="物流单号：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="transportNumberText" layoutX="688.0" layoutY="563.0" prefHeight="27.0" prefWidth="216.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="48.0" prefWidth="422.0" spacing="5.0">
+               <children>
+                  <Label layoutX="560.0" layoutY="638.0" text="物流类型：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="transportTypeComboBox" layoutX="683.0" layoutY="664.0" prefHeight="23.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <HBox>
+               <children>
+                  <Label layoutX="917.0" layoutY="397.0" text="操作员：" />
+                  <Label fx:id="operatorLabel" layoutX="965.0" layoutY="397.0" text="Label" />
+               </children>
+            </HBox>
+            <HBox spacing="10.0">
+               <children>
+                  <Button fx:id="uploadBtn" layoutY="642.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="80.0" text="提交" />
+                  <Button fx:id="printBtn" layoutX="108.0" layoutY="653.0" mnemonicParsing="false" onAction="#handlePrint" prefHeight="23.0" prefWidth="80.0" text="打印" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
