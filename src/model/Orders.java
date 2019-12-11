@@ -7,18 +7,17 @@ import org.hibernate.envers.enhanced.SequenceIdTrackingModifiedEntitiesRevisionE
 //订单总表
 public class Orders {
     private IntegerProperty orderId = new SimpleIntegerProperty();
-    //0为现货订单 1为预定订单
-    private IntegerProperty orderType = new SimpleIntegerProperty();
+    private IntegerProperty orderType = new SimpleIntegerProperty(); //0为现货订单 1为预定订单
+    private StringProperty companyName = new SimpleStringProperty();
     private StringProperty customerName = new SimpleStringProperty();
     private IntegerProperty customerNumber = new SimpleIntegerProperty();
     private StringProperty customerPhone = new SimpleStringProperty();
     private StringProperty customerAddress = new SimpleStringProperty();
     private StringProperty buildDate =new SimpleStringProperty();
     private DoubleProperty totalSum= new SimpleDoubleProperty();
-    //订单状态 0为生产中，1为运输中，2为已到达，3为未生产
-    private IntegerProperty orderState =new SimpleIntegerProperty();
-    //支付状态 0为未付款 1为付了预付款 2为付了全款
-    private IntegerProperty paymentState= new SimpleIntegerProperty();
+    private IntegerProperty orderState =new SimpleIntegerProperty();//订单状态 0为未生产，1为生产中，2为运输中，3为已到达
+    private IntegerProperty paymentState= new SimpleIntegerProperty(); //支付状态 0为未付款 1为付了预付款 2为付了全款
+    private IntegerProperty stuffNumber = new SimpleIntegerProperty();
 
     public int getOrderId() {
         return orderId.get();
@@ -42,6 +41,18 @@ public class Orders {
 
     public void setOrderType(int orderType) {
         this.orderType.set(orderType);
+    }
+
+    public String getCompanyName() {
+        return companyName.get();
+    }
+
+    public StringProperty companyNameProperty() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName.set(companyName);
     }
 
     public String getCustomerName() {
@@ -140,11 +151,24 @@ public class Orders {
         this.paymentState.set(paymentState);
     }
 
+    public int getStuffNumber() {
+        return stuffNumber.get();
+    }
+
+    public IntegerProperty stuffNumberProperty() {
+        return stuffNumber;
+    }
+
+    public void setStuffNumber(int stuffNumber) {
+        this.stuffNumber.set(stuffNumber);
+    }
+
     @Override
     public String toString() {
         return "Orders{" +
                 "orderId=" + orderId +
                 ", orderType=" + orderType +
+                ", companyName=" + companyName +
                 ", customerName=" + customerName +
                 ", customerNumber=" + customerNumber +
                 ", customerPhone=" + customerPhone +
@@ -153,6 +177,7 @@ public class Orders {
                 ", totalSum=" + totalSum +
                 ", orderState=" + orderState +
                 ", paymentState=" + paymentState +
+                ", stuffNumber=" + stuffNumber +
                 '}';
     }
 }

@@ -53,7 +53,7 @@ public class Material {
     public int getStuffNumber() {
         return stuffNumber.get();
     }
-
+    
     public IntegerProperty stuffNumberProperty() {
         return stuffNumber;
     }
