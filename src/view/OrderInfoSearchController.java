@@ -19,6 +19,7 @@ import model.OrderSpotGoods;
 import model.Orders;
 import org.controlsfx.control.ToggleSwitch;
 import service.AddImageForComponent;
+import service.CustomerSearch;
 import service.DoubleFormatService;
 import service.OrdersSearch;
 
@@ -71,6 +72,7 @@ public class OrderInfoSearchController {
     private final String pattern = "yyyy-MM-dd";
     private ObservableList<OrderBookGoods> orderBookGoodsList = FXCollections.observableArrayList();
     private ObservableList<OrderSpotGoods> orderSpotGoodsList = FXCollections.observableArrayList();
+    private Orders currentSelected;
 
     @FXML
     private void initialize() {
@@ -86,6 +88,11 @@ public class OrderInfoSearchController {
         deleteOrderBtn.setDisable(true);
         deleteOrderBtn.setVisible(false);
         orderTypeLabel.setText("");
+        customerNameText.setDisable(true);
+        customerAddressText.setDisable(true);
+        customerPhoneText.setDisable(true);
+        orderDatePicker.setDisable(true);
+        modelLabel.setText("查询模式");
 
         TableColumn orderIdCol = new TableColumn("订单编号");
         orderIdCol.setSortable(true);
@@ -138,6 +145,17 @@ public class OrderInfoSearchController {
         orderListTable.setItems(searchData);
         orderListTable.getColumns().addAll(orderIdCol, orderTypeCol, companyNameCol, personalName, costCol);
 
+        TableColumn goodsIdCol = new TableColumn("商品编号");
+        goodsIdCol.setSortable(true);
+        goodsIdCol.setCellValueFactory(new PropertyValueFactory<>("goodsNumber"));
+        TableColumn goodsNameCol = new TableColumn("商品名称");
+        goodsNameCol.setSortable(false);
+        goodsNameCol.setCellValueFactory(new PropertyValueFactory<>("goodsName"));
+        TableColumn goodsNumberCol = new TableColumn("购买数量");
+        goodsNumberCol.setSortable(true);
+        goodsNumberCol.setCellValueFactory(new PropertyValueFactory<>("orderQuantity"));
+        goodsListTable.getColumns().addAll(goodsIdCol, goodsNameCol, goodsNumberCol);
+
         StringConverter converter = new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
 
@@ -166,19 +184,29 @@ public class OrderInfoSearchController {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
+                    modelLabel.setText("修改模式");
                     printBtn.setDisable(true);
                     printBtn.setVisible(false);
                     saveChangeBtn.setDisable(false);
                     saveChangeBtn.setVisible(true);
                     deleteOrderBtn.setDisable(false);
                     deleteOrderBtn.setVisible(true);
+                    customerNameText.setDisable(false);
+                    customerAddressText.setDisable(false);
+                    customerPhoneText.setDisable(false);
+                    orderDatePicker.setDisable(false);
                 } else {
+                    modelLabel.setText("查询模式");
                     printBtn.setDisable(false);
                     printBtn.setVisible(true);
                     saveChangeBtn.setDisable(true);
                     saveChangeBtn.setVisible(false);
                     deleteOrderBtn.setDisable(true);
                     deleteOrderBtn.setVisible(false);
+                    customerNameText.setDisable(true);
+                    customerAddressText.setDisable(true);
+                    customerPhoneText.setDisable(true);
+                    orderDatePicker.setDisable(true);
                 }
             }
         });
@@ -186,20 +214,24 @@ public class OrderInfoSearchController {
         orderListTable.getSelectionModel().getSelectedCells().addListener(new ListChangeListener() {
             @Override
             public void onChanged(Change c) {
-                Orders orders = searchData.get(orderListTable.getSelectionModel().getSelectedIndex());
-                orderNumber.setText(String.valueOf(orders.getOrderId()));
-                if (orders.getOrderType() == 1) orderTypeLabel.setText("现货订单");
+                orderSpotGoodsList.clear();
+                orderBookGoodsList.clear();
+                currentSelected = searchData.get(orderListTable.getSelectionModel().getSelectedIndex());
+                orderNumber.setText(String.valueOf(currentSelected.getOrderId()));
+                if (currentSelected.getOrderType() == 1) orderTypeLabel.setText("现货订单");
                 else orderTypeLabel.setText("预定订单");
-                if (!orders.getCompanyName().equals("")) customerNameText.setText(orders.getCompanyName());
-                else customerNameText.setText(orders.getCustomerName());
-                customerPhoneText.setText(orders.getCustomerPhone());
-                customerAddressText.setText(orders.getCustomerAddress());
-                String date = orders.getEndDate();
+                if (!currentSelected.getCompanyName().equals(""))
+                    customerNameText.setText(currentSelected.getCompanyName());
+                else customerNameText.setText(currentSelected.getCustomerName());
+                customerPhoneText.setText(currentSelected.getCustomerPhone());
+                customerAddressText.setText(currentSelected.getCustomerAddress());
+                String date = currentSelected.getEndDate();
                 int spaceIndex = date.indexOf(" ");
                 orderDatePicker.setValue(LocalDate.parse(date.substring(0, spaceIndex), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
-                //TODO
-                totalPrice.setText(String.valueOf(orders.getTotalSum()));
+                if (currentSelected.getOrderType()==0) goodsListTable.setItems(orderSpotGoodsList);
+                else goodsListTable.setItems(orderBookGoodsList);
+                service_getGoodsList.restart();
+                totalPrice.setText(String.valueOf(currentSelected.getTotalSum()));
             }
         });
         //TODO
@@ -275,7 +307,18 @@ public class OrderInfoSearchController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-
+                    OrdersSearch ordersSearch = new OrdersSearch();
+                    if (currentSelected.getOrderType() == 0) {
+                        List<OrderSpotGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentSelected.getOrderId()), "0");
+                        for (int i = 0; i < list.size(); i++) {
+                            orderSpotGoodsList.add(list.get(i));
+                        }
+                    } else {
+                        List<OrderBookGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentSelected.getOrderId()), "1");
+                        for (int i = 0; i < list.size(); i++) {
+                            orderBookGoodsList.add(list.get(i));
+                        }
+                    }
                     return null;
                 }
             };
