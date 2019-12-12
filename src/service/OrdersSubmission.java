@@ -16,7 +16,7 @@ import java.util.List;
 
 public class OrdersSubmission {
 
-    public Orders createMainOrders(int orderType, String customerName, String customerPhone, String customerAddress, double totalSum, int stuffNumber, String companyName) {
+    public Orders createMainOrders(int orderType, String companyName, String customerName, String customerPhone, String customerAddress, double totalSum, int stuffNumber) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         Orders od = new Orders();
@@ -98,9 +98,9 @@ public class OrdersSubmission {
     public String CreateBookOrders(Orders od, int goodsNumber, String goodsName, int orderQuantity) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
-        String lastDate="";
-        OrderBookGoods obg=new OrderBookGoods();
-        try{
+        String lastDate = "";
+        OrderBookGoods obg = new OrderBookGoods();
+        try {
             obg.setOrderId(od.getOrderId());
             obg.setOrderType(od.getOrderType());
             obg.setStuffNumber(od.getStuffNumber());
@@ -117,21 +117,19 @@ public class OrdersSubmission {
             //订单提交后，立马将某件商品的库存更新
 
 
+            if (1 == 1) {//可在截至日期内完成，该工作由后台做 直接建订单表
 
-            if(1==1){//可在截至日期内完成，该工作由后台做 直接建订单表
 
-
-            }
-            else{//不可在截至日期完成，返回一个最快完成的流水线的日期
+            } else {//不可在截至日期完成，返回一个最快完成的流水线的日期
 
             }
 
 
             tx.commit();
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             tx.rollback();
             throw e;
-        }finally {
+        } finally {
             session.close();
             return lastDate;
         }

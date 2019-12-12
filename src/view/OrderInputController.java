@@ -18,13 +18,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.StringConverter;
 import model.Customer;
 import model.Goods;
-import service.AddImageForComponent;
-import service.AlertDialog;
-import service.CustomerSearch;
-import service.GoodsSearch;
+import service.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OrderInputController {
@@ -79,6 +79,8 @@ public class OrderInputController {
     private ObservableList<String> searchIndexOptions = FXCollections.observableArrayList("个人", "公司/企业");
     private ObservableList<Customer> customerData = FXCollections.observableArrayList();
     private Customer currentCustomer;
+    private final String pattern = "yyyy-MM-dd";
+    private Double sum = 0.0;
 
     @FXML
     private void initialize() {
@@ -152,10 +154,35 @@ public class OrderInputController {
         customerListTable.setPlaceholder(new Label("没有结果"));
         customerListTable.setEditable(true);
 
+        StringConverter converter = new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter =
+                    DateTimeFormatter.ofPattern(pattern);
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        };
+        datePicker.setConverter(converter);
+        datePicker.setPromptText(pattern.toLowerCase());
+
         leftGoodsListData.addListener(new ListChangeListener<GoodsInfo>() {
             @Override
             public void onChanged(Change<? extends GoodsInfo> c) {
-                Double sum = 0.0;
+                sum = 0.0;
                 for (int i = 0; i < leftGoodsListData.size(); i++) {
                     GoodsInfo tempGoodsInfo = (GoodsInfo) leftGoodsListData.get(i);
                     Double goodPrice = tempGoodsInfo.getGoodsPrice();
@@ -171,12 +198,12 @@ public class OrderInputController {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 currentCustomer = customerData.get(customerListTable.getSelectionModel().getSelectedIndex());
                 customerNumberLabel.setText(String.valueOf(currentCustomer.getNumber()));
-                if (!currentCustomer.getCompanyName().equals("")) customerNameLabel.setText(currentCustomer.getCompanyName());
+                if (!currentCustomer.getCompanyName().equals(""))
+                    customerNameLabel.setText(currentCustomer.getCompanyName());
                 else customerNameLabel.setText(currentCustomer.getPersonalName());
                 customerPhoneLabel.setText(currentCustomer.getPhoneNumber());
             }
         });
-        //TODO
     }
 
     @FXML
@@ -245,6 +272,7 @@ public class OrderInputController {
 
     @FXML
     private void handleUploadOrder() {
+
         //TODO
     }
 
@@ -263,7 +291,6 @@ public class OrderInputController {
                     List<Object> list = goodsSearch.searchGoods(searchInput);
                     for (int i = 0; i < list.size(); i++) {
                         Object[] obj = (Object[]) list.get(i);
-                        System.out.println((String) obj[1]);
                         rightGoodsListData.add(new GoodsInfo((int) obj[0], (String) obj[1], (Double) obj[2], (int) obj[3], (int) obj[4], 0.0));
                     }
                     return null;
@@ -294,6 +321,28 @@ public class OrderInputController {
                         for (int i = 0; i < list.size(); i++) {
                             customerData.add((Customer) list.get(i));
                         }
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_submissionOrder = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    if (orderType.getSelectionModel().getSelectedIndex() == 0) {
+                        //现货订单
+                        PropertiesOperation propertiesOperation = new PropertiesOperation();
+                        int number = Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber"));
+                        OrdersSubmission ordersSubmission = new OrdersSubmission();
+                        ordersSubmission.createMainOrders(0, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number);
+                    } else {
+                        //预定订单
+                        //TODO
                     }
                     return null;
                 }
