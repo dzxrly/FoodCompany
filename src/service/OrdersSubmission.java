@@ -3,6 +3,7 @@ package service;
 import DAO.HibernateTest1;
 import DAO.HibernateUtils;
 import javafx.beans.property.StringProperty;
+import model.OrderBookGoods;
 import model.OrderSpotGoods;
 import model.Orders;
 import org.hibernate.Session;
@@ -53,7 +54,8 @@ public class OrdersSubmission {
             return od;
         }
     }
-    public int createSpotOrders(Orders od,int goodsNumber,String goodsName,  int orderQuantity) {
+
+    public int createSpotOrders(Orders od, int goodsNumber, String goodsName, int orderQuantity) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         OrderSpotGoods osg = new OrderSpotGoods();
@@ -74,11 +76,16 @@ public class OrdersSubmission {
             ans = 1;//1表示提交成功
 
             //订单提交后 更新成品库表
+            String hql = "Update ShippingDepartment set stocks = stocks - :orderQuantity where goodsId = :goodsNumber";
+            Query query = session.createQuery(hql);
+            query.setInteger("orderQuantity", orderQuantity);
+            query.setInteger("goodsNumber", goodsNumber);
+            query.executeUpdate();
+            System.out.println("_____________________________Update on SD______________________________");
             tx.commit();
 
         } catch (RuntimeException e) {
             System.out.println("_____________________________Can not Insert into OSG_______________________________");
-
             ans = 0;//0表示提交失败
             tx.rollback();
             throw e;
@@ -86,6 +93,49 @@ public class OrdersSubmission {
             session.close();
             return ans;
         }
+    }
+
+    public String CreateBookOrders(Orders od, int goodsNumber, String goodsName, int orderQuantity) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        String lastDate="";
+        OrderBookGoods obg=new OrderBookGoods();
+        try{
+            obg.setOrderId(od.getOrderId());
+            obg.setOrderType(od.getOrderType());
+            obg.setStuffNumber(od.getStuffNumber());
+            obg.setCustomerNumber(od.getCustomerNumber());
+            obg.setGoodsName(goodsName);
+            obg.setGoodsNumber(goodsNumber);
+            obg.setOrderQuantity(orderQuantity);
+            obg.setBuildDate(od.getBuildDate());
+
+            tx = session.beginTransaction();
+            session.save(obg);
+            lastDate = "1";//表示提交成功
+
+            //订单提交后，立马将某件商品的库存更新
+
+
+
+            if(1==1){//可在截至日期内完成，该工作由后台做 直接建订单表
+
+
+            }
+            else{//不可在截至日期完成，返回一个最快完成的流水线的日期
+
+            }
+
+
+            tx.commit();
+        }catch (RuntimeException e){
+            tx.rollback();
+            throw e;
+        }finally {
+            session.close();
+            return lastDate;
+        }
+
     }
 
 
