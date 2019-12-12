@@ -70,6 +70,7 @@ public class OrdersSearch {
             }
             else{//1 现货订单的查询
                 hql="from OrderBookGoods where orderId = "+orderId;
+
             }
             list = session.createQuery(hql).list();
         }catch (RuntimeException e){
