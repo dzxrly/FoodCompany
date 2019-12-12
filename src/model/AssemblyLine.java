@@ -11,8 +11,8 @@ public class AssemblyLine {
 
     private IntegerProperty lineState = new SimpleIntegerProperty(); //0为工作 1为空闲 2为迨机
     private StringProperty startWorkTime = new SimpleStringProperty();
-    private StringProperty endWorkTime =new SimpleStringProperty();
-    private DoubleProperty startAllocateQuantity =new SimpleDoubleProperty();
+    private StringProperty endWorkTime = new SimpleStringProperty();
+    private DoubleProperty startAllocateQuantity = new SimpleDoubleProperty();
     private DoubleProperty accumulateFinishQuantity = new SimpleDoubleProperty();
 
     private IntegerProperty priority = new SimpleIntegerProperty(); //0为季度 1为预定
