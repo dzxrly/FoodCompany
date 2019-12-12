@@ -197,6 +197,7 @@ public class OrderInfoSearchController {
                 String date = orders.getEndDate();
                 int spaceIndex = date.indexOf(" ");
                 orderDatePicker.setValue(LocalDate.parse(date.substring(0, spaceIndex), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
                 //TODO
                 totalPrice.setText(String.valueOf(orders.getTotalSum()));
             }
