@@ -1,6 +1,7 @@
 package view;
 
-import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,9 +14,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.StringConverter;
+import model.OrderBookGoods;
+import model.OrderSpotGoods;
 import model.Orders;
 import org.controlsfx.control.ToggleSwitch;
 import service.AddImageForComponent;
+import service.DoubleFormatService;
 import service.OrdersSearch;
 
 import java.time.LocalDate;
@@ -65,6 +69,8 @@ public class OrderInfoSearchController {
     private ObservableList<String> searchTypeOptions = FXCollections.observableArrayList("订单号", "客户名称", "公司/企业名称");
     private ObservableList<Orders> searchData = FXCollections.observableArrayList();
     private final String pattern = "yyyy-MM-dd";
+    private ObservableList<OrderBookGoods> orderBookGoodsList = FXCollections.observableArrayList();
+    private ObservableList<OrderSpotGoods> orderSpotGoodsList = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
@@ -86,7 +92,23 @@ public class OrderInfoSearchController {
         orderIdCol.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         TableColumn orderTypeCol = new TableColumn("订单类型");
         orderTypeCol.setSortable(false);
-        orderTypeCol.setCellValueFactory(new PropertyValueFactory<>("orderType"));
+        orderTypeCol.setCellFactory(col -> {
+            TableCell<Orders, IntegerProperty> cell = new TableCell<Orders, IntegerProperty>() {
+                @Override
+                public void updateItem(IntegerProperty item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+                    if (!empty) {
+                        int rowIndex = this.getIndex();
+                        int type = ((Orders) orderListTable.getItems().get(rowIndex)).getOrderType();
+                        if (type == 0) this.setText("现货订单");
+                        else this.setText("预定订单");
+                    }
+                }
+            };
+            return cell;
+        });
         TableColumn companyNameCol = new TableColumn("公司/企业名称");
         companyNameCol.setSortable(false);
         companyNameCol.setCellValueFactory(new PropertyValueFactory<>("companyName"));
@@ -96,11 +118,29 @@ public class OrderInfoSearchController {
         TableColumn costCol = new TableColumn("总价格");
         costCol.setSortable(true);
         costCol.setCellValueFactory(new PropertyValueFactory<>("totalSum"));
+//        costCol.setCellFactory(col -> {
+//            TableCell<Orders, DoubleProperty> cell = new TableCell<>() {
+//                @Override
+//                public void updateItem(DoubleProperty item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    this.setText(null);
+//                    this.setGraphic(null);
+//                    if (!empty) {
+//                        int rowIndex = this.getIndex();
+//                        DoubleFormatService doubleFormatService = new DoubleFormatService();
+//                        double res = doubleFormatService.numberFormat((Double) ((Orders) orderListTable.getItems().get(rowIndex)).getTotalSum(), 5);
+//                        this.setText(String.valueOf(res));
+//                    }
+//                }
+//            };
+//            return cell;
+//        });
         orderListTable.setItems(searchData);
         orderListTable.getColumns().addAll(orderIdCol, orderTypeCol, companyNameCol, personalName, costCol);
 
         StringConverter converter = new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
             @Override
             public String toString(LocalDate date) {
                 if (date != null) {
@@ -109,6 +149,7 @@ public class OrderInfoSearchController {
                     return "";
                 }
             }
+
             @Override
             public LocalDate fromString(String string) {
                 if (string != null && !string.isEmpty()) {
@@ -221,6 +262,19 @@ public class OrderInfoSearchController {
                     for (int i = 0; i < list.size(); i++) {
                         searchData.add((Orders) list.get(i));
                     }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_getGoodsList = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+
                     return null;
                 }
             };

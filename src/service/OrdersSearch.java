@@ -28,11 +28,6 @@ public class OrdersSearch {
             }
             Query query = session.createQuery(hql);
             list = query.list();
-
-//            for (int i = 0; i < list.size(); i++) {
-//                Orders od = (Orders) list.get(i);
-//                System.out.println("________________________________" + od + "_________________________");
-//            }
         } catch (RuntimeException e) {
             System.out.println("_____________________________Can not search___________________________");
             throw e;
@@ -41,42 +36,41 @@ public class OrdersSearch {
             return list;
         }
     }
-    public List searchAllOrders(){
+
+    public List searchAllOrders() {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         String hql = "";
         List list = null;
-        try{
-            hql="from Orders";
-            list=session.createQuery(hql).list();
-        }catch(RuntimeException e){
+        try {
+            hql = "from Orders";
+            list = session.createQuery(hql).list();
+        } catch (RuntimeException e) {
             System.out.println("_____________________________Can not search___________________________");
             throw e;
-        }
-        finally {
+        } finally {
             session.close();
             return list;
         }
     }
 
-    public List searchSpotOrBookOrder(String orderId,String orderType){
+    public List searchSpotOrBookOrder(String orderId, String orderType) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         String hql = "";
         List list = null;
-        try{
-            if(orderType == "0"){//0 预定订单的查询
-                hql="from OrderSpotGoods where orderId = "+orderId;
-            }
-            else{//1 现货订单的查询
-                hql="from OrderBookGoods where orderId = "+orderId;
+        try {
+            if (orderType == "0") {//0 预定订单的查询
+                hql = "from OrderSpotGoods where orderId = " + orderId;
+            } else {//1 现货订单的查询
+                hql = "from OrderBookGoods where orderId = " + orderId;
 
             }
             list = session.createQuery(hql).list();
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             System.out.println("_____________________________Can not search___________________________");
             throw e;
-        }finally {
+        } finally {
             session.close();
             return list;
         }
