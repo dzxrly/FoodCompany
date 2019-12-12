@@ -253,7 +253,19 @@ public class MainWindowController {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }else {
+                    } else if (currentSelectedItem.getValue().equals("抽检管理")) {
+                        try {
+                            showInsidePane("ProductionCheckPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("产品销毁")) {
+                        try {
+                            showInsidePane("ProductDestructionPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
                         mainUI.getChildren().remove(currentNode); //清空主面板
                     }
                 }

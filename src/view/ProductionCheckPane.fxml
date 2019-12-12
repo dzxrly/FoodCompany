@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProductionCheckPaneController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="抽检管理">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <HBox layoutX="14.0" layoutY="58.0">
+         <children>
+            <TextField fx:id="numberInputText" layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="200.0" promptText="请输入批次编号" />
+            <Button fx:id="searchBtn" layoutX="214.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="83.0" text="查询" />
+         </children>
+      </HBox>
+      <VBox fx:id="vBox" layoutX="14.0" layoutY="94.0" prefHeight="639.0" prefWidth="337.0" spacing="10.0">
+         <children>
+            <Label layoutX="306.0" layoutY="44.0" prefWidth="120.0" text="批次编号：">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="numberLabel" layoutX="327.0" layoutY="73.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="286.0" layoutY="108.0" prefWidth="120.0" text="产品总数：">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="sumLabel" layoutX="331.0" layoutY="138.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="180.0" text="抽检数量：">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="checkNumberText" />
+            <Label layoutX="14.0" layoutY="232.0" text="不合格数量：">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="disqualifiedNumberText" />
+            <Label layoutX="14.0" layoutY="294.0" text="合格率：">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="passRateLabel" layoutX="14.0" layoutY="332.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="是否合格：">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="isCheckedComboBox" prefHeight="23.0" prefWidth="200.0" />
+            <Label text="操作人：">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="operatorLabel" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="检查时间：">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="datePicker" prefHeight="23.0" prefWidth="200.0" />
+            <Button fx:id="uploadBtn" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="96.0" text="提交" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
