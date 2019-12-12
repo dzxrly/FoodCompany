@@ -18,9 +18,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import model.Customer;
 import model.Goods;
 import service.AddImageForComponent;
 import service.AlertDialog;
+import service.CustomerSearch;
 import service.GoodsSearch;
 
 import java.util.List;
@@ -48,11 +50,13 @@ public class OrderInputController {
     @FXML
     private Button uploadOrder;
     @FXML
-    private TextField customerName;
+    private ComboBox customerTypeComboBox;
     @FXML
-    private TextField customerPhone;
+    private TextField customerNameInputText;
     @FXML
-    private TextField customerAddress;
+    private Button customerSearchBtn;
+    @FXML
+    private TableView customerListTable;
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -61,11 +65,20 @@ public class OrderInputController {
     private TextField totalPrice;
     @FXML
     private TextField payNumberText;
+    @FXML
+    private Label customerNameLabel;
+    @FXML
+    private Label customerNumberLabel;
+    @FXML
+    private Label customerPhoneLabel;
 
     private ObservableList<String> orderTypeOptions = FXCollections.observableArrayList("现货订单", "预定订单");
     private ObservableList<GoodsInfo> rightGoodsListData = FXCollections.observableArrayList();
     private String searchInput;
     private ObservableList<GoodsInfo> leftGoodsListData = FXCollections.observableArrayList();
+    private ObservableList<String> searchIndexOptions = FXCollections.observableArrayList("个人", "公司/企业");
+    private ObservableList<Customer> customerData = FXCollections.observableArrayList();
+    private Customer currentCustomer;
 
     @FXML
     private void initialize() {
@@ -78,6 +91,8 @@ public class OrderInputController {
         uploadOrder.setGraphic((new AddImageForComponent("img/check.png", 16)).getImageView());
         printBtn.setGraphic((new AddImageForComponent("img/download.png", 16)).getImageView());
         addSelectedToTable.setGraphic((new AddImageForComponent("img/cart_empty.png", 16)).getImageView());
+        customerTypeComboBox.setItems(searchIndexOptions);
+        customerTypeComboBox.getSelectionModel().select(0);
 
         TableColumn goodsIDCol = new TableColumn("编号");
         goodsIDCol.setSortable(true);
@@ -123,6 +138,20 @@ public class OrderInputController {
         goodsTable.setPlaceholder(new Label("没有结果"));
         goodsTable.setEditable(true);
 
+        TableColumn customer_number = new TableColumn("客户编号");
+        customer_number.setSortable(true);
+        customer_number.setCellValueFactory(new PropertyValueFactory<>("number"));
+        TableColumn customer_companyName = new TableColumn("公司/企业名称");
+        customer_companyName.setSortable(false);
+        customer_companyName.setCellValueFactory(new PropertyValueFactory<>("companyName"));
+        TableColumn customer_personalName = new TableColumn("客户名称");
+        customer_personalName.setSortable(false);
+        customer_personalName.setCellValueFactory(new PropertyValueFactory<>("personalName"));
+        customerListTable.setItems(customerData);
+        customerListTable.getColumns().addAll(customer_number, customer_companyName, customer_personalName);
+        customerListTable.setPlaceholder(new Label("没有结果"));
+        customerListTable.setEditable(true);
+
         leftGoodsListData.addListener(new ListChangeListener<GoodsInfo>() {
             @Override
             public void onChanged(Change<? extends GoodsInfo> c) {
@@ -134,6 +163,17 @@ public class OrderInputController {
                     sum += goodPrice * number;
                 }
                 totalPrice.setText(String.valueOf(sum));
+            }
+        });
+
+        customerListTable.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                currentCustomer = customerData.get(customerListTable.getSelectionModel().getSelectedIndex());
+                customerNumberLabel.setText(String.valueOf(currentCustomer.getNumber()));
+                if (!currentCustomer.getCompanyName().equals("")) customerNameLabel.setText(currentCustomer.getCompanyName());
+                else customerNameLabel.setText(currentCustomer.getPersonalName());
+                customerPhoneLabel.setText(currentCustomer.getPhoneNumber());
             }
         });
         //TODO
@@ -195,6 +235,15 @@ public class OrderInputController {
     }
 
     @FXML
+    private void handleCustomerSearch() {
+        customerData.clear();
+        customerNameLabel.setText("");
+        customerNumberLabel.setText("");
+        customerPhoneLabel.setText("");
+        service_searchCustomerByName.restart();
+    }
+
+    @FXML
     private void handleUploadOrder() {
         //TODO
     }
@@ -216,6 +265,35 @@ public class OrderInputController {
                         Object[] obj = (Object[]) list.get(i);
                         System.out.println((String) obj[1]);
                         rightGoodsListData.add(new GoodsInfo((int) obj[0], (String) obj[1], (Double) obj[2], (int) obj[3], (int) obj[4], 0.0));
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_searchCustomerByName = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    CustomerSearch customerSearch = new CustomerSearch();
+                    if (customerTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+                        List<Customer> list = customerSearch.NameFuzzySearch(customerNameInputText.getText());
+                        for (int i = 0; i < list.size(); i++) {
+                            customerData.add((Customer) list.get(i));
+                        }
+                    } else if (customerTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
+                        List<Customer> list = customerSearch.CompanyFuzzySearch(customerNameInputText.getText());
+                        for (int i = 0; i < list.size(); i++) {
+                            customerData.add((Customer) list.get(i));
+                        }
+                    } else {
+                        List<Customer> list = customerSearch.AllSearch();
+                        for (int i = 0; i < list.size(); i++) {
+                            customerData.add((Customer) list.get(i));
+                        }
                     }
                     return null;
                 }

@@ -24,7 +24,6 @@ import java.util.List;
 
 public class OrderInfoSearchController {
     //订单信息查询修改控制类
-
     @FXML
     private ComboBox searchIndexComboBox;
     @FXML

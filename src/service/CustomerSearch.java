@@ -9,7 +9,6 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CustomerSearch {
-
     public List NameFuzzySearch(String name) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
