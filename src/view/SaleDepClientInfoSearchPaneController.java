@@ -224,6 +224,7 @@ public class SaleDepClientInfoSearchPaneController {
 
     @FXML
     private void handleSearchAll() {
+        searchData.clear();
         service_searchAll.restart();
     }
 

@@ -31,15 +31,17 @@
             </TableView>
          </content>
       </ScrollPane>
-      <VBox layoutX="688.0" layoutY="112.0" prefHeight="63.0" prefWidth="216.0" spacing="5.0">
+      <VBox layoutX="688.0" layoutY="112.0" prefHeight="227.0" prefWidth="373.0" spacing="5.0">
          <children>
             <HBox layoutX="686.0" layoutY="112.0">
                <children>
-                  <Label layoutX="686.0" layoutY="112.0" text="订单编号：" />
-                  <Label fx:id="orderNumber" layoutX="753.0" layoutY="112.0" />
+                  <Label layoutX="686.0" layoutY="112.0" prefWidth="80.0" text="订单编号：" />
+                  <Label fx:id="orderNumber" layoutX="753.0" layoutY="112.0" prefWidth="130.0" />
+                  <Label prefWidth="80.0" text="订单类型：" />
+                  <Label fx:id="orderTypeLabel" />
                </children>
             </HBox>
-            <Label layoutX="686.0" layoutY="166.0" text="客户姓名：" />
+            <Label layoutX="686.0" layoutY="166.0" text="客户/公司/企业名称：" />
             <TextField fx:id="customerNameText" layoutX="688.0" layoutY="192.0" />
             <Label text="客户联系方式：" />
             <TextField fx:id="customerPhoneText" />

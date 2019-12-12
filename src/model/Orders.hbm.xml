@@ -38,6 +38,7 @@
         <property name="customerPhone" column="customerPhone" type="java.lang.String" length="20"></property>
         <property name="customerAddress" column="customerAddress" type="java.lang.String" length="100"></property>
         <property name="buildDate" column="buildDate" type="java.lang.String" length="20"></property>
+        <property name="endDate" column="endDate" type="java.lang.String" length="20"></property>
         <property name="totalSum" column="totalSum" type="java.lang.Double" length="0"></property>
         <property name="orderState" column="orderState" type="java.lang.Integer" length="11"></property>
         <property name="paymentState" column="paymentState" type="java.lang.Integer" length="11"></property>

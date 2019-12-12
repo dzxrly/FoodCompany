@@ -110,6 +110,8 @@ public class MainWindowController {
         itemProductionPlanDep.getChildren().add(productionsManage);
         //侧边栏生产车间
         TreeItem<String> itemWorkshop = new TreeItem<>("生产车间");
+        itemWorkshop.getChildren().add(new TreeItem<>("原料申请"));
+
         //侧边栏成品库
         TreeItem<String> itemFinishedProductionDep = new TreeItem<>("成品库");
         //权限处理
@@ -229,6 +231,12 @@ public class MainWindowController {
                     } else if (currentSelectedItem.getValue().equals("生产计划交付")) {
                         try {
                             showInsidePane("ProductionManagePane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("原料申请")) {
+                        try {
+                            showInsidePane("RawMaterialRequestPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

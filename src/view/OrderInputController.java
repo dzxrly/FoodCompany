@@ -141,7 +141,7 @@ public class OrderInputController {
 
     @FXML
     private void handleSearch() {
-        System.out.println("SEARCH");
+        rightGoodsListData.clear();
         searchInput = goodsName.getText();
         service.restart();
     }

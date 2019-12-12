@@ -2,7 +2,6 @@ package model;
 
 import javafx.beans.property.*;
 import javassist.Loader;
-import org.hibernate.envers.enhanced.SequenceIdTrackingModifiedEntitiesRevisionEntity;
 
 //订单总表
 public class Orders {
@@ -14,10 +13,23 @@ public class Orders {
     private StringProperty customerPhone = new SimpleStringProperty();
     private StringProperty customerAddress = new SimpleStringProperty();
     private StringProperty buildDate =new SimpleStringProperty();
+    private StringProperty endDate = new SimpleStringProperty();
     private DoubleProperty totalSum= new SimpleDoubleProperty();
     private IntegerProperty orderState =new SimpleIntegerProperty();//订单状态 0为未生产，1为生产中，2为运输中，3为已到达
     private IntegerProperty paymentState= new SimpleIntegerProperty(); //支付状态 0为未付款 1为付了预付款 2为付了全款
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
+
+    public String getEndDate() {
+        return endDate.get();
+    }
+
+    public StringProperty endDateProperty() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate.set(endDate);
+    }
 
     public int getOrderId() {
         return orderId.get();
@@ -168,14 +180,17 @@ public class Orders {
         return "Orders{" +
                 "orderId=" + orderId +
                 ", orderType=" + orderType +
+                ", companyName=" + companyName +
                 ", customerName=" + customerName +
                 ", customerNumber=" + customerNumber +
                 ", customerPhone=" + customerPhone +
                 ", customerAddress=" + customerAddress +
                 ", buildDate=" + buildDate +
+                ", endDate=" + endDate +
                 ", totalSum=" + totalSum +
                 ", orderState=" + orderState +
                 ", paymentState=" + paymentState +
+                ", stuffNumber=" + stuffNumber +
                 '}';
     }
 }
