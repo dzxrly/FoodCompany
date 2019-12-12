@@ -1,6 +1,8 @@
 package service;
 
 import DAO.HibernateUtils;
+import model.OrderBookGoods;
+import model.OrderSpotGoods;
 import model.Orders;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -56,4 +58,28 @@ public class OrdersSearch {
             return list;
         }
     }
+
+    public List searchSpotOrBookOrder(String orderId,String orderType){
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        String hql = "";
+        List list = null;
+        try{
+            if(orderType == "0"){//0 预定订单的查询
+                hql="from OrderSpotGoods where orderId = "+orderId;
+            }
+            else{//1 现货订单的查询
+                hql="from OrderBookGoods where orderId = "+orderId;
+            }
+            list = session.createQuery(hql).list();
+        }catch (RuntimeException e){
+            System.out.println("_____________________________Can not search___________________________");
+            throw e;
+        }finally {
+            session.close();
+            return list;
+        }
+
+    }
+
 }
