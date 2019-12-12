@@ -112,6 +112,13 @@ public class MainWindowController {
         TreeItem<String> itemWorkshop = new TreeItem<>("生产车间");
         itemWorkshop.getChildren().add(new TreeItem<>("原料申请"));
 
+        TreeItem<String> produceProgress = new TreeItem<>("生产流程管理");
+        produceProgress.getChildren().add(new TreeItem<>("生产分配"));
+        produceProgress.getChildren().add(new TreeItem<>("抽检管理"));
+        itemWorkshop.getChildren().add(produceProgress);
+
+        TreeItem<String> productDestruction = new TreeItem<>("产品销毁");
+        itemWorkshop.getChildren().add(productDestruction);
         //侧边栏成品库
         TreeItem<String> itemFinishedProductionDep = new TreeItem<>("成品库");
         //权限处理
@@ -240,7 +247,13 @@ public class MainWindowController {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    } else {
+                    } else if (currentSelectedItem.getValue().equals("生产分配")) {
+                        try {
+                            showInsidePane("ProductionDistributionPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }else {
                         mainUI.getChildren().remove(currentNode); //清空主面板
                     }
                 }
