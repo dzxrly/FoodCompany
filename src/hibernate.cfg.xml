@@ -29,5 +29,6 @@
         <mapping resource="model/Material.hbm.xml"/>
         <mapping resource="model/PlanFinishCondition.hbm.xml"/>
         <mapping resource="model/AssemblyLine.hbm.xml"/>
+        <mapping resource="model/ProductUnit.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
