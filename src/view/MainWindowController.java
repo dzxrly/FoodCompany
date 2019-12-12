@@ -274,6 +274,12 @@ public class MainWindowController {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    } else if (currentSelectedItem.getValue().equals("提货信息管理")) {
+                        try {
+                            showInsidePane("PickupInformationManagementPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         mainUI.getChildren().remove(currentNode); //清空主面板
                     }

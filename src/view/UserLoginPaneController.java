@@ -135,7 +135,7 @@ public class UserLoginPaneController {
 
     @FXML
     private void handleCancel() {
-        Platform.exit();
+        System.exit(-1);
     }
 
     @FXML
