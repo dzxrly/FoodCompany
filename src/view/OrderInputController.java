@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -21,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.StringConverter;
 import model.Customer;
 import model.Goods;
+import model.Orders;
 import service.*;
 
 import java.time.LocalDate;
@@ -272,8 +274,11 @@ public class OrderInputController {
 
     @FXML
     private void handleUploadOrder() {
-
-        //TODO
+        if (customerNumberLabel.getText().equals("")) {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR,"错误","提交出错!","信息填写错误！");
+            alertDialog.showAlert();
+        } else service_submissionOrder.restart();
     }
 
     @FXML
@@ -339,7 +344,26 @@ public class OrderInputController {
                         PropertiesOperation propertiesOperation = new PropertiesOperation();
                         int number = Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber"));
                         OrdersSubmission ordersSubmission = new OrdersSubmission();
-                        ordersSubmission.createMainOrders(0, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number);
+                        Orders orders = ordersSubmission.createMainOrders(0, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number, datePicker.getValue().toString());
+                        int[] flags = new int[leftGoodsListData.size()];
+                        for (int i = 0; i < leftGoodsListData.size(); i++) {
+                            flags[i] = ordersSubmission.createSpotOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (int) leftGoodsListData.get(i).getPayNumber());
+                        }
+                        for (int i = 0; i < flags.length; i++) {
+                            if (flags[i]==0) {
+                                Platform.runLater(() -> {
+                                    AlertDialog alertDialog = new AlertDialog();
+                                    alertDialog.createAlert(Alert.AlertType.ERROR,"错误","提交出错!","提交出错!");
+                                    alertDialog.show();
+                                });
+                                break;
+                            } else continue;
+                        }
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION,"成功","提交完成!","提交完成!");
+                            alertDialog.show();
+                        });
                     } else {
                         //预定订单
                         //TODO

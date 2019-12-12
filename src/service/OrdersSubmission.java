@@ -16,7 +16,7 @@ import java.util.List;
 
 public class OrdersSubmission {
 
-    public Orders createMainOrders(int orderType, String companyName, String customerName, String customerPhone, String customerAddress, double totalSum, int stuffNumber) {
+    public Orders createMainOrders(int orderType, String companyName, String customerName, String customerPhone, String customerAddress, double totalSum, int stuffNumber, String endDate) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         Orders od = new Orders();
@@ -30,6 +30,7 @@ public class OrdersSubmission {
             od.setTotalSum(totalSum);
             od.setStuffNumber(stuffNumber);
             od.setCompanyName(companyName);
+            od.setEndDate(endDate);
             od.setOrderState(0);
             od.setPaymentState(0);
             tx = session.beginTransaction();
