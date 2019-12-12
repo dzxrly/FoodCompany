@@ -56,4 +56,8 @@ public class PropertiesOperation {
             System.err.println("Visit " + filePath + " for updating " + parameterName + " value error");
         }
     }
+
+    public String returnOperatorFromProperties(String filePath) {
+        return (readValue(filePath, "LoginUserName") + " [" + readValue(filePath, "LoginUserNumber") + "]");
+    }
 }

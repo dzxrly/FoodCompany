@@ -96,6 +96,10 @@ public class OrderInputController {
         uploadOrder.setGraphic((new AddImageForComponent("img/check.png", 16)).getImageView());
         printBtn.setGraphic((new AddImageForComponent("img/download.png", 16)).getImageView());
         addSelectedToTable.setGraphic((new AddImageForComponent("img/cart_empty.png", 16)).getImageView());
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
+        customerSearchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
+        deleteSelectedGoodFromTable.setGraphic((new AddImageForComponent("img/close14x14.png", 14)).getImageView());
+        clearGoodsTable.setGraphic((new AddImageForComponent("img/close_filled.png", 14)).getImageView());
         customerTypeComboBox.setItems(searchIndexOptions);
         customerTypeComboBox.getSelectionModel().select(0);
 
@@ -277,7 +281,7 @@ public class OrderInputController {
     private void handleUploadOrder() {
         if (customerNumberLabel.getText().equals("")) {
             AlertDialog alertDialog = new AlertDialog();
-            alertDialog.createAlert(Alert.AlertType.ERROR,"错误","提交出错!","信息填写错误！");
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交出错!", "信息填写错误！");
             alertDialog.showAlert();
         } else service_submissionOrder.restart();
     }
@@ -351,10 +355,10 @@ public class OrderInputController {
                             flags[i] = ordersSubmission.createSpotOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (int) leftGoodsListData.get(i).getPayNumber());
                         }
                         for (int i = 0; i < flags.length; i++) {
-                            if (flags[i]==0) {
+                            if (flags[i] == 0) {
                                 Platform.runLater(() -> {
                                     AlertDialog alertDialog = new AlertDialog();
-                                    alertDialog.createAlert(Alert.AlertType.ERROR,"错误","提交出错!","提交出错!");
+                                    alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交出错!", "提交出错!");
                                     alertDialog.show();
                                 });
                                 break;
@@ -362,7 +366,7 @@ public class OrderInputController {
                         }
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();
-                            alertDialog.createAlert(Alert.AlertType.INFORMATION,"成功","提交完成!","提交完成!");
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交完成!", "提交完成!");
                             alertDialog.show();
                         });
                     } else {

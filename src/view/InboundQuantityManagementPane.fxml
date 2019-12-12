@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.InboundQuantityManagementPaneController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="入库数量管理">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <HBox layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="359.0">
+         <children>
+            <TextField fx:id="numberInputText" layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="150.0" promptText="请输入生产单号" />
+            <Button fx:id="searchBtn" layoutX="192.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="80.0" text="搜索" />
+            <Button fx:id="searchAllBtn" mnemonicParsing="false" onAction="#handleSearchAll" prefWidth="80.0" text="查询全部" />
+         </children>
+      </HBox>
+      <VBox layoutX="794.0" layoutY="143.0" prefHeight="483.0" prefWidth="271.0" spacing="10.0">
+         <children>
+            <Label layoutX="14.0" layoutY="111.0" text="生产单号：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="numberLabel" layoutX="14.0" layoutY="143.0" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="180.0" text="计划类型：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="typeLabel" layoutX="17.0" layoutY="215.0" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="251.0" text="流水线编号：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="pipeLineNumberLabel" layoutX="17.0" layoutY="290.0" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="生产计划科预计生产数量：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="expectedNumberLabel" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="生产车间实际生产数量：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="producedNumberLabel" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="完成情况：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="statusLabel" text="Label" />
+            <Label fx:id="warningTextChangeLabel" text="缺少情况：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="warningLabel" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="操作人：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="operatorLabel" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <HBox spacing="10.0">
+               <children>
+                  <Button fx:id="markDONOTFinish" layoutX="802.0" layoutY="657.0" mnemonicParsing="false" onAction="#handleMarkDONOTFinish" prefHeight="23.0" prefWidth="90.0" text="标记未完成" />
+                  <Button fx:id="markHasFinished" layoutX="890.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleMarkHasFinished" prefWidth="90.0" text="标记已完成" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <ScrollPane layoutX="14.0" layoutY="98.0" prefHeight="566.0" prefWidth="751.0">
+         <content>
+            <TableView fx:id="listTable" prefHeight="570.0" prefWidth="757.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

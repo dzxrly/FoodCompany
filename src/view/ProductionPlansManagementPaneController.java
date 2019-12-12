@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import service.AddImageForComponent;
+import service.PropertiesOperation;
 
 public class ProductionPlansManagementPaneController {
     @FXML
@@ -12,8 +14,6 @@ public class ProductionPlansManagementPaneController {
     private Button searchBtn;
     @FXML
     private TableView orderList;
-    @FXML
-    private Button exportBtn;
     @FXML
     private TableView selectedOrderList;
     @FXML
@@ -38,17 +38,15 @@ public class ProductionPlansManagementPaneController {
         orderTypeComboBox.getSelectionModel().select(0);
         planTypeComboBox.setItems(planTypeOptions);
         planTypeComboBox.getSelectionModel().select(0);
-
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
+        PropertiesOperation propertiesOperation = new PropertiesOperation();
+        operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
         //TODO
     }
 
     @FXML
     private void handleSearch() {
-        //TODO
-    }
-
-    @FXML
-    private void handleExport() {
         //TODO
     }
 

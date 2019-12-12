@@ -38,6 +38,7 @@ public class RawMaterialRequestPaneController {
 
     @FXML
     private void initialize() {
+
         //TODO
     }
 

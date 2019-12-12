@@ -80,6 +80,7 @@ public class OrderInfoSearchController {
         searchIndexComboBox.getSelectionModel().select(0);
         toggleSwitch.setSelected(false);
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
+        printBtn.setGraphic((new AddImageForComponent("img/download.png", 14)).getImageView());
         hBox.getChildren().add(1, toggleSwitch);
         printBtn.setDisable(false);
         printBtn.setVisible(true);

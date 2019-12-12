@@ -23,8 +23,6 @@ public class FinancialStatementsPaneCpntroller {
     @FXML
     private TableView billList;
     @FXML
-    private Button exportBtn;
-    @FXML
     private Label billNumberLabel;
     @FXML
     private Label incomingSum;
@@ -47,7 +45,6 @@ public class FinancialStatementsPaneCpntroller {
         searchInputText.setText("");
         searchInputText.setDisable(false);
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
-        exportBtn.setGraphic((new AddImageForComponent("img/page_last.png", 14)).getImageView());
         printBtn.setGraphic((new AddImageForComponent("img/download.png", 14)).getImageView());
 
         searchTypeComboBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
@@ -72,11 +69,6 @@ public class FinancialStatementsPaneCpntroller {
 
     @FXML
     private void handleSearchAll() {
-        //TODO
-    }
-
-    @FXML
-    private void handleExport() {
         //TODO
     }
 

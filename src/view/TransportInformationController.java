@@ -6,6 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import service.AddImageForComponent;
+import service.PropertiesOperation;
 
 public class TransportInformationController {
     //物流信息页面控制类
@@ -47,6 +49,8 @@ public class TransportInformationController {
     private ObservableList<String> addressOptions = FXCollections.observableArrayList("使用预填地址","使用新增地址");
     private ObservableList<String> transportCompanyNameOptions = FXCollections.observableArrayList("EMS","顺丰速运");
     private ObservableList<String> transportTypeOptions = FXCollections.observableArrayList("普通陆运","空运","冷冻运输");
+    private String operatorName;
+    private String operatorNumber;
 
     @FXML
     private void initialize() {
@@ -57,6 +61,12 @@ public class TransportInformationController {
         transportCompanyComboBox.getSelectionModel().select(0);
         transportTypeComboBox.setItems(transportTypeOptions);
         transportTypeComboBox.getSelectionModel().select(0);
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png", 14)).getImageView());
+        printBtn.setGraphic((new AddImageForComponent("img/download.png", 14)).getImageView());
+
+        PropertiesOperation propertiesOperation = new PropertiesOperation();
+        operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
 
         addressComboBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override

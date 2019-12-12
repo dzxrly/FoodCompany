@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import service.AddImageForComponent;
 
 public class ProductionManagePaneController {
     @FXML
@@ -28,6 +29,8 @@ public class ProductionManagePaneController {
 
     @FXML
     private void initialize() {
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
         //TODO
     }
 

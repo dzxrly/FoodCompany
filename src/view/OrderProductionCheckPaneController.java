@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import service.AddImageForComponent;
+import service.PropertiesOperation;
 
 public class OrderProductionCheckPaneController {
     //订单需求量检查类
@@ -45,8 +46,12 @@ public class OrderProductionCheckPaneController {
     private void initialize() {
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         uploadBtn.setText("提交");
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
         isCheckedComboBox.setItems(checkStatusOptions);
         isCheckedComboBox.getSelectionModel().select(0);
+
+        PropertiesOperation propertiesOperation = new PropertiesOperation();
+        operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
 
         isCheckedComboBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override

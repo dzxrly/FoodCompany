@@ -1,5 +1,7 @@
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import service.AddImageForComponent;
@@ -36,11 +38,16 @@ public class OrderCancelPaneController {
     @FXML
     private Button clearBtn;
 
+    private ObservableList<String> typeOptions = FXCollections.observableArrayList("是", "否");
+
     @FXML
     private void initialize() {
+        isHasProblem.setItems(typeOptions);
+        isHasProblem.getSelectionModel().select(0);
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         uploadBtn.setGraphic((new AddImageForComponent("img/upload14x14.png", 14)).getImageView());
         clearBtn.setGraphic((new AddImageForComponent("img/close.png", 14)).getImageView());
+        //TODO
     }
 
     @FXML

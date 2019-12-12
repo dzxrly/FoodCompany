@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import service.AddImageForComponent;
+import service.PropertiesOperation;
 
 public class ProductionFiancePlanPaneController {
     @FXML
@@ -15,8 +17,6 @@ public class ProductionFiancePlanPaneController {
     private Button searchBtn;
     @FXML
     private TableView planList;
-    @FXML
-    private Button exportBtn;
     @FXML
     private Label planCountLabel;
     @FXML
@@ -34,16 +34,15 @@ public class ProductionFiancePlanPaneController {
     private void initialize() {
         productionPlanDateComboBox.setItems(options);
         productionPlanDateComboBox.getSelectionModel().select(0);
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
+        PropertiesOperation propertiesOperation = new PropertiesOperation();
+        operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
         //TODO
     }
 
     @FXML
     private void handleSearch() {
-        //TODO
-    }
-
-    @FXML
-    private void handleExport() {
         //TODO
     }
 

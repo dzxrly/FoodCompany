@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import service.AddImageForComponent;
+import service.PropertiesOperation;
 
 import java.util.regex.Pattern;
 
@@ -68,6 +70,11 @@ public class RawmetarialManagePaneController {
         priceText.setDisable(true);
         uploadBtn.setDisable(true);
         printBtn.setDisable(false);
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
+        printBtn.setGraphic((new AddImageForComponent("img/download.png",14)).getImageView());
+        PropertiesOperation propertiesOperation = new PropertiesOperation();
+        operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
 
         toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override

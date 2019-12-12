@@ -29,7 +29,6 @@
             </TableView>
          </content>
       </ScrollPane>
-      <Button fx:id="exportBtn" layoutX="460.0" layoutY="688.0" mnemonicParsing="false" onAction="#handleExport" prefHeight="23.0" prefWidth="160.0" text="导出所选项至右侧" />
       <Label layoutX="648.0" layoutY="100.0" text="新增生产计划">
          <font>
             <Font name="System Bold" size="14.0" />

@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import service.AddImageForComponent;
+import service.PropertiesOperation;
 
 public class BillManagementController {
     //账单管理控制类
@@ -63,6 +65,9 @@ public class BillManagementController {
 
     @FXML
     private void initialize() {
+        previewBtn.setGraphic((new AddImageForComponent("img/image.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
+        printBtn.setGraphic((new AddImageForComponent("img/download.png",14)).getImageView());
         addBill_incomingOrOutcomingLabel.setText("收入金额：");
         addBill_incomingOrOutcomingTypeLabel.setText("收入类型：");
         addBill_projectTypeLabel.setText("收入项目：");
@@ -73,6 +78,9 @@ public class BillManagementController {
         billTypeComboBox.getSelectionModel().select(0);
         incomingOrOutcomingTypeComboBox.setItems(incomingBillTypeOptions);
         incomingOrOutcomingTypeComboBox.getSelectionModel().select(0);
+
+        PropertiesOperation propertiesOperation = new PropertiesOperation();
+        operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
 
         billTypeComboBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
