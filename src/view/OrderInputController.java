@@ -129,9 +129,9 @@ public class OrderInputController {
         TableColumn left_goodPriceCol = new TableColumn("单价");
         left_goodPriceCol.setSortable(true);
         left_goodPriceCol.setCellValueFactory(new PropertyValueFactory<>("goodsPrice"));
-//        TableColumn left_goodsQualityTimeCol = new TableColumn("保质期");
-//        left_goodsQualityTimeCol.setSortable(false);
-//        left_goodsQualityTimeCol.setCellValueFactory(new PropertyValueFactory<>("goodsQualityTime"));
+        TableColumn left_goodsQualityTimeCol = new TableColumn("保质期");
+        left_goodsQualityTimeCol.setSortable(false);
+        left_goodsQualityTimeCol.setCellValueFactory(new PropertyValueFactory<>("goodsQualityTime"));
         TableColumn left_stocksCol = new TableColumn("库存");
         left_stocksCol.setSortable(true);
         left_stocksCol.setCellValueFactory(new PropertyValueFactory<>("stocks"));
@@ -139,7 +139,7 @@ public class OrderInputController {
         left_payNumber.setSortable(true);
         left_payNumber.setCellValueFactory(new PropertyValueFactory<>("payNumber"));
         goodsTable.setItems(leftGoodsListData);
-        goodsTable.getColumns().addAll(left_goodsIDCol, left_goodsNameCol, left_goodPriceCol, left_stocksCol, left_payNumber);
+        goodsTable.getColumns().addAll(left_goodsIDCol, left_goodsNameCol, left_goodPriceCol, left_goodsQualityTimeCol, left_stocksCol, left_payNumber);
         goodsTable.setPlaceholder(new Label("没有结果"));
         goodsTable.setEditable(true);
 
