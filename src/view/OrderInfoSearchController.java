@@ -101,9 +101,7 @@ public class OrderInfoSearchController {
         orderListTable.getColumns().addAll(orderIdCol, orderTypeCol, companyNameCol, personalName, costCol);
 
         StringConverter converter = new StringConverter<LocalDate>() {
-            DateTimeFormatter dateFormatter =
-                    DateTimeFormatter.ofPattern(pattern);
-
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
             @Override
             public String toString(LocalDate date) {
                 if (date != null) {
@@ -112,7 +110,6 @@ public class OrderInfoSearchController {
                     return "";
                 }
             }
-
             @Override
             public LocalDate fromString(String string) {
                 if (string != null && !string.isEmpty()) {
@@ -124,6 +121,7 @@ public class OrderInfoSearchController {
         };
         orderDatePicker.setConverter(converter);
         orderDatePicker.setPromptText(pattern.toLowerCase());
+
         toggleSwitch.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
