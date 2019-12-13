@@ -1,6 +1,8 @@
 package view;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
@@ -50,6 +52,8 @@ public class UserLoginPaneController {
     private ProgressBar progressBar;
     @FXML
     private Label loginInfoLabel;
+    @FXML
+    private CheckBox rememberAccount;
 
     private Timer timer = new Timer();
 
@@ -67,6 +71,9 @@ public class UserLoginPaneController {
         propertiesOperation.writeProperties("userConfig.properties", "LoginUserName", "null");
         propertiesOperation.writeProperties("userConfig.properties", "LoginUserNumber", "null");
 
+        String flag = propertiesOperation.readValue("userConfig.properties", "LastLoginUserNumber");
+        if (!flag.equals("NOT_ACCOUNT") && !flag.equals("")) inputNumber.setText(flag);
+
         inputNumber.textProperty().addListener((observable, oldValue, newValue) -> {
             loginBtn.setDisable(newValue.trim().isEmpty());
         });
@@ -74,6 +81,13 @@ public class UserLoginPaneController {
 
     @FXML
     private void handleLoginBtn() {
+        if (rememberAccount.isSelected()) {
+            PropertiesOperation propertiesOperation = new PropertiesOperation();
+            propertiesOperation.writeProperties("userConfig.properties", "LastLoginUserNumber", inputNumber.getText());
+        } else {
+            PropertiesOperation propertiesOperation = new PropertiesOperation();
+            propertiesOperation.writeProperties("userConfig.properties", "LastLoginUserNumber", "NOT_ACCOUNT");
+        }
         progressBar.setVisible(true);
         loginBtn.setDisable(true);
         setBtn.setDisable(true);

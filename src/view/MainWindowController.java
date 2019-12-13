@@ -61,7 +61,7 @@ public class MainWindowController {
         aboutUs.setMnemonicParsing(true);
         aboutUs.setAccelerator(new KeyCodeCombination(KeyCode.U, KeyCombination.SHORTCUT_DOWN));
         //创建侧边栏
-        TreeItem<String> rootItem = new TreeItem<>("部门");
+        TreeItem<String> rootItem = new TreeItem<>("");
         rootItem.setExpanded(true);
         //侧边栏警告
         TreeItem<String> itemWarning = new TreeItem<>("没有访问权限！");
