@@ -10,8 +10,7 @@ public class ProductPlan {
     private IntegerProperty goodsId = new SimpleIntegerProperty();
     private IntegerProperty goodsNumber = new SimpleIntegerProperty();
     private IntegerProperty goodsQuantity = new SimpleIntegerProperty();
-    //0为季度 1为预定
-    private IntegerProperty planType = new SimpleIntegerProperty();
+    private IntegerProperty planType = new SimpleIntegerProperty(); //0为季度 1为预定
     private IntegerProperty productionCycle = new SimpleIntegerProperty();
 
     public int getPlanId() {
