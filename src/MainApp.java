@@ -15,6 +15,7 @@ import jfxtras.styles.jmetro.Style;
 
 import model.Goods;
 import model.GoodsInfo;
+import model.Logistics;
 import model.Orders;
 import service.*;
 

@@ -29,7 +29,7 @@ public class LogisticsSubmission {
         try {
             tx = session.beginTransaction();
             //物流订单提交 应该把orders表的订单状态改为运输中
-            hql="update Orders set orderState = 2 where orderId = " + String.valueOf(lg.getOrderId());
+            hql = "update Orders set orderState = 2 where orderId = " + String.valueOf(lg.getOrderId());
             session.save(lg);
             Query query = session.createQuery(hql);
             query.executeUpdate();
@@ -43,8 +43,31 @@ public class LogisticsSubmission {
         }
     }
 
-    public void OrderUpdate(int orderId){
-
+    public int LogisticsJudge(String orderId) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        String hql = "";
+        int ans = 0;
+        try {
+            tx = session.beginTransaction();
+            //物流订单提交 应该把orders表的订单状态改为运输中
+            hql = "from Logistics where orderId = " + orderId;
+            Query query = session.createQuery(hql);
+            List list = query.list();
+            if (list.toString() != "[]" && list != null) {
+                ans = 0;//表示物流表里面有 无法修改
+                System.out.println("__________________not null____________");
+            } else {
+                ans = 1;//表示物流表里面没有 需要生成
+                System.out.println("_______________________null____________");
+            }
+        } catch (RuntimeException e) {
+            ans = 0;
+            throw e;
+        } finally {
+            session.close();
+            return ans;
+        }
     }
 }
 
