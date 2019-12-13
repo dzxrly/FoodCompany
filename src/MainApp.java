@@ -36,6 +36,9 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws ParseException {
+//
+//        ReturnBillSubmission rb=new ReturnBillSubmission();
+//        rb.submitReturnBill(10002,1,23,"商品质量出现问题");
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
         showUserLoginPane();

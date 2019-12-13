@@ -25,7 +25,6 @@ public class LogisticsSubmission {
         lg.setCompanyName(logisticsCompanyName);
         lg.setDeliveryDate(deliveryDate);//发货日期
         lg.setDestination(destination);
-
         try {
             tx = session.beginTransaction();
             //物流订单提交 应该把orders表的订单状态改为运输中
@@ -42,7 +41,6 @@ public class LogisticsSubmission {
             session.close();
         }
     }
-
     public int LogisticsJudge(String orderId) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
