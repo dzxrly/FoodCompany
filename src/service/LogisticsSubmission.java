@@ -38,6 +38,10 @@ public class LogisticsSubmission {
             session.close();
         }
     }
+
+    public void OrderUpdate(int orderId){
+
+    }
 }
 
 //Test
