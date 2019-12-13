@@ -295,6 +295,17 @@ public class OrderInputController {
         service_searchCustomerByName.restart();
     }
 
+    private void clearAll() {
+        totalPrice.setText("0.0");
+        leftGoodsListData.clear();
+        rightGoodsListData.clear();
+        customerData.clear();
+        customerNameLabel.setText("");
+        customerNumberLabel.setText("");
+        customerPhoneLabel.setText("");
+        datePicker.setValue(LocalDate.now());
+    }
+
     @FXML
     private void handleUploadOrder() {
         if (customerNumberLabel.getText().equals("")) {
@@ -378,21 +389,26 @@ public class OrderInputController {
                             for (int i = 0; i < leftGoodsListData.size(); i++) {
                                 flags[i] = ordersSubmission.createSpotOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (int) leftGoodsListData.get(i).getPayNumber());
                             }
+                            int flagsEqualOneCount = 0;
                             for (int i = 0; i < flags.length; i++) {
-                                if (flags[i] == 0) {
-                                    Platform.runLater(() -> {
-                                        AlertDialog alertDialog = new AlertDialog();
-                                        alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交出错!", "提交出错!");
-                                        alertDialog.show();
-                                    });
-                                    break;
+                                if (flags[i] == 1) {
+                                    flagsEqualOneCount++;
                                 } else continue;
                             }
-                            Platform.runLater(() -> {
-                                AlertDialog alertDialog = new AlertDialog();
-                                alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交完成!", "提交完成!");
-                                alertDialog.show();
-                            });
+                            if (flagsEqualOneCount == flags.length) {
+                                clearAll();
+                                Platform.runLater(() -> {
+                                    AlertDialog alertDialog = new AlertDialog();
+                                    alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交完成!", "提交完成!");
+                                    alertDialog.show();
+                                });
+                            } else {
+                                Platform.runLater(() -> {
+                                    AlertDialog alertDialog = new AlertDialog();
+                                    alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交出错!", "提交出错!");
+                                    alertDialog.show();
+                                });
+                            }
                         } else {
                             //预定订单
                             PropertiesOperation propertiesOperation = new PropertiesOperation();
@@ -402,21 +418,26 @@ public class OrderInputController {
                             for (int i = 0; i < leftGoodsListData.size(); i++) {
                                 flags[i] = ordersSubmission.createBookOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (int) leftGoodsListData.get(i).getPayNumber());
                             }
+                            int flagsEqualOneCount = 0;
                             for (int i = 0; i < flags.length; i++) {
-                                if (flags[i] == 0) {
-                                    Platform.runLater(() -> {
-                                        AlertDialog alertDialog = new AlertDialog();
-                                        alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交出错!", "提交出错!");
-                                        alertDialog.show();
-                                    });
-                                    break;
+                                if (flags[i] == 1) {
+                                    flagsEqualOneCount++;
                                 } else continue;
                             }
-                            Platform.runLater(() -> {
-                                AlertDialog alertDialog = new AlertDialog();
-                                alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交完成!", "提交完成!");
-                                alertDialog.show();
-                            });
+                            if (flagsEqualOneCount == flags.length) {
+                                clearAll();
+                                Platform.runLater(() -> {
+                                    AlertDialog alertDialog = new AlertDialog();
+                                    alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交完成!", "提交完成!");
+                                    alertDialog.show();
+                                });
+                            } else {
+                                Platform.runLater(() -> {
+                                    AlertDialog alertDialog = new AlertDialog();
+                                    alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交出错!", "提交出错!");
+                                    alertDialog.show();
+                                });
+                            }
                         }
                     } else {
                         Platform.runLater(() -> {
@@ -427,7 +448,7 @@ public class OrderInputController {
 
                             Optional<ButtonType> res = alert.showAndWait();
                             if (res.get() == ButtonType.OK) {
-                                datePicker.setValue(LocalDate.parse(recommendDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                                datePicker.setValue(LocalDate.parse(recommendDate.substring(0, 10), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                             } else alert.close();
                         });
                     }
