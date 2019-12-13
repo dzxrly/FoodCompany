@@ -8,7 +8,7 @@ public class Income {
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
     private DoubleProperty incomePrice = new SimpleDoubleProperty();
     private StringProperty incomeTime = new SimpleStringProperty();
-    private IntegerProperty incomeType = new SimpleIntegerProperty();//0表示现货订单收入，1表示预定订单收入
+    private IntegerProperty incomeType = new SimpleIntegerProperty();//0表示付预付款 1表示付尾款 2表示付全款
     private StringProperty incomeItem = new SimpleStringProperty();//具体收入款项
     private IntegerProperty orderId = new SimpleIntegerProperty();
     private StringProperty payCardNumber =new SimpleStringProperty();

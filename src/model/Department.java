@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 
 //部门表
 public class Department {
-    private IntegerProperty departmentId = new SimpleIntegerProperty();
+    private IntegerProperty departmentId = new SimpleIntegerProperty();//11 销售部
     private StringProperty departmentName= new SimpleStringProperty();
     private StringProperty departmentManager = new SimpleStringProperty();
     private IntegerProperty departmentSum= new SimpleIntegerProperty();
