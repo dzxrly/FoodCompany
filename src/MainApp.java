@@ -13,6 +13,8 @@ import javafx.stage.WindowEvent;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
+import model.Goods;
+import model.GoodsInfo;
 import model.Orders;
 import service.*;
 

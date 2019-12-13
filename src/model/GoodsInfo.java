@@ -9,8 +9,8 @@ public class GoodsInfo {
     private SimpleStringProperty goodsName;
     private SimpleDoubleProperty goodsPrice;
     private SimpleIntegerProperty goodsQualityTime;
-    private SimpleIntegerProperty stocks;
-    private SimpleDoubleProperty payNumber;
+    private SimpleIntegerProperty stocks;//库存
+    private SimpleDoubleProperty payNumber;//购买数量
 
     public GoodsInfo(int goodsId, String goodsName, Double goodsPrice, int goodsQualityTime, int stocks, Double payNumber) {
         this.goodsId = new SimpleIntegerProperty(goodsId);
