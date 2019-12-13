@@ -20,11 +20,8 @@
             如果length忽略不写，且你的表是自动创建这种方案，那么length的默认长度是255
         -->
         <property name="orderId" column="orderId" type="java.lang.Integer" length="11"></property>
-        <property name="orderType" column="orderType" type="java.lang.Integer" length="11"></property>
         <property name="customerNumber" column="customerNumber" type="java.lang.Integer" length="11"></property>
         <property name="customerName" column="customerName" type="java.lang.String" length="20"></property>
-        <property name="customerLevel" column="customerLevel" type="java.lang.Integer" length="11"></property>
-        <property name="returnTime" column="returnTime" type="java.lang.String" length="20"></property>
         <property name="stuffNumber" column="stuffNumber" type="java.lang.Integer" length="11"></property>
         <property name="totalReturnPrice" column="totalReturnPrice" type="java.lang.Double" length="0"></property>
     </class>
