@@ -124,6 +124,8 @@ public class MainWindowController {
         itemFinishedProductionDep.getChildren().add(new TreeItem<>("出入库信息管理"));
         itemFinishedProductionDep.getChildren().add(new TreeItem<>("提货信息管理"));
         itemFinishedProductionDep.getChildren().add(new TreeItem<>("生产入库数量管理"));
+        //考勤管理
+
         //权限处理
         if (userLevel.equals("0")) {
             rootItem.getChildren().add(itemSaleDep);

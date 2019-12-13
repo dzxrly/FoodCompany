@@ -111,6 +111,7 @@ public class OrdersSearch {
 //            System.out.println("_____________" + cto + "________________");
         } catch (RuntimeException e) {
             System.out.println("_____________________________Can not search___________________________");
+            cto = null;
             throw e;
         } finally {
             session.close();
