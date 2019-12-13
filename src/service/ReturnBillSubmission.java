@@ -37,3 +37,6 @@ public class ReturnBillSubmission {
     }
 
 }
+
+//        ReturnBillSubmission rb=new ReturnBillSubmission();
+//        rb.submitReturnBill(10002,1,23,"商品质量出现问题");
