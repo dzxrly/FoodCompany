@@ -86,7 +86,7 @@ public class OrdersSearch {
         List list = null;
 
         try {
-            hql = "select o.orderId,c.personalName,c.companyName,c.number,c.level,c.email,c.phoneNumber,c.type from Orders as o,Customer as c where o.customerPhone = c.phoneNumber and o.orderId = " + text;
+            hql = "select o.orderId,c.personalName,c.companyName,c.number,c.level,c.address,c.email,c.phoneNumber,c.type,o.orderType,o.endDate,o.totalSum,o.orderState,o.paymentState,o.stuffNumber from Orders as o,Customer as c where o.customerPhone = c.phoneNumber and o.orderId = " + text;
             Query query = session.createQuery(hql);
             list = query.list();
 //            CustomerOrder cto = new CustomerOrder();
