@@ -28,7 +28,6 @@ public class OrderPaymentSubmission {
             else{
                 paymentState="2";
             }
-
             Income in=new Income();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             String incomeDate = df.format(new Date()).toString();//获得日期
@@ -46,6 +45,9 @@ public class OrderPaymentSubmission {
             Query query = session.createQuery(hql);
             query.executeUpdate();
             System.out.println("_____________________update successful__________________");
+
+
+            ans=1;//1表示提交成功
             tx.commit();
         }catch(RuntimeException e){
             ans=0;//0表示提交失败
