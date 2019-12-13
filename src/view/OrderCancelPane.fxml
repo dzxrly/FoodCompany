@@ -73,20 +73,6 @@
                   </Label>
                </children>
             </HBox>
-            <HBox layoutX="191.0" layoutY="252.0">
-               <children>
-                  <Label layoutX="14.0" layoutY="182.0" text="退货截止日期：">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="deadline" layoutX="105.0" layoutY="182.0" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
             <HBox>
                <children>
                   <Label layoutX="106.0" layoutY="352.0" text="客户姓名：">
@@ -129,16 +115,16 @@
                   </Label>
                </children>
             </HBox>
-            <HBox>
+            <VBox spacing="5.0">
                <children>
-                  <Label layoutX="41.0" layoutY="352.0" text="是否存在质量问题：">
+                  <Label layoutX="586.0" layoutY="322.0" text="是否存在质量问题：">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="isHasProblem" layoutX="167.0" layoutY="350.0" prefHeight="23.0" prefWidth="84.0" />
+                  <ComboBox fx:id="isHasProblem" layoutX="763.0" layoutY="324.0" prefHeight="23.0" prefWidth="84.0" />
                </children>
-            </HBox>
+            </VBox>
          </children>
       </VBox>
       <Label layoutX="14.0" layoutY="14.0" text="退货处理">

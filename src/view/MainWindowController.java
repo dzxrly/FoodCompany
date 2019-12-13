@@ -135,6 +135,7 @@ public class MainWindowController {
             rootItem.getChildren().add(itemProductionPlanDep);
             rootItem.getChildren().add(itemWorkshop);
             rootItem.getChildren().add(itemFinishedProductionDep);
+            rootItem.getChildren().add(itemUserManagement);
         } else if (userLevel.equals("1")) {
             rootItem.getChildren().add(itemSaleDep);
             rootItem.getChildren().add(itemFinishedProductionDep);
@@ -287,6 +288,12 @@ public class MainWindowController {
                     } else if (currentSelectedItem.getValue().equals("生产入库数量管理")) {
                         try {
                             showInsidePane("InboundQuantityManagementPane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("员工信息管理")) {
+                        try {
+                            showInsidePane("StuffInfoManagementPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

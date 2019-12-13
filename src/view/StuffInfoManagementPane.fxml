@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StuffInfoManagementPaneController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="员工信息管理">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <HBox layoutX="14.0" layoutY="56.0">
+         <children>
+            <ComboBox fx:id="levelSelectComboBox" layoutX="32.0" layoutY="87.0" prefWidth="150.0" />
+            <TextField fx:id="inputText" layoutX="190.0" layoutY="87.0" prefHeight="27.0" prefWidth="150.0" />
+            <Button fx:id="searchBtn" layoutX="394.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleSearchBtn" prefWidth="80.0" text="搜索" />
+            <Button fx:id="searchAllBtn" layoutX="513.0" layoutY="103.0" mnemonicParsing="false" onAction="#handleSearchAllBtn" prefWidth="80.0" text="查询全部" />
+         </children>
+      </HBox>
+      <ScrollPane layoutX="14.0" layoutY="97.0" prefHeight="595.0" prefWidth="634.0">
+         <content>
+            <TableView fx:id="resList" prefHeight="596.0" prefWidth="633.0" />
+         </content>
+      </ScrollPane>
+      <VBox layoutX="679.0" layoutY="97.0" prefHeight="535.0" prefWidth="354.0" spacing="8.0">
+         <children>
+            <HBox fx:id="modelHBox" spacing="5.0">
+               <children>
+                  <Label fx:id="modelLebel" text="查询模式">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label layoutX="685.0" layoutY="166.0" prefWidth="80.0" text="员工编号：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="stuffNumberLabel" layoutX="685.0" layoutY="202.0" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label prefWidth="80.0" text="员工姓名：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="stuffNameText" />
+            <Label prefWidth="80.0" text="员工权限：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="stuffLevelComboBox" prefHeight="23.0" prefWidth="200.0" />
+            <Label prefWidth="80.0" text="地址：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="addressText" />
+            <Label text="联系方式：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="phoneText" />
+            <Label text="邮箱：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailText" />
+            <Label text="身份证号：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="idNumberText" />
+            <Label text="性别：" />
+            <ComboBox fx:id="genderComboBox" prefHeight="23.0" prefWidth="200.0" />
+            <HBox spacing="5.0">
+               <children>
+                  <Button fx:id="printBtn" mnemonicParsing="false" onAction="#handlePrintBtn" prefWidth="80.0" text="打印" />
+                  <HBox fx:id="btnGroup" spacing="5.0">
+                     <children>
+                        <Button fx:id="saveBtn" layoutX="829.0" layoutY="663.0" mnemonicParsing="false" onAction="#handleSaveBtn" prefWidth="80.0" text="保存" />
+                        <Button fx:id="deleteBtn" layoutX="944.0" layoutY="663.0" mnemonicParsing="false" onAction="#handleDeleteBtn" prefWidth="80.0" text="删除" />
+                     </children>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

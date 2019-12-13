@@ -22,8 +22,6 @@ public class OrderCancelPaneController {
     @FXML
     private Label productionStatus;
     @FXML
-    private Label deadline;
-    @FXML
     private Label customerNameLabel;
     @FXML
     private Label customerPhoneLabel;
