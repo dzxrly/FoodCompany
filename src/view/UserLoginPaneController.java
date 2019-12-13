@@ -64,17 +64,22 @@ public class UserLoginPaneController {
         setBtn.setGraphic(new ImageView(new Image("img/setting.png", 16, 16, false, false)));
         Image img = new Image("img/loginBG.jpg");
         imgView.setImage(img);
-        loginBtn.setDisable(true);
+        if (inputNumber.getText().equals("")) {
+            loginBtn.setDisable(true);
+        } else loginBtn.setDisable(false);
 
         PropertiesOperation propertiesOperation = new PropertiesOperation();
         propertiesOperation.writeProperties("userConfig.properties", "UserLevel", "999");
         propertiesOperation.writeProperties("userConfig.properties", "LoginUserName", "null");
         propertiesOperation.writeProperties("userConfig.properties", "LoginUserNumber", "null");
 
+        if (propertiesOperation.readValue("userConfig.properties", "isRememberedPW").equals("true")) rememberAccount.setSelected(true);
+        else rememberAccount.setSelected(false);
+
         String flag = propertiesOperation.readValue("userConfig.properties", "LastLoginUserNumber");
         if (!flag.equals("NOT_ACCOUNT") && !flag.equals("")) inputNumber.setText(flag);
 
-        inputNumber.textProperty().addListener((observable, oldValue, newValue) -> {
+        inputPW.textProperty().addListener((observable, oldValue, newValue) -> {
             loginBtn.setDisable(newValue.trim().isEmpty());
         });
     }
@@ -84,9 +89,11 @@ public class UserLoginPaneController {
         if (rememberAccount.isSelected()) {
             PropertiesOperation propertiesOperation = new PropertiesOperation();
             propertiesOperation.writeProperties("userConfig.properties", "LastLoginUserNumber", inputNumber.getText());
+            propertiesOperation.writeProperties("userConfig.properties","isRememberedPW", "true");
         } else {
             PropertiesOperation propertiesOperation = new PropertiesOperation();
             propertiesOperation.writeProperties("userConfig.properties", "LastLoginUserNumber", "NOT_ACCOUNT");
+            propertiesOperation.writeProperties("userConfig.properties","isRememberedPW", "false");
         }
         progressBar.setVisible(true);
         loginBtn.setDisable(true);

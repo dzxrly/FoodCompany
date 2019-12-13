@@ -61,7 +61,7 @@ public class MainWindowController {
         aboutUs.setMnemonicParsing(true);
         aboutUs.setAccelerator(new KeyCodeCombination(KeyCode.U, KeyCombination.SHORTCUT_DOWN));
         //创建侧边栏
-        TreeItem<String> rootItem = new TreeItem<>("");
+        TreeItem<String> rootItem = new TreeItem<>("功能列表");
         rootItem.setExpanded(true);
         //侧边栏警告
         TreeItem<String> itemWarning = new TreeItem<>("没有访问权限！");
@@ -124,8 +124,10 @@ public class MainWindowController {
         itemFinishedProductionDep.getChildren().add(new TreeItem<>("出入库信息管理"));
         itemFinishedProductionDep.getChildren().add(new TreeItem<>("提货信息管理"));
         itemFinishedProductionDep.getChildren().add(new TreeItem<>("生产入库数量管理"));
-        //考勤管理
-
+        //用户管理
+        TreeItem<String> itemUserManagement = new TreeItem<>("用户管理");
+        itemUserManagement.getChildren().add(new TreeItem<>("员工信息管理"));
+        itemUserManagement.getChildren().add(new TreeItem<>("考勤管理"));
         //权限处理
         if (userLevel.equals("0")) {
             rootItem.getChildren().add(itemSaleDep);
