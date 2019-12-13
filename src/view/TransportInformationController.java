@@ -107,6 +107,7 @@ public class TransportInformationController {
                 }
             }
         };
+
         datePicker.setConverter(converter);
         datePicker.setPromptText(pattern.toLowerCase());
         datePicker.setValue(LocalDate.now());
