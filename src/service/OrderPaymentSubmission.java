@@ -46,7 +46,6 @@ public class OrderPaymentSubmission {
             query.executeUpdate();
             System.out.println("_____________________update successful__________________");
 
-
             ans=1;//1表示提交成功
             tx.commit();
         }catch(RuntimeException e){
