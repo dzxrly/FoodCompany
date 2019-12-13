@@ -33,5 +33,7 @@
         <mapping resource="model/Department.hbm.xml"/>
         <mapping resource="model/LoginInfo.hbm.xml"/>
         <mapping resource="model/ReturnBill.hbm.xml"/>
+        <mapping resource="model/Income.hbm.xml"/>
+        <mapping resource="model/Payment.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
