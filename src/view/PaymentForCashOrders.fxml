@@ -20,18 +20,18 @@
             <Button fx:id="searchBtn" layoutX="229.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="23.0" prefWidth="76.0" text="查询" />
          </children>
       </HBox>
-      <VBox layoutX="60.0" layoutY="121.0" prefHeight="160.0" prefWidth="274.0" spacing="10.0">
+      <VBox layoutX="14.0" layoutY="121.0" prefHeight="160.0" prefWidth="274.0" spacing="10.0">
          <children>
             <HBox>
                <children>
                   <Label layoutX="60.0" layoutY="114.0" text="订单类型：">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="orderTypeLabel" layoutX="150.0" layoutY="119.0" text="Label">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -40,12 +40,12 @@
                <children>
                   <Label layoutX="264.0" layoutY="156.0" text="订单编号：">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="orderNumberLabel" layoutX="334.0" layoutY="158.0" text="Label">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -54,12 +54,12 @@
                <children>
                   <Label layoutX="53.0" layoutY="202.0" text="客户编号：">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="customerNumberLabel" text="Label">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -68,12 +68,12 @@
                <children>
                   <Label layoutX="53.0" layoutY="235.0" text="客户姓名：">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="customerNameLabel" layoutX="122.0" layoutY="235.0" text="Label">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -82,12 +82,12 @@
                <children>
                   <Label layoutX="46.0" layoutY="103.0" text="客户星级：">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="customerLevelLabel" layoutX="122.0" layoutY="105.0" text="Label">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -96,80 +96,91 @@
                <children>
                   <Label layoutX="409.0" layoutY="51.0" text="订单生成时间：">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="orderTimeLabel" layoutX="540.0" layoutY="57.0" text="Label">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="60.0" layoutY="355.0" spacing="10.0">
+      <HBox layoutX="14.0" layoutY="301.0" prefHeight="176.0" prefWidth="340.0" spacing="20.0">
          <children>
-            <Label layoutX="84.0" layoutY="273.0" text="应缴纳预付款：">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <HBox spacing="20.0">
+            <VBox layoutX="14.0" layoutY="353.0" prefWidth="120.0" spacing="10.0">
                <children>
-                  <Label fx:id="prepaymentsLabel" layoutX="322.0" layoutY="345.0" prefHeight="20.0" prefWidth="120.0" text="Label">
+                  <Label layoutX="84.0" layoutY="273.0" text="应缴纳预付款：">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <CheckBox fx:id="isPrePay" layoutX="397.0" layoutY="339.0" mnemonicParsing="false" text="是否已缴纳">
+                  <HBox spacing="20.0">
+                     <children>
+                        <Label fx:id="prepaymentsLabel" layoutX="322.0" layoutY="345.0" prefHeight="20.0" prefWidth="120.0" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label layoutX="84.0" layoutY="341.0" text="应缴纳尾款：">
                      <font>
-                        <Font size="14.0" />
-                     </font>
-                  </CheckBox>
-               </children>
-            </HBox>
-            <Label layoutX="84.0" layoutY="341.0" text="应缴纳尾款：">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <HBox spacing="20.0">
-               <children>
-                  <Label fx:id="restPaymentsLabel" layoutX="374.0" layoutY="369.0" prefHeight="20.0" prefWidth="120.0" text="Label">
-                     <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <CheckBox fx:id="isRestPay" layoutX="435.0" layoutY="376.0" mnemonicParsing="false" text="是否已缴纳">
+                  <HBox spacing="20.0">
+                     <children>
+                        <Label fx:id="restPaymentsLabel" layoutX="374.0" layoutY="369.0" prefHeight="20.0" prefWidth="120.0" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label layoutX="84.0" layoutY="410.0" text="应缴纳全款：">
                      <font>
-                        <Font size="14.0" />
-                     </font>
-                  </CheckBox>
-               </children>
-            </HBox>
-            <Label layoutX="84.0" layoutY="410.0" text="共计：">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <HBox spacing="20.0">
-               <children>
-                  <Label fx:id="totalCost" layoutX="195.0" layoutY="524.0" prefHeight="20.0" prefWidth="120.0" text="Label">
-                     <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <CheckBox fx:id="isTotalPay" layoutX="262.0" layoutY="528.0" mnemonicParsing="false" text="是否已缴纳">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </CheckBox>
+                  <HBox spacing="20.0">
+                     <children>
+                        <Label fx:id="totalCost" layoutX="195.0" layoutY="524.0" prefHeight="20.0" prefWidth="120.0" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
+            <VBox layoutX="158.0" layoutY="354.0" prefHeight="176.0" prefWidth="188.0" spacing="10.0">
+               <children>
+                  <Label layoutX="158.0" layoutY="354.0" text="已缴纳预付款：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="hasPaiedPrepaymentText" />
+                  <Label layoutX="158.0" layoutY="409.0" text="已缴纳尾款：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="hasPaiedRestPaymentText" />
+                  <Label layoutX="158.0" layoutY="445.0" text="已缴纳全款：">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="hasPaiedAllCostText" />
+               </children>
+            </VBox>
          </children>
-      </VBox>
-      <VBox layoutX="60.0" layoutY="560.0" spacing="20.0">
+      </HBox>
+      <VBox layoutX="60.0" layoutY="601.0" spacing="20.0">
          <children>
             <HBox layoutX="84.0" layoutY="493.0">
                <children>
@@ -185,14 +196,24 @@
             </HBox>
          </children>
       </VBox>
-      <ScrollPane layoutX="374.0" layoutY="121.0" prefHeight="558.0" prefWidth="675.0">
+      <ScrollPane layoutX="362.0" layoutY="121.0" prefHeight="538.0" prefWidth="675.0">
          <content>
-            <TableView fx:id="goodsList" prefHeight="556.0" prefWidth="673.0">
+            <TableView fx:id="goodsList" prefHeight="538.0" prefWidth="681.0">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
          </content>
       </ScrollPane>
+      <VBox layoutX="14.0" layoutY="498.0" spacing="10.0">
+         <children>
+            <Label layoutX="14.0" layoutY="491.0" text="支付银行卡卡号：">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="bankCardNumberText" layoutX="14.0" layoutY="525.0" prefWidth="250.0" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -29,12 +29,6 @@ public class PaymentForCashOrdersController {
     @FXML
     private Label operatorLabel;
     @FXML
-    private CheckBox isPrePay;
-    @FXML
-    private CheckBox isRestPay;
-    @FXML
-    private CheckBox isTotalPay;
-    @FXML
     private TableView goodsList;
     @FXML
     private Button upload;
@@ -44,6 +38,14 @@ public class PaymentForCashOrdersController {
     private Label orderTypeLabel;
     @FXML
     private Button printBtn;
+    @FXML
+    private TextField hasPaiedPrepaymentText;
+    @FXML
+    private TextField hasPaiedRestPaymentText;
+    @FXML
+    private TextField hasPaiedAllCostText;
+    @FXML
+    private TextField bankCardNumberText;
 
     private String operator;
     private String operatorNumber;
