@@ -21,6 +21,7 @@ import org.controlsfx.control.ToggleSwitch;
 import service.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SaleDepClientInfoSearchPaneController {
     //客户信息查询控制类
@@ -242,7 +243,23 @@ public class SaleDepClientInfoSearchPaneController {
 
     @FXML
     private void handleDelete() {
-        //TODO
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("确认");
+        alert.setHeaderText("是否删除客户？");
+        alert.setContentText("删除后无法撤销！");
+        Optional<ButtonType> optionalButtonType = alert.showAndWait();
+        if (optionalButtonType.get() == ButtonType.OK) {
+            service_delete.restart();
+            customerNumberLabel.setText("");
+            customerTypeComboBox.getSelectionModel().select(0);
+            customerLevelComboBox.getSelectionModel().select(0);
+            companyNameText.setText("");
+            personalNameText.setText("");
+            phoneText.setText("");
+            addressText.setText("");
+            emailText.setText("");
+            searchData.clear();
+        } else alert.close();
     }
 
     Service<Integer> service_search = new Service<Integer>() {
@@ -315,6 +332,32 @@ public class SaleDepClientInfoSearchPaneController {
                             alertDialog.show();
                         }
                     });
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_delete = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    CustomerDelete customerDelete = new CustomerDelete();
+                    if (customerDelete.deleteCustomer(searchResTable.getSelectionModel().getSelectedItem().getNumber())==1) {
+                        Platform.runLater(()-> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION,"成功","删除成功！","客户已删除！");
+                            alertDialog.show();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR,"错误","删除失败！","请重试！");
+                            alertDialog.show();
+                        });
+                    }
                     return null;
                 }
             };
