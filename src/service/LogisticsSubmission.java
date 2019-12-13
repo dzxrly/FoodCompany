@@ -30,6 +30,7 @@ public class LogisticsSubmission {
             tx = session.beginTransaction();
             session.save(lg);
             tx.commit();
+
         } catch (RuntimeException e) {
             tx.rollback();
             throw e;
