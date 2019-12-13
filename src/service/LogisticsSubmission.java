@@ -23,12 +23,16 @@ public class LogisticsSubmission {
         lg.setOrderId(orderId);
         lg.setLogisticsType(logisticsType);
         lg.setCompanyName(logisticsCompanyName);
-        lg.setDeliveryDate(deliveryDate);
+        lg.setDeliveryDate(deliveryDate);//发货日期
         lg.setDestination(destination);
 
         try {
             tx = session.beginTransaction();
+            //物流订单提交 应该把orders表的订单状态改为运输中
+            hql="update Orders set orderState = 2 where orderId = " + String.valueOf(lg.getOrderId());
             session.save(lg);
+            Query query = session.createQuery(hql);
+            query.executeUpdate();
             tx.commit();
 
         } catch (RuntimeException e) {
@@ -45,5 +49,6 @@ public class LogisticsSubmission {
 }
 
 //Test
-//        LogisticsSubmission ls=new LogisticsSubmission();
-//        ls.logisticsSubmit("20191211",9,0,"顺丰","2019-12-13","德州路23号");
+//LogisticsSubmission ls = new LogisticsSubmission();
+//ls.logisticsSubmit("20191217", 9, 0, "EMS", "2019-12-17", "泰安路89号");
+

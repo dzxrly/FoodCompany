@@ -89,7 +89,6 @@ public class OrdersSearch {
             hql = "select o.orderId,c.personalName,c.companyName,c.number,c.level,c.email,c.phoneNumber,c.type from Orders as o,Customer as c where o.customerPhone = c.phoneNumber and o.orderId = " + text;
             Query query = session.createQuery(hql);
             list = query.list();
-
 //            CustomerOrder cto = new CustomerOrder();
 //            Object[] co = (Object[]) list.get(0);
 //            cto.setOrderId((int) co[0]);
