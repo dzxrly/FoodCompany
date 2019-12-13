@@ -19,6 +19,7 @@ import model.Orders;
 import service.*;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 public class MainApp extends Application {
@@ -33,7 +34,7 @@ public class MainApp extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws ParseException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
         showUserLoginPane();

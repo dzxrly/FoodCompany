@@ -162,6 +162,7 @@ public class OrdersSubmission {
                     time = time + (gd[i].getPayNumber() - stocks) / t;
                 }
             }
+            time=Math.ceil(time/24);
             System.out.println(time);
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -176,16 +177,16 @@ public class OrdersSubmission {
                 if (list1.toString() != "[]" && list1 != null) {//表示有空闲的流水线 但是时间不满足 用系统当前时间加完成这批订单所需的时间time作为返回值
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                     String firstEndDate = df.format(new Date()).toString();//获得系统日期
-//                    System.out.println("_________________not null_______________" + firstEndDate);
+                    System.out.println("_________________not null_______________" + firstEndDate);
                     Return = PlusDay.plusDay((int) time, firstEndDate);
-//                    System.out.println("_________________not null_______________" + Return);
+                    System.out.println("_________________not null_______________" + Return);
                 } else {//表示无空闲流水线 且时间不满足最早完成的流水线的时间 返回的是 可以完成的完成这批产品的最早的日期
                     String hql1 = "from AssemblyLine where lineState = 0 order by endWorkTime asc";
                     List ASL = session.createQuery(hql1).list();//流水线状态表
                     String firstEndDate = ((AssemblyLine) ASL.get(0)).getEndWorkTime();//最早完成的流水线的号
-//                    System.out.println("_________________null_______________" + firstEndDate);
+                    System.out.println("_________________null_______________" + firstEndDate);
                     Return = PlusDay.plusDay((int) time, firstEndDate);
-//                    System.out.println("_________________null_______________" + Return);
+                    System.out.println("_________________null_______________" + Return);
                 }
             } else {
                 //首先根据优先权判断是否为预定订单计划或者季度生产计划
