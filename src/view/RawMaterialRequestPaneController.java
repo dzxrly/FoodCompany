@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import service.AddImageForComponent;
 
 public class RawMaterialRequestPaneController {
     @FXML
@@ -38,7 +39,10 @@ public class RawMaterialRequestPaneController {
 
     @FXML
     private void initialize() {
-
+        plan_searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        material_searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
+        exportBtn.setGraphic((new AddImageForComponent("img/arrow_down.png",14)).getImageView());
         //TODO
     }
 

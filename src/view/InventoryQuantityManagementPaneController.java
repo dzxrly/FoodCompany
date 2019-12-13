@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import service.AddImageForComponent;
 
 import java.util.regex.Pattern;
 
@@ -44,6 +45,8 @@ public class InventoryQuantityManagementPaneController {
 
     @FXML
     private void initialize() {
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
         stocksNumberLabel.setText("0");
         warningLabel.setText("");
         warningLabel.setTextFill(Color.BLACK);

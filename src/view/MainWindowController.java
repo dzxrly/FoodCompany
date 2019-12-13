@@ -290,7 +290,6 @@ public class MainWindowController {
                         mainUI.getChildren().remove(currentNode); //清空主面板
                     }
                 }
-                //TODO
             }
         });
     }
