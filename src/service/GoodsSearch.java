@@ -1,6 +1,7 @@
 package service;
 
 import DAO.HibernateUtils;
+import model.AssemblyLine;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -8,7 +9,6 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class GoodsSearch {
-
     public List searchGoods(String name) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;

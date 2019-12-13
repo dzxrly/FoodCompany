@@ -15,7 +15,7 @@ public class OrderBookGoods {
     private IntegerProperty customerNumber = new SimpleIntegerProperty();
     private IntegerProperty goodsNumber = new SimpleIntegerProperty();
     private StringProperty goodsName =new SimpleStringProperty();
-    private IntegerProperty orderQuantity = new SimpleIntegerProperty();
+    private IntegerProperty orderQuantity = new SimpleIntegerProperty();//商品数量
     private StringProperty buildDate = new SimpleStringProperty();
 
     public int getBookId() {

@@ -30,5 +30,7 @@
         <mapping resource="model/PlanFinishCondition.hbm.xml"/>
         <mapping resource="model/AssemblyLine.hbm.xml"/>
         <mapping resource="model/ProductUnit.hbm.xml"/>
+        <mapping resource="model/Department.hbm.xml"/>
+        <mapping resource="model/LoginInfo.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
