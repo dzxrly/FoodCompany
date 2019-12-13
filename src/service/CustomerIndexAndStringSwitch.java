@@ -58,4 +58,19 @@ public class CustomerIndexAndStringSwitch {
                 return 4;
         }
     }
+
+    public String returnStatusByIndex(int index) {
+        switch (index) {
+            default:
+                return "未生产";
+            case 0:
+                return "未生产";
+            case 1:
+                return "生产中";
+            case 2:
+                return "运输中";
+            case 3:
+                return "已到达";
+        }
+    }
 }

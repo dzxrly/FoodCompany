@@ -15,7 +15,7 @@
             <Button fx:id="searchBtn" layoutX="175.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="111.0" text="搜索" />
          </children>
       </HBox>
-      <VBox layoutX="41.0" layoutY="116.0" prefHeight="251.0" prefWidth="407.0" spacing="10.0">
+      <VBox layoutX="41.0" layoutY="133.0" prefHeight="251.0" prefWidth="407.0" spacing="10.0">
          <children>
             <HBox layoutX="190.0" layoutY="107.0">
                <children>
@@ -47,26 +47,12 @@
             </HBox>
             <HBox layoutX="190.0" layoutY="173.0">
                <children>
-                  <Label layoutX="14.0" layoutY="129.0" text="发货状态：">
+                  <Label layoutX="14.0" layoutY="129.0" text="订单状态：">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="transportationStatus" layoutX="82.0" layoutY="129.0" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox layoutX="184.0" layoutY="211.0">
-               <children>
-                  <Label layoutX="14.0" layoutY="157.0" text="是否已进行生产：">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="productionStatus" layoutX="113.0" layoutY="157.0" text="Label">
+                  <Label fx:id="statusLabel" layoutX="82.0" layoutY="129.0" text="Label">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -134,10 +120,17 @@
       </Label>
       <TextArea fx:id="note" layoutX="41.0" layoutY="409.0" prefHeight="203.0" prefWidth="559.0" />
       <Label layoutX="41.0" layoutY="384.0" text="退款备注：" />
-      <HBox layoutX="394.0" layoutY="630.0" spacing="10.0">
+      <HBox layoutX="394.0" layoutY="641.0" spacing="10.0">
          <children>
             <Button fx:id="uploadBtn" layoutX="502.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="23.0" prefWidth="98.0" text="提交" />
             <Button fx:id="clearBtn" layoutX="621.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleClear" prefHeight="23.0" prefWidth="98.0" text="清空" />
+         </children>
+      </HBox>
+      <Label fx:id="inputNumberMaxLabel" layoutX="41.0" layoutY="612.0" text="0/128" />
+      <HBox layoutX="394.0" layoutY="620.0">
+         <children>
+            <Label layoutX="474.0" layoutY="612.0" text="操作人：" />
+            <Label fx:id="operatorLabel" prefWidth="80.0" text="Label" />
          </children>
       </HBox>
    </children>

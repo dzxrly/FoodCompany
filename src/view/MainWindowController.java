@@ -297,6 +297,12 @@ public class MainWindowController {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    } else if (currentSelectedItem.getValue().equals("考勤管理")) {
+                        try {
+                            showInsidePane("AttendanceManagePane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         mainUI.getChildren().remove(currentNode); //清空主面板
                     }

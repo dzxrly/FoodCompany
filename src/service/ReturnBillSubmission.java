@@ -10,28 +10,27 @@ import org.hibernate.query.Query;
 
 public class ReturnBillSubmission {
 
-    public int submitReturnBill(int stuffNumber,int customerId,int orderId,String note,int isQuality){
+    public int submitReturnBill(int stuffNumber, int customerId, int orderId, String note, int isQuality) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
-        ReturnBill rb=new ReturnBill();
+        ReturnBill rb = new ReturnBill();
         rb.setStuffNumber(stuffNumber);
         rb.setCustomerId(customerId);
         rb.setOrderId(orderId);
         rb.setNote(note);
         rb.setIsQuality(isQuality);
-        int ans=0;
-        try{
-            tx=session.beginTransaction();
+        int ans = 0;
+        try {
+            tx = session.beginTransaction();
             session.save(rb);
             tx.commit();
-            ans=1;//1表示提交成功
+            ans = 1;//1表示提交成功
             System.out.println("_____________Successful———————————");
-        }catch (RuntimeException e){
-            ans=0;//0表示提交失败
+        } catch (RuntimeException e) {
+            ans = 0;//0表示提交失败
             System.out.println("_____________Error———————————");
             tx.rollback();
-        }
-        finally {
+        } finally {
             session.close();
             return ans;
         }
