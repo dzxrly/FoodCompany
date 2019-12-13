@@ -35,5 +35,6 @@
         <mapping resource="model/ReturnBill.hbm.xml"/>
         <mapping resource="model/Income.hbm.xml"/>
         <mapping resource="model/Payment.hbm.xml"/>
+        <mapping resource="model/ReturnRecord.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
