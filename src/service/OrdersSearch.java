@@ -79,33 +79,42 @@ public class OrdersSearch {
 
     }
 
-    public List searchCustomerAndOrder(String text) {
+    public CustomerOrder searchCustomerAndOrder(String text) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         String hql = "";
         List list = null;
-
+        CustomerOrder cto = new CustomerOrder();
         try {
             hql = "select o.orderId,c.personalName,c.companyName,c.number,c.level,c.address,c.email,c.phoneNumber,c.type,o.orderType,o.endDate,o.totalSum,o.orderState,o.paymentState,o.stuffNumber from Orders as o,Customer as c where o.customerPhone = c.phoneNumber and o.orderId = " + text;
             Query query = session.createQuery(hql);
             list = query.list();
-//            CustomerOrder cto = new CustomerOrder();
-//            Object[] co = (Object[]) list.get(0);
-//            cto.setOrderId((int) co[0]);
-//            cto.setPersonalName((String) co[1]);
-//            cto.setCompanyName((String) co[2]);
-//            cto.setNumber((int) co[3]);
-//            cto.setLevel((int) co[4]);
-//            cto.setEmail((String) co[5]);
-//            cto.setPersonalName((String) co[6]);
-//            cto.setType((int) co[7]);
+
+            Object[] co = (Object[]) list.get(0);
+
+            cto.setOrderId((int) co[0]);
+            cto.setPersonalName((String) co[1]);
+            cto.setCompanyName((String) co[2]);
+            cto.setNumber((int) co[3]);
+            cto.setLevel((int) co[4]);
+            cto.setAddress((String) co[5]);
+            cto.setEmail((String) co[6]);
+            cto.setPhoneNumber((String) co[7]);
+            cto.setType((int) co[8]);
+            cto.setOrderType((int) co[9]);
+            cto.setEndDate((String) co[10]);
+            cto.setTotalSum((double) co[11]);
+            cto.setOrderState((int) co[12]);
+            cto.setPaymentState((int) co[13]);
+            cto.setStuffNumber((int) co[14]);
+
 //            System.out.println("_____________" + cto + "________________");
         } catch (RuntimeException e) {
             System.out.println("_____________________________Can not search___________________________");
             throw e;
         } finally {
             session.close();
-            return list;
+            return cto;
         }
     }
 }
