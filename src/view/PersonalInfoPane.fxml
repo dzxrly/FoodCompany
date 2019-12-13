@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PersonalInfoPaneController">
+   <children>
+      <VBox alignment="CENTER" layoutX="27.0" layoutY="171.0" spacing="5.0">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="132.0" fitWidth="94.0" layoutX="27.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="uploadBtn" layoutX="36.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleUploadBtn" text="照片上传" />
+         </children>
+      </VBox>
+      <Label layoutX="172.0" layoutY="14.0" text="个人信息">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <VBox layoutX="148.0" layoutY="51.0" prefHeight="399.0" prefWidth="221.0" spacing="5.0">
+         <children>
+            <Label layoutX="130.0" layoutY="54.0" prefWidth="70.0" text="员工编号：" />
+            <Label fx:id="stuffLabel" layoutX="144.0" layoutY="77.0" text="Label" />
+            <Label layoutX="124.0" layoutY="106.0" prefWidth="70.0" text="身份证号：" />
+            <Label fx:id="idCardNumberLabel" layoutX="144.0" layoutY="129.0" text="Label" />
+            <Label layoutX="124.0" layoutY="160.0" prefWidth="70.0" text="员工权限：" />
+            <Label fx:id="stuffLevelLabel" layoutX="144.0" layoutY="192.0" text="Label" />
+            <Label text="性别：" />
+            <ComboBox fx:id="genderComboBox" prefWidth="150.0" />
+            <Label layoutX="124.0" layoutY="216.0" prefWidth="70.0" text="员工姓名：" />
+            <TextField fx:id="stuffNameText" />
+            <Label text="联系方式：" />
+            <TextField fx:id="phoneText" />
+            <Label text="住址：" />
+            <TextField fx:id="addressText" />
+            <Label text="邮箱：" />
+            <TextField fx:id="emailText" />
+            <HBox spacing="5.0">
+               <children>
+                  <Button fx:id="beginChangeBtn" layoutX="75.0" layoutY="446.0" mnemonicParsing="false" onAction="#handleBeginChange" text="修改信息" />
+                  <Button fx:id="changePWBtn" layoutX="173.0" layoutY="446.0" mnemonicParsing="false" onAction="#handleChangePW" text="修改密码" />
+                  <Button fx:id="saveBtn" layoutX="265.0" layoutY="446.0" mnemonicParsing="false" onAction="#handleSaveBtn" text="保存修改" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

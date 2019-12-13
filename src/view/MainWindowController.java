@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import service.AddImageForComponent;
 import service.PropertiesOperation;
 
@@ -323,6 +326,23 @@ public class MainWindowController {
         currentNode = (Node) anchorPane;
     }
 
+    private void showInfoPane() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("PersonalInfoPane.fxml"));
+            AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
+            new JMetro(scene, Style.LIGHT);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("个人信息");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void handleExit() {
         System.exit(-1);
@@ -330,7 +350,7 @@ public class MainWindowController {
 
     @FXML
     private void handleInfo() {
-        //TODO
+        showInfoPane();
     }
 
     @FXML
