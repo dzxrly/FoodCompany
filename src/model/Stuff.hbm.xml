@@ -28,8 +28,6 @@
         <property name="phoneNumber" column="phoneNumber" type="java.lang.String" length="20"></property>
         <property name="email" column="email" type="java.lang.String" length="100"></property>
         <property name="type" column="type" type="java.lang.Integer" length="11"></property>
-
-
-
+        <property name="gender" column="gender" type="java.lang.Integer" length="11"></property>
     </class>
 </hibernate-mapping>
