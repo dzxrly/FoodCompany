@@ -9,8 +9,7 @@ import javafx.beans.property.StringProperty;
 public class Logistics {
     private IntegerProperty logisticsId = new SimpleIntegerProperty();
     private StringProperty logisticsNumber = new SimpleStringProperty();
-    //物流类型0为普通陆运 1为海运 2为空运
-    private IntegerProperty logisticsType = new SimpleIntegerProperty();
+    private IntegerProperty logisticsType = new SimpleIntegerProperty();//物流类型0为普通陆运 1为海运 2为空运
     private StringProperty companyName = new SimpleStringProperty();
     private StringProperty deliveryDate = new SimpleStringProperty();
     private StringProperty destination = new SimpleStringProperty();

@@ -35,8 +35,6 @@ public class CustomerUpdate {
             query.setString("phoneNumber", phoneNumber);
             query.setInteger("number",number);
             query.executeUpdate();
-
-
             tx.commit();
             ans=1;//1表示更新成功
         } catch (RuntimeException e) {
