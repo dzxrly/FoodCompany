@@ -11,6 +11,19 @@ public class ReturnBill {
     private IntegerProperty customerId = new SimpleIntegerProperty();
     private IntegerProperty orderId= new SimpleIntegerProperty();
     private StringProperty note = new SimpleStringProperty();
+    private  IntegerProperty isQuality = new SimpleIntegerProperty();//0 表示是质量问题 1 表示不是质量问题
+
+    public int getIsQuality() {
+        return isQuality.get();
+    }
+
+    public IntegerProperty isQualityProperty() {
+        return isQuality;
+    }
+
+    public void setIsQuality(int isQuality) {
+        this.isQuality.set(isQuality);
+    }
 
     public int getReturnId() {
         return returnId.get();
@@ -80,6 +93,7 @@ public class ReturnBill {
                 ", customerId=" + customerId +
                 ", orderId=" + orderId +
                 ", note=" + note +
+                ", isQuality=" + isQuality +
                 '}';
     }
 }

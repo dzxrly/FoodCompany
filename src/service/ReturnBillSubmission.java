@@ -10,7 +10,7 @@ import org.hibernate.query.Query;
 
 public class ReturnBillSubmission {
 
-    public int submitReturnBill(int stuffNumber,int customerId,int orderId,String note){
+    public int submitReturnBill(int stuffNumber,int customerId,int orderId,String note,int isQuality){
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         ReturnBill rb=new ReturnBill();
@@ -18,6 +18,7 @@ public class ReturnBillSubmission {
         rb.setCustomerId(customerId);
         rb.setOrderId(orderId);
         rb.setNote(note);
+        rb.setIsQuality(isQuality);
         int ans=0;
         try{
             tx=session.beginTransaction();

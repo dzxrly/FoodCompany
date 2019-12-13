@@ -24,5 +24,6 @@
         <property name="customerId" column="customerId" type="java.lang.Integer" length="11"></property>
         <property name="orderId" column="orderId" type="java.lang.Integer" length="11"></property>
         <property name="note" column="note" type="java.lang.String" length="255"></property>
+        <property name="isQuality" column="isQuality" type="java.lang.Integer" length="11"></property>
     </class>
 </hibernate-mapping>
