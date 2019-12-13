@@ -157,13 +157,12 @@ public class OrdersSubmission {
                 Double t = (Double) ob;//t是 id为 gd[i].getGoodsId的 单位时间生产数量
                 Object ob1 = (Object) templist1.get(0);
                 Integer stocks = (Integer) ob1;
-//                time2 = time2 + (gd[i].getPayNumber() - stocks) / t;
                 if (stocks < gd[i].getPayNumber()) {
                     time = time + (gd[i].getPayNumber() - stocks) / t;
                 }
             }
             time=Math.ceil(time/24);
-            System.out.println(time);
+//            System.out.println(time);
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date date1 = sdf.parse(endDate);
