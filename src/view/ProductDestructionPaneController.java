@@ -2,6 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import service.AddImageForComponent;
 
 public class ProductDestructionPaneController {
     @FXML
@@ -29,6 +30,8 @@ public class ProductDestructionPaneController {
 
     @FXML
     private void initialize() {
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
         //TODO
     }
 

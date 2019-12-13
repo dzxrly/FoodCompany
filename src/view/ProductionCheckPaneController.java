@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import service.AddImageForComponent;
 import service.DoubleFormatService;
 
 import java.util.regex.Pattern;
@@ -38,6 +39,8 @@ public class ProductionCheckPaneController {
 
     @FXML
     private void initialize() {
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
         passRateLabel.setText("");
         passRateLabel.setTextFill(Color.BLACK);
         checkNumberText.textProperty().addListener(new ChangeListener<String>() {

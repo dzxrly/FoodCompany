@@ -3,6 +3,7 @@ package view;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import service.AddImageForComponent;
 
 public class ProductionDistributionPaneController {
     @FXML
@@ -40,6 +41,8 @@ public class ProductionDistributionPaneController {
 
     @FXML
     private void initialize() {
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
         //TODO
     }
 
