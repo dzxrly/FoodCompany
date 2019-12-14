@@ -4,12 +4,13 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.CustomerOrder;
-import model.Orders;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.*;
 import org.hibernate.annotations.FilterDef;
 import service.*;
 
@@ -54,8 +55,6 @@ public class PaymentForCashOrdersController {
     private TextField hasPaiedAllCostText;
     @FXML
     private TextField bankCardNumberText;
-    @FXML
-    private ComboBox payStatus;
 
     private String operator;
     private String operatorNumber;
@@ -63,6 +62,7 @@ public class PaymentForCashOrdersController {
     private Double prePayment = 0.0;
     private Double resPayment = 0.0;
     private Double totalPayment = 0.0;
+    private ObservableList<GoodsInfoWithPriceInfo> goodsInfoWithPriceInfos = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
@@ -73,6 +73,24 @@ public class PaymentForCashOrdersController {
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         upload.setGraphic((new AddImageForComponent("img/upload14x14.png", 14)).getImageView());
         printBtn.setGraphic((new AddImageForComponent("img/download.png", 14)).getImageView());
+
+        TableColumn goodsIdCol = new TableColumn("编号");
+        goodsIdCol.setSortable(true);
+        goodsIdCol.setCellValueFactory(new PropertyValueFactory<>("goodsNumber"));
+        TableColumn goodsNameCol = new TableColumn("商品名");
+        goodsNameCol.setSortable(false);
+        goodsNameCol.setCellValueFactory(new PropertyValueFactory<>("goodsName"));
+        TableColumn goodsNumberCol = new TableColumn("购买数量");
+        goodsNumberCol.setSortable(true);
+        goodsNumberCol.setCellValueFactory(new PropertyValueFactory<>("orderQuantity"));
+        TableColumn goodsPriceCol = new TableColumn("单价");
+        goodsPriceCol.setSortable(true);
+        goodsPriceCol.setCellValueFactory(new PropertyValueFactory<>("goodsPrice"));
+        TableColumn totalPriceCol = new TableColumn("总价格");
+        totalPriceCol.setSortable(true);
+        totalPriceCol.setCellValueFactory(new PropertyValueFactory<>("goodsTotalPrice"));
+        goodsList.getColumns().addAll(goodsIdCol, goodsNameCol, goodsNumberCol, goodsPriceCol, totalPriceCol);
+        goodsList.setItems(goodsInfoWithPriceInfos);
     }
 
     @FXML
@@ -103,6 +121,7 @@ public class PaymentForCashOrdersController {
     }
 
     private void clearAll() {
+        goodsInfoWithPriceInfos.clear();
         currentOrder = null;
         prePayment = 0.0;
         resPayment = 0.0;
@@ -131,8 +150,19 @@ public class PaymentForCashOrdersController {
                 @Override
                 protected Integer call() throws Exception {
                     OrdersSearch ordersSearch = new OrdersSearch();
+                    GoodsSearch goodsSearch = new GoodsSearch();
                     currentOrder = ordersSearch.searchCustomerAndOrder(orderNumberInput.getText());
                     if (currentOrder != null) {
+                        if (currentOrder.getOrderType() == 0) {
+                            List<OrderSpotGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "0");
+                            for (int i = 0; i < list.size(); i++)
+                                goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber()))));
+                        } else {
+                            List<OrderBookGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "1");
+                            for (int i = 0; i < list.size(); i++)
+                                goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber()))));
+                        }
+
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
@@ -201,7 +231,7 @@ public class PaymentForCashOrdersController {
                                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                                 alert.setTitle("确认");
                                 alert.setHeaderText("当前提交的是订单预付款记录");
-                                alert.setContentText("是否确认提交？提交后无法更改");
+                                alert.setContentText("是否确认提交？提交后无法更改\n若要提交全款记录请保证\n“应缴纳全款”与“已缴纳全款”输入款中的内容相同");
                                 Optional<ButtonType> optionalButtonType = alert.showAndWait();
                                 int flag = 0;
                                 if (optionalButtonType.get() == ButtonType.OK) {
@@ -223,7 +253,7 @@ public class PaymentForCashOrdersController {
                                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                                 alert.setTitle("确认");
                                 alert.setHeaderText("当前提交的是订单全款记录");
-                                alert.setContentText("是否确认提交？提交后无法更改，若要提交预付款记录请清空“已缴纳全款”输入框！");
+                                alert.setContentText("是否确认提交？提交后无法更改\n若要提交预付款记录请清空“已缴纳全款”输入框！");
                                 Optional<ButtonType> optionalButtonType = alert.showAndWait();
                                 int flag = 0;
                                 if (optionalButtonType.get() == ButtonType.OK) {
@@ -246,7 +276,7 @@ public class PaymentForCashOrdersController {
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("确认");
                             alert.setHeaderText("当前提交的是订单尾款记录");
-                            alert.setContentText("是否确认提交？提交后无法更改，若要提交全款记录请保证“应缴纳全款”与“已缴纳全款”输入款中的内容相同！");
+                            alert.setContentText("是否确认提交？提交后无法更改！");
                             Optional<ButtonType> optionalButtonType = alert.showAndWait();
                             int flag = 0;
                             if (optionalButtonType.get() == ButtonType.OK) {

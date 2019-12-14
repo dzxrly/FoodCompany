@@ -62,7 +62,7 @@ public class OrdersSearch {
         String hql = "";
         List list = null;
         try {
-            if (orderType == "0") {//0 现货订单的查询
+            if (orderType.equals("0")) {//0 现货订单的查询
                 hql = "from OrderSpotGoods where orderId = " + orderId;
             } else {//1 预定订单的查询
                 hql = "from OrderBookGoods where orderId = " + orderId;

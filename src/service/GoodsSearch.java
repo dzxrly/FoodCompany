@@ -43,9 +43,9 @@ public class GoodsSearch {
         }
     }
 
-    public double searchExactGoods(String goodsId){
+    public Double searchExactGoods(String goodsId){
         Session session= HibernateUtils.openSession();
-        double price = 0.0;
+        Double price = 0.0;
         String hql="";
 
         try{
