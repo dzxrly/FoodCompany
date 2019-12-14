@@ -23,7 +23,12 @@
             </Label>
             <Label layoutX="63.0" layoutY="142.0" prefWidth="80.0" text="账单类型：" />
             <ComboBox fx:id="billTypeComboBox" layoutX="59.0" layoutY="173.0" prefWidth="120.0" />
-            <Label layoutX="63.0" layoutY="210.0" text="订单编号：" />
+            <HBox>
+               <children>
+                  <Label layoutX="360.0" layoutY="237.0" text="订单编号：" />
+                  <Label fx:id="warningInfoLabel" alignment="CENTER" layoutX="447.0" layoutY="241.0" text="Label" />
+               </children>
+            </HBox>
             <TextField fx:id="billNumberText" layoutX="63.0" layoutY="235.0" prefWidth="200.0" />
             <Label fx:id="addBill_incomingOrOutcomingLabel" layoutX="59.0" layoutY="285.0" text="收入金额：" />
             <TextField fx:id="priceText" layoutX="50.0" layoutY="310.0" prefWidth="200.0" />

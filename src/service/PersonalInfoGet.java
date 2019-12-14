@@ -44,7 +44,7 @@ public class PersonalInfoGet {
             tx.commit();
         } catch (RuntimeException e) {
             tx.rollback();
-            state=1;
+            state = 1;
             System.out.println("-------cannot update-------");
             throw e;
         } finally {
@@ -61,7 +61,7 @@ public class PersonalInfoGet {
         Transaction tx = null;
         Stuff sf = new Stuff();
         try {
-            tx=session.beginTransaction();
+            tx = session.beginTransaction();
             sf = session.get(Stuff.class, stuffNumber);
             if (!sf.getPassword().equals(oldPsw)) state = 1;
             else sf.setPassword(newPsw);

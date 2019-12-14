@@ -65,7 +65,7 @@ public class BillSubmission {
         try {
             hql = "from Orders where orderId = " + orderId;
             List list = session.createQuery(hql).list();
-            if (list.toString() != "[]" && list != null) {//表示存在这个订单号 创建失败 返回最大的订单号 + 1
+            if (!list.toString().equals("[]") && list != null) {//表示存在这个订单号 创建失败 返回最大的订单号 + 1
                 hql = "select max(orderId) from Orders";
                 List list1 = session.createQuery(hql).list();
                 Object ob = (Object) list1.get(0);

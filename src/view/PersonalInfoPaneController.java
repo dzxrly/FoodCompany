@@ -8,16 +8,14 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 import model.Stuff;
+import service.AlertDialog;
 import service.PersonalInfoGet;
 import service.PropertiesOperation;
 
@@ -54,6 +52,7 @@ public class PersonalInfoPaneController {
     private ObservableList<String> genderOptions = FXCollections.observableArrayList("男", "女");
     private Stuff currentStuff = new Stuff();
     private PropertiesOperation propertiesOperation = new PropertiesOperation();
+    private PersonalInfoGet personalInfoGet = new PersonalInfoGet();
 
     @FXML
     private void initialize() {
@@ -92,14 +91,21 @@ public class PersonalInfoPaneController {
 
     @FXML
     private void handleSaveBtn() {
-        beginChangeBtn.setVisible(true);
-        changePWBtn.setVisible(true);
-        saveBtn.setVisible(false);
-        stuffNameText.setDisable(true);
-        genderComboBox.setDisable(true);
-        phoneText.setDisable(true);
-        addressText.setDisable(true);
-        emailText.setDisable(true);
+        if (!stuffNameText.getText().equals("") && !phoneText.getText().equals("") && !addressText.getText().equals("") && !emailText.getText().equals("")) {
+            service_upload.restart();
+            beginChangeBtn.setVisible(true);
+            changePWBtn.setVisible(true);
+            saveBtn.setVisible(false);
+            stuffNameText.setDisable(true);
+            genderComboBox.setDisable(true);
+            phoneText.setDisable(true);
+            addressText.setDisable(true);
+            emailText.setDisable(true);
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "失败", "个人信息不能为空！", "请输入个人信息！");
+            alertDialog.showAlert();
+        }
         //TODO
     }
 
@@ -131,7 +137,6 @@ public class PersonalInfoPaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-                    PersonalInfoGet personalInfoGet = new PersonalInfoGet();
                     currentStuff = personalInfoGet.stuffInfoView(Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber")));
                     Platform.runLater(new Runnable() {
                         @Override
@@ -146,6 +151,34 @@ public class PersonalInfoPaneController {
                             emailText.setText(currentStuff.getEmail());
                         }
                     });
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_upload = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int flag = personalInfoGet.stuffInfoUpdate(currentStuff.getNumber(), genderComboBox.getSelectionModel().getSelectedIndex(), stuffNameText.getText(), phoneText.getText(), addressText.getText(), emailText.getText());
+                    if (flag == 0) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "个人信息已修改!", "个人信息已修改！");
+                            alertDialog.showAlert();
+                            propertiesOperation.writeProperties("userConfig.properties", "LoginUserName", stuffNameText.getText());
+                            service_search.restart();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "失败", "个人信息修改失败！", "请重新修改！");
+                            alertDialog.showAlert();
+                        });
+                    }
                     return null;
                 }
             };

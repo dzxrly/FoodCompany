@@ -312,6 +312,12 @@ public class MainWindowController {
                 }
             }
         });
+
+
+    }
+
+    private void reReadPropertiesFile() {
+        System.out.println("!!!");
     }
 
     //显示内部页面
