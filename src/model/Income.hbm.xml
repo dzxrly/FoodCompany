@@ -26,5 +26,6 @@
         <property name="incomeItem" column="incomeItem" type="java.lang.String" length="255"></property>
         <property name="payCardNumber" column="payCardNumber" type="java.lang.String" length="20"></property>
         <property name="orderId" column="orderId" type="java.lang.Integer" length="11"></property>
+
     </class>
 </hibernate-mapping>
