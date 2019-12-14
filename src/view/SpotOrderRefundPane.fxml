@@ -91,21 +91,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label layoutX="585.0" layoutY="85.0" prefHeight="24.0" prefWidth="130.0" text="退款通过时间：">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="orderTimeLabel" layoutX="711.0" layoutY="90.0" text="Label">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox>
-               <children>
-                  <Label layoutX="71.0" layoutY="248.0" prefWidth="130.0" text="销售部操作人：">
+                  <Label layoutX="71.0" layoutY="248.0" prefWidth="150.0" text="销售部操作人ID：">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -119,7 +105,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label layoutX="68.0" layoutY="321.0" prefWidth="130.0" text="已缴纳预付款：">
+                  <Label layoutX="68.0" layoutY="321.0" prefWidth="150.0" text="已缴纳预付款：">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -142,12 +128,12 @@
             </HBox>
             <HBox>
                <children>
-                  <Label layoutX="68.0" layoutY="369.0" prefWidth="130.0" text="已缴纳的尾款：">
+                  <Label layoutX="68.0" layoutY="369.0" prefWidth="150.0" text="已缴纳的尾款：">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="hsaPayResPaymentLabel" layoutX="189.0" layoutY="374.0" prefHeight="15.0" prefWidth="120.0" text="Label">
+                  <Label fx:id="hasPayResPaymentLabel" layoutX="189.0" layoutY="374.0" prefHeight="15.0" prefWidth="120.0" text="Label">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -165,7 +151,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label layoutX="68.0" layoutY="394.0" prefHeight="24.0" prefWidth="130.0" text="合计：">
+                  <Label layoutX="68.0" layoutY="394.0" prefHeight="24.0" prefWidth="150.0" text="合计：">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

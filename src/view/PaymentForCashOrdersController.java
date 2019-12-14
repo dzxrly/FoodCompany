@@ -74,6 +74,7 @@ public class PaymentForCashOrdersController {
         upload.setGraphic((new AddImageForComponent("img/upload14x14.png", 14)).getImageView());
         printBtn.setGraphic((new AddImageForComponent("img/download.png", 14)).getImageView());
 
+
         TableColumn goodsIdCol = new TableColumn("编号");
         goodsIdCol.setSortable(true);
         goodsIdCol.setCellValueFactory(new PropertyValueFactory<>("goodsNumber"));
@@ -91,6 +92,8 @@ public class PaymentForCashOrdersController {
         totalPriceCol.setCellValueFactory(new PropertyValueFactory<>("goodsTotalPrice"));
         goodsList.getColumns().addAll(goodsIdCol, goodsNameCol, goodsNumberCol, goodsPriceCol, totalPriceCol);
         goodsList.setItems(goodsInfoWithPriceInfos);
+
+        clearAll();
     }
 
     @FXML
@@ -152,7 +155,7 @@ public class PaymentForCashOrdersController {
                     OrdersSearch ordersSearch = new OrdersSearch();
                     GoodsSearch goodsSearch = new GoodsSearch();
                     currentOrder = ordersSearch.searchCustomerAndOrder(orderNumberInput.getText());
-                    if (currentOrder != null) {
+                    if (currentOrder != null && (currentOrder.getPaymentState() != 3 || currentOrder.getPaymentState() != 4)) {
                         if (currentOrder.getOrderType() == 0) {
                             List<OrderSpotGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "0");
                             for (int i = 0; i < list.size(); i++)
@@ -208,7 +211,7 @@ public class PaymentForCashOrdersController {
                     } else {
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();
-                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有找到订单！", "请确认订单是否正确！");
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有找到订单或订单已退款！", "请确认订单是否正确！");
                             alertDialog.showAlert();
                         });
                     }
