@@ -145,52 +145,61 @@ public class SpotOrderRefundPaneController {
                 protected Integer call() throws Exception {
                     OrdersSearch ordersSearch = new OrdersSearch();
                     currentOrder = ordersSearch.searchCustomerAndOrder(orderNumberInput.getText());
-                    if (currentOrder != null && currentOrder.getPaymentState() == 3) {
-                        CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                orderTypeLabel.setText(customerIndexAndStringSwitch.returnOrderTypeByIndex(currentOrder.getOrderType()));
-                                orderNumberLabel.setText(String.valueOf(currentOrder.getOrderId()));
-                                customerNumberLabel.setText(String.valueOf(currentOrder.getNumber()));
-                                if (currentOrder.getCompanyName().equals(""))
-                                    customerNameLabel.setText(currentOrder.getPersonalName());
-                                else customerNameLabel.setText(currentOrder.getCompanyName());
-                                customerLevelLabel.setText(customerIndexAndStringSwitch.returnCustomerLevelByIndex(currentOrder.getLevel()));
-                                fianceDepOperatorLabel.setText(String.valueOf(currentOrder.getStuffNumber()));
-                                if (currentOrder.getPaymentState() == 0) {
-                                    needPayPrepayment = 0.0;
-                                    needPayResPayment = 0.0;
-                                    needTotalCost = 0.0;
-                                    hasPayPrepaymentLabel.setText("0.0");
-                                    hasPayResPaymentLabel.setText("0.0");
-                                    totalCostLabel.setText("0.0");
-                                    needPayPrepaymentText.setDisable(true);
-                                    needPayResPaymentText.setDisable(true);
-                                    needPayTotalCostText.setDisable(true);
-                                } else if (currentOrder.getPaymentState() == 1) {
-                                    needPayPrepayment = customerIndexAndStringSwitch.getPrepaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
-                                    needPayResPayment = 0.0;
-                                    needTotalCost = 0.0;
-                                    hasPayPrepaymentLabel.setText(String.valueOf(needPayPrepayment));
-                                    hasPayResPaymentLabel.setText("0.0");
-                                    totalCostLabel.setText("0.0");
-                                    needPayPrepaymentText.setDisable(false);
-                                    needPayResPaymentText.setDisable(true);
-                                    needPayTotalCostText.setDisable(true);
-                                } else {
-                                    needPayPrepayment = customerIndexAndStringSwitch.getPrepaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
-                                    needPayResPayment = customerIndexAndStringSwitch.getRespaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
-                                    needTotalCost = currentOrder.getTotalSum();
-                                    hasPayPrepaymentLabel.setText(String.valueOf(needPayPrepayment));
-                                    hasPayResPaymentLabel.setText(String.valueOf(needPayResPayment));
-                                    totalCostLabel.setText(String.valueOf(needTotalCost));
-                                    needPayPrepaymentText.setDisable(false);
-                                    needPayResPaymentText.setDisable(false);
-                                    needPayTotalCostText.setDisable(false);
+                    if (currentOrder != null) {
+                        RefundQuestCheck refundQuestCheck = new RefundQuestCheck(currentOrder.getOrderId());
+                        if (refundQuestCheck.getCheckRes()) {
+                            CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    orderTypeLabel.setText(customerIndexAndStringSwitch.returnOrderTypeByIndex(currentOrder.getOrderType()));
+                                    orderNumberLabel.setText(String.valueOf(currentOrder.getOrderId()));
+                                    customerNumberLabel.setText(String.valueOf(currentOrder.getNumber()));
+                                    if (currentOrder.getCompanyName().equals(""))
+                                        customerNameLabel.setText(currentOrder.getPersonalName());
+                                    else customerNameLabel.setText(currentOrder.getCompanyName());
+                                    customerLevelLabel.setText(customerIndexAndStringSwitch.returnCustomerLevelByIndex(currentOrder.getLevel()));
+                                    fianceDepOperatorLabel.setText(String.valueOf(currentOrder.getStuffNumber()));
+                                    if (currentOrder.getPaymentState() == 0) {
+                                        needPayPrepayment = 0.0;
+                                        needPayResPayment = 0.0;
+                                        needTotalCost = 0.0;
+                                        hasPayPrepaymentLabel.setText("0.0");
+                                        hasPayResPaymentLabel.setText("0.0");
+                                        totalCostLabel.setText("0.0");
+                                        needPayPrepaymentText.setDisable(true);
+                                        needPayResPaymentText.setDisable(true);
+                                        needPayTotalCostText.setDisable(true);
+                                    } else if (currentOrder.getPaymentState() == 1) {
+                                        needPayPrepayment = customerIndexAndStringSwitch.getPrepaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
+                                        needPayResPayment = 0.0;
+                                        needTotalCost = 0.0;
+                                        hasPayPrepaymentLabel.setText(String.valueOf(needPayPrepayment));
+                                        hasPayResPaymentLabel.setText("0.0");
+                                        totalCostLabel.setText("0.0");
+                                        needPayPrepaymentText.setDisable(false);
+                                        needPayResPaymentText.setDisable(true);
+                                        needPayTotalCostText.setDisable(true);
+                                    } else {
+                                        needPayPrepayment = customerIndexAndStringSwitch.getPrepaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
+                                        needPayResPayment = customerIndexAndStringSwitch.getRespaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
+                                        needTotalCost = currentOrder.getTotalSum();
+                                        hasPayPrepaymentLabel.setText(String.valueOf(needPayPrepayment));
+                                        hasPayResPaymentLabel.setText(String.valueOf(needPayResPayment));
+                                        totalCostLabel.setText(String.valueOf(needTotalCost));
+                                        needPayPrepaymentText.setDisable(false);
+                                        needPayResPaymentText.setDisable(false);
+                                        needPayTotalCostText.setDisable(false);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        } else {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "无法退款！", "订单不存在或已退款！");
+                                alertDialog.showAlert();
+                            });
+                        }
                     } else {
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();

@@ -135,20 +135,29 @@ public class OrderCancelPaneController {
                     List<Orders> list = ordersSearch.OrderFuzzySearch(0, orderNumberInput.getText());
                     if (!list.toString().equals("[]") && (list != null)) {
                         currtenOrder = list.get(0);
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                orderNumberLabel.setText(String.valueOf(currtenOrder.getOrderId()));
-                                CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
-                                orderTypeLabel.setText(customerIndexAndStringSwitch.returnCustomerTypeByIndex(currtenOrder.getOrderType()));
-                                statusLabel.setText(customerIndexAndStringSwitch.returnStatusByIndex(currtenOrder.getOrderState()));
-                                if (!currtenOrder.getCompanyName().equals(""))
-                                    customerNameLabel.setText(currtenOrder.getCompanyName());
-                                else customerNameLabel.setText(currtenOrder.getCustomerName());
-                                customerAddressLabel.setText(currtenOrder.getCustomerAddress());
-                                customerPhoneLabel.setText(currtenOrder.getCustomerPhone());
-                            }
-                        });
+                        RefundQuestCheck refundQuestCheck = new RefundQuestCheck(currtenOrder.getOrderId());
+                        if (refundQuestCheck.getCheckRes()) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    orderNumberLabel.setText(String.valueOf(currtenOrder.getOrderId()));
+                                    CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
+                                    orderTypeLabel.setText(customerIndexAndStringSwitch.returnCustomerTypeByIndex(currtenOrder.getOrderType()));
+                                    statusLabel.setText(customerIndexAndStringSwitch.returnStatusByIndex(currtenOrder.getOrderState()));
+                                    if (!currtenOrder.getCompanyName().equals(""))
+                                        customerNameLabel.setText(currtenOrder.getCompanyName());
+                                    else customerNameLabel.setText(currtenOrder.getCustomerName());
+                                    customerAddressLabel.setText(currtenOrder.getCustomerAddress());
+                                    customerPhoneLabel.setText(currtenOrder.getCustomerPhone());
+                                }
+                            });
+                        }else {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有找到订单或订单已退款！", "请确认订单号是否正确！");
+                                alertDialog.showAlert();
+                            });
+                        }
                     } else {
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();

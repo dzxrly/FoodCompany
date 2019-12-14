@@ -154,60 +154,70 @@ public class PaymentForCashOrdersController {
                 protected Integer call() throws Exception {
                     OrdersSearch ordersSearch = new OrdersSearch();
                     GoodsSearch goodsSearch = new GoodsSearch();
+                    OrderRefundSubmission orderRefundSubmission = new OrderRefundSubmission();
                     currentOrder = ordersSearch.searchCustomerAndOrder(orderNumberInput.getText());
-                    if (currentOrder != null && (currentOrder.getPaymentState() != 3 || currentOrder.getPaymentState() != 4)) {
-                        if (currentOrder.getOrderType() == 0) {
-                            List<OrderSpotGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "0");
-                            for (int i = 0; i < list.size(); i++)
-                                goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber()))));
-                        } else {
-                            List<OrderBookGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "1");
-                            for (int i = 0; i < list.size(); i++)
-                                goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber()))));
-                        }
-
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
-                                orderTypeLabel.setText(customerIndexAndStringSwitch.returnOrderTypeByIndex(currentOrder.getOrderType()));
-                                orderNumberLabel.setText(String.valueOf(currentOrder.getOrderId()));
-                                customerNumberLabel.setText(String.valueOf(currentOrder.getNumber()));
-                                if (!currentOrder.getCompanyName().equals(""))
-                                    customerNameLabel.setText(currentOrder.getCompanyName());
-                                else customerNameLabel.setText(currentOrder.getPersonalName());
-                                customerLevelLabel.setText(customerIndexAndStringSwitch.returnCustomerLevelByIndex(currentOrder.getLevel()));
-                                prePayment = customerIndexAndStringSwitch.getPrepaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
-                                resPayment = customerIndexAndStringSwitch.getRespaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
-                                totalPayment = currentOrder.getTotalSum();
-                                DoubleFormatService doubleFormatService = new DoubleFormatService();
-                                prepaymentsLabel.setText(doubleFormatService.getSubstringPrice(prePayment, 8));
-                                restPaymentsLabel.setText(doubleFormatService.getSubstringPrice(resPayment, 8));
-                                totalCost.setText(doubleFormatService.getSubstringPrice(totalPayment, 8));
-                                if (currentOrder.getPaymentState() == 0) {
-                                    hasPaiedPrepaymentText.setText(doubleFormatService.getSubstringPrice(prePayment, 8));
-                                    hasPaiedPrepaymentText.setDisable(false);
-                                    hasPaiedRestPaymentText.setText(doubleFormatService.getSubstringPrice(resPayment, 8));
-                                    hasPaiedRestPaymentText.setDisable(false);
-                                    hasPaiedAllCostText.setText(doubleFormatService.getSubstringPrice(totalPayment, 8));
-                                    hasPaiedAllCostText.setDisable(false);
-                                } else if (currentOrder.getPaymentState() == 1) {
-                                    hasPaiedPrepaymentText.setText(doubleFormatService.getSubstringPrice(prePayment, 8));
-                                    hasPaiedPrepaymentText.setDisable(true);
-                                    hasPaiedRestPaymentText.setText(doubleFormatService.getSubstringPrice(resPayment, 8));
-                                    hasPaiedRestPaymentText.setDisable(false);
-                                    hasPaiedAllCostText.setText(doubleFormatService.getSubstringPrice(totalPayment, 8));
-                                    hasPaiedAllCostText.setDisable(false);
-                                } else {
-                                    hasPaiedPrepaymentText.setText(doubleFormatService.getSubstringPrice(prePayment, 8));
-                                    hasPaiedPrepaymentText.setDisable(true);
-                                    hasPaiedRestPaymentText.setText(doubleFormatService.getSubstringPrice(resPayment, 8));
-                                    hasPaiedRestPaymentText.setDisable(true);
-                                    hasPaiedAllCostText.setText(doubleFormatService.getSubstringPrice(totalPayment, 8));
-                                    hasPaiedAllCostText.setDisable(true);
-                                }
+                    if (currentOrder != null) {
+                        RefundQuestCheck refundQuestCheck = new RefundQuestCheck(currentOrder.getOrderId());
+                        if (refundQuestCheck.getCheckRes()) {
+                            if (currentOrder.getOrderType() == 0) {
+                                List<OrderSpotGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "0");
+                                for (int i = 0; i < list.size(); i++)
+                                    goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber()))));
+                            } else {
+                                List<OrderBookGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "1");
+                                for (int i = 0; i < list.size(); i++)
+                                    goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber()))));
                             }
-                        });
+
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
+                                    orderTypeLabel.setText(customerIndexAndStringSwitch.returnOrderTypeByIndex(currentOrder.getOrderType()));
+                                    orderNumberLabel.setText(String.valueOf(currentOrder.getOrderId()));
+                                    customerNumberLabel.setText(String.valueOf(currentOrder.getNumber()));
+                                    if (!currentOrder.getCompanyName().equals(""))
+                                        customerNameLabel.setText(currentOrder.getCompanyName());
+                                    else customerNameLabel.setText(currentOrder.getPersonalName());
+                                    customerLevelLabel.setText(customerIndexAndStringSwitch.returnCustomerLevelByIndex(currentOrder.getLevel()));
+                                    prePayment = customerIndexAndStringSwitch.getPrepaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
+                                    resPayment = customerIndexAndStringSwitch.getRespaymentBySumAndLevel(currentOrder.getTotalSum(), currentOrder.getLevel());
+                                    totalPayment = currentOrder.getTotalSum();
+                                    DoubleFormatService doubleFormatService = new DoubleFormatService();
+                                    prepaymentsLabel.setText(doubleFormatService.getSubstringPrice(prePayment, 8));
+                                    restPaymentsLabel.setText(doubleFormatService.getSubstringPrice(resPayment, 8));
+                                    totalCost.setText(doubleFormatService.getSubstringPrice(totalPayment, 8));
+                                    if (currentOrder.getPaymentState() == 0) {
+                                        hasPaiedPrepaymentText.setText(doubleFormatService.getSubstringPrice(prePayment, 8));
+                                        hasPaiedPrepaymentText.setDisable(false);
+                                        hasPaiedRestPaymentText.setText(doubleFormatService.getSubstringPrice(resPayment, 8));
+                                        hasPaiedRestPaymentText.setDisable(false);
+                                        hasPaiedAllCostText.setText(doubleFormatService.getSubstringPrice(totalPayment, 8));
+                                        hasPaiedAllCostText.setDisable(false);
+                                    } else if (currentOrder.getPaymentState() == 1) {
+                                        hasPaiedPrepaymentText.setText(doubleFormatService.getSubstringPrice(prePayment, 8));
+                                        hasPaiedPrepaymentText.setDisable(true);
+                                        hasPaiedRestPaymentText.setText(doubleFormatService.getSubstringPrice(resPayment, 8));
+                                        hasPaiedRestPaymentText.setDisable(false);
+                                        hasPaiedAllCostText.setText(doubleFormatService.getSubstringPrice(totalPayment, 8));
+                                        hasPaiedAllCostText.setDisable(false);
+                                    } else {
+                                        hasPaiedPrepaymentText.setText(doubleFormatService.getSubstringPrice(prePayment, 8));
+                                        hasPaiedPrepaymentText.setDisable(true);
+                                        hasPaiedRestPaymentText.setText(doubleFormatService.getSubstringPrice(resPayment, 8));
+                                        hasPaiedRestPaymentText.setDisable(true);
+                                        hasPaiedAllCostText.setText(doubleFormatService.getSubstringPrice(totalPayment, 8));
+                                        hasPaiedAllCostText.setDisable(true);
+                                    }
+                                }
+                            });
+                        } else {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有找到订单或订单已退款！", "请确认订单是否正确！");
+                                alertDialog.showAlert();
+                            });
+                        }
                     } else {
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();

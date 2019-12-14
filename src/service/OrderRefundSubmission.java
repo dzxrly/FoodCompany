@@ -61,7 +61,7 @@ public class OrderRefundSubmission {
             if (list.toString() != "[]" && list != null) {//表示订单表里面有这个订单记录 那么就看是否满足退货条件 满足退货条件会在退货表里面生成一条记录
                 String hql1 = "select r.id from ReturnBill r where r.orderId = " + orderId;
                 List list1 = session.createQuery(hql).list();
-                if (list1.toString() != "[]" && list != null) {
+                if (list1.toString().equals("[]") && list != null) {
                     System.out.println("____________________ ReturnBill have the data");
                     ans = 1;//1表示list中有数据 可以进行查询 可以退款
                 } else {

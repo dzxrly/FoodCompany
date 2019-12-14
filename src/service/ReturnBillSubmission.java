@@ -11,7 +11,6 @@ import org.hibernate.query.Query;
 public class ReturnBillSubmission {
 
     public int submitReturnBill(int stuffNumber, int customerId, int orderId, String note, int isQuality) {
-        //!!!!!!!!!!!!!!!!需要将Orders表的payStatement为3
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         ReturnBill rb = new ReturnBill();
