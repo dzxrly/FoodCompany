@@ -12,27 +12,61 @@ public class PersonalInfoGet {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         Stuff sf = new Stuff();
-        try{
+        try {
             sf = session.get(Stuff.class, stuffNumber);
-            System.out.println(sf.getNumber()+" "+sf.getPersonalID());
-        }catch(RuntimeException e){
+            System.out.println(sf.getNumber() + " " + sf.getPersonalID());
+        } catch (RuntimeException e) {
             System.out.println("_____________________________Can not get___________________________");
-            sf=null;
+            sf = null;
             throw e;
-        }finally {
+        } finally {
             session.close();
             return sf;
         }
     }
 
     //个人信息修改（密码和别的信息）返回状态
-    public int stuffInfoUpdate(int gender,String name,String phoneNumber,String address,String email) {
-        int state=0;
-        return state;
+    public int stuffInfoUpdate(int stuffNumber,int gender, String name, String phoneNumber, String address, String email) {
+        //状态码为0表示修改成功 1表示修改失败
+        int state = 0;
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        Stuff sf = new Stuff();
+        try {
+            sf = session.get(Stuff.class, stuffNumber);
+            sf.setGender(gender);
+            sf.setAddress(address);
+            sf.setPersonalName(name);
+            sf.setPhoneNumber(phoneNumber);
+            sf.setEmail(email);
+        } catch (RuntimeException e) {
+            state=1;
+            System.out.println("-------cannot update-------");
+            throw e;
+        } finally {
+            session.close();
+            return state;
+        }
+
     }
 
-    public int stuffUpdatePsw(String newPsw){
-        int state=0;
-        return state;
+    public int stuffUpdatePsw(int stuffNumber,String oldPsw, String newPsw) {
+        //状态码为0表示修改成功，状态码为1表示密码相同
+        int state = 0;
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        Stuff sf = new Stuff();
+        try {
+            sf = session.get(Stuff.class, stuffNumber);
+            if(sf.getPassword().equals(oldPsw)) state=1;
+            else sf.setPassword(newPsw);
+        } catch (RuntimeException e) {
+            System.out.println("----------can not update---------");
+            throw e;
+        } finally {
+            session.close();
+            return state;
+        }
+
     }
 }
