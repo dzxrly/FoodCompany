@@ -42,4 +42,25 @@ public class GoodsSearch {
             return list;
         }
     }
+
+    public double searchExactGoods(String goodsId){
+        Session session= HibernateUtils.openSession();
+        double price = 0.0;
+        String hql="";
+
+        try{
+            hql="select goodsPrice from Goods where goodsId ="+ goodsId;
+            List list = session.createQuery(hql).list();
+            Object ob= (Object) list.get(0);
+
+            price=(double) ob;
+            System.out.println("____________"+ price+"______________");
+        }catch(RuntimeException e){
+            System.out.println("____________________Can not submit_________________");
+            throw e;
+        }finally {
+            session.close();
+            return price;
+        }
+    }
 }

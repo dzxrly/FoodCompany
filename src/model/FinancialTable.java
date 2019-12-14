@@ -1,14 +1,25 @@
 package model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 
 public class FinancialTable {
+
     private IntegerProperty id = new SimpleIntegerProperty();//incomeId或paymentId
     private IntegerProperty type = new SimpleIntegerProperty();//0表示收入 1表示支出
     private DoubleProperty price =new SimpleDoubleProperty();//收入或支出
+    private StringProperty date = new SimpleStringProperty();//日期
+
+    public String getDate() {
+        return date.get();
+    }
+
+    public StringProperty dateProperty() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date.set(date);
+    }
 
     public int getId() {
         return id.get();
@@ -52,6 +63,7 @@ public class FinancialTable {
                 "id=" + id +
                 ", type=" + type +
                 ", price=" + price +
+                ", date=" + date +
                 '}';
     }
 }

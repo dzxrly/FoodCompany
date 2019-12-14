@@ -66,7 +66,6 @@ public class OrdersSearch {
                 hql = "from OrderSpotGoods where orderId = " + orderId;
             } else {//1 预定订单的查询
                 hql = "from OrderBookGoods where orderId = " + orderId;
-
             }
             list = session.createQuery(hql).list();
         } catch (RuntimeException e) {
@@ -76,7 +75,6 @@ public class OrdersSearch {
             session.close();
             return list;
         }
-
     }
 
     public CustomerOrder searchCustomerAndOrder(String text) {
