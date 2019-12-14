@@ -4,9 +4,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.Income;
 import service.AddImageForComponent;
+import service.FinancialSheetSearch;
 
 public class FinancialStatementsPaneCpntroller {
     //财务报表页面控制类
@@ -35,6 +39,7 @@ public class FinancialStatementsPaneCpntroller {
 
     private ObservableList<String> searchTypeOptions = FXCollections.observableArrayList("仅查询收入账单", "仅查询支出账单");
     private ObservableList<String> filterOptions = FXCollections.observableArrayList("全部", "最近一个月", "最近半年", "最近一年");
+//    private ObservableList<Income>
 
     @FXML
     private void initialize() {
@@ -64,4 +69,18 @@ public class FinancialStatementsPaneCpntroller {
     private void handlePrint() {
         //TODO
     }
+
+    Service<Integer> service_search = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    FinancialSheetSearch financialSheetSearch = new FinancialSheetSearch();
+
+                    return null;
+                }
+            };
+        }
+    };
 }

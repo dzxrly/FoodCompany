@@ -1,7 +1,10 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import model.Stuff;
+import service.PersonalInfoGet;
 import service.PropertiesOperation;
 
 import java.io.IOException;
@@ -46,7 +51,9 @@ public class PersonalInfoPaneController {
     @FXML
     private Button uploadBtn;
 
-    private ObservableList<String> genderOptions = FXCollections.observableArrayList("男","女");
+    private ObservableList<String> genderOptions = FXCollections.observableArrayList("男", "女");
+    private Stuff currentStuff = new Stuff();
+    private PropertiesOperation propertiesOperation = new PropertiesOperation();
 
     @FXML
     private void initialize() {
@@ -61,8 +68,7 @@ public class PersonalInfoPaneController {
         addressText.setDisable(true);
         emailText.setDisable(true);
 
-        PropertiesOperation propertiesOperation = new PropertiesOperation();
-        stuffLabel.setText(propertiesOperation.readValue("userConfig.properties","LoginUserNumber"));
+        service_search.restart();
         //TODO
     }
 
@@ -118,4 +124,31 @@ public class PersonalInfoPaneController {
             e.printStackTrace();
         }
     }
+
+    Service<Integer> service_search = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    PersonalInfoGet personalInfoGet = new PersonalInfoGet();
+                    currentStuff = personalInfoGet.stuffInfoView(Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber")));
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            stuffLabel.setText(String.valueOf(currentStuff.getNumber()));
+                            idCardNumberLabel.setText(currentStuff.getPersonalID());
+                            stuffLevelLabel.setText(String.valueOf(currentStuff.getLevel()));
+                            genderComboBox.getSelectionModel().select(currentStuff.getGender());
+                            stuffNameText.setText(currentStuff.getPersonalName());
+                            phoneText.setText(currentStuff.getPhoneNumber());
+                            addressText.setText(currentStuff.getAddress());
+                            emailText.setText(currentStuff.getEmail());
+                        }
+                    });
+                    return null;
+                }
+            };
+        }
+    };
 }

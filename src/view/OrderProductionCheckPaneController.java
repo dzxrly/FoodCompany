@@ -58,7 +58,7 @@ public class OrderProductionCheckPaneController {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if ((int) newValue == 0 ) {
                     uploadBtn.setText("提交");
-                } else uploadBtn.setText("生成生产计划");
+                } else uploadBtn.setText("生成生产表单");
             }
         });
         //TODO

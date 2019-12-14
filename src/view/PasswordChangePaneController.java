@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class PasswordChangePaneController {
     @FXML
@@ -14,6 +16,10 @@ public class PasswordChangePaneController {
     private PasswordField newPWSecondInputText;
     @FXML
     private Button uploadBtn;
+    @FXML
+    private Button cancelBtn;
+    @FXML
+    private AnchorPane anchorPane;
 
     @FXML
     private void initialize() {
@@ -23,5 +29,11 @@ public class PasswordChangePaneController {
     @FXML
     private void handleUpload() {
         //TODO
+    }
+
+    @FXML
+    private void handleCancel() {
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        stage.close();
     }
 }

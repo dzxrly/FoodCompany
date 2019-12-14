@@ -17,8 +17,6 @@ public class ProductionPlansManagementPaneController {
     @FXML
     private TableView selectedOrderList;
     @FXML
-    private Label orderNumberLabel;
-    @FXML
     private ComboBox planTypeComboBox;
     @FXML
     private DatePicker beginDate;

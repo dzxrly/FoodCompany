@@ -20,6 +20,10 @@ public class ProductionFiancePlanPaneController {
     @FXML
     private Label planCountLabel;
     @FXML
+    private TableView goodsList;
+    @FXML
+    private TableView rawMetarialList;
+    @FXML
     private Label produceCostLabel;
     @FXML
     private Label rawMaterialLabel;

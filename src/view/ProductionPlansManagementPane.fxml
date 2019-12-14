@@ -14,10 +14,10 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox layoutX="14.0" layoutY="62.0" prefHeight="23.0" prefWidth="317.0">
+      <HBox layoutX="14.0" layoutY="62.0" prefHeight="23.0" prefWidth="383.0">
          <children>
             <ComboBox fx:id="orderTypeComboBox" layoutX="55.0" layoutY="72.0" prefHeight="23.0" prefWidth="199.0" />
-            <Button fx:id="searchBtn" layoutX="205.0" layoutY="72.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="126.0" text="查询订单" />
+            <Button fx:id="searchBtn" layoutX="205.0" layoutY="72.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="130.0" text="查询生产表单" />
          </children>
       </HBox>
       <ScrollPane layoutX="14.0" layoutY="100.0" prefHeight="576.0" prefWidth="606.0">
@@ -34,7 +34,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="648.0" layoutY="131.0" text="订单列表：" />
+      <Label layoutX="648.0" layoutY="131.0" text="生产表单列表：" />
       <ScrollPane layoutX="648.0" layoutY="159.0" prefHeight="343.0" prefWidth="418.0">
          <content>
             <TableView fx:id="selectedOrderList" prefHeight="341.0" prefWidth="416.0">
@@ -46,12 +46,6 @@
       </ScrollPane>
       <VBox layoutX="648.0" layoutY="514.0" spacing="5.0">
          <children>
-            <HBox layoutX="648.0" layoutY="514.0">
-               <children>
-                  <Label layoutX="650.0" layoutY="550.0" prefWidth="90.0" text="订单数量：" />
-                  <Label fx:id="orderNumberLabel" layoutX="753.0" layoutY="565.0" text="Label" />
-               </children>
-            </HBox>
             <VBox layoutX="648.0" layoutY="541.0" prefHeight="52.0" prefWidth="175.0" spacing="5.0">
                <children>
                   <Label layoutX="650.0" layoutY="581.0" text="计划类型：" />
