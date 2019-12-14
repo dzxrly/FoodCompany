@@ -7,7 +7,6 @@ import org.hibernate.Transaction;
 
 //个人信息表的获取
 public class PersonalInfoGet {
-
     //个人信息显示 返回stuff类
     public Stuff stuffInfoView(int stuffNumber) {
         Session session = HibernateUtils.openSession();
