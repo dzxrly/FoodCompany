@@ -197,7 +197,8 @@ public class OrderInputController {
                     Double number = tempGoodsInfo.getPayNumber();
                     sum += goodPrice * number;
                 }
-                totalPrice.setText(String.valueOf(sum));
+                DoubleFormatService doubleFormatService = new DoubleFormatService();
+                totalPrice.setText(doubleFormatService.getSubstringPrice(sum, 8));
             }
         });
 

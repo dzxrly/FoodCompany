@@ -73,4 +73,49 @@ public class CustomerIndexAndStringSwitch {
                 return "已到达";
         }
     }
+
+    public String returnOrderTypeByIndex(int index) {
+        switch (index) {
+            default:
+                return "现货订单";
+            case 0:
+                return "现货订单";
+            case 1:
+                return "预定订单";
+        }
+    }
+
+    public Double getPrepaymentBySumAndLevel(Double sum, int level) {
+        switch (level) {
+            default:
+                return sum * 0.3;
+            case 0:
+                return sum * 0.3;
+            case 1:
+                return sum * 0.25;
+            case 2:
+                return sum * 0.2;
+            case 3:
+                return sum * 0.15;
+            case 4:
+                return sum * 0.1;
+        }
+    }
+
+    public Double getRespaymentBySumAndLevel(Double sum, int level) {
+        switch (level) {
+            default:
+                return sum * 0.7;
+            case 0:
+                return sum * 0.7;
+            case 1:
+                return sum * 0.75;
+            case 2:
+                return sum * 0.8;
+            case 3:
+                return sum * 0.85;
+            case 4:
+                return sum * 0.9;
+        }
+    }
 }

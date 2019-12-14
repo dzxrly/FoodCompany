@@ -10,7 +10,7 @@ import java.util.List;
 
 public class OrderRefundSubmission {
 
-    public int submitOrderRefund(String orderId,String customerName,int customerNumber,int stuffNumber,double totalReturnPrice ) {//退款单提交 会在删除收入表income中与该orderId相关的行 更新orders表的payStatement字段为4表示已经退款 在退款记录表里面插入一条新的记录
+    public int submitOrderRefund(String orderId, String customerName, int customerNumber, int stuffNumber, double totalReturnPrice) {//退款单提交 会在删除收入表income中与该orderId相关的行 更新orders表的payStatement字段为4表示已经退款 在退款记录表里面插入一条新的记录
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         int ans = 0;
@@ -26,7 +26,7 @@ public class OrderRefundSubmission {
             query = session.createQuery(hql2);
             query.executeUpdate();
             //退款记录表中插入数据
-            ReturnRecord rr=new ReturnRecord();
+            ReturnRecord rr = new ReturnRecord();
             rr.setOrderId(Integer.parseInt(orderId));
             rr.setCustomerName(customerName);
             rr.setCustomerNumber(customerNumber);

@@ -20,7 +20,7 @@
             <Button fx:id="searchBtn" layoutX="229.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="23.0" prefWidth="76.0" text="查询" />
          </children>
       </HBox>
-      <VBox layoutX="14.0" layoutY="121.0" prefHeight="160.0" prefWidth="274.0" spacing="10.0">
+      <VBox layoutX="14.0" layoutY="121.0" prefHeight="176.0" prefWidth="274.0" spacing="10.0">
          <children>
             <HBox>
                <children>
@@ -86,20 +86,6 @@
                      </font>
                   </Label>
                   <Label fx:id="customerLevelLabel" layoutX="122.0" layoutY="105.0" text="Label">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox>
-               <children>
-                  <Label layoutX="409.0" layoutY="51.0" text="订单生成时间：">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="orderTimeLabel" layoutX="540.0" layoutY="57.0" text="Label">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

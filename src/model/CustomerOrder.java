@@ -17,9 +17,9 @@ public class CustomerOrder {
     private IntegerProperty orderId = new SimpleIntegerProperty();
     private IntegerProperty orderType = new SimpleIntegerProperty(); //0为现货订单 1为预定订单
     private StringProperty endDate = new SimpleStringProperty();
-    private DoubleProperty totalSum= new SimpleDoubleProperty();
-    private IntegerProperty orderState =new SimpleIntegerProperty();//订单状态 0为未生产，1为生产中，2为运输中，3为已到达
-    private IntegerProperty paymentState= new SimpleIntegerProperty(); //支付状态 0为未付款 1为付了预付款 2为付了全款
+    private DoubleProperty totalSum = new SimpleDoubleProperty();
+    private IntegerProperty orderState = new SimpleIntegerProperty();//订单状态 0为未生产，1为生产中，2为运输中，3为已到达
+    private IntegerProperty paymentState = new SimpleIntegerProperty(); //支付状态 0为未付款 1为付了预付款 2为付了全款
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
 //        private CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();//过滤器类
 

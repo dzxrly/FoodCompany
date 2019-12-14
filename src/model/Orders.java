@@ -12,11 +12,11 @@ public class Orders {
     private IntegerProperty customerNumber = new SimpleIntegerProperty();
     private StringProperty customerPhone = new SimpleStringProperty();
     private StringProperty customerAddress = new SimpleStringProperty();
-    private StringProperty buildDate =new SimpleStringProperty();
+    private StringProperty buildDate = new SimpleStringProperty();
     private StringProperty endDate = new SimpleStringProperty();
-    private DoubleProperty totalSum= new SimpleDoubleProperty();
-    private IntegerProperty orderState =new SimpleIntegerProperty();//订单状态 0为未生产，1为生产中，2为运输中，3为已到达
-    private IntegerProperty paymentState= new SimpleIntegerProperty(); //支付状态 0为未付款 1为付了预付款 2为付了全款 4为已退款
+    private DoubleProperty totalSum = new SimpleDoubleProperty();
+    private IntegerProperty orderState = new SimpleIntegerProperty();//订单状态 0为未生产，1为生产中，2为运输中，3为已到达
+    private IntegerProperty paymentState = new SimpleIntegerProperty(); //支付状态 0为未付款 1为付了预付款 2为付了全款 4为已退款
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
 
     public String getEndDate() {
