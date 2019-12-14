@@ -223,7 +223,7 @@ public class PaymentForCashOrdersController {
                                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                                 alert.setTitle("确认");
                                 alert.setHeaderText("当前提交的是订单全款记录");
-                                alert.setContentText("是否确认提交？提交后无法更改,若要提交预付款记录请清空“已缴纳全款”输入框！");
+                                alert.setContentText("是否确认提交？提交后无法更改，若要提交预付款记录请清空“已缴纳全款”输入框！");
                                 Optional<ButtonType> optionalButtonType = alert.showAndWait();
                                 int flag = 0;
                                 if (optionalButtonType.get() == ButtonType.OK) {
@@ -246,7 +246,7 @@ public class PaymentForCashOrdersController {
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("确认");
                             alert.setHeaderText("当前提交的是订单尾款记录");
-                            alert.setContentText("是否确认提交？提交后无法更改");
+                            alert.setContentText("是否确认提交？提交后无法更改，若要提交全款记录请保证“应缴纳全款”与“已缴纳全款”输入款中的内容相同！");
                             Optional<ButtonType> optionalButtonType = alert.showAndWait();
                             int flag = 0;
                             if (optionalButtonType.get() == ButtonType.OK) {
