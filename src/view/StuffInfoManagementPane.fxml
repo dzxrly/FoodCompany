@@ -15,7 +15,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <HBox layoutX="14.0" layoutY="56.0">
+      <HBox fx:id="searchMenuHBox" layoutX="14.0" layoutY="56.0">
          <children>
             <ComboBox fx:id="levelSelectComboBox" layoutX="32.0" layoutY="87.0" prefWidth="150.0" />
             <TextField fx:id="inputText" layoutX="190.0" layoutY="87.0" prefHeight="27.0" prefWidth="150.0" />
@@ -28,7 +28,7 @@
             <TableView fx:id="resList" prefHeight="596.0" prefWidth="633.0" />
          </content>
       </ScrollPane>
-      <VBox layoutX="679.0" layoutY="97.0" prefHeight="535.0" prefWidth="354.0" spacing="8.0">
+      <VBox fx:id="infoInputVBox" layoutX="684.0" layoutY="46.0" prefHeight="683.0" prefWidth="354.0" spacing="8.0">
          <children>
             <HBox fx:id="modelHBox" spacing="5.0">
                <children>
@@ -90,7 +90,7 @@
             <TextField fx:id="idNumberText" />
             <Label text="性别：" />
             <ComboBox fx:id="genderComboBox" prefHeight="23.0" prefWidth="200.0" />
-            <HBox spacing="5.0">
+            <HBox fx:id="printSaveDeleteBtnGroup" spacing="5.0">
                <children>
                   <Button fx:id="printBtn" mnemonicParsing="false" onAction="#handlePrintBtn" prefWidth="80.0" text="打印" />
                   <HBox fx:id="btnGroup" spacing="5.0">
@@ -99,12 +99,14 @@
                         <Button fx:id="deleteBtn" layoutX="944.0" layoutY="663.0" mnemonicParsing="false" onAction="#handleDeleteBtn" prefWidth="80.0" text="删除" />
                      </children>
                      <padding>
-                        <Insets left="50.0" />
+                        <Insets left="70.0" />
                      </padding>
                   </HBox>
                </children>
             </HBox>
          </children>
       </VBox>
+      <CheckBox fx:id="isOnAddStuffModel" layoutX="555.0" layoutY="62.0" mnemonicParsing="false" text="批量添加员工" />
+      <Button fx:id="addAllStuffBtn" layoutX="448.0" layoutY="699.0" mnemonicParsing="false" onAction="#handleUploadAll" prefHeight="23.0" prefWidth="200.0" text="上传表内员工信息" />
    </children>
 </AnchorPane>

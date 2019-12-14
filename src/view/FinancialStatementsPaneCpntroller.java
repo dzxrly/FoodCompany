@@ -33,7 +33,7 @@ public class FinancialStatementsPaneCpntroller {
     @FXML
     private Button printBtn;
 
-    private ObservableList<String> searchTypeOptions = FXCollections.observableArrayList("按名称查询", "仅查询收入账单", "仅查询支出账单");
+    private ObservableList<String> searchTypeOptions = FXCollections.observableArrayList("仅查询收入账单", "仅查询支出账单");
     private ObservableList<String> filterOptions = FXCollections.observableArrayList("全部", "最近一个月", "最近半年", "最近一年");
 
     @FXML
@@ -47,18 +47,6 @@ public class FinancialStatementsPaneCpntroller {
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         printBtn.setGraphic((new AddImageForComponent("img/download.png", 14)).getImageView());
 
-        searchTypeComboBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if ((int) newValue == 1 || (int) newValue == 2) {
-                    searchInputText.setText("");
-                    searchInputText.setDisable(true);
-                } else {
-                    searchInputText.setText("");
-                    searchInputText.setDisable(false);
-                }
-            }
-        });
         //TODO
     }
 
