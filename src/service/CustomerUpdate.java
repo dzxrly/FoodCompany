@@ -25,21 +25,21 @@ public class CustomerUpdate {
             tx = session.beginTransaction();
             String hql = "update Customer set personalName=:personalName,companyName=:companyName,type=:type ,level= :level,address= :address," +
                     "email=:email,phoneNumber=:phoneNumber where number=:number";
-            Query query=session.createQuery(hql);
+            Query query = session.createQuery(hql);
             query.setString("personalName", personalName);
             query.setString("companyName", companyName);
-            query.setInteger("type",type);
-            query.setInteger("level",level);
+            query.setInteger("type", type);
+            query.setInteger("level", level);
             query.setString("address", address);
             query.setString("email", email);
             query.setString("phoneNumber", phoneNumber);
-            query.setInteger("number",number);
+            query.setInteger("number", number);
             query.executeUpdate();
             tx.commit();
-            ans=1;//1表示更新成功
+            ans = 1;//1表示更新成功
         } catch (RuntimeException e) {
             tx.rollback();
-            ans=0;//0表示更新失败
+            ans = 0;//0表示更新失败
             System.out.println("__________________________Can't insert into table customer________________________");
         } finally {
             session.close();
