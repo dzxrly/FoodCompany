@@ -2,10 +2,7 @@ package service;
 
 import DAO.HibernateUtils;
 import javafx.beans.property.*;
-import model.CustomerOrder;
-import model.OrderBookGoods;
-import model.OrderSpotGoods;
-import model.Orders;
+import model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -105,7 +102,6 @@ public class OrdersSearch {
             cto.setOrderState((int) co[12]);
             cto.setPaymentState((int) co[13]);
             cto.setStuffNumber((int) co[14]);
-
 //            System.out.println("_____________" + cto + "________________");
         } catch (RuntimeException e) {
             System.out.println("_____________________________Can not search___________________________");
@@ -116,8 +112,47 @@ public class OrdersSearch {
             return cto;
         }
     }
+
+
+    public List searchOrderAndStocks(String orderId){//查询 预定订单表与库存表中库存的连接结果 新生成类为 OrderStocks
+        //订单需求量检查界面
+        Session session = HibernateUtils.openSession();
+        Transaction tx=null;
+        List list = null;
+        try{
+            tx=session.beginTransaction();
+            String hql="select sd.goodsId,gd.goodsName,obg.orderQuantity,gd.goodsPrice,sd.stocks from OrderBookGoods obg, ShippingDepartment sd ,Goods gd where obg.goodsNumber = sd.goodsId and sd.goodsId = gd.goodsId and obg.orderId = " + orderId;
+            list = session.createQuery(hql).list();
+            for(int i=0;i<list.size();i++){
+                Object[] ob=(Object[]) list.get(i);
+
+                OrderStocks os =new OrderStocks();
+                os.setGoodsId((int) ob[0]);
+                os.setGoodsName((String) ob[1]);
+                os.setOrderQuantity((int) ob[2]);
+                os.setGoodsPrice((double) ob[3]);
+                os.setStocks((int) ob[4]);
+                System.out.println("___________"+os+"_________________");
+            }
+
+        }catch (RuntimeException e){
+            System.out.println("___________________Can not search_________________");
+            throw e;
+        }finally {
+            session.close();
+            return list;
+        }
+    }
 }
 
 
 //    OrdersSearch os=new OrdersSearch();
 //    os.searchCustomerAndOrder("11");
+
+
+// test searchOrderAndStocks
+//        OrdersSearch os =new OrdersSearch();
+//        List list = os.searchOrderAndStocks("21");
+//        if(list.toString() !="[]"){
+//            System.out.println("_________not null__________");
+//        }
