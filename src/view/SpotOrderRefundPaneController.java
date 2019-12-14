@@ -107,7 +107,13 @@ public class SpotOrderRefundPaneController {
 
     @FXML
     private void handleUpload() {
-        //TODO
+        if (!needPayTotalCostText.getText().equals("") && needPayTotalCostText.getText().matches(costRegex) && currentOrder != null) {
+            service_upload.restart();
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "订单不能为空且退款价格必须为数字！", "请重新输入！");
+            alertDialog.showAlert();
+        }
     }
 
     @FXML
@@ -136,6 +142,7 @@ public class SpotOrderRefundPaneController {
         needPayResPaymentText.setDisable(false);
         needPayTotalCostText.setDisable(false);
     }
+
 
     Service<Integer> service_search = new Service<Integer>() {
         @Override
@@ -219,7 +226,25 @@ public class SpotOrderRefundPaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-
+                    OrderRefundSubmission orderRefundSubmission = new OrderRefundSubmission();
+                    int flag = 0;
+                    if (currentOrder.getCompanyName().equals(""))
+                        flag = orderRefundSubmission.submitOrderRefund(String.valueOf(currentOrder.getOrderId()), currentOrder.getPersonalName(), currentOrder.getNumber(), Integer.valueOf(operatorNumber), Double.valueOf(needPayTotalCostText.getText()));
+                    else
+                        flag = orderRefundSubmission.submitOrderRefund(String.valueOf(currentOrder.getOrderId()), currentOrder.getCompanyName(), currentOrder.getNumber(), Integer.valueOf(operatorNumber), Double.valueOf(needPayTotalCostText.getText()));
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                            alertDialog.showAlert();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "失败", "提交失败！", "提交失败！");
+                            alertDialog.showAlert();
+                        });
+                    }
                     return null;
                 }
             };

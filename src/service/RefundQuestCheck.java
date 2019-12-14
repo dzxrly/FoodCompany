@@ -14,7 +14,7 @@ public class RefundQuestCheck { //封装退款检测
     public boolean getCheckRes() {
         switch (orderRefundSubmission.Judge(orderId)) {
             default:
-                return false;
+                return true;
             case 0:
                 return true;
             case 1:
