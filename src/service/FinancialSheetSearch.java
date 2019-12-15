@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class FinancialSheetSearch {
+public class FinancialSheetSearch {//财务报表
 
     public List searchId(String id, int index) {// index=0 0表示仅查询收入表 1表示仅查询支出表
         Session session = HibernateUtils.openSession();
@@ -124,7 +124,6 @@ public class FinancialSheetSearch {
 
 //        FinancialSheetSearch fsh=new FinancialSheetSearch();
 //        fsh.searchId("7");
-
 
 //
 //    FinancialSheetSearch fsh = new FinancialSheetSearch();
