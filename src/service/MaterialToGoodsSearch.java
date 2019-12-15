@@ -2,7 +2,6 @@ package service;
 
 import DAO.HibernateUtils;
 import model.MaterialToGoods;
-import org.geolatte.geom.M;
 import org.hibernate.Session;
 
 import java.util.List;
