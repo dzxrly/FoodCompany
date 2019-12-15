@@ -31,8 +31,7 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
 //        ProductWorkshop pw= new ProductWorkshop();
-//        System.out.println(pw.materialFuzzySearch(1,"生"));
-//        System.out.println(pw.productPlanSearchById(1));
+
         launch(args);
     }
 
