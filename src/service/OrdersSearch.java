@@ -156,3 +156,16 @@ public class OrdersSearch {
 //        if(list.toString() !="[]"){
 //            System.out.println("_________not null__________");
 //        }
+
+//    Session session = HibernateUtils.openSession();
+//    String sql="";
+//    List list=null;
+//        try{
+//
+//                }catch (RuntimeException e){
+//                System.out.println("---can not search----");
+//                throw e;
+//                }finally {
+//                session.close();
+//                return list;
+//                }
