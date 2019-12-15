@@ -13,6 +13,7 @@ public class Material {
     private IntegerProperty materialType = new SimpleIntegerProperty();
     private DoubleProperty stocks = new SimpleDoubleProperty();
     private StringProperty storeTime = new SimpleStringProperty();
+    private StringProperty materialUnit = new SimpleStringProperty();
 
     public int getMaterialId() {
         return materialId.get();
@@ -110,6 +111,18 @@ public class Material {
         this.storeTime.set(storeTime);
     }
 
+    public String getMaterialUnit() {
+        return materialUnit.get();
+    }
+
+    public StringProperty materialUnitProperty() {
+        return materialUnit;
+    }
+
+    public void setMaterialUnit(String materialUnit) {
+        this.materialUnit.set(materialUnit);
+    }
+
     @Override
     public String toString() {
         return "Material{" +
@@ -121,6 +134,7 @@ public class Material {
                 ", materialType=" + materialType +
                 ", stocks=" + stocks +
                 ", storeTime=" + storeTime +
+                ", materialUnit=" + materialUnit +
                 '}';
     }
 }
