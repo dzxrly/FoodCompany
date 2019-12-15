@@ -1,4 +1,5 @@
 import DAO.HibernateTest1;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
@@ -19,6 +20,7 @@ import service.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+
 
 public class MainApp extends Application {
 
@@ -59,7 +61,7 @@ public class MainApp extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                System.exit(-1);
+                //exit(-1);
             }
         });
     }//显示登陆页面
