@@ -60,7 +60,7 @@ public class BillSubmission {
     public int Judge(String orderId) {//在收入账单时 创建完点击提交订单编号先判断 若orders表中有 则返回创建失败 订单编号重复 返回一个最大的编号值 否则返回-1
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
-        int ans = 0;
+        int ans = -1;
         String hql = "";
         try {
             hql = "from Orders where orderId = " + orderId;
@@ -69,7 +69,7 @@ public class BillSubmission {
                 hql = "select max(orderId) from Orders";
                 List list1 = session.createQuery(hql).list();
                 Object ob = (Object) list1.get(0);
-                ans = (int) ob;
+                ans = (int) ob + 1;
                 System.out.println("__________________________" + ans + "________________________________");
             } else {
                 return -1;

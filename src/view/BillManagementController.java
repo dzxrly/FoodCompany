@@ -69,10 +69,10 @@ public class BillManagementController {
     private ObservableList<String> billTypeOptions = FXCollections.observableArrayList("收入账单", "支出账单");
     private ObservableList<String> incomingBillTypeOptions = FXCollections.observableArrayList("预付款", "尾款", "全款");
     private ObservableList<String> outcomingBillTypeOptions = FXCollections.observableArrayList("税务", "原料");
-    private BillSubmission billSubmission = new BillSubmission();
     private int recommendOrderNumber = 0;
     private String orderNumberRegex = "[0-9]+";
     private String paymentRegex = "[0-9.]+";
+    private String operatorNumber;
 
     @FXML
     private void initialize() {
@@ -92,9 +92,16 @@ public class BillManagementController {
         billTypeComboBox.getSelectionModel().select(0);
         incomingOrOutcomingTypeComboBox.setItems(incomingBillTypeOptions);
         incomingOrOutcomingTypeComboBox.getSelectionModel().select(0);
+        billTypeLabel.setText("");
+        billNumberLabel.setText("");
+        priceLabel.setText("");
+        incomingOrOutcomingTypeLabel.setText("");
+        projectLabel.setText("");
+        cardNumberLabel.setText("");
 
         PropertiesOperation propertiesOperation = new PropertiesOperation();
         operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
+        operatorNumber = propertiesOperation.readValue("userConfig.properties", "LoginUserNumber");
 
         billTypeComboBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -128,12 +135,36 @@ public class BillManagementController {
                 }
             }
         });
-        //TODO
     }
 
     @FXML
     private void handlePreview() {
-        //TODO
+        if (billTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+            billTypeLabel.setText(billTypeComboBox.getValue().toString());
+            billNumberLabel.setText(billNumberText.getText());
+            priceLabel.setText(priceText.getText());
+            incomingOrOutcomingTypeLabel.setText(incomingOrOutcomingTypeComboBox.getValue().toString());
+            projectLabel.setText(projectNameText.getText());
+            cardNumberLabel.setText(cardNumberText.getText());
+        } else {
+            priceLabel.setText(priceText.getText());
+            incomingOrOutcomingTypeLabel.setText(incomingOrOutcomingTypeComboBox.getValue().toString());
+            projectLabel.setText(projectNameText.getText());
+        }
+    }
+
+    private void clearAll() {
+        billNumberText.setText("");
+        priceText.setText("");
+        projectNameText.setText("");
+        cardNumberText.setText("");
+
+        billTypeLabel.setText("");
+        billNumberLabel.setText("");
+        priceLabel.setText("");
+        incomingOrOutcomingTypeLabel.setText("");
+        projectLabel.setText("");
+        cardNumberLabel.setText("");
     }
 
     @FXML
@@ -146,15 +177,24 @@ public class BillManagementController {
                     !projectNameText.getText().equals("") &&
                     !cardNumberText.getText().equals("") &&
                     cardNumberText.getText().matches(orderNumberRegex)) {
-                service_upload.restart();
-                //clear();
+                service_incomingBill.restart();
             } else {
                 AlertDialog alertDialog = new AlertDialog();
-                alertDialog.createAlert(Alert.AlertType.ERROR,"错误","表单填写有误！","请重新填写！");
+                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "表单填写有误！", "请重新填写！");
                 alertDialog.showAlert();
             }
         }
-        //TODO
+        if (billTypeComboBox.getSelectionModel().getSelectedIndex() == 1) {
+            if (!priceText.getText().equals("") &&
+                    priceText.getText().matches(paymentRegex) &&
+                    !projectNameText.getText().equals("")) {
+                service_outcomingBill.restart();
+            } else {
+                AlertDialog alertDialog = new AlertDialog();
+                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "表单填写有误！", "请重新填写！");
+                alertDialog.showAlert();
+            }
+        }
     }
 
     @FXML
@@ -162,15 +202,33 @@ public class BillManagementController {
         //TODO
     }
 
-    Service<Integer> service_upload = new Service<Integer>() {
+    Service<Integer> service_incomingBill = new Service<Integer>() {
         @Override
         protected Task<Integer> createTask() {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
+                    //收入账单
+                    BillSubmission billSubmission = new BillSubmission();
                     int flag = billSubmission.Judge(billNumberText.getText());
                     if (flag == -1) {
-                        //continue
+                        int isUpload = 0;
+                        isUpload = billSubmission.submitBill(0, Integer.valueOf(operatorNumber), Double.valueOf(priceText.getText()), incomingOrOutcomingTypeComboBox.getSelectionModel().getSelectedIndex(), Integer.valueOf(billNumberText.getText()), cardNumberText.getText(), projectNameText.getText());
+                        System.out.println(isUpload);
+                        if (isUpload == 1) {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "账单已提交！", "账单已提交！");
+                                alertDialog.showAlert();
+                                clearAll();
+                            });
+                        } else {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "请重新提交！");
+                                alertDialog.showAlert();
+                            });
+                        }
                     } else {
                         Platform.runLater(new Runnable() {
                             @Override
@@ -187,6 +245,35 @@ public class BillManagementController {
                                     alert.close();
                                 }
                             }
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_outcomingBill = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    BillSubmission billSubmission = new BillSubmission();
+                    int isUpload = 0;
+                    isUpload = billSubmission.submitBill(billTypeComboBox.getSelectionModel().getSelectedIndex(), Integer.valueOf(operatorNumber), Double.valueOf(priceText.getText()), incomingOrOutcomingTypeComboBox.getSelectionModel().getSelectedIndex(), 0, null, projectNameText.getText());
+                    if (isUpload == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "账单已提交！", "账单已提交！");
+                            alertDialog.showAlert();
+                            clearAll();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "请重新提交！");
+                            alertDialog.showAlert();
                         });
                     }
                     return null;
