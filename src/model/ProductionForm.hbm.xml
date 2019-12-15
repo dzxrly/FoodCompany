@@ -26,6 +26,6 @@
         <property name="stuffNumber" column="stuffNumber" type="java.lang.Integer" length="11"></property>
         <property name="planState" column="planState" type="java.lang.Integer" length="11"></property>
         <property name="productionState" column="productionState" type="java.lang.Integer" length="11"></property>
-
+        <property name="userTime" column="useTime" type="java.lang.Double" length="0"></property>
     </class>
 </hibernate-mapping>

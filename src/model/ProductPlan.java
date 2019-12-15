@@ -1,17 +1,82 @@
 package model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 
 //生产计划表
 public class ProductPlan {
+
     private IntegerProperty planId = new SimpleIntegerProperty();
+    private IntegerProperty productionId = new SimpleIntegerProperty();
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
-    private IntegerProperty goodsId = new SimpleIntegerProperty();
-    private IntegerProperty goodsNumber = new SimpleIntegerProperty();
-    private IntegerProperty goodsQuantity = new SimpleIntegerProperty();
+    private StringProperty startTime = new SimpleStringProperty();
+    private StringProperty endTime =new SimpleStringProperty();
     private IntegerProperty planType = new SimpleIntegerProperty(); //0为季度 1为预定
-    private IntegerProperty productionCycle = new SimpleIntegerProperty();
+    private DoubleProperty productionCycle = new SimpleDoubleProperty();
+    private IntegerProperty productionState = new SimpleIntegerProperty();//表示是否投入生产 0表示为投入生产 1表示投入生产
+
+    public int getProductionState() {
+        return productionState.get();
+    }
+
+    public IntegerProperty productionStateProperty() {
+        return productionState;
+    }
+
+    public void setProductionState(int productionState) {
+        this.productionState.set(productionState);
+    }
+
+    public int getStuffNumber() {
+        return stuffNumber.get();
+    }
+
+    public double getProductionCycle() {
+        return productionCycle.get();
+    }
+
+    public DoubleProperty productionCycleProperty() {
+        return productionCycle;
+    }
+
+    public void setProductionCycle(double productionCycle) {
+        this.productionCycle.set(productionCycle);
+    }
+
+    public int getProductionId() {
+        return productionId.get();
+    }
+
+    public IntegerProperty productionIdProperty() {
+        return productionId;
+    }
+
+    public void setProductionId(int productionId) {
+        this.productionId.set(productionId);
+    }
+
+    public String getStartTime() {
+        return startTime.get();
+    }
+
+    public StringProperty startTimeProperty() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime.set(startTime);
+    }
+
+    public String getEndTime() {
+        return endTime.get();
+    }
+
+    public StringProperty endTimeProperty() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime.set(endTime);
+    }
 
     public int getPlanId() {
         return planId.get();
@@ -25,52 +90,12 @@ public class ProductPlan {
         this.planId.set(planId);
     }
 
-    public int getStuffNumber() {
-        return stuffNumber.get();
-    }
-
     public IntegerProperty stuffNumberProperty() {
         return stuffNumber;
     }
 
     public void setStuffNumber(int stuffNumber) {
         this.stuffNumber.set(stuffNumber);
-    }
-
-    public int getGoodsId() {
-        return goodsId.get();
-    }
-
-    public IntegerProperty goodsIdProperty() {
-        return goodsId;
-    }
-
-    public void setGoodsId(int goodsId) {
-        this.goodsId.set(goodsId);
-    }
-
-    public int getGoodsNumber() {
-        return goodsNumber.get();
-    }
-
-    public IntegerProperty goodsNumberProperty() {
-        return goodsNumber;
-    }
-
-    public void setGoodsNumber(int goodsNumber) {
-        this.goodsNumber.set(goodsNumber);
-    }
-
-    public int getGoodsQuantity() {
-        return goodsQuantity.get();
-    }
-
-    public IntegerProperty goodsQuantityProperty() {
-        return goodsQuantity;
-    }
-
-    public void setGoodsQuantity(int goodsQuantity) {
-        this.goodsQuantity.set(goodsQuantity);
     }
 
     public int getPlanType() {
@@ -85,28 +110,21 @@ public class ProductPlan {
         this.planType.set(planType);
     }
 
-    public int getProductionCycle() {
-        return productionCycle.get();
-    }
-
-    public IntegerProperty productionCycleProperty() {
-        return productionCycle;
-    }
-
     public void setProductionCycle(int productionCycle) {
         this.productionCycle.set(productionCycle);
     }
 
     @Override
     public String toString() {
-        return "productPlan{" +
+        return "ProductPlan{" +
                 "planId=" + planId +
+                ", productionId=" + productionId +
                 ", stuffNumber=" + stuffNumber +
-                ", goodsId=" + goodsId +
-                ", goodsNumber=" + goodsNumber +
-                ", goodsQuantity=" + goodsQuantity +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 ", planType=" + planType +
                 ", productionCycle=" + productionCycle +
+                ", productionState=" + productionState +
                 '}';
     }
 }

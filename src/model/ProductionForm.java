@@ -11,8 +11,19 @@ public class ProductionForm {
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
     private IntegerProperty planState = new SimpleIntegerProperty();//表示是否已经生成生产表单 0表示未加入 1表示加入
     private IntegerProperty productionState =new SimpleIntegerProperty();//表示是否已加入生产计划 0表示未加入 1表示加入
+    private DoubleProperty userTime =new SimpleDoubleProperty();//生产这个订单所需的耗时 单位 xx/天
 
+    public double getUserTime() {
+        return userTime.get();
+    }
 
+    public DoubleProperty userTimeProperty() {
+        return userTime;
+    }
+
+    public void setUserTime(double userTime) {
+        this.userTime.set(userTime);
+    }
 
     public int getProductionId() {
         return productionId.get();
@@ -105,10 +116,10 @@ public class ProductionForm {
                 ", orderId=" + orderId +
                 ", buildTime=" + buildTime +
                 ", endTime=" + endTime +
-                ", useTime=" +
                 ", stuffNumber=" + stuffNumber +
                 ", planState=" + planState +
                 ", productionState=" + productionState +
+                ", userTime=" + userTime +
                 '}';
     }
 }

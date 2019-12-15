@@ -15,6 +15,7 @@ public class ProductionFormSubmission {
     public ProductionForm createProductionForm(int orderId,String endTime,int stuffNumber){
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
+        String hql="";
         ProductionForm pf=new ProductionForm();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String buildTime  = df.format(new Date()).toString();//获得日期
@@ -27,6 +28,12 @@ public class ProductionFormSubmission {
 
         try{
             tx=session.beginTransaction();
+            hql="select sum(o.orderQuantity/p.productQuantityPerTime) from OrderBookGoods o,ProductUnit  p where o.goodsNumber = p.goodsId and orderId = " + orderId;
+            List list = session.createQuery(hql).list();
+            Object ob = (Object) list.get(0);
+            double userTime = Double.parseDouble(ob.toString())/24;
+            pf.setUserTime(userTime);
+
             session.save(pf);
             System.out.println("_______________insert successfully 1________");
             tx.commit();

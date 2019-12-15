@@ -20,10 +20,11 @@
             如果length忽略不写，且你的表是自动创建这种方案，那么length的默认长度是255
         -->
         <property name="stuffNumber" column="stuffNumber" type="java.lang.Integer" length="11"></property>
-        <property name="goodsId" column="goodsId" type="java.lang.Integer" length="11"></property>
-        <property name="goodsNumber" column="goodsNumber" type="java.lang.Integer" length="11"></property>
-        <property name="goodsQuantity" column="goodsQuantity" type="java.lang.Integer" length="11"></property>
+        <property name="productionId" column="productionId" type="java.lang.Integer" length="11"></property>
+        <property name="startTime" column="startTime" type="java.lang.String" length="20"></property>
+        <property name="endTime" column="endTime" type="java.lang.String" length="20"></property>
         <property name="planType" column="planType" type="java.lang.Integer" length="11"></property>
-        <property name="productionCycle" column="productionCycle" type="java.lang.Integer" length="11"></property>
+        <property name="productionCycle" column="productionCycle" type="java.lang.Double" length="0"></property>
+        <property name="productionState" column="productionState" type="java.lang.Integer" length="11"></property>
     </class>
 </hibernate-mapping>
