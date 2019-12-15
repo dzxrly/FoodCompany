@@ -24,7 +24,10 @@
       </HBox>
       <ScrollPane layoutX="14.0" layoutY="149.0" prefHeight="527.0" prefWidth="682.0">
          <content>
-            <TableView fx:id="billList" prefHeight="525.0" prefWidth="680.0" />
+            <TableView fx:id="billList" prefHeight="525.0" prefWidth="680.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy></TableView>
          </content>
       </ScrollPane>
       <ComboBox fx:id="filterTypeComboBox" layoutX="14.0" layoutY="118.0" prefHeight="23.0" prefWidth="209.0" />

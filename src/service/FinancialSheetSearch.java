@@ -24,11 +24,11 @@ public class FinancialSheetSearch {
         List list = null;
         try {
             if (index == 0) {
-                hql = "select i.incomeId,i.incomeType,i.incomePrice,i.incomeTime from Income i where i.incomeId =" + id;
+                hql = "from Income i where i.incomeId =" + id;
                 list = session.createQuery(hql).list();
                 System.out.println("_________OK!_______________" + (String) ((Object[]) list.get(0))[3]);//如果list为空 ((Object[])list.get(0))[3]得不到就会报错
             } else {
-                hql = "select paymentId,paymentType,paymentPrice,payTime from Payment where paymentId =" + id;
+                hql = "from Payment where paymentId =" + id;
                 list = session.createQuery(hql).list();
             }
 //            FinancialTable f=(FinancialTable) list.get(0);
