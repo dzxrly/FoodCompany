@@ -98,7 +98,7 @@ public class MainWindowController {
         //侧边栏生产计划科
         TreeItem<String> itemProductionPlanDep = new TreeItem<>("生产计划科");
 
-        TreeItem<String> orderProductionCheck = new TreeItem<>("订单需求量检查");
+        TreeItem<String> orderProductionCheck = new TreeItem<>("新增生产表单");
         itemProductionPlanDep.getChildren().add(orderProductionCheck);
 
         TreeItem<String> produceNumberManagement = new TreeItem<>("生产管理");
@@ -106,9 +106,10 @@ public class MainWindowController {
         produceNumberManagement.getChildren().add(new TreeItem<>("生产计划管理"));
         produceNumberManagement.getChildren().add(new TreeItem<>("库存数量补充"));
         itemProductionPlanDep.getChildren().add(produceNumberManagement);
-
-        TreeItem<String> rawMaterialManage = new TreeItem<>("原料管理");
-        itemProductionPlanDep.getChildren().add(rawMaterialManage);
+        //原料库
+        TreeItem<String> itemRawMaterial = new TreeItem<>("原料库");
+        itemRawMaterial.getChildren().add(new TreeItem<>("原料库存管理"));
+        itemRawMaterial.getChildren().add(new TreeItem<>("商品原料管理"));
         //侧边栏生产车间
         TreeItem<String> itemWorkshop = new TreeItem<>("生产车间");
         itemWorkshop.getChildren().add(new TreeItem<>("原料申请"));
@@ -134,6 +135,7 @@ public class MainWindowController {
         if (userLevel.equals("0")) {
             rootItem.getChildren().add(itemSaleDep);
             rootItem.getChildren().add(itemFianceDep);
+            rootItem.getChildren().add(itemRawMaterial);
             rootItem.getChildren().add(itemProductionPlanDep);
             rootItem.getChildren().add(itemWorkshop);
             rootItem.getChildren().add(itemFinishedProductionDep);
@@ -221,7 +223,7 @@ public class MainWindowController {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    } else if (currentSelectedItem.getValue().equals("订单需求量检查")) {
+                    } else if (currentSelectedItem.getValue().equals("新增生产表单")) {
                         try {
                             showInsidePane("OrderProductionCheckPane.fxml");
                         } catch (IOException e) {
@@ -239,7 +241,7 @@ public class MainWindowController {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    } else if (currentSelectedItem.getValue().equals("原料管理")) {
+                    } else if (currentSelectedItem.getValue().equals("原料库存管理")) {
                         try {
                             showInsidePane("RawmetarialManagePane.fxml");
                         } catch (IOException e) {

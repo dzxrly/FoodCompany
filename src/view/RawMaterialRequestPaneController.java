@@ -17,19 +17,9 @@ public class RawMaterialRequestPaneController {
     @FXML
     private TableView plansTable;
     @FXML
-    private TextField material_searchInputText;
+    private TableView goodsSearchDataTable;
     @FXML
-    private Button material_searchBtn;
-    @FXML
-    private Button material_searchAllBtn;
-    @FXML
-    private TableView materialSearchDataTable;
-    @FXML
-    private Button exportBtn;
-    @FXML
-    private TableView selectedMaterialTable;
-    @FXML
-    private Button clearBtn;
+    private TableView searchMaterialTable;
     @FXML
     private Label planNumberLabel;
     @FXML
@@ -40,9 +30,7 @@ public class RawMaterialRequestPaneController {
     @FXML
     private void initialize() {
         plan_searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
-        material_searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
         uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
-        exportBtn.setGraphic((new AddImageForComponent("img/arrow_down.png",14)).getImageView());
         //TODO
     }
 
@@ -53,26 +41,6 @@ public class RawMaterialRequestPaneController {
 
     @FXML
     private void handlePlanSearchAll() {
-        //TODO
-    }
-
-    @FXML
-    private void handleMaterialSearch() {
-        //TODO
-    }
-
-    @FXML
-    private void handleMaterialSearchAll() {
-        //TODO
-    }
-
-    @FXML
-    private void handleExport() {
-        //TODO
-    }
-
-    @FXML
-    private void handleClear() {
         //TODO
     }
 
