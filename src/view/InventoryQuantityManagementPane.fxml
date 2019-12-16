@@ -31,38 +31,33 @@
             </TableView>
          </content>
       </ScrollPane>
-      <VBox layoutX="732.0" layoutY="94.0" prefHeight="601.0" prefWidth="282.0" spacing="15.0">
+      <VBox fx:id="vBox" layoutX="733.0" layoutY="99.0" prefHeight="544.0" prefWidth="282.0" spacing="15.0">
          <children>
+            <HBox fx:id="selectModelHBox" spacing="10.0">
+               <children>
+                  <RadioButton fx:id="searchModel" layoutX="711.0" layoutY="63.0" mnemonicParsing="false" text="查询" />
+                  <RadioButton fx:id="changeModel" layoutX="817.0" layoutY="63.0" mnemonicParsing="false" text="修改" />
+                  <RadioButton fx:id="addModel" layoutX="931.0" layoutY="63.0" mnemonicParsing="false" text="添加" />
+               </children>
+            </HBox>
             <Label layoutX="749.0" layoutY="187.0" text="成品编号：">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="numberLabel" layoutX="749.0" layoutY="231.0" text="Label">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <TextField fx:id="numberLabel" />
             <Label layoutX="752.0" layoutY="269.0" text="成品名称：">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="nameLabel" layoutX="766.0" layoutY="304.0" text="Label">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <TextField fx:id="nameLabel" />
             <Label text="现有数量：">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="stocksNumberLabel" text="Label">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <TextField fx:id="stocksNumberLabel" />
             <Label text="出入库情况：">
                <font>
                   <Font size="14.0" />
@@ -94,7 +89,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="uploadBtn" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="100.0" text="提交" />
+            <HBox fx:id="btnGroup" spacing="10.0">
+               <children>
+                  <Button fx:id="uploadBtn" layoutX="764.0" layoutY="682.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="100.0" text="提交" />
+                  <Button fx:id="deleteBtn" layoutX="913.0" layoutY="672.0" mnemonicParsing="false" onAction="#handleDelete" prefWidth="100.0" text="删除" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

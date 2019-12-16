@@ -104,6 +104,7 @@ public class MainWindowController {
         TreeItem<String> produceNumberManagement = new TreeItem<>("生产管理");
         produceNumberManagement.getChildren().add(new TreeItem<>("生产财务规划"));
         produceNumberManagement.getChildren().add(new TreeItem<>("生产计划管理"));
+        produceNumberManagement.getChildren().add(new TreeItem<>("库存数量补充"));
         itemProductionPlanDep.getChildren().add(produceNumberManagement);
 
         TreeItem<String> rawMaterialManage = new TreeItem<>("原料管理");
@@ -301,6 +302,12 @@ public class MainWindowController {
                     } else if (currentSelectedItem.getValue().equals("考勤管理")) {
                         try {
                             showInsidePane("AttendanceManagePane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("库存数量补充")) {
+                        try {
+                            showInsidePane("StockAddPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
