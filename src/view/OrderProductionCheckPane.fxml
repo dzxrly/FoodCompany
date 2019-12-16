@@ -51,9 +51,9 @@
             </HBox>
          </children>
       </VBox>
-      <ScrollPane layoutX="555.0" layoutY="222.0" prefHeight="323.0" prefWidth="515.0">
+      <ScrollPane layoutX="555.0" layoutY="222.0" prefHeight="273.0" prefWidth="515.0">
          <content>
-            <TableView fx:id="goodsList" prefHeight="321.0" prefWidth="513.0">
+            <TableView fx:id="goodsList" prefHeight="272.0" prefWidth="513.0">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
@@ -61,8 +61,20 @@
          </content>
       </ScrollPane>
       <Label layoutX="555.0" layoutY="201.0" text="商品列表：" />
-      <VBox layoutX="555.0" layoutY="562.0" spacing="10.0">
+      <VBox layoutX="555.0" layoutY="519.0" spacing="10.0">
          <children>
+            <HBox>
+               <children>
+                  <Label fx:id="selectedGoodNameLabel" layoutX="437.0" layoutY="703.0" prefWidth="80.0" text="Label" />
+                  <Label layoutX="553.0" layoutY="703.0" text="商品数量信息：" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="445.0" layoutY="711.0" prefWidth="250.0" text="购买数量：" />
+                  <Label fx:id="buyNumberLabel" layoutX="509.0" layoutY="711.0" text="Label" />
+               </children>
+            </HBox>
             <HBox layoutX="555.0" layoutY="604.0" prefHeight="15.0" prefWidth="515.0">
                <children>
                   <Label fx:id="goodNameLabel_inStock" layoutX="555.0" layoutY="604.0" prefHeight="15.0" prefWidth="250.0" text="库存数量：" />
@@ -77,13 +89,13 @@
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="557.0" layoutY="617.0">
+      <HBox layoutX="555.0" layoutY="629.0">
          <children>
             <Label layoutX="555.0" layoutY="635.0" text="操作人：" />
             <Label fx:id="operatorLabel" layoutX="612.0" layoutY="635.0" text="Label" />
          </children>
       </HBox>
-      <ComboBox fx:id="isCheckedComboBox" layoutX="555.0" layoutY="644.0" prefHeight="23.0" prefWidth="194.0" />
-      <Button fx:id="uploadBtn" layoutX="886.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="168.0" text="提交" />
+      <ComboBox fx:id="isCheckedComboBox" layoutX="555.0" layoutY="653.0" prefHeight="23.0" prefWidth="194.0" />
+      <Button fx:id="uploadBtn" layoutX="886.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="168.0" text="提交" />
    </children>
 </AnchorPane>

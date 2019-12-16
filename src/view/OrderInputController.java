@@ -397,11 +397,11 @@ public class OrderInputController {
                                 } else continue;
                             }
                             if (flagsEqualOneCount == flags.length) {
-                                clearAll();
                                 Platform.runLater(() -> {
                                     AlertDialog alertDialog = new AlertDialog();
                                     alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交完成!", "提交完成!");
                                     alertDialog.show();
+                                    clearAll();
                                 });
                             } else {
                                 Platform.runLater(() -> {
@@ -414,7 +414,7 @@ public class OrderInputController {
                             //预定订单
                             PropertiesOperation propertiesOperation = new PropertiesOperation();
                             int number = Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber"));
-                            Orders orders = ordersSubmission.createMainOrders(0, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number, datePicker.getValue().toString());
+                            Orders orders = ordersSubmission.createMainOrders(1, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number, datePicker.getValue().toString());
                             int[] flags = new int[leftGoodsListData.size()];
                             for (int i = 0; i < leftGoodsListData.size(); i++) {
                                 flags[i] = ordersSubmission.createBookOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (int) leftGoodsListData.get(i).getPayNumber());
@@ -426,11 +426,11 @@ public class OrderInputController {
                                 } else continue;
                             }
                             if (flagsEqualOneCount == flags.length) {
-                                clearAll();
                                 Platform.runLater(() -> {
                                     AlertDialog alertDialog = new AlertDialog();
                                     alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交完成!", "提交完成!");
                                     alertDialog.show();
+                                    clearAll();
                                 });
                             } else {
                                 Platform.runLater(() -> {
