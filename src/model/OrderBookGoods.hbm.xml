@@ -27,6 +27,6 @@
         <property name="goodsName" column="goodsName" type="java.lang.String" length="20"></property>
         <property name="orderQuantity" column="orderQuantity" type="java.lang.Integer" length="0"></property>
         <property name="buildDate" column="buildDate" type="java.lang.String" length="20"></property>
-
+        <property name="producedQuantity" column="producedQuantity" type="java.lang.Double" length="0"></property>
     </class>
 </hibernate-mapping>

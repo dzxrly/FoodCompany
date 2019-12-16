@@ -1,9 +1,6 @@
 package model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 //预定订单表
 public class OrderBookGoods {
@@ -17,6 +14,7 @@ public class OrderBookGoods {
     private StringProperty goodsName =new SimpleStringProperty();
     private IntegerProperty orderQuantity = new SimpleIntegerProperty();//商品数量
     private StringProperty buildDate = new SimpleStringProperty();
+    private DoubleProperty producedQuantity =new SimpleDoubleProperty();
 
     public int getBookId() {
         return bookId.get();
@@ -126,6 +124,18 @@ public class OrderBookGoods {
         this.buildDate.set(buildDate);
     }
 
+    public double getProducedQuantity() {
+        return producedQuantity.get();
+    }
+
+    public DoubleProperty producedQuantityProperty() {
+        return producedQuantity;
+    }
+
+    public void setProducedQuantity(double producedQuantity) {
+        this.producedQuantity.set(producedQuantity);
+    }
+
     @Override
     public String toString() {
         return "OrderBookGoods{" +
@@ -138,6 +148,7 @@ public class OrderBookGoods {
                 ", goodsName=" + goodsName +
                 ", orderQuantity=" + orderQuantity +
                 ", buildDate=" + buildDate +
+                ", procedureQuantity=" + producedQuantity +
                 '}';
     }
 }

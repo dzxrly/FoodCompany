@@ -96,7 +96,7 @@ public class OrdersSubmission {
         }
     }
 
-    public int createBookOrders(Orders od, int goodsNumber, String goodsName, int orderQuantity, int stocks) {
+    public int createBookOrders(Orders od, int goodsNumber, String goodsName, int orderQuantity, int stocks,double procedureQuantity) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         OrderBookGoods obg = new OrderBookGoods();
@@ -120,11 +120,14 @@ public class OrdersSubmission {
             //订单提交后 更新成品库表
             if (stocks > orderQuantity) {
                 hql = "Update ShippingDepartment set stocks = stocks - :orderQuantity where goodsId = :goodsNumber";
+                obg.setProducedQuantity(0);
                 query = session.createQuery(hql);
                 query.setInteger("orderQuantity", orderQuantity);
                 query.setInteger("goodsNumber", goodsNumber);
-            } else {
+            } else {//库存<订单数量
                 hql = "Update ShippingDepartment set stocks = 0 where goodsId = :goodsNumber";
+                double number = procedureQuantity -(double)orderQuantity;
+                obg.setProducedQuantity(number);
                 query = session.createQuery(hql);
                 query.setInteger("goodsNumber", goodsNumber);
             }
