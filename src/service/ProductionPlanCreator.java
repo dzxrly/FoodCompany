@@ -23,6 +23,12 @@ public class ProductionPlanCreator {//生产计划管理界面
         p.setStartTime(startTime);
         p.setEndTime(endTime);
         p.setProductionState(0);
+        if(orderId!="0"){
+            p.setPlanId(0);
+        }
+        else{
+            p.setPlanType(1);
+        }
         try{
             tx=session.beginTransaction();
             //生产生产计划表

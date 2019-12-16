@@ -96,10 +96,11 @@ public class OrdersSubmission {
         }
     }
 
-    public int createBookOrders(Orders od, int goodsNumber, String goodsName, int orderQuantity) {
+    public int createBookOrders(Orders od, int goodsNumber, String goodsName, int orderQuantity, int stocks) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         OrderBookGoods obg = new OrderBookGoods();
+        String hql = "";
         int ans = 0;
         try {
             obg.setOrderId(od.getOrderId());
@@ -115,12 +116,19 @@ public class OrdersSubmission {
             session.save(obg);
             System.out.println("_____________________________Insert into OSG______________________________");
             ans = 1;//1表示提交成功
-
+            Query query;
             //订单提交后 更新成品库表
-            String hql = "Update ShippingDepartment set stocks = stocks - :orderQuantity where goodsId = :goodsNumber";
-            Query query = session.createQuery(hql);
-            query.setInteger("orderQuantity", orderQuantity);
-            query.setInteger("goodsNumber", goodsNumber);
+            if (stocks > orderQuantity) {
+                hql = "Update ShippingDepartment set stocks = stocks - :orderQuantity where goodsId = :goodsNumber";
+                query = session.createQuery(hql);
+                query.setInteger("orderQuantity", orderQuantity);
+                query.setInteger("goodsNumber", goodsNumber);
+            } else {
+                hql = "Update ShippingDepartment set stocks = 0 where goodsId = :goodsNumber";
+                query = session.createQuery(hql);
+                query.setInteger("goodsNumber", goodsNumber);
+            }
+
             query.executeUpdate();
             System.out.println("_____________________________Update on SD______________________________");
             tx.commit();
@@ -161,7 +169,7 @@ public class OrdersSubmission {
                     time = time + (gd[i].getPayNumber() - stocks) / t;
                 }
             }
-            time=Math.ceil(time/24);
+            time = Math.ceil(time / 24);
 //            System.out.println(time);
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
