@@ -28,7 +28,8 @@ public class ProductionFormSubmission {
 
         try{
             tx=session.beginTransaction();
-            hql="select sum(o.orderQuantity/p.productQuantityPerTime) from OrderBookGoods o,ProductUnit  p where o.goodsNumber = p.goodsId and orderId = " + orderId;
+            //sum(应该生产数量/单位生产时间)
+            hql="select sum(o.producedQuantity/p.productQuantityPerTime) from OrderBookGoods o,ProductUnit  p where o.goodsNumber = p.goodsId and orderId = " + orderId;
             List list = session.createQuery(hql).list();
             Object ob = (Object) list.get(0);
             double userTime = Double.parseDouble(ob.toString())/24;
