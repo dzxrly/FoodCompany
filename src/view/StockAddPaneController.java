@@ -1,5 +1,7 @@
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -27,8 +29,12 @@ public class StockAddPaneController {
     @FXML
     private Button uploadBtn;
 
+    private ObservableList<String> searchTypeOptions = FXCollections.observableArrayList("按商品编号查询","按商品名查询");
+
     @FXML
     private void initialize() {
+        searchTypeComboBox.setItems(searchTypeOptions);
+        searchTypeComboBox.getSelectionModel().select(0);
         //TODO
     }
 
