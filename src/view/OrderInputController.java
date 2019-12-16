@@ -417,7 +417,7 @@ public class OrderInputController {
                             Orders orders = ordersSubmission.createMainOrders(1, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number, datePicker.getValue().toString());
                             int[] flags = new int[leftGoodsListData.size()];
                             for (int i = 0; i < leftGoodsListData.size(); i++) {
-                                flags[i] = ordersSubmission.createBookOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (int) leftGoodsListData.get(i).getPayNumber());
+                                flags[i] = ordersSubmission.createBookOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (int) leftGoodsListData.get(i).getPayNumber(), leftGoodsListData.get(i).getStocks());
                             }
                             int flagsEqualOneCount = 0;
                             for (int i = 0; i < flags.length; i++) {
