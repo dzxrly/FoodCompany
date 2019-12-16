@@ -12,7 +12,7 @@ public class ProductPlan {
     private StringProperty endTime =new SimpleStringProperty();
     private IntegerProperty planType = new SimpleIntegerProperty(); //0为季度 1为预定
     private DoubleProperty productionCycle = new SimpleDoubleProperty();
-    private IntegerProperty productionState = new SimpleIntegerProperty();//表示是否投入生产 0表示为投入生产 1表示投入生产
+    private IntegerProperty productionState = new SimpleIntegerProperty();//表示是否投入生产 0表示未投入生产 1表示投入生产
 
     public int getProductionState() {
         return productionState.get();

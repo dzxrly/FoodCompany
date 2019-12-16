@@ -123,11 +123,47 @@ public class MaterialManagement {
             session.close();
             return ans;
         }
+    }
+
+    public List productionPlanMaterialSearch(String planId){//用于生产车间的原料申请 显示一个生产计划所需的 原料名称 原料的数量 原料单位 原料库存量 原料单位
+        Session session= HibernateUtils.openSession();
+        Transaction tx=null;
+        String hql="";
+        List list= null;
+        try{
+            tx=session.beginTransaction();
+            hql ="select productionId from ProductPlan where planId = " +planId;
+            list = session.createQuery(hql).list();
+            Object ob = (Object) list.get(0);
+            String productionId = ob.toString();
+            System.out.println("_____________" + productionId);
+            hql ="select DISTINCT m.materialName,p.productionQuantity * m.perQuantity,t.materialUnit, m.materialStocks,t.materialUnit from ProductionDetailForm p,MaterialToGoods m,Material t where p.goodsId = m.goodsId and m.materialId = t.materialId and p.productionId = "+ productionId;
+            list = session.createQuery(hql).list();
+            tx.commit();
+        }catch(RuntimeException e){
+            System.out.println("____________________Can not submit_________________");
+            tx.rollback();
+            throw e;
+        }finally {
+            session.close();
+            return list;
+        }
 
     }
+
 }
 
 
 //        MaterialManagement m =new MaterialManagement();
 //        m.AddMaterial("膨化剂量",20,10002,365,1,1000);
 //        m.UpdateMaterial(9,"硼化剂",10,10003,365,1,200);
+
+
+
+//test    productionPlanMaterialSearch
+//        MaterialManagement m = new MaterialManagement();
+//        List list  = m.productionPlanMaterialSearch("6");
+//        for(int i=0;i<list.size();i++){
+//            Object[] ob1 = (Object [])list.get(i);
+//            System.out.println(ob1[0].toString()+ob1[1].toString()+ob1[2].toString()+ob1[3].toString()+ob1[4].toString());
+//        }
