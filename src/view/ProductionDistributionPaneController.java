@@ -38,6 +38,10 @@ public class ProductionDistributionPaneController {
     private Label operatorLabel;
     @FXML
     private Button uploadBtn;
+    @FXML
+    private TableView pipelineStatusList;
+    @FXML
+    private Button refreshStatus;
 
     @FXML
     private void initialize() {
@@ -58,6 +62,11 @@ public class ProductionDistributionPaneController {
 
     @FXML
     private void handleUpload() {
+        //TODO
+    }
+
+    @FXML
+    private void handleRefresh() {
         //TODO
     }
 }

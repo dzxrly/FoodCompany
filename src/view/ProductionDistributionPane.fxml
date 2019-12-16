@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -21,9 +22,9 @@
             <Button fx:id="searchAllBtn" layoutX="292.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleSearchAll" prefWidth="80.0" text="查询全部" />
          </children>
       </HBox>
-      <ScrollPane layoutX="14.0" layoutY="109.0" prefHeight="415.0" prefWidth="1047.0">
+      <ScrollPane layoutX="14.0" layoutY="109.0" prefHeight="415.0" prefWidth="761.0">
          <content>
-            <TableView fx:id="plansList" prefHeight="413.0" prefWidth="1045.0" />
+            <TableView fx:id="plansList" prefHeight="419.0" prefWidth="760.0" />
          </content>
       </ScrollPane>
       <Label layoutX="402.0" layoutY="538.0" text="生产计划分配">
@@ -109,6 +110,25 @@
                </children>
             </HBox>
             <Button fx:id="uploadBtn" layoutX="396.0" layoutY="731.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="96.0" text="提交" />
+         </children>
+      </VBox>
+      <VBox layoutX="793.0" layoutY="109.0" prefHeight="405.0" prefWidth="258.0">
+         <children>
+            <Label layoutX="798.0" layoutY="109.0" text="流水线状态：" />
+            <ScrollPane layoutX="798.0" layoutY="134.0" prefHeight="350.0" prefWidth="258.0">
+               <content>
+                  <TableView fx:id="pipelineStatusList" prefHeight="349.0" prefWidth="262.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </content>
+            </ScrollPane>
+            <Button fx:id="refreshStatus" layoutX="798.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="23.0" prefWidth="90.0" text="刷新">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>
