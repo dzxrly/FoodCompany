@@ -80,4 +80,7 @@ public class ProductWorkshop {
     public void submit(){
 
     }
+    //生产流程管理界面
+
+    //产品销毁界面
 }

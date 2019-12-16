@@ -6,12 +6,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import service.AddImageForComponent;
 
 import java.util.regex.Pattern;
 
 public class InventoryQuantityManagementPaneController {
+    @FXML
+    private HBox selectModelHBox;
+    @FXML
+    private RadioButton searchModel;
+    @FXML
+    private RadioButton changeModel;
+    @FXML
+    private RadioButton addModel;
     @FXML
     private ComboBox typeComboBox;
     @FXML
@@ -23,11 +33,11 @@ public class InventoryQuantityManagementPaneController {
     @FXML
     private TableView resList;
     @FXML
-    private Label numberLabel;
+    private TextField numberLabel;
     @FXML
-    private Label nameLabel;
+    private TextField nameLabel;
     @FXML
-    private Label stocksNumberLabel;
+    private TextField stocksNumberLabel;
     @FXML
     private ComboBox inOrOutTypeComboBox;
     @FXML
@@ -40,19 +50,41 @@ public class InventoryQuantityManagementPaneController {
     private Label operatorLabel;
     @FXML
     private Button uploadBtn;
+    @FXML
+    private Button deleteBtn;
+    @FXML
+    private HBox btnGroup;
+    @FXML
+    private VBox vBox;
 
+    private ToggleGroup toggleGroup = new ToggleGroup();
     private ObservableList<String> inOrOurTypeOptions = FXCollections.observableArrayList("出库", "入库");
 
     @FXML
     private void initialize() {
-        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
-        uploadBtn.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
+        searchModel.setSelected(true);
+        searchModel.setUserData(1);
+        searchModel.setToggleGroup(toggleGroup);
+        changeModel.setUserData(2);
+        changeModel.setToggleGroup(toggleGroup);
+        addModel.setUserData(3);
+        addModel.setToggleGroup(toggleGroup);
+
+        searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
+        uploadBtn.setGraphic((new AddImageForComponent("img/check.png", 14)).getImageView());
         stocksNumberLabel.setText("0");
         warningLabel.setText("");
         warningLabel.setTextFill(Color.BLACK);
         inOrOutLabel.setText("出库数量：");
         inOrOutTypeComboBox.setItems(inOrOurTypeOptions);
         inOrOutTypeComboBox.getSelectionModel().select(0);
+        numberLabel.setDisable(true);
+        nameLabel.setDisable(true);
+        stocksNumberLabel.setDisable(true);
+        inOrOutTypeComboBox.setDisable(true);
+        inputText.setDisable(true);
+        deleteBtn.setVisible(false);
+        uploadBtn.setVisible(false);
 
         inOrOutTypeComboBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -85,6 +117,37 @@ public class InventoryQuantityManagementPaneController {
                 }
             }
         });
+
+        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if (newValue.getUserData().toString().equals("1")) {
+                    numberLabel.setDisable(true);
+                    nameLabel.setDisable(true);
+                    stocksNumberLabel.setDisable(true);
+                    inOrOutTypeComboBox.setDisable(true);
+                    inputText.setDisable(true);
+                    deleteBtn.setVisible(false);
+                    uploadBtn.setVisible(false);
+                } else if (newValue.getUserData().toString().equals("2")) {
+                    numberLabel.setDisable(true);
+                    nameLabel.setDisable(true);
+                    stocksNumberLabel.setDisable(false);
+                    inOrOutTypeComboBox.setDisable(false);
+                    inputText.setDisable(false);
+                    deleteBtn.setVisible(true);
+                    uploadBtn.setVisible(true);
+                } else {
+                    numberLabel.setDisable(false);
+                    nameLabel.setDisable(false);
+                    stocksNumberLabel.setDisable(false);
+                    inOrOutTypeComboBox.setDisable(false);
+                    inputText.setDisable(false);
+                    deleteBtn.setVisible(false);
+                    uploadBtn.setVisible(true);
+                }
+            }
+        });
         //TODO
     }
 
@@ -100,6 +163,11 @@ public class InventoryQuantityManagementPaneController {
 
     @FXML
     private void handleUpload() {
+        //TODO
+    }
+
+    @FXML
+    private void handleDelete() {
         //TODO
     }
 

@@ -104,13 +104,11 @@ public class MainWindowController {
         TreeItem<String> produceNumberManagement = new TreeItem<>("生产管理");
         produceNumberManagement.getChildren().add(new TreeItem<>("生产财务规划"));
         produceNumberManagement.getChildren().add(new TreeItem<>("生产计划管理"));
+        produceNumberManagement.getChildren().add(new TreeItem<>("库存数量补充"));
         itemProductionPlanDep.getChildren().add(produceNumberManagement);
 
         TreeItem<String> rawMaterialManage = new TreeItem<>("原料管理");
         itemProductionPlanDep.getChildren().add(rawMaterialManage);
-
-        TreeItem<String> productionsManage = new TreeItem<>("生产计划交付");
-        itemProductionPlanDep.getChildren().add(productionsManage);
         //侧边栏生产车间
         TreeItem<String> itemWorkshop = new TreeItem<>("生产车间");
         itemWorkshop.getChildren().add(new TreeItem<>("原料申请"));
@@ -118,6 +116,7 @@ public class MainWindowController {
         TreeItem<String> produceProgress = new TreeItem<>("生产流程管理");
         produceProgress.getChildren().add(new TreeItem<>("生产分配"));
         produceProgress.getChildren().add(new TreeItem<>("抽检管理"));
+        produceProgress.getChildren().add(new TreeItem<>("生产计划交付"));
         itemWorkshop.getChildren().add(produceProgress);
 
         TreeItem<String> productDestruction = new TreeItem<>("产品销毁");
@@ -303,6 +302,12 @@ public class MainWindowController {
                     } else if (currentSelectedItem.getValue().equals("考勤管理")) {
                         try {
                             showInsidePane("AttendanceManagePane.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (currentSelectedItem.getValue().equals("库存数量补充")) {
+                        try {
+                            showInsidePane("StockAddPane.fxml");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
