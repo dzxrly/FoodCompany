@@ -14,12 +14,11 @@ import javafx.scene.paint.Color;
 import model.Goods;
 import model.OrderStocks;
 import model.Orders;
-import service.AddImageForComponent;
-import service.AlertDialog;
-import service.OrdersSearch;
-import service.PropertiesOperation;
+import model.ProductionForm;
+import service.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class OrderProductionCheckPaneController {
     //订单需求量检查类
@@ -40,8 +39,6 @@ public class OrderProductionCheckPaneController {
     @FXML
     private Label operatorLabel;
     @FXML
-    private ComboBox isCheckedComboBox;
-    @FXML
     private Button uploadBtn;
     @FXML
     private Label goodNameLabel_inStock;
@@ -54,12 +51,12 @@ public class OrderProductionCheckPaneController {
     @FXML
     private Label buyNumberLabel;
 
-    private ObservableList<String> checkStatusOptions = FXCollections.observableArrayList("无法通过", "已通过");
     private ObservableList<Orders> ordersObservableList = FXCollections.observableArrayList();
     private OrdersSearch ordersSearch = new OrdersSearch();
     private ObservableList<OrderStocks> goodsObservableList = FXCollections.observableArrayList();
     private Orders currentOrders = new Orders();
     private OrderStocks currentGood = new OrderStocks();
+    private ProductionFormSubmission productionFormSubmission = new ProductionFormSubmission();
 
     @FXML
     private void initialize() {
@@ -71,10 +68,7 @@ public class OrderProductionCheckPaneController {
         needProducedNumberLabel.setText("未选中商品");
 
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
-        uploadBtn.setText("提交");
         uploadBtn.setGraphic((new AddImageForComponent("img/check.png", 14)).getImageView());
-        isCheckedComboBox.setItems(checkStatusOptions);
-        isCheckedComboBox.getSelectionModel().select(0);
 
         PropertiesOperation propertiesOperation = new PropertiesOperation();
         operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
@@ -144,15 +138,6 @@ public class OrderProductionCheckPaneController {
         goodsList.getColumns().addAll(goodsIdCol, goodsNameCol, orderQuantityCol, stocksCol);
         goodsList.setItems(goodsObservableList);
 
-        isCheckedComboBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if ((int) newValue == 0) {
-                    uploadBtn.setText("提交");
-                } else uploadBtn.setText("生成生产表单");
-            }
-        });
-
         orderList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -183,7 +168,6 @@ public class OrderProductionCheckPaneController {
                 }
             }
         });
-        //TODO
     }
 
     private void clearAll() {
@@ -195,7 +179,6 @@ public class OrderProductionCheckPaneController {
         needProducedNumberLabel.setText("未选中商品");
         ordersObservableList.clear();
         goodsObservableList.clear();
-        isCheckedComboBox.getSelectionModel().select(0);
     }
 
     @FXML
@@ -218,7 +201,20 @@ public class OrderProductionCheckPaneController {
 
     @FXML
     private void handleUpload() {
-        //TODO
+        if (!orderNumberLabel.getText().equals("未选中订单")) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("确认");
+            alert.setHeaderText("是否创建生产表单？");
+            alert.setContentText("提交后无法撤销！");
+            Optional<ButtonType> optionalButtonType = alert.showAndWait();
+            if (optionalButtonType.get() == ButtonType.OK) {
+                service_upload.restart();
+            } else alert.close();
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有选中订单！", "请选择要处理的订单！");
+            alertDialog.showAlert();
+        }
     }
 
     Service<Integer> service_search = new Service<Integer>() {
@@ -293,7 +289,6 @@ public class OrderProductionCheckPaneController {
                 protected Integer call() throws Exception {
                     List list = ordersSearch.searchOrderAndStocks(String.valueOf(currentOrders.getOrderId()));
                     if (!list.toString().equals("[]") && list != null) {
-                        System.out.println("-----------------------------------------------------");
                         for (int i = 0; i < list.size(); i++) {
                             Object[] objects = (Object[]) list.get(i);
                             OrderStocks os = new OrderStocks();
@@ -307,6 +302,49 @@ public class OrderProductionCheckPaneController {
                         }
                     } else {
                         Platform.runLater(() -> goodsList.setPlaceholder(new Label("没有结果！")));
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_upload = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    PropertiesOperation propertiesOperation = new PropertiesOperation();
+                    ProductionForm productionForm = productionFormSubmission.createProductionForm(currentOrders.getOrderId(), currentOrders.getEndDate(), Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber")));
+                    if (productionForm != null) {
+                        int[] flags = new int[goodsObservableList.size()];
+                        for (int i = 0; i < goodsObservableList.size(); i++) {
+                            flags[i] = productionFormSubmission.createProductionDetailForm(productionForm, goodsObservableList.get(i).getGoodsId(), goodsObservableList.get(i).getGoodsName(), goodsObservableList.get(i).getProduceQuantity(), goodsObservableList.get(i).getStocks());
+                        }
+                        int number = 0;
+                        for (int i = 0; i < flags.length; i++)
+                            if (flags[i] == 1) number++;
+                        if (number == goodsObservableList.size()) {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                                alertDialog.showAlert();
+                                clearAll();
+                            });
+                        } else {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "请重新提交！");
+                                alertDialog.showAlert();
+                            });
+                        }
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "请重新提交！");
+                            alertDialog.showAlert();
+                        });
                     }
                     return null;
                 }

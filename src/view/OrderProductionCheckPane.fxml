@@ -89,7 +89,6 @@
             <Label fx:id="operatorLabel" layoutX="612.0" layoutY="635.0" text="Label" />
          </children>
       </HBox>
-      <ComboBox fx:id="isCheckedComboBox" layoutX="555.0" layoutY="619.0" prefHeight="23.0" prefWidth="194.0" />
-      <Button fx:id="uploadBtn" layoutX="885.0" layoutY="619.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="168.0" text="提交" />
+      <Button fx:id="uploadBtn" layoutX="885.0" layoutY="619.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="168.0" text="生成生产表单" />
    </children>
 </AnchorPane>
