@@ -35,7 +35,8 @@ public class StuffSearch {
             } else if (index == 1) {//员工姓名
                 hql = "from Stuff where personalName like '%" + test + "%'";
             } else if (index == 2) {//部门id
-                if(test.equals("销售部")) test="1";
+                if(test.equals("老板")) test="0";
+                else if(test.equals("销售部")) test="1";
                 else if(test.equals("财务部")) test="2";
                 else if(test.equals("生产计划科")) test="3";
                 else if(test.equals("生产车间")) test="4";
