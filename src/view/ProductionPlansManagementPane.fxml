@@ -34,17 +34,42 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="648.0" layoutY="131.0" text="生产表单列表：" />
-      <ScrollPane layoutX="648.0" layoutY="159.0" prefHeight="343.0" prefWidth="418.0">
-         <content>
-            <TableView fx:id="selectedOrderList" prefHeight="341.0" prefWidth="416.0">
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-         </content>
-      </ScrollPane>
-      <VBox layoutX="648.0" layoutY="514.0" spacing="5.0">
+      <VBox layoutX="648.0" layoutY="144.0" prefHeight="190.0" prefWidth="350.0" spacing="20.0">
+         <children>
+            <Label layoutX="648.0" layoutY="131.0" text="生产表单信息：" />
+            <HBox layoutX="659.0" layoutY="176.0">
+               <children>
+                  <Label layoutX="659.0" layoutY="183.0" prefWidth="90.0" text="生产表单编号：" />
+                  <Label layoutX="800.0" layoutY="176.0" text="Label" />
+               </children>
+            </HBox>
+            <HBox layoutX="659.0" layoutY="211.0">
+               <children>
+                  <Label layoutX="659.0" layoutY="218.0" prefWidth="90.0" text="订单编号：" />
+                  <Label layoutX="734.0" layoutY="211.0" text="Label" />
+               </children>
+            </HBox>
+            <HBox layoutX="644.0" layoutY="256.0">
+               <children>
+                  <Label layoutX="644.0" layoutY="256.0" prefWidth="90.0" text="创建日期：" />
+                  <Label layoutX="771.0" layoutY="256.0" text="Label" />
+               </children>
+            </HBox>
+            <HBox layoutX="633.0" layoutY="306.0">
+               <children>
+                  <Label layoutX="633.0" layoutY="306.0" prefWidth="90.0" text="截止日期：" />
+                  <Label layoutX="732.0" layoutY="306.0" text="Label" />
+               </children>
+            </HBox>
+            <HBox layoutX="675.0" layoutY="369.0">
+               <children>
+                  <Label layoutX="675.0" layoutY="369.0" prefWidth="90.0" text="生产速度：" />
+                  <Label layoutX="754.0" layoutY="369.0" text="Label" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="648.0" layoutY="352.0" spacing="5.0">
          <children>
             <VBox layoutX="648.0" layoutY="541.0" prefHeight="52.0" prefWidth="175.0" spacing="5.0">
                <children>

@@ -50,12 +50,6 @@
                         <Label fx:id="planCountLabel" layoutX="779.0" layoutY="488.0" text="Label" />
                      </children>
                   </HBox>
-                  <HBox layoutX="755.0" layoutY="253.0">
-                     <children>
-                        <Label layoutX="755.0" layoutY="253.0" prefWidth="90.0" text="生产总成本：" />
-                        <Label fx:id="produceCostLabel" layoutX="845.0" layoutY="253.0" text="Label" />
-                     </children>
-                  </HBox>
                   <HBox layoutX="755.0" layoutY="294.0">
                      <children>
                         <Label layoutX="755.0" layoutY="294.0" prefWidth="90.0" text="原料总成本：" />

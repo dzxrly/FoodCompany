@@ -34,10 +34,6 @@ public class OrderStocks {
         this.goodsName.set(goodsName);
     }
 
-    public void setOrderQuantity(int orderQuantity) {
-        this.orderQuantity.set(orderQuantity);
-    }
-
     public double getGoodsPrice() {
         return goodsPrice.get();
     }
@@ -71,10 +67,6 @@ public class OrderStocks {
     }
 
     public void setStocks(double stocks) {
-        this.stocks.set(stocks);
-    }
-
-    public void setStocks(int stocks) {
         this.stocks.set(stocks);
     }
 
