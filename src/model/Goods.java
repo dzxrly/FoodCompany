@@ -12,6 +12,7 @@ public class Goods {
     private DoubleProperty goodsPrice =new SimpleDoubleProperty();
     private IntegerProperty goodsQualityTime = new SimpleIntegerProperty();
     private DoubleProperty requiredQuantity = new SimpleDoubleProperty();
+    private StringProperty goodsUnit = new SimpleStringProperty();
     //private ObjectProperty<LocalDateTime> = new ObjectProperty<LocalDateTime>
 
     public int getGoodsId() {
@@ -78,6 +79,18 @@ public class Goods {
         this.requiredQuantity.set(requiredQuantity);
     }
 
+    public String getGoodsUnit() {
+        return goodsUnit.get();
+    }
+
+    public StringProperty goodsUnitProperty() {
+        return goodsUnit;
+    }
+
+    public void setGoodsUnit(String goodsUnit) {
+        this.goodsUnit.set(goodsUnit);
+    }
+
     @Override
     public String toString() {
         return "Goods{" +
@@ -86,6 +99,7 @@ public class Goods {
                 ", goodsPrice=" + goodsPrice +
                 ", goodsQualityTime=" + goodsQualityTime +
                 ", requiredQuantity=" + requiredQuantity +
+                ", goodsUnit=" + goodsUnit +
                 '}';
     }
 }

@@ -30,6 +30,8 @@ public class MainApp extends Application {
     private AnchorPane loginPane;
 
     public static void main(String[] args) {
+        StuffSearch ss= new StuffSearch();
+        System.out.println(ss.searchByIndex(3,"男"));
         launch(args);
     }
 
