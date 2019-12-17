@@ -10,10 +10,11 @@ import java.util.List;
 
 public class ProductionFormSearch {//生产财务规划界面的部分功能
 
-    public List searchProductionForm(int index) {
-        Session session = HibernateUtils.openSession();
-        String hql = "";
-        List list = null;
+    public List searchProductionForm(int index){
+        Session session= HibernateUtils.openSession();
+        String hql="";
+        List list=null;
+
         try {
             if (index == 0) {
                 hql = "from ProductionForm";
