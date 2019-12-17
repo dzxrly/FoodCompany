@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 
 public class StuffAdd {
 
-    public int addStuff(String personalName,String password,int level,String personalId ,String address,String phoneNumber,String email,int gender){
+    public int addStuff(String personalName,String password,int level,String personalId ,String address,String phoneNumber,String email,int gender,int type){
         Session session = HibernateUtils.openSession();
         Transaction tx=null;
         int ans= 0;
@@ -20,6 +20,7 @@ public class StuffAdd {
         s.setPhoneNumber(phoneNumber);
         s.setEmail(email);
         s.setGender(gender);
+        s.setLevel(type);
         try{
             tx=session.beginTransaction();
             session.save(s);

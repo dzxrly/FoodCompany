@@ -7,13 +7,14 @@ import java.util.List;
 
 //员工信息管理界面的员工搜索
 public class StuffSearch {
+    //test为空
     public List searchAll(int index,String test){
         Session session = HibernateUtils.openSession();
         String hql="";
         List list=null;
         try{
             if(index==0){//员工性别
-                hql="";
+
             }
             else if(index==1){//员工姓名
 
@@ -39,7 +40,7 @@ public class StuffSearch {
             return list;
         }
     }
-
+    //test不为空
     public List searchByIndex(int index,String test){
         Session session = HibernateUtils.openSession();
         String sql="";

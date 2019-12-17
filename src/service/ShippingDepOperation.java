@@ -75,6 +75,37 @@ public class ShippingDepOperation {
             return res;
         }
     }
-    //生产入库数量管理
 
+    //生产入库数量管理
+    public List searchPlanId(int planId) {
+        Session session = HibernateUtils.openSession();
+        List list = null;
+        String hql = "";
+        try {
+            hql = "from ProductDetailPlan where planId=" + String.valueOf(planId);
+            list=session.createQuery(hql).list();
+        } catch (RuntimeException e) {
+            System.out.println("---can not search---");
+            throw e;
+        } finally {
+            session.close();
+            return list;
+        }
+    }
+
+    public List searchAllId() {
+        Session session = HibernateUtils.openSession();
+        List list = null;
+        String hql = "";
+        try {
+            hql = "from ProductDetailPlan";
+            list=session.createQuery(hql).list();
+        } catch (RuntimeException e) {
+            System.out.println("---can not search---");
+            throw e;
+        } finally {
+            session.close();
+            return list;
+        }
+    }
 }

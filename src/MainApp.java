@@ -30,8 +30,10 @@ public class MainApp extends Application {
     private AnchorPane loginPane;
 
     public static void main(String[] args) {
-//        ProductWorkshop pw= new ProductWorkshop();
-
+        ShippingDepOperation sdo= new ShippingDepOperation();
+        System.out.println(sdo.searchPlanId(1));
+//        ProductPlan pp= new ProductPlan();
+//        System.out.println(pp.getEndTime());
         launch(args);
     }
 

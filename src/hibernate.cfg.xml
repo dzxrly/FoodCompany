@@ -40,5 +40,6 @@
         <mapping resource="model/ProductionDetailForm.hmb.xml"/>
         <mapping resource="model/MaterialToGoods.hbm.xml"/>
         <mapping resource="model/DestroyRecord.hbm.xml"/>
+        <mapping resource="model/ProductDetailPlan.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
