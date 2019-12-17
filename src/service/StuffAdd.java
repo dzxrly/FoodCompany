@@ -7,13 +7,13 @@ import org.hibernate.Transaction;
 
 public class StuffAdd {
 
-    public int addStuff(String personalName,String passward,int level,String personalId ,String address,String phoneNumber,String email,int gender){
+    public int addStuff(String personalName,String password,int level,String personalId ,String address,String phoneNumber,String email,int gender){
         Session session = HibernateUtils.openSession();
         Transaction tx=null;
         int ans= 0;
         Stuff s=new Stuff();
         s.setPersonalName(personalName);
-        s.setPassword(passward);
+        s.setPassword(password);
         s.setLevel(level);
         s.setPersonalID(personalId);
         s.setAddress(address);

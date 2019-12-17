@@ -76,5 +76,5 @@ public class ShippingDepOperation {
         }
     }
     //生产入库数量管理
-    //入库数量管理
+
 }

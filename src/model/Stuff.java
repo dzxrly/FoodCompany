@@ -9,15 +9,14 @@ public class Stuff {
     private StringProperty personalName = new SimpleStringProperty(); //姓名.
     private IntegerProperty number =  new SimpleIntegerProperty(); //员工ID
     private StringProperty password = new SimpleStringProperty(); //登陆密码
-    private IntegerProperty level = new SimpleIntegerProperty(); //权限等级，用数字表示，0为最高
+    private IntegerProperty level = new SimpleIntegerProperty(); //权限等级，用数字表示，0表示老板 1表示经理 2表示员工
     private StringProperty personalID = new SimpleStringProperty(); //身份证
     private StringProperty address = new SimpleStringProperty(); //住址
     private StringProperty phoneNumber =new SimpleStringProperty(); //手机号
     private StringProperty email = new SimpleStringProperty(); //邮箱.
     private IntegerProperty gender= new SimpleIntegerProperty();//性别 0为男1为女
 
-    //0表示老板拥有全部权限 1表示销售部经理 2表示财务部经理 3表示生产计划科经理 4表示生产车间经理 5表示成品库管理员 6表示原料库管理员
-    //11表示销售部职员 22表示财务部职员 33表示生产计划科职员 44表示生产车间职员 55表示成品库职员 66表示原料库职员
+    //相当于部门id 详情可见department表）：0表示老板 1表示销售部 2表示财务部，3表示生产计划科，4表示生产车间，5表示成品库，6表示原料库
     private IntegerProperty type =new SimpleIntegerProperty();//员工类型
 
     public String getPersonalName() {

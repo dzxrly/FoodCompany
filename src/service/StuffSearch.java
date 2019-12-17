@@ -9,18 +9,28 @@ import java.util.List;
 public class StuffSearch {
     public List searchAll(int index,String test){
         Session session = HibernateUtils.openSession();
-        String sql="";
+        String hql="";
         List list=null;
         try{
-            if(index==0){//员工id
-
+            if(index==0){//员工性别
+                hql="";
             }
             else if(index==1){//员工姓名
 
             }
-            else if(index==2){
+            else if(index==2){//部门id(员工type）
 
             }
+            else if(index==3){//地址
+
+            }
+            else if(index==4){//职位
+
+            }
+            else if(index==5){//电话
+
+            }
+
         }catch (RuntimeException e){
             System.out.println("---can not search----");
             throw e;
