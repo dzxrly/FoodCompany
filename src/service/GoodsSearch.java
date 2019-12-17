@@ -15,6 +15,7 @@ public class GoodsSearch {
         List list = null;
         String hql = null;
         try {
+
             tx = session.beginTransaction();
             if (name != null)
                 hql = "select g.goodsId,g.goodsName,g.goodsPrice,g.goodsQualityTime,s.stocks,g.goodsUnit from Goods as g,ShippingDepartment as s where g.goodsId=s.goodsId and g.goodsName like '%" + name + "%'";
