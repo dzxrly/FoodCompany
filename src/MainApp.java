@@ -32,20 +32,11 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         ShippingDepOperation sdo= new ShippingDepOperation();
         System.out.println(sdo.searchPlanId(1));
-//        ProductPlan pp= new ProductPlan();
-//        System.out.println(pp.getEndTime());
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws ParseException {
-//        OrdersSubmission Obs = new OrdersSubmission();
-//        Orders od = Obs.createMainOrders(0, "test", "李天添", "17863107716", "上海", 7300.0, 10002, "购物广场");
-//        Obs.createSpotOrders(od, 1, "香蕉", 100.0);
-//        Obs.createSpotOrders(od, 2, "苹果", 200.0);
-//        Obs.createSpotOrders(od, 3, "猪肉", 100.0);
-
-
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
         showUserLoginPane();

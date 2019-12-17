@@ -14,6 +14,7 @@ public class ProductionFormSearch {//生产财务规划界面的部分功能
         Session session= HibernateUtils.openSession();
         String hql="";
         List list=null;
+
         try{
             if(index == 0){
                 hql="from ProductionForm";

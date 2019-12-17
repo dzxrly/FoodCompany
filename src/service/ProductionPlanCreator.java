@@ -32,7 +32,7 @@ public class ProductionPlanCreator {//生产计划管理界面
         try{
             tx=session.beginTransaction();
             //生产生产计划表
-            hql="select sum(o.orderQuantity/p.productQuantityPerTime) from OrderBookGoods o,ProductUnit  p where o.goodsNumber = p.goodsId and orderId = " + orderId;
+            hql="select sum(o.producedQuantity/p.productQuantityPerTime) from OrderBookGoods o,ProductUnit  p where o.goodsNumber = p.goodsId and orderId = " + orderId;
             List list = session.createQuery(hql).list();
             Object ob = (Object) list.get(0);
             double cycle = Double.parseDouble(ob.toString())/24;
