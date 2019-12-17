@@ -21,7 +21,7 @@
         -->
         <property name="productTime" column="productTime" type="java.lang.String" length="13"></property>
         <property name="goodsQualityTime" column="goodsQualityTime" type="java.lang.Integer" length="11"></property>
-        <property name="stocks" column="stocks" type="java.lang.Integer" length="11"></property>
+        <property name="stocks" column="stocks" type="java.lang.Double" length="0"></property>
         <property name="storeTime" column="storeTime" type="java.lang.String" length="20"></property>
     </class>
 </hibernate-mapping>

@@ -11,8 +11,8 @@ public class ProductionDetailForm {
     private IntegerProperty orderId = new SimpleIntegerProperty();//预定订单编号
     private IntegerProperty goodsId =new SimpleIntegerProperty();//商品编号
     private StringProperty goodsName = new SimpleStringProperty();//商品名称
-    private IntegerProperty productionQuantity = new SimpleIntegerProperty();//预定订单数量-库存的数量 如果订单数量小于库存数量则为0
-    private IntegerProperty stocks = new SimpleIntegerProperty();//库存数量
+    private DoubleProperty productionQuantity = new SimpleDoubleProperty();//预定订单数量-库存的数量 如果订单数量小于库存数量则为0
+    private DoubleProperty stocks = new SimpleDoubleProperty();//库存数量
 
     public int getId() {
         return id.get();
@@ -74,24 +74,28 @@ public class ProductionDetailForm {
         this.goodsName.set(goodsName);
     }
 
-    public int getProductionQuantity() {
+    public double getProductionQuantity() {
         return productionQuantity.get();
     }
 
-    public IntegerProperty productionQuantityProperty() {
+    public DoubleProperty productionQuantityProperty() {
         return productionQuantity;
     }
 
-    public void setProductionQuantity(int productionQuantity) {
+    public void setProductionQuantity(double productionQuantity) {
         this.productionQuantity.set(productionQuantity);
     }
 
-    public int getStocks() {
+    public double getStocks() {
         return stocks.get();
     }
 
-    public IntegerProperty stocksProperty() {
+    public DoubleProperty stocksProperty() {
         return stocks;
+    }
+
+    public void setStocks(double stocks) {
+        this.stocks.set(stocks);
     }
 
     public void setStocks(int stocks) {

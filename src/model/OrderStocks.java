@@ -5,9 +5,10 @@ import javafx.beans.property.*;
 public class OrderStocks {
     private IntegerProperty goodsId = new SimpleIntegerProperty();
     private StringProperty goodsName = new SimpleStringProperty();
-    private IntegerProperty orderQuantity = new SimpleIntegerProperty();//订单数量
+    private DoubleProperty orderQuantity = new SimpleDoubleProperty();//订单数量
     private DoubleProperty goodsPrice = new SimpleDoubleProperty();
-    private IntegerProperty stocks = new SimpleIntegerProperty();//库存数量
+    private DoubleProperty stocks = new SimpleDoubleProperty();//库存数量
+    private DoubleProperty produceQuantity = new SimpleDoubleProperty();//应生产数量
 
     public int getGoodsId() {
         return goodsId.get();
@@ -33,14 +34,6 @@ public class OrderStocks {
         this.goodsName.set(goodsName);
     }
 
-    public double getOrderQuantity() {
-        return orderQuantity.get();
-    }
-
-    public IntegerProperty orderQuantityProperty() {
-        return orderQuantity;
-    }
-
     public void setOrderQuantity(int orderQuantity) {
         this.orderQuantity.set(orderQuantity);
     }
@@ -57,16 +50,44 @@ public class OrderStocks {
         this.goodsPrice.set(goodsPrice);
     }
 
-    public int getStocks() {
+    public double getOrderQuantity() {
+        return orderQuantity.get();
+    }
+
+    public DoubleProperty orderQuantityProperty() {
+        return orderQuantity;
+    }
+
+    public void setOrderQuantity(double orderQuantity) {
+        this.orderQuantity.set(orderQuantity);
+    }
+
+    public double getStocks() {
         return stocks.get();
     }
 
-    public IntegerProperty stocksProperty() {
+    public DoubleProperty stocksProperty() {
         return stocks;
+    }
+
+    public void setStocks(double stocks) {
+        this.stocks.set(stocks);
     }
 
     public void setStocks(int stocks) {
         this.stocks.set(stocks);
+    }
+
+    public double getProduceQuantity() {
+        return produceQuantity.get();
+    }
+
+    public DoubleProperty produceQuantityProperty() {
+        return produceQuantity;
+    }
+
+    public void setProduceQuantity(double produceQuantity) {
+        this.produceQuantity.set(produceQuantity);
     }
 
     @Override
@@ -77,6 +98,7 @@ public class OrderStocks {
                 ", orderQuantity=" + orderQuantity +
                 ", goodsPrice=" + goodsPrice +
                 ", stocks=" + stocks +
+                ", produceQuantity=" + produceQuantity +
                 '}';
     }
 }

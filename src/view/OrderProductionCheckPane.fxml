@@ -75,12 +75,6 @@
                   <Label fx:id="buyNumberLabel" layoutX="509.0" layoutY="711.0" text="Label" />
                </children>
             </HBox>
-            <HBox layoutX="555.0" layoutY="604.0" prefHeight="15.0" prefWidth="515.0">
-               <children>
-                  <Label fx:id="goodNameLabel_inStock" layoutX="555.0" layoutY="604.0" prefHeight="15.0" prefWidth="250.0" text="库存数量：" />
-                  <Label fx:id="countLabel" layoutX="859.0" layoutY="604.0" text="Label" />
-               </children>
-            </HBox>
             <HBox layoutX="674.0" layoutY="57.0">
                <children>
                   <Label fx:id="goodNameLabel_needed" layoutX="674.0" layoutY="57.0" prefWidth="250.0" text="应生产数量：" />
@@ -89,13 +83,13 @@
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="555.0" layoutY="629.0">
+      <HBox layoutX="555.0" layoutY="596.0">
          <children>
             <Label layoutX="555.0" layoutY="635.0" text="操作人：" />
             <Label fx:id="operatorLabel" layoutX="612.0" layoutY="635.0" text="Label" />
          </children>
       </HBox>
-      <ComboBox fx:id="isCheckedComboBox" layoutX="555.0" layoutY="653.0" prefHeight="23.0" prefWidth="194.0" />
-      <Button fx:id="uploadBtn" layoutX="886.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="168.0" text="提交" />
+      <ComboBox fx:id="isCheckedComboBox" layoutX="555.0" layoutY="619.0" prefHeight="23.0" prefWidth="194.0" />
+      <Button fx:id="uploadBtn" layoutX="885.0" layoutY="619.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="168.0" text="提交" />
    </children>
 </AnchorPane>

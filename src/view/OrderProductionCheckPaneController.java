@@ -38,8 +38,6 @@ public class OrderProductionCheckPaneController {
     @FXML
     private TableView goodsList;
     @FXML
-    private Label countLabel;
-    @FXML
     private Label operatorLabel;
     @FXML
     private ComboBox isCheckedComboBox;
@@ -69,7 +67,6 @@ public class OrderProductionCheckPaneController {
         deadlineLabel.setText("未选中订单");
         selectedGoodNameLabel.setText("未选中商品");
         selectedGoodNameLabel.setTextFill(Color.BLACK);
-        countLabel.setText("未选中商品");
         buyNumberLabel.setText("未选中商品");
         needProducedNumberLabel.setText("未选中商品");
 
@@ -162,7 +159,6 @@ public class OrderProductionCheckPaneController {
                 goodsObservableList.clear();
                 selectedGoodNameLabel.setText("未选中商品");
                 selectedGoodNameLabel.setTextFill(Color.BLACK);
-                countLabel.setText("未选中商品");
                 buyNumberLabel.setText("未选中商品");
                 needProducedNumberLabel.setText("未选中商品");
                 currentOrders = ordersObservableList.get((int) newValue);
@@ -177,10 +173,9 @@ public class OrderProductionCheckPaneController {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 currentGood = goodsObservableList.get((int) newValue);
                 selectedGoodNameLabel.setText(currentGood.getGoodsName());
-                countLabel.setText(String.valueOf(currentGood.getStocks()));
                 buyNumberLabel.setText(String.valueOf(currentGood.getOrderQuantity()));
-                if (currentGood.getOrderQuantity() - currentGood.getStocks() > 0) {
-                    needProducedNumberLabel.setText(String.valueOf(currentGood.getOrderQuantity() - currentGood.getStocks()));
+                if (currentGood.getProduceQuantity() > 0) {
+                    needProducedNumberLabel.setText(String.valueOf(currentGood.getProduceQuantity()));
                     selectedGoodNameLabel.setTextFill(Color.web("#F56C6C"));
                 } else {
                     needProducedNumberLabel.setText("库存充足，无需生产");
@@ -196,7 +191,6 @@ public class OrderProductionCheckPaneController {
         deadlineLabel.setText("未选中订单");
         selectedGoodNameLabel.setText("未选中商品");
         selectedGoodNameLabel.setTextFill(Color.BLACK);
-        countLabel.setText("未选中商品");
         buyNumberLabel.setText("未选中商品");
         needProducedNumberLabel.setText("未选中商品");
         ordersObservableList.clear();
@@ -299,14 +293,16 @@ public class OrderProductionCheckPaneController {
                 protected Integer call() throws Exception {
                     List list = ordersSearch.searchOrderAndStocks(String.valueOf(currentOrders.getOrderId()));
                     if (!list.toString().equals("[]") && list != null) {
+                        System.out.println("-----------------------------------------------------");
                         for (int i = 0; i < list.size(); i++) {
                             Object[] objects = (Object[]) list.get(i);
                             OrderStocks os = new OrderStocks();
                             os.setGoodsId((int) objects[0]);
                             os.setGoodsName((String) objects[1]);
-                            os.setOrderQuantity((int) objects[2]);
-                            os.setGoodsPrice((double) objects[3]);
-                            os.setStocks((int) objects[4]);
+                            os.setOrderQuantity((Double) objects[2]);
+                            os.setGoodsPrice((Double) objects[3]);
+                            os.setStocks((Double) objects[4]);
+                            os.setProduceQuantity((Double) objects[5]);
                             goodsObservableList.add(os);
                         }
                     } else {

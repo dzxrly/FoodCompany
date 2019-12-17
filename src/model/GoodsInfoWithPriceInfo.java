@@ -5,11 +5,11 @@ import javafx.beans.property.*;
 public class GoodsInfoWithPriceInfo {
     private IntegerProperty goodsNumber = new SimpleIntegerProperty();
     private StringProperty goodsName = new SimpleStringProperty();
-    private IntegerProperty orderQuantity = new SimpleIntegerProperty();//商品数量
+    private DoubleProperty orderQuantity = new SimpleDoubleProperty();//商品数量
     private DoubleProperty goodsPrice = new SimpleDoubleProperty();
     private DoubleProperty goodsTotalPrice = new SimpleDoubleProperty();
 
-    public GoodsInfoWithPriceInfo(int goodsNumber, String goodsName, int payNumber, Double goodsPrice) {
+    public GoodsInfoWithPriceInfo(int goodsNumber, String goodsName, Double payNumber, Double goodsPrice) {
         this.goodsNumber.set(goodsNumber);
         this.goodsName.set(goodsName);
         this.goodsPrice.set(goodsPrice);
@@ -41,12 +41,16 @@ public class GoodsInfoWithPriceInfo {
         this.goodsName.set(goodsName);
     }
 
-    public int getOrderQuantity() {
+    public double getOrderQuantity() {
         return orderQuantity.get();
     }
 
-    public IntegerProperty orderQuantityProperty() {
+    public DoubleProperty orderQuantityProperty() {
         return orderQuantity;
+    }
+
+    public void setOrderQuantity(double orderQuantity) {
+        this.orderQuantity.set(orderQuantity);
     }
 
     public void setOrderQuantity(int orderQuantity) {

@@ -13,7 +13,7 @@ public class ShippingDepartment {
     private IntegerProperty goodsId = new SimpleIntegerProperty();
     private StringProperty productTime = new SimpleStringProperty();
     private IntegerProperty goodsQualityTime = new SimpleIntegerProperty();
-    private IntegerProperty stocks = new SimpleIntegerProperty();
+    private DoubleProperty stocks = new SimpleDoubleProperty();
     private StringProperty storeTime = new SimpleStringProperty();
 
     public int getGoodsId() {
@@ -52,12 +52,16 @@ public class ShippingDepartment {
         this.goodsQualityTime.set(goodsQualityTime);
     }
 
-    public int getStocks() {
+    public double getStocks() {
         return stocks.get();
     }
 
-    public IntegerProperty stocksProperty() {
+    public DoubleProperty stocksProperty() {
         return stocks;
+    }
+
+    public void setStocks(double stocks) {
+        this.stocks.set(stocks);
     }
 
     public void setStocks(int stocks) {

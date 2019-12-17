@@ -1,9 +1,6 @@
 package model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 //现货订单表
 public class OrderSpotGoods {
@@ -15,7 +12,7 @@ public class OrderSpotGoods {
     private IntegerProperty customerNumber = new SimpleIntegerProperty();
     private IntegerProperty goodsNumber = new SimpleIntegerProperty();
     private StringProperty goodsName =new SimpleStringProperty();
-    private IntegerProperty orderQuantity = new SimpleIntegerProperty();//商品数量
+    private DoubleProperty orderQuantity = new SimpleDoubleProperty();//商品数量
     private StringProperty buildDate = new SimpleStringProperty();
 
     public int getSpotId() {
@@ -102,12 +99,16 @@ public class OrderSpotGoods {
         this.goodsName.set(goodsName);
     }
 
-    public int getOrderQuantity() {
+    public double getOrderQuantity() {
         return orderQuantity.get();
     }
 
-    public IntegerProperty orderQuantityProperty() {
+    public DoubleProperty orderQuantityProperty() {
         return orderQuantity;
+    }
+
+    public void setOrderQuantity(double orderQuantity) {
+        this.orderQuantity.set(orderQuantity);
     }
 
     public void setOrderQuantity(int orderQuantity) {

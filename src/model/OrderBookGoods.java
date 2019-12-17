@@ -12,7 +12,7 @@ public class OrderBookGoods {
     private IntegerProperty customerNumber = new SimpleIntegerProperty();
     private IntegerProperty goodsNumber = new SimpleIntegerProperty();
     private StringProperty goodsName =new SimpleStringProperty();
-    private IntegerProperty orderQuantity = new SimpleIntegerProperty();//商品数量
+    private DoubleProperty orderQuantity = new SimpleDoubleProperty();//商品数量
     private StringProperty buildDate = new SimpleStringProperty();
     private DoubleProperty producedQuantity =new SimpleDoubleProperty();
 
@@ -100,12 +100,16 @@ public class OrderBookGoods {
         this.goodsName.set(goodsName);
     }
 
-    public int getOrderQuantity() {
+    public double getOrderQuantity() {
         return orderQuantity.get();
     }
 
-    public IntegerProperty orderQuantityProperty() {
+    public DoubleProperty orderQuantityProperty() {
         return orderQuantity;
+    }
+
+    public void setOrderQuantity(double orderQuantity) {
+        this.orderQuantity.set(orderQuantity);
     }
 
     public void setOrderQuantity(int orderQuantity) {

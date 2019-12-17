@@ -48,7 +48,7 @@ public class ProductionFormSubmission {
         }
     }
 
-    public int createProductionDetailForm(ProductionForm pf,int goodId, String goodsName, int productionQuantity, int stocks){
+    public int createProductionDetailForm(ProductionForm pf,int goodId, String goodsName, Double productionQuantity, Double stocks){
         Session session= HibernateUtils.openSession();
         Transaction tx=null;
         int ans=0;

@@ -56,7 +56,7 @@ public class OrdersSubmission {
         }
     }
 
-    public int createSpotOrders(Orders od, int goodsNumber, String goodsName, int orderQuantity) {
+    public int createSpotOrders(Orders od, int goodsNumber, String goodsName, Double orderQuantity) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         OrderSpotGoods osg = new OrderSpotGoods();
@@ -79,7 +79,7 @@ public class OrdersSubmission {
             //订单提交后 更新成品库表
             String hql = "Update ShippingDepartment set stocks = stocks - :orderQuantity where goodsId = :goodsNumber";
             Query query = session.createQuery(hql);
-            query.setInteger("orderQuantity", orderQuantity);
+            query.setDouble("orderQuantity", orderQuantity);
             query.setInteger("goodsNumber", goodsNumber);
             query.executeUpdate();
             System.out.println("_____________________________Update on SD______________________________");
@@ -96,7 +96,7 @@ public class OrdersSubmission {
         }
     }
 
-    public int createBookOrders(Orders od, int goodsNumber, String goodsName, int orderQuantity, int stocks,double procedureQuantity) {
+    public int createBookOrders(Orders od, int goodsNumber, String goodsName, Double orderQuantity, Double stocks, Double procedureQuantity) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         OrderBookGoods obg = new OrderBookGoods();
@@ -122,12 +122,11 @@ public class OrdersSubmission {
                 hql = "Update ShippingDepartment set stocks = stocks - :orderQuantity where goodsId = :goodsNumber";
                 obg.setProducedQuantity(0);
                 query = session.createQuery(hql);
-                query.setInteger("orderQuantity", orderQuantity);
+                query.setDouble("orderQuantity", orderQuantity);
                 query.setInteger("goodsNumber", goodsNumber);
             } else {//库存<订单数量
                 hql = "Update ShippingDepartment set stocks = 0 where goodsId = :goodsNumber";
-                double number = procedureQuantity -(double)orderQuantity;
-                obg.setProducedQuantity(number);
+                obg.setProducedQuantity(procedureQuantity);
                 query = session.createQuery(hql);
                 query.setInteger("goodsNumber", goodsNumber);
             }
@@ -167,7 +166,7 @@ public class OrdersSubmission {
                 Object ob = (Object) templist.get(0);
                 Double t = (Double) ob;//t是 id为 gd[i].getGoodsId的 单位时间生产数量
                 Object ob1 = (Object) templist1.get(0);
-                Integer stocks = (Integer) ob1;
+                Double stocks = (Double) ob1;
                 if (stocks < gd[i].getPayNumber()) {
                     time = time + (gd[i].getPayNumber() - stocks) / t;
                 }

@@ -11,7 +11,7 @@ public class Goods {
     private StringProperty goodsName=new SimpleStringProperty();
     private DoubleProperty goodsPrice =new SimpleDoubleProperty();
     private IntegerProperty goodsQualityTime = new SimpleIntegerProperty();
-    private IntegerProperty requiredQuantity = new SimpleIntegerProperty();
+    private DoubleProperty requiredQuantity = new SimpleDoubleProperty();
     //private ObjectProperty<LocalDateTime> = new ObjectProperty<LocalDateTime>
 
     public int getGoodsId() {
@@ -62,12 +62,16 @@ public class Goods {
         this.goodsQualityTime.set(goodsQualityTime);
     }
 
-    public int getRequiredQuantity() {
+    public double getRequiredQuantity() {
         return requiredQuantity.get();
     }
 
-    public IntegerProperty requiredQuantityProperty() {
+    public DoubleProperty requiredQuantityProperty() {
         return requiredQuantity;
+    }
+
+    public void setRequiredQuantity(double requiredQuantity) {
+        this.requiredQuantity.set(requiredQuantity);
     }
 
     public void setRequiredQuantity(int requiredQuantity) {
