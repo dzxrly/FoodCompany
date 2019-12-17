@@ -118,4 +118,49 @@ public class CustomerIndexAndStringSwitch {
                 return sum * 0.9;
         }
     }
+
+    public String getDepNameByIndex(int index) {
+        switch (index) {
+            default:
+                return "老板";
+            case 0:
+                return "老板";
+            case 1:
+                return "销售部";
+            case 2:
+                return "财务部";
+            case 3:
+                return "生产计划科";
+            case 4:
+                return "生产车间";
+            case 5:
+                return "成品库";
+            case 6:
+                return "原料库";
+        }
+    }
+
+    public String getStuffLevelByIndex(int index) {
+        switch (index) {
+            default:
+                return "老板";
+            case 0:
+                return "老板";
+            case 1:
+                return "经理";
+            case 2:
+                return "员工";
+        }
+    }
+
+    public String getGenderByIndex(int index) {
+        switch (index) {
+            default:
+                return "男";
+            case 0:
+                return "男";
+            case 1:
+                return "女";
+        }
+    }
 }

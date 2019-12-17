@@ -118,11 +118,27 @@ public class ProductionFiancePlanPaneController {
         goodsList.getColumns().addAll(goodIdCol, goodNameCol, buyNumberCol, goodPrice);
         goodsList.setItems(orderStocksObservableList);
 
+        TableColumn materialIdCol = new TableColumn("原料编号");
+        materialIdCol.setSortable(true);
+        materialIdCol.setCellValueFactory(new PropertyValueFactory<>("materialId"));
+        TableColumn materialQuantityCol = new TableColumn("所需数量");
+        materialQuantityCol.setSortable(true);
+        materialQuantityCol.setCellValueFactory(new PropertyValueFactory<>("perQuantity"));
+        TableColumn materialNameCol = new TableColumn("原料名称");
+        materialNameCol.setSortable(false);
+        materialNameCol.setCellValueFactory(new PropertyValueFactory<>("materialName"));
+        TableColumn materialStocksCol = new TableColumn("原料库存");
+        materialStocksCol.setSortable(true);
+        materialStocksCol.setCellValueFactory(new PropertyValueFactory<>("materialStocks"));
+        rawMetarialList.getColumns().addAll(materialIdCol, materialNameCol, materialQuantityCol, materialStocksCol);
+        rawMetarialList.setItems(materialToGoodsObservableList);
+
         planList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 currentProductionForm = productionFormObservableList.get((int) newValue);
                 orderStocksObservableList.clear();
+                materialToGoodsObservableList.clear();
                 service_searchGoods.restart();
             }
         });
