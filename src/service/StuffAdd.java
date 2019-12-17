@@ -7,11 +7,11 @@ import org.hibernate.Transaction;
 
 public class StuffAdd {
 
-    public int addStuff(String personalName,String password,int level,String personalId ,String address,String phoneNumber,String email,int gender,int type){
+    public int addStuff(String personalName, String password, int level, String personalId, String address, String phoneNumber, String email, int gender, int type) {
         Session session = HibernateUtils.openSession();
-        Transaction tx=null;
-        int ans= 0;
-        Stuff s=new Stuff();
+        Transaction tx = null;
+        int ans = 0;
+        Stuff s = new Stuff();
         s.setPersonalName(personalName);
         s.setPassword(password);
         s.setLevel(level);
@@ -21,16 +21,16 @@ public class StuffAdd {
         s.setEmail(email);
         s.setGender(gender);
         s.setLevel(type);
-        try{
-            tx=session.beginTransaction();
+        try {
+            tx = session.beginTransaction();
             session.save(s);
             ans = 1;//1表示成功
             tx.commit();
-        }catch ( RuntimeException e){
+        } catch (RuntimeException e) {
             tx.rollback();
-            ans=0;//0表示失败
+            ans = 0;//0表示失败
             throw e;
-        }finally {
+        } finally {
             session.close();
             return ans;
         }

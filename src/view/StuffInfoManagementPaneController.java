@@ -19,6 +19,7 @@ import model.Stuff;
 import org.controlsfx.control.ToggleSwitch;
 import service.AlertDialog;
 import service.CustomerIndexAndStringSwitch;
+import service.StuffAdd;
 import service.StuffSearch;
 
 import java.util.List;
@@ -94,6 +95,7 @@ public class StuffInfoManagementPaneController {
     private CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
     private Stuff currentStuff = new Stuff();
     private ObservableList<String> accLevelOptions = FXCollections.observableArrayList("老板", "经理", "员工");
+    private StuffAdd stuffAdd = new StuffAdd();
 
     @FXML
     private void initialize() {
@@ -415,7 +417,23 @@ public class StuffInfoManagementPaneController {
     }
 
     private void handleAddBtn() {
-        //TODO
+        if (!stuffNameText.getText().equals("") &&
+                !firstPWInputText.getText().equals("") &&
+                !secondPWInputText.getText().equals("") &&
+                firstPWInputText.getText().equals(secondPWInputText.getText()) &&
+                !idNumberText.getText().equals("") &&
+                !addressText.getText().equals("") &&
+                !emailText.getText().equals("") &&
+                !phoneText.getText().equals("")) {
+            service_addStuff.restart();
+            clearSidePane();
+        } else {
+            Platform.runLater(() -> {
+                AlertDialog alertDialog = new AlertDialog();
+                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "表单填写错误！", "请重新填写！");
+                alertDialog.showAlert();
+            });
+        }
     }
 
     Service<Integer> service_search = new Service<Integer>() {
@@ -456,6 +474,32 @@ public class StuffInfoManagementPaneController {
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();
                             alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有结果！", "请重新输入！");
+                            alertDialog.showAlert();
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_addStuff = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int flag = stuffAdd.addStuff(stuffNameText.getText(), firstPWInputText.getText(), secondLevelComboBox.getSelectionModel().getSelectedIndex(), idNumberText.getText(), addressText.getText(), phoneText.getText(), emailText.getText(), genderComboBox.getSelectionModel().getSelectedIndex(), stuffLevelComboBox.getSelectionModel().getSelectedIndex());
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "添加成功！", "员工已添加！");
+                            alertDialog.showAlert();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "添加失败！", "请重新添加！");
                             alertDialog.showAlert();
                         });
                     }
