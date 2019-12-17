@@ -36,6 +36,7 @@ public class GetUnit {
             list = session.createQuery(hql).list();
             Object ob = (Object) list.get(0);
             unit = ob.toString();
+            System.out.println(unit);
         } catch (RuntimeException e) {
             System.out.println("--cannot get----");
             throw e;
@@ -60,14 +61,14 @@ public class GetUnit {
         }
     }
 
-    public double getGoodsPrice(String goodsId){
+    public double getGoodsPrice(String goodsId) {
         Session session = HibernateUtils.openSession();
         String hql = "";
         double price = 0.0;
         try {
-            hql ="select goodsPrice from goods where goodsId = " +goodsId;
+            hql = "select goodsPrice from goods where goodsId = " + goodsId;
             List list = session.createQuery(hql).list();
-            price =  Double.valueOf(((Object) list.get(0)).toString());
+            price = Double.valueOf(((Object) list.get(0)).toString());
 
         } catch (RuntimeException e) {
             System.out.println("--cannot get----");

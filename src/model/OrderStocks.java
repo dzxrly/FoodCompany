@@ -9,6 +9,19 @@ public class OrderStocks {
     private DoubleProperty goodsPrice = new SimpleDoubleProperty();
     private DoubleProperty stocks = new SimpleDoubleProperty();//库存数量
     private DoubleProperty produceQuantity = new SimpleDoubleProperty();//应生产数量
+    private StringProperty goodUnit = new SimpleStringProperty();//单位
+
+    public String getGoodUnit() {
+        return goodUnit.get();
+    }
+
+    public StringProperty goodUnitProperty() {
+        return goodUnit;
+    }
+
+    public void setGoodUnit(String goodUnit) {
+        this.goodUnit.set(goodUnit);
+    }
 
     public int getGoodsId() {
         return goodsId.get();
@@ -91,6 +104,7 @@ public class OrderStocks {
                 ", goodsPrice=" + goodsPrice +
                 ", stocks=" + stocks +
                 ", produceQuantity=" + produceQuantity +
+                ", goodUnit=" + goodUnit +
                 '}';
     }
 }

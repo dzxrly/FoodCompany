@@ -5,6 +5,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -45,6 +47,8 @@ public class MainWindowController {
     private MenuItem exitMenuItem;
     @FXML
     private MenuItem aboutUs;
+    @FXML
+    private Label netStatus;
 
     private Node currentNode;
     private PropertiesOperation propertiesOperation = new PropertiesOperation();
@@ -376,4 +380,17 @@ public class MainWindowController {
     private void handleAbout() {
         //TODO
     }
+
+    Service<Integer> service_checkNet = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    //TODO
+                    return null;
+                }
+            };
+        }
+    };
 }

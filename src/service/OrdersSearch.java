@@ -122,20 +122,8 @@ public class OrdersSearch {
         List list = null;
         try {
             tx = session.beginTransaction();
-            String hql = "select sd.goodsId,gd.goodsName,obg.orderQuantity,gd.goodsPrice,sd.stocks,obg.producedQuantity from OrderBookGoods obg, ShippingDepartment sd ,Goods gd where obg.goodsNumber = sd.goodsId and sd.goodsId = gd.goodsId and obg.orderId = " + orderId;
+            String hql = "select sd.goodsId,gd.goodsName,obg.orderQuantity,gd.goodsPrice,sd.stocks,obg.producedQuantity,obg.goodsUnit from OrderBookGoods obg, ShippingDepartment sd ,Goods gd where obg.goodsNumber = sd.goodsId and sd.goodsId = gd.goodsId and obg.orderId = " + orderId;
             list = session.createQuery(hql).list();
-//            for (int i = 0; i < list.size(); i++) {
-//                Object[] ob = (Object[]) list.get(i);
-//
-//                OrderStocks os = new OrderStocks();
-//                os.setGoodsId((int) ob[0]);
-//                os.setGoodsName((String) ob[1]);
-//                os.setOrderQuantity((int) ob[2]);
-//                os.setGoodsPrice((double) ob[3]);
-//                os.setStocks((int) ob[4]);
-//                System.out.println("___________" + os + "_________________");
-//            }
-
         } catch (RuntimeException e) {
             System.out.println("___________________Can not search_________________");
             throw e;

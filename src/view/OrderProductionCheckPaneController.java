@@ -130,11 +130,23 @@ public class OrderProductionCheckPaneController {
         goodsNameCol.setSortable(false);
         goodsNameCol.setCellValueFactory(new PropertyValueFactory<>("goodsName"));
         TableColumn orderQuantityCol = new TableColumn("购买数量");
-        orderQuantityCol.setSortable(true);
-        orderQuantityCol.setCellValueFactory(new PropertyValueFactory<>("orderQuantity"));
+        orderQuantityCol.setSortable(false);
+        TableColumn payNumberCol = new TableColumn("数量");
+        payNumberCol.setSortable(false);
+        payNumberCol.setCellValueFactory(new PropertyValueFactory<>("orderQuantity"));
+        TableColumn payUnitCol = new TableColumn("单位");
+        payUnitCol.setSortable(false);
+        payUnitCol.setCellValueFactory(new PropertyValueFactory<>("goodUnit"));
+        orderQuantityCol.getColumns().addAll(payNumberCol, payUnitCol);
         TableColumn stocksCol = new TableColumn("库存数量");
-        stocksCol.setSortable(true);
-        stocksCol.setCellValueFactory(new PropertyValueFactory<>("stocks"));
+        stocksCol.setSortable(false);
+        TableColumn stocksNumberCol = new TableColumn("数量");
+        stocksNumberCol.setSortable(false);
+        stocksNumberCol.setCellValueFactory(new PropertyValueFactory<>("stocks"));
+        TableColumn stocksUnitCol = new TableColumn("单位");
+        stocksUnitCol.setSortable(false);
+        stocksUnitCol.setCellValueFactory(new PropertyValueFactory<>("goodUnit"));
+        stocksCol.getColumns().addAll(stocksNumberCol, stocksUnitCol);
         goodsList.getColumns().addAll(goodsIdCol, goodsNameCol, orderQuantityCol, stocksCol);
         goodsList.setItems(goodsObservableList);
 
@@ -298,6 +310,7 @@ public class OrderProductionCheckPaneController {
                             os.setGoodsPrice((Double) objects[3]);
                             os.setStocks((Double) objects[4]);
                             os.setProduceQuantity((Double) objects[5]);
+                            os.setGoodUnit((String) objects[6]);
                             goodsObservableList.add(os);
                         }
                     } else {

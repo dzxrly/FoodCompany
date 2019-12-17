@@ -8,13 +8,27 @@ public class GoodsInfoWithPriceInfo {
     private DoubleProperty orderQuantity = new SimpleDoubleProperty();//商品数量
     private DoubleProperty goodsPrice = new SimpleDoubleProperty();
     private DoubleProperty goodsTotalPrice = new SimpleDoubleProperty();
+    private StringProperty goodUnit = new SimpleStringProperty();
 
-    public GoodsInfoWithPriceInfo(int goodsNumber, String goodsName, Double payNumber, Double goodsPrice) {
+    public GoodsInfoWithPriceInfo(int goodsNumber, String goodsName, Double payNumber, Double goodsPrice, String goodUnit) {
         this.goodsNumber.set(goodsNumber);
         this.goodsName.set(goodsName);
         this.goodsPrice.set(goodsPrice);
         this.orderQuantity.set(payNumber);
         this.goodsTotalPrice.set(payNumber * goodsPrice);
+        this.goodUnit.set(goodUnit);
+    }
+
+    public String getGoodUnit() {
+        return goodUnit.get();
+    }
+
+    public StringProperty goodUnitProperty() {
+        return goodUnit;
+    }
+
+    public void setGoodUnit(String goodUnit) {
+        this.goodUnit.set(goodUnit);
     }
 
     public int getGoodsNumber() {

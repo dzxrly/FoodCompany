@@ -82,8 +82,14 @@ public class PaymentForCashOrdersController {
         goodsNameCol.setSortable(false);
         goodsNameCol.setCellValueFactory(new PropertyValueFactory<>("goodsName"));
         TableColumn goodsNumberCol = new TableColumn("购买数量");
-        goodsNumberCol.setSortable(true);
-        goodsNumberCol.setCellValueFactory(new PropertyValueFactory<>("orderQuantity"));
+        goodsNumberCol.setSortable(false);
+        TableColumn goodsCountCol = new TableColumn("数量");
+        goodsCountCol.setSortable(false);
+        goodsCountCol.setCellValueFactory(new PropertyValueFactory<>("orderQuantity"));
+        TableColumn goodsUnitCol = new TableColumn("单位");
+        goodsUnitCol.setSortable(false);
+        goodsUnitCol.setCellValueFactory(new PropertyValueFactory<>("goodUnit"));
+        goodsNumberCol.getColumns().addAll(goodsCountCol, goodsUnitCol);
         TableColumn goodsPriceCol = new TableColumn("单价");
         goodsPriceCol.setSortable(true);
         goodsPriceCol.setCellValueFactory(new PropertyValueFactory<>("goodsPrice"));
@@ -162,11 +168,11 @@ public class PaymentForCashOrdersController {
                             if (currentOrder.getOrderType() == 0) {
                                 List<OrderSpotGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "0");
                                 for (int i = 0; i < list.size(); i++)
-                                    goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber()))));
+                                    goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber())), list.get(i).getGoodsUnit()));
                             } else {
                                 List<OrderBookGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "1");
                                 for (int i = 0; i < list.size(); i++)
-                                    goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber()))));
+                                    goodsInfoWithPriceInfos.add(new GoodsInfoWithPriceInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getOrderQuantity(), goodsSearch.searchExactGoods(String.valueOf(list.get(i).getGoodsNumber())), list.get(i).getGoodsUnit()));
                             }
 
                             Platform.runLater(new Runnable() {

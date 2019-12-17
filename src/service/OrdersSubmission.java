@@ -73,8 +73,8 @@ public class OrdersSubmission {
             osg.setOrderQuantity(orderQuantity);
             osg.setBuildDate(od.getBuildDate());
 
-            String goodsUnit = g.getGoodsUnit(od.getOrderId());
-            double goodsPrice = g.getGoodsPrice(String.valueOf(od.getOrderId()));
+            String goodsUnit = g.getGoodsUnit(goodsNumber);
+            double goodsPrice = g.getGoodsPrice(String.valueOf(goodsNumber));
 
             osg.setGoodsUnit(goodsUnit);
             osg.setGoodsPrice(goodsPrice);
