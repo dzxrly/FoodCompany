@@ -331,7 +331,7 @@ public class OrderInputController {
                     List<Object> list = goodsSearch.searchGoods(searchInput);
                     for (int i = 0; i < list.size(); i++) {
                         Object[] obj = (Object[]) list.get(i);
-                        rightGoodsListData.add(new GoodsInfo((int) obj[0], (String) obj[1], (Double) obj[2], (int) obj[3], (Double) obj[4], 0.0));
+                        rightGoodsListData.add(new GoodsInfo((int) obj[0], (String) obj[1], (Double) obj[2], (int) obj[3], (Double) obj[4], 0.0, (String) obj[5]));
                     }
                     return null;
                 }

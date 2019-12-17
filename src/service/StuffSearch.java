@@ -8,12 +8,12 @@ import java.util.List;
 //员工信息管理界面的员工搜索
 public class StuffSearch {
     //test为空
-    public List searchAll(int index, String test) {
+    public List searchAll() {
         Session session = HibernateUtils.openSession();
         String hql = "";
         List list = null;
         try {
-            hql="from Stuff";
+            hql = "from Stuff";
             list = session.createQuery(hql).list();
         } catch (RuntimeException e) {
             System.out.println("---can not search----");
@@ -35,17 +35,17 @@ public class StuffSearch {
             } else if (index == 1) {//员工姓名
                 hql = "from Stuff where personalName like '%" + test + "%'";
             } else if (index == 2) {//部门id
-                if(test.equals("老板")) test="0";
-                else if(test.equals("销售部")) test="1";
-                else if(test.equals("财务部")) test="2";
-                else if(test.equals("生产计划科")) test="3";
-                else if(test.equals("生产车间")) test="4";
-                else if(test.equals("成品库")) test="5";
-                else if(test.equals("原料库")) test="6";
+                if (test.equals("老板")) test = "0";
+                else if (test.equals("销售部")) test = "1";
+                else if (test.equals("财务部")) test = "2";
+                else if (test.equals("生产计划科")) test = "3";
+                else if (test.equals("生产车间")) test = "4";
+                else if (test.equals("成品库")) test = "5";
+                else if (test.equals("原料库")) test = "6";
                 hql = "from Stuff where type=" + test;
             } else if (index == 3) {//性别
-                if(test.equals("男")) test="0";
-                else test="1";
+                if (test.equals("男")) test = "0";
+                else test = "1";
                 hql = "from Stuff where gender=" + test;
             }
             list = session.createQuery(hql).list();
