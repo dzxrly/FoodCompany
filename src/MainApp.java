@@ -30,10 +30,9 @@ public class MainApp extends Application {
     private AnchorPane loginPane;
 
     public static void main(String[] args) {
-        ShippingDepOperation sdo= new ShippingDepOperation();
-        System.out.println(sdo.searchPlanId(1));
-//        ProductPlan pp= new ProductPlan();
-//        System.out.println(pp.getEndTime());
+        StuffSearch ss= new StuffSearch();
+        //System.out.println(ss.searchAll(0,""));
+        System.out.println(ss.searchByIndex(1,"陈"));
         launch(args);
     }
 
