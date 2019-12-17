@@ -59,6 +59,11 @@ public class ProductionFormSubmission {
         pdf.setGoodsName(goodsName);
         pdf.setProductionQuantity(productionQuantity);
         pdf.setStocks(stocks);
+
+        GetUnit g =new GetUnit();
+        String goodsUnit = g.getGoodsUnit(goodId);
+        pdf.setGoodsUnit(goodsUnit);
+
         try {
             tx = session.beginTransaction();
             session.save(pdf);

@@ -62,7 +62,7 @@ public class MaterialManagement {
         }
     }
 
-    public int AddMaterial(String materialName,double materialPrice,int stuffNumber,int materialQualityTime,int materialType,double stocks){
+    public int AddMaterial(String materialName,double materialPrice,int stuffNumber,int materialQualityTime,int materialType,double stocks,String materialUnit){
         Session session= HibernateUtils.openSession();
         Transaction tx=null;
         int ans=0;
@@ -77,6 +77,7 @@ public class MaterialManagement {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String storeTime = df.format(new Date()).toString();//获得日期
         m.setStoreTime(storeTime);
+        m.setMaterialUnit(materialUnit);
         try{
             tx=session.beginTransaction();
             session.save(m);
@@ -93,7 +94,7 @@ public class MaterialManagement {
         }
     }
 
-    public int UpdateMaterial(int materialId,String materialName,double materialPrice,int stuffNumber,int materialQualityTime,int materialType,double stocks){
+    public int UpdateMaterial(int materialId,String materialName,double materialPrice,int stuffNumber,int materialQualityTime,int materialType,double stocks,String materialUnit){
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         int ans =0 ;
@@ -109,6 +110,7 @@ public class MaterialManagement {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String storeTime = df.format(new Date()).toString();//获得日期
         m.setStoreTime(storeTime);
+        m.setMaterialUnit(materialUnit);
 
         try {
             tx = session.beginTransaction();

@@ -15,6 +15,32 @@ public class OrderBookGoods {
     private DoubleProperty orderQuantity = new SimpleDoubleProperty();//商品数量
     private StringProperty buildDate = new SimpleStringProperty();
     private DoubleProperty producedQuantity =new SimpleDoubleProperty();
+    private StringProperty goodsUnit =  new SimpleStringProperty();
+    private DoubleProperty goodsPrice = new SimpleDoubleProperty();
+
+    public String getGoodsUnit() {
+        return goodsUnit.get();
+    }
+
+    public StringProperty goodsUnitProperty() {
+        return goodsUnit;
+    }
+
+    public void setGoodsUnit(String goodsUnit) {
+        this.goodsUnit.set(goodsUnit);
+    }
+
+    public double getGoodsPrice() {
+        return goodsPrice.get();
+    }
+
+    public DoubleProperty goodsPriceProperty() {
+        return goodsPrice;
+    }
+
+    public void setGoodsPrice(double goodsPrice) {
+        this.goodsPrice.set(goodsPrice);
+    }
 
     public int getBookId() {
         return bookId.get();
@@ -152,7 +178,9 @@ public class OrderBookGoods {
                 ", goodsName=" + goodsName +
                 ", orderQuantity=" + orderQuantity +
                 ", buildDate=" + buildDate +
-                ", procedureQuantity=" + producedQuantity +
+                ", producedQuantity=" + producedQuantity +
+                ", goodsUnit=" + goodsUnit +
+                ", goodsPrice=" + goodsPrice +
                 '}';
     }
 }

@@ -14,6 +14,32 @@ public class OrderSpotGoods {
     private StringProperty goodsName =new SimpleStringProperty();
     private DoubleProperty orderQuantity = new SimpleDoubleProperty();//商品数量
     private StringProperty buildDate = new SimpleStringProperty();
+    private StringProperty goodsUnit = new SimpleStringProperty();//商品单位
+    private DoubleProperty goodsPrice = new SimpleDoubleProperty();
+
+    public String getGoodsUnit() {
+        return goodsUnit.get();
+    }
+
+    public StringProperty goodsUnitProperty() {
+        return goodsUnit;
+    }
+
+    public void setGoodsUnit(String goodsUnit) {
+        this.goodsUnit.set(goodsUnit);
+    }
+
+    public double getGoodsPrice() {
+        return goodsPrice.get();
+    }
+
+    public DoubleProperty goodsPriceProperty() {
+        return goodsPrice;
+    }
+
+    public void setGoodsPrice(double goodsPrice) {
+        this.goodsPrice.set(goodsPrice);
+    }
 
     public int getSpotId() {
         return spotId.get();
@@ -139,6 +165,8 @@ public class OrderSpotGoods {
                 ", goodsName=" + goodsName +
                 ", orderQuantity=" + orderQuantity +
                 ", buildDate=" + buildDate +
+                ", goodsUnit=" + goodsUnit +
+                ", goodsPrice=" + goodsPrice +
                 '}';
     }
 }

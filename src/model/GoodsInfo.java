@@ -11,14 +11,28 @@ public class GoodsInfo {
     private SimpleIntegerProperty goodsQualityTime;
     private SimpleDoubleProperty stocks;//库存
     private SimpleDoubleProperty payNumber;//购买数量
+    private SimpleStringProperty goodsUnit;
 
-    public GoodsInfo(int goodsId, String goodsName, Double goodsPrice, int goodsQualityTime, Double stocks, Double payNumber) {
+    public GoodsInfo(int goodsId, String goodsName, Double goodsPrice, int goodsQualityTime, Double stocks, Double payNumber,String goodsUnit) {
         this.goodsId = new SimpleIntegerProperty(goodsId);
         this.goodsName = new SimpleStringProperty(goodsName);
         this.goodsPrice = new SimpleDoubleProperty(goodsPrice);
         this.goodsQualityTime = new SimpleIntegerProperty(goodsQualityTime);
         this.stocks = new SimpleDoubleProperty(stocks);
         this.payNumber = new SimpleDoubleProperty(payNumber);
+        this.goodsUnit =new SimpleStringProperty();
+    }
+
+    public String getGoodsUnit() {
+        return goodsUnit.get();
+    }
+
+    public SimpleStringProperty goodsUnitProperty() {
+        return goodsUnit;
+    }
+
+    public void setGoodsUnit(String goodsUnit) {
+        this.goodsUnit.set(goodsUnit);
     }
 
     public double getPayNumber() {

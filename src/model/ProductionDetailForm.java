@@ -13,6 +13,19 @@ public class ProductionDetailForm {
     private StringProperty goodsName = new SimpleStringProperty();//商品名称
     private DoubleProperty productionQuantity = new SimpleDoubleProperty();//预定订单数量-库存的数量 如果订单数量小于库存数量则为0
     private DoubleProperty stocks = new SimpleDoubleProperty();//库存数量
+    private StringProperty goodsUnit = new SimpleStringProperty();
+
+    public String getGoodsUnit() {
+        return goodsUnit.get();
+    }
+
+    public StringProperty goodsUnitProperty() {
+        return goodsUnit;
+    }
+
+    public void setGoodsUnit(String goodsUnit) {
+        this.goodsUnit.set(goodsUnit);
+    }
 
     public int getId() {
         return id.get();
@@ -112,6 +125,7 @@ public class ProductionDetailForm {
                 ", goodsName=" + goodsName +
                 ", productionQuantity=" + productionQuantity +
                 ", stocks=" + stocks +
+                ", goodsUnit=" + goodsUnit +
                 '}';
     }
 }

@@ -12,6 +12,19 @@ public class ProductDetailPlan {
     private DoubleProperty quantity= new SimpleDoubleProperty();
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
     private StringProperty endTime = new SimpleStringProperty();
+    private StringProperty goodsUnit =new SimpleStringProperty();
+
+    public String getGoodsUnit() {
+        return goodsUnit.get();
+    }
+
+    public StringProperty goodsUnitProperty() {
+        return goodsUnit;
+    }
+
+    public void setGoodsUnit(String goodsUnit) {
+        this.goodsUnit.set(goodsUnit);
+    }
 
     public int getPdpId() {
         return pdpId.get();
@@ -120,6 +133,7 @@ public class ProductDetailPlan {
                 ", quantity=" + quantity +
                 ", stuffNumber=" + stuffNumber +
                 ", endTime=" + endTime +
+                ", goodsUnit=" + goodsUnit +
                 '}';
     }
 }

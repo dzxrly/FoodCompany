@@ -17,9 +17,9 @@ public class GoodsSearch {
         try {
             tx = session.beginTransaction();
             if (name != null)
-                hql = "select g.goodsId,g.goodsName,g.goodsPrice,g.goodsQualityTime,s.stocks from Goods as g,ShippingDepartment as s where g.goodsId=s.goodsId and g.goodsName like '%" + name + "%'";
+                hql = "select g.goodsId,g.goodsName,g.goodsPrice,g.goodsQualityTime,s.stocks,g.goodsUnit from Goods as g,ShippingDepartment as s where g.goodsId=s.goodsId and g.goodsName like '%" + name + "%'";
             else
-                hql = "select g.goodsId,g.goodsName,g.goodsPrice,g.goodsQualityTime,s.stocks from Goods as g,ShippingDepartment as s where g.goodsId=s.goodsId";
+                hql = "select g.goodsId,g.goodsName,g.goodsPrice,g.goodsQualityTime,s.stocks,g.goodsUnit from Goods as g,ShippingDepartment as s where g.goodsId=s.goodsId";
 
             Query query = session.createQuery(hql);
             list = query.list();

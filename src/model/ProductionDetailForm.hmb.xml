@@ -26,5 +26,6 @@
         <property name="goodsName" column="goodsName" type="java.lang.String" length="20"></property>
         <property name="productionQuantity" column="productionQuantity" type="java.lang.Double" length="0"></property>
         <property name="stocks" column="stocks" type="java.lang.Double" length="0"></property>
+        <property name="goodsUnit" column="goodsUnit" type="java.lang.String" length="10"></property>
     </class>
 </hibernate-mapping>
