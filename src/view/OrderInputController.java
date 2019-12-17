@@ -331,7 +331,7 @@ public class OrderInputController {
                     List<Object> list = goodsSearch.searchGoods(searchInput);
                     for (int i = 0; i < list.size(); i++) {
                         Object[] obj = (Object[]) list.get(i);
-                        rightGoodsListData.add(new GoodsInfo((int) obj[0], (String) obj[1], (Double) obj[2], (int) obj[3], (int) obj[4], 0.0));
+                        rightGoodsListData.add(new GoodsInfo((int) obj[0], (String) obj[1], (Double) obj[2], (int) obj[3], (Double) obj[4], 0.0));
                     }
                     return null;
                 }
@@ -379,16 +379,45 @@ public class OrderInputController {
                     for (int i = 0; i < leftGoodsListData.size(); i++) {
                         goodsInfos[i] = leftGoodsListData.get(i);
                     }
-                    String recommendDate = ordersSubmission.Judge(goodsInfos, datePicker.getValue().toString());
-                    if (recommendDate.equals("1")) {
-                        if (orderType.getSelectionModel().getSelectedIndex() == 0) {
-                            //现货订单
+                    if (orderType.getSelectionModel().getSelectedIndex() == 0) {
+                        //现货订单
+                        PropertiesOperation propertiesOperation = new PropertiesOperation();
+                        int number = Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber"));
+                        Orders orders = ordersSubmission.createMainOrders(0, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number, datePicker.getValue().toString());
+                        int[] flags = new int[leftGoodsListData.size()];
+                        for (int i = 0; i < leftGoodsListData.size(); i++) {
+                            flags[i] = ordersSubmission.createSpotOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (Double) leftGoodsListData.get(i).getPayNumber());
+                        }
+                        int flagsEqualOneCount = 0;
+                        for (int i = 0; i < flags.length; i++) {
+                            if (flags[i] == 1) {
+                                flagsEqualOneCount++;
+                            } else continue;
+                        }
+                        if (flagsEqualOneCount == flags.length) {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交完成!", "提交完成!");
+                                alertDialog.show();
+                                clearAll();
+                            });
+                        } else {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交出错!", "提交出错!");
+                                alertDialog.show();
+                            });
+                        }
+                    } else {
+                        //预定订单
+                        String recommendDate = ordersSubmission.Judge(goodsInfos, datePicker.getValue().toString());
+                        if (recommendDate.equals("1")) {
                             PropertiesOperation propertiesOperation = new PropertiesOperation();
                             int number = Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber"));
-                            Orders orders = ordersSubmission.createMainOrders(0, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number, datePicker.getValue().toString());
+                            Orders orders = ordersSubmission.createMainOrders(1, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number, datePicker.getValue().toString());
                             int[] flags = new int[leftGoodsListData.size()];
                             for (int i = 0; i < leftGoodsListData.size(); i++) {
-                                flags[i] = ordersSubmission.createSpotOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (int) leftGoodsListData.get(i).getPayNumber());
+                                flags[i] = ordersSubmission.createBookOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (Double) leftGoodsListData.get(i).getPayNumber(), leftGoodsListData.get(i).getStocks(), (Double) Math.max(0.0, leftGoodsListData.get(i).getPayNumber() - leftGoodsListData.get(i).getStocks()));
                             }
                             int flagsEqualOneCount = 0;
                             for (int i = 0; i < flags.length; i++) {
@@ -411,47 +440,18 @@ public class OrderInputController {
                                 });
                             }
                         } else {
-                            //预定订单
-                            PropertiesOperation propertiesOperation = new PropertiesOperation();
-                            int number = Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber"));
-                            Orders orders = ordersSubmission.createMainOrders(1, currentCustomer.getCompanyName(), currentCustomer.getPersonalName(), currentCustomer.getPhoneNumber(), currentCustomer.getAddress(), sum, number, datePicker.getValue().toString());
-                            int[] flags = new int[leftGoodsListData.size()];
-                            for (int i = 0; i < leftGoodsListData.size(); i++) {
-//                                flags[i] = ordersSubmission.createBookOrders(orders, leftGoodsListData.get(i).getGoodsId(), leftGoodsListData.get(i).getGoodsName(), (int) leftGoodsListData.get(i).getPayNumber(), leftGoodsListData.get(i).getStocks());
-                            }
-                            int flagsEqualOneCount = 0;
-                            for (int i = 0; i < flags.length; i++) {
-                                if (flags[i] == 1) {
-                                    flagsEqualOneCount++;
-                                } else continue;
-                            }
-                            if (flagsEqualOneCount == flags.length) {
-                                Platform.runLater(() -> {
-                                    AlertDialog alertDialog = new AlertDialog();
-                                    alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交完成!", "提交完成!");
-                                    alertDialog.show();
-                                    clearAll();
-                                });
-                            } else {
-                                Platform.runLater(() -> {
-                                    AlertDialog alertDialog = new AlertDialog();
-                                    alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交出错!", "提交出错!");
-                                    alertDialog.show();
-                                });
-                            }
-                        }
-                    } else {
-                        Platform.runLater(() -> {
-                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("提交失败");
-                            alert.setHeaderText("指定截止日期前无法完成订单！");
-                            alert.setContentText("检测到" + recommendDate + "前可以完成订单，是否应用？");
+                            Platform.runLater(() -> {
+                                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                alert.setTitle("提交失败");
+                                alert.setHeaderText("指定截止日期前无法完成订单！");
+                                alert.setContentText("检测到" + recommendDate + "前可以完成订单，是否应用？");
 
-                            Optional<ButtonType> res = alert.showAndWait();
-                            if (res.get() == ButtonType.OK) {
-                                datePicker.setValue(LocalDate.parse(recommendDate.substring(0, 10), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-                            } else alert.close();
-                        });
+                                Optional<ButtonType> res = alert.showAndWait();
+                                if (res.get() == ButtonType.OK) {
+                                    datePicker.setValue(LocalDate.parse(recommendDate.substring(0, 10), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                                } else alert.close();
+                            });
+                        }
                     }
                     return null;
                 }
