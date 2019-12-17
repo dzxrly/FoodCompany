@@ -12,8 +12,6 @@ public class AssemblyLine {
     private IntegerProperty lineState = new SimpleIntegerProperty(); //0为工作 1为空闲 2为迨机
     private StringProperty startWorkTime = new SimpleStringProperty();
     private StringProperty endWorkTime = new SimpleStringProperty();
-    private DoubleProperty startAllocateQuantity = new SimpleDoubleProperty();
-    private DoubleProperty accumulateFinishQuantity = new SimpleDoubleProperty();
 
     private IntegerProperty priority = new SimpleIntegerProperty(); //0为季度 1为预定
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
@@ -90,30 +88,6 @@ public class AssemblyLine {
         this.endWorkTime.set(endWorkTime);
     }
 
-    public double getStartAllocateQuantity() {
-        return startAllocateQuantity.get();
-    }
-
-    public DoubleProperty startAllocateQuantityProperty() {
-        return startAllocateQuantity;
-    }
-
-    public void setStartAllocateQuantity(double startAllocateQuantity) {
-        this.startAllocateQuantity.set(startAllocateQuantity);
-    }
-
-    public double getAccumulateFinishQuantity() {
-        return accumulateFinishQuantity.get();
-    }
-
-    public DoubleProperty accumulateFinishQuantityProperty() {
-        return accumulateFinishQuantity;
-    }
-
-    public void setAccumulateFinishQuantity(double accumulateFinishQuantity) {
-        this.accumulateFinishQuantity.set(accumulateFinishQuantity);
-    }
-
     public int getPriority() {
         return priority.get();
     }
@@ -147,8 +121,6 @@ public class AssemblyLine {
                 ", lineState=" + lineState +
                 ", startWorkTime=" + startWorkTime +
                 ", endWorkTime=" + endWorkTime +
-                ", startAllocateQuantity=" + startAllocateQuantity +
-                ", accumulateFinishQuantity=" + accumulateFinishQuantity +
                 ", priority=" + priority +
                 ", stuffNumber=" + stuffNumber +
                 '}';

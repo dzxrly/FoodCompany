@@ -24,8 +24,6 @@
         <property name="lineState" column="lineState" type="java.lang.Integer" length="11"></property>
         <property name="startWorkTime" column="startWorkTime" type="java.lang.String" length="20"></property>
         <property name="endWorkTime" column="endWorkTime" type="java.lang.String" length="20"></property>
-        <property name="startAllocateQuantity" column="startAllocateQuantity" type="java.lang.Double" length="0"></property>
-        <property name="accumulateFinishQuantity" column="accumulateFinishQuantity" type="java.lang.Double" length="0"></property>
         <property name="priority" column="priority"  type="java.lang.Integer" length="11"></property>
         <property name="stuffNumber" column="stuffNumber" type="java.lang.Integer" length="11"></property>
 
