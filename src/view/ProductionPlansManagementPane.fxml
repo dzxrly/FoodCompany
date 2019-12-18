@@ -40,31 +40,31 @@
             <HBox layoutX="659.0" layoutY="176.0">
                <children>
                   <Label layoutX="659.0" layoutY="183.0" prefWidth="90.0" text="生产表单编号：" />
-                  <Label layoutX="800.0" layoutY="176.0" text="Label" />
+                  <Label fx:id="formNumberLabel" layoutX="800.0" layoutY="176.0" text="Label" />
                </children>
             </HBox>
             <HBox layoutX="659.0" layoutY="211.0">
                <children>
                   <Label layoutX="659.0" layoutY="218.0" prefWidth="90.0" text="订单编号：" />
-                  <Label layoutX="734.0" layoutY="211.0" text="Label" />
+                  <Label fx:id="orderIdLabel" layoutX="734.0" layoutY="211.0" text="Label" />
                </children>
             </HBox>
             <HBox layoutX="644.0" layoutY="256.0">
                <children>
                   <Label layoutX="644.0" layoutY="256.0" prefWidth="90.0" text="创建日期：" />
-                  <Label layoutX="771.0" layoutY="256.0" text="Label" />
+                  <Label fx:id="buildTimeLabel" layoutX="771.0" layoutY="256.0" text="Label" />
                </children>
             </HBox>
             <HBox layoutX="633.0" layoutY="306.0">
                <children>
                   <Label layoutX="633.0" layoutY="306.0" prefWidth="90.0" text="截止日期：" />
-                  <Label layoutX="732.0" layoutY="306.0" text="Label" />
+                  <Label fx:id="endTimeLabel" layoutX="732.0" layoutY="306.0" text="Label" />
                </children>
             </HBox>
             <HBox layoutX="675.0" layoutY="369.0">
                <children>
                   <Label layoutX="675.0" layoutY="369.0" prefWidth="90.0" text="生产速度：" />
-                  <Label layoutX="754.0" layoutY="369.0" text="Label" />
+                  <Label fx:id="speedLabel" layoutX="754.0" layoutY="369.0" text="Label" />
                </children>
             </HBox>
          </children>
