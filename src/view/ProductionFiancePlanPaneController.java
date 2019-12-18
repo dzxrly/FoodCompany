@@ -46,6 +46,7 @@ public class ProductionFiancePlanPaneController {
     private MaterialToGoodsSearch materialToGoodsSearch = new MaterialToGoodsSearch();
     private OrderStocks currentGood = new OrderStocks();
     private ObservableList<MaterialToGoods> materialToGoodsObservableList = FXCollections.observableArrayList();
+    private Double priceSum = 0.0;
 
     @FXML
     private void initialize() {
@@ -55,6 +56,9 @@ public class ProductionFiancePlanPaneController {
         uploadBtn.setGraphic((new AddImageForComponent("img/check.png", 14)).getImageView());
         PropertiesOperation propertiesOperation = new PropertiesOperation();
         operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
+        planCountLabel.setText("");
+        priceSum = 0.0;
+        rawMaterialLabel.setText("");
 
         TableColumn productionFormIdCol = new TableColumn("表单编号");
         productionFormIdCol.setSortable(true);
@@ -110,8 +114,14 @@ public class ProductionFiancePlanPaneController {
         goodNameCol.setSortable(false);
         goodNameCol.setCellValueFactory(new PropertyValueFactory<>("goodsName"));
         TableColumn buyNumberCol = new TableColumn("应生产数量");
-        buyNumberCol.setSortable(true);
-        buyNumberCol.setCellValueFactory(new PropertyValueFactory<>("produceQuantity"));
+        buyNumberCol.setSortable(false);
+        TableColumn buyCountCol = new TableColumn("数量");
+        buyCountCol.setSortable(false);
+        buyCountCol.setCellValueFactory(new PropertyValueFactory<>("produceQuantity"));
+        TableColumn buyUnitCol = new TableColumn("单位");
+        buyUnitCol.setSortable(false);
+        buyUnitCol.setCellValueFactory(new PropertyValueFactory<>("goodUnit"));
+        buyNumberCol.getColumns().addAll(buyCountCol, buyUnitCol);
         TableColumn goodPrice = new TableColumn("单价");
         goodPrice.setSortable(true);
         goodPrice.setCellValueFactory(new PropertyValueFactory<>("goodsPrice"));
@@ -122,8 +132,14 @@ public class ProductionFiancePlanPaneController {
         materialIdCol.setSortable(true);
         materialIdCol.setCellValueFactory(new PropertyValueFactory<>("materialId"));
         TableColumn materialQuantityCol = new TableColumn("所需数量");
-        materialQuantityCol.setSortable(true);
-        materialQuantityCol.setCellValueFactory(new PropertyValueFactory<>("perQuantity"));
+        materialQuantityCol.setSortable(false);
+        TableColumn materialNumberCol = new TableColumn("数量");
+        materialNumberCol.setSortable(false);
+        materialNumberCol.setCellValueFactory(new PropertyValueFactory<>("perQuantity"));
+        TableColumn materialUnitCol = new TableColumn("单位");
+        materialUnitCol.setSortable(false);
+        materialUnitCol.setCellValueFactory(new PropertyValueFactory<>("materialUnit"));
+        materialQuantityCol.getColumns().addAll(materialNumberCol, materialUnitCol);
         TableColumn materialNameCol = new TableColumn("原料名称");
         materialNameCol.setSortable(false);
         materialNameCol.setCellValueFactory(new PropertyValueFactory<>("materialName"));
@@ -137,9 +153,14 @@ public class ProductionFiancePlanPaneController {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 currentProductionForm = productionFormObservableList.get((int) newValue);
+                planCountLabel.setText("");
+                priceSum = 0.0;
+                rawMaterialLabel.setText("");
                 orderStocksObservableList.clear();
                 materialToGoodsObservableList.clear();
                 service_searchGoods.restart();
+                planCountLabel.setText(String.valueOf(currentProductionForm.getProductionId()));
+                service_sum.restart();
             }
         });
 
@@ -203,6 +224,7 @@ public class ProductionFiancePlanPaneController {
                             orderStocks.setGoodsPrice((Double) objects[3]);
                             orderStocks.setStocks((Double) objects[4]);
                             orderStocks.setProduceQuantity((Double) objects[5]);
+                            orderStocks.setGoodUnit((String) objects[6]);
                             orderStocksObservableList.add(orderStocks);
                         }
                     } else {
@@ -222,9 +244,40 @@ public class ProductionFiancePlanPaneController {
                 protected Integer call() throws Exception {
                     List<MaterialToGoods> list = materialToGoodsSearch.searchMaterialToGoods(String.valueOf(currentGood.getGoodsId()));
                     if (!list.toString().equals("[]") && list != null) {
-                        for (int i = 0; i < list.size(); i++) materialToGoodsObservableList.add(list.get(i));
+                        for (int i = 0; i < list.size(); i++) {
+                            materialToGoodsObservableList.add(list.get(i));
+                        }
                     } else {
                         Platform.runLater(() -> rawMetarialList.setPlaceholder(new Label("没有结果")));
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_sum = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    List list = ordersSearch.searchOrderAndStocks(String.valueOf(currentProductionForm.getOrderId()));
+                    if (!list.toString().equals("[]") && list != null) {
+                        for (int i = 0; i < list.size(); i++) {
+                            Object[] objects = (Object[]) list.get(i);
+                            List<MaterialToGoods> materialList = materialToGoodsSearch.searchMaterialToGoods(String.valueOf((int) objects[0]));
+                            Double temp_sum = 0.0;
+                            if (!materialList.toString().equals("[]") && list != null) {
+                                for (int j = 0; j < materialList.size(); j++)
+                                    temp_sum += (materialList.get(j).getPerQuantity() * 100);//100是占位符
+                                priceSum += temp_sum;
+                            }
+                        }
+                        Platform.runLater(() -> rawMaterialLabel.setText(String.valueOf(priceSum)));
+                    } else {
+                        priceSum = 0.0;
+                        rawMaterialLabel.setText(String.valueOf(priceSum));
                     }
                     return null;
                 }
