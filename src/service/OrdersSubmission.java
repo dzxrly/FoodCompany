@@ -61,7 +61,7 @@ public class OrdersSubmission {
         Transaction tx = null;
         OrderSpotGoods osg = new OrderSpotGoods();
         int ans = 0;
-        GetUnit g= new GetUnit();
+        GetUnit g = new GetUnit();
 
         try {
             osg.setOrderId(od.getOrderId());
@@ -78,7 +78,6 @@ public class OrdersSubmission {
 
             osg.setGoodsUnit(goodsUnit);
             osg.setGoodsPrice(goodsPrice);
-
 
 
             tx = session.beginTransaction();
@@ -113,7 +112,7 @@ public class OrdersSubmission {
         String hql = "";
         int ans = 0;
 
-        GetUnit g= new GetUnit();
+        GetUnit g = new GetUnit();
         try {
             obg.setOrderId(od.getOrderId());
             obg.setOrderType(od.getOrderType());
@@ -125,8 +124,8 @@ public class OrdersSubmission {
             obg.setBuildDate(od.getBuildDate());
 
 
-            String goodsUnit = g.getGoodsUnit(od.getOrderId());
-            double goodsPrice = g.getGoodsPrice(String.valueOf(od.getOrderId()));
+            String goodsUnit = g.getGoodsUnit(goodsNumber);
+            double goodsPrice = g.getGoodsPrice(String.valueOf(goodsNumber));
 
             obg.setGoodsUnit(goodsUnit);
             obg.setGoodsPrice(goodsPrice);

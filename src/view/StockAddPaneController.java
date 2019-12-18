@@ -137,7 +137,7 @@ public class StockAddPaneController {
                     this.setGraphic(null);
                     if (!empty) {
                         int rowIndex = this.getIndex();
-                        this.setText(doubleFormatService.getSubstringInputDouble(goodsObservableList.get(rowIndex).getRequiredNumber(), 3) + " " + goodsObservableList.get(rowIndex).getGoodUnit());
+                        this.setText(doubleFormatService.getSubstringInputDouble(select_goodsList.get(rowIndex).getRequiredNumber(), 3) + " " + select_goodsList.get(rowIndex).getGoodUnit());
                     }
                 }
             };
@@ -155,7 +155,7 @@ public class StockAddPaneController {
                     this.setGraphic(null);
                     if (!empty) {
                         int rowIndex = this.getIndex();
-                        GoodsStockInfo temp_goodsStockInfo = goodsObservableList.get(rowIndex);
+                        GoodsStockInfo temp_goodsStockInfo = select_goodsList.get(rowIndex);
                         this.setText(doubleFormatService.getSubstringInputDouble(temp_goodsStockInfo.getStocks(), 3) + " " + temp_goodsStockInfo.getGoodUnit());
                     }
                 }
@@ -311,7 +311,7 @@ public class StockAddPaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-                    ProductionForm productionForm = productionFormSubmission.createProductionForm(0, datePicker.getValue().toString(), Integer.valueOf(operatorNumber));
+                    ProductionForm productionForm = productionFormSubmission.createProductionForm(0, datePicker.getValue().toString() + " 23:59:59", Integer.valueOf(operatorNumber));
                     if (productionForm != null) {
                         int[] flags = new int[select_goodsList.size()];
                         for (int i = 0; i < select_goodsList.size(); i++) {
