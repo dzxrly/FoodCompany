@@ -37,9 +37,10 @@
         <mapping resource="model/Payment.hbm.xml"/>
         <mapping resource="model/ReturnRecord.hbm.xml"/>
         <mapping resource="model/ProductionForm.hbm.xml"/>
-        <mapping resource="model/ProductionDetailForm.hmb.xml"/>
+        <mapping resource="model/ProductionDetailForm.hbm.xml"/>
         <mapping resource="model/MaterialToGoods.hbm.xml"/>
         <mapping resource="model/DestroyRecord.hbm.xml"/>
         <mapping resource="model/ProductDetailPlan.hbm.xml"/>
+        <mapping resource="model/WorkshopToStockRecord.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

@@ -10,6 +10,41 @@ import java.util.List;
 //成品库的操作函数
 public class ShippingDepOperation {
     //出入库信息管理
+    public List stockSearchAll() {
+        Session session = HibernateUtils.openSession();
+        List list = null;
+        String hql = "";
+        try {
+            hql = "from ShippingDepartment";
+            list = session.createQuery(hql).list();
+        } catch (RuntimeException e) {
+            System.out.println("cannot search---");
+            throw e;
+        } finally {
+            session.close();
+            return list;
+        }
+    }
+
+    public List stockSearchByTest(int index, String test) {
+        Session session = HibernateUtils.openSession();
+        String hql = "";
+        List list = null;
+        try {
+            if(index==0){//按照成品库商品id查
+                hql="from ShippingDepartment where ";
+            }
+            else if(index==1){//按照成品库商品名字查
+
+            }
+        } catch (RuntimeException e) {
+            System.out.println("cannot search---");
+            throw e;
+        } finally {
+            session.close();
+            return list;
+        }
+    }
 
     //提货信息管理 第一个函数返回左边的各项信息 第二个函数返回右边的商品列表
     public List pickingManagement(int orderId) {
@@ -83,7 +118,7 @@ public class ShippingDepOperation {
         String hql = "";
         try {
             hql = "from ProductDetailPlan where planId=" + String.valueOf(planId);
-            list=session.createQuery(hql).list();
+            list = session.createQuery(hql).list();
         } catch (RuntimeException e) {
             System.out.println("---can not search---");
             throw e;
@@ -99,7 +134,7 @@ public class ShippingDepOperation {
         String hql = "";
         try {
             hql = "from ProductDetailPlan";
-            list=session.createQuery(hql).list();
+            list = session.createQuery(hql).list();
         } catch (RuntimeException e) {
             System.out.println("---can not search---");
             throw e;
