@@ -99,13 +99,6 @@ public class StockAddPaneController {
                     if (!empty) {
                         int rowIndex = this.getIndex();
                         GoodsStockInfo temp_goodsStockInfo = goodsObservableList.get(rowIndex);
-                        if (temp_goodsStockInfo.getStocks() < temp_goodsStockInfo.getRequiredNumber()) {
-                            this.getTableRow().setStyle("-fx-background-color: #F56C6C");
-                        } else if (temp_goodsStockInfo.getStocks() == temp_goodsStockInfo.getRequiredNumber()) {
-                            this.getTableRow().setStyle("-fx-background-color: #E6A23C");
-                        } else {
-                            this.getTableRow().setStyle("-fx-background-color: #67C23A");
-                        }
                         this.setText(doubleFormatService.getSubstringInputDouble(temp_goodsStockInfo.getStocks(), 3) + " " + temp_goodsStockInfo.getGoodUnit());
                     }
                 }
