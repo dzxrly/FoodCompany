@@ -31,6 +31,7 @@ public class MainApp extends Application {
     private AnchorPane loginPane;
 
     public static void main(String[] args) {
+//        WorkshopToStockRecord wt= new WorkshopToStockRecord();
         launch(args);
     }
 
