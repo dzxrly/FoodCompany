@@ -9,10 +9,23 @@ public class MaterialToGoods {
     private IntegerProperty materialId = new SimpleIntegerProperty();//材料Id
     private DoubleProperty perQuantity = new SimpleDoubleProperty();//每一件商品所需的原材料数量
     private StringProperty goodsName = new SimpleStringProperty();
-    private StringProperty goodsUnit =new SimpleStringProperty();//商品单位
-    private  StringProperty materialName =new SimpleStringProperty();
-    private DoubleProperty materialStocks= new SimpleDoubleProperty();//原料库存
-    private StringProperty materialUnit =new SimpleStringProperty();//原料单位
+    private StringProperty goodsUnit = new SimpleStringProperty();//商品单位
+    private StringProperty materialName = new SimpleStringProperty();
+    private DoubleProperty materialStocks = new SimpleDoubleProperty();//原料库存
+    private StringProperty materialUnit = new SimpleStringProperty();//原料单位
+    private DoubleProperty materialPrice = new SimpleDoubleProperty();
+
+    public double getMaterialPrice() {
+        return materialPrice.get();
+    }
+
+    public DoubleProperty materialPriceProperty() {
+        return materialPrice;
+    }
+
+    public void setMaterialPrice(double materialPrice) {
+        this.materialPrice.set(materialPrice);
+    }
 
     public String getGoodsUnit() {
         return goodsUnit.get();
@@ -134,6 +147,7 @@ public class MaterialToGoods {
                 ", materialName=" + materialName +
                 ", materialStocks=" + materialStocks +
                 ", materialUnit=" + materialUnit +
+                ", materialPrice=" + materialPrice +
                 '}';
     }
 }
