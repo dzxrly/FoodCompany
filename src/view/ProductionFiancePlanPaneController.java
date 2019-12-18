@@ -270,7 +270,7 @@ public class ProductionFiancePlanPaneController {
                             Double temp_sum = 0.0;
                             if (!materialList.toString().equals("[]") && list != null) {
                                 for (int j = 0; j < materialList.size(); j++)
-                                    temp_sum += (materialList.get(j).getPerQuantity() * 100);//100是占位符
+                                    temp_sum += (materialList.get(j).getPerQuantity() * materialList.get(j).getMaterialPrice());
                                 priceSum += temp_sum;
                             }
                         }

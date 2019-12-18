@@ -1,5 +1,6 @@
 package service;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 public class DoubleFormatService {
@@ -16,5 +17,10 @@ public class DoubleFormatService {
         String str = String.valueOf(price);
         if (str.length() <= decimalDigit) return str;
         else return str.substring(0, decimalDigit);
+    }
+
+    public String getSubstringInputDouble(Double input, int decimalDigit) {
+        BigDecimal bigDecimal = new BigDecimal(input);
+        return bigDecimal.setScale(decimalDigit, BigDecimal.ROUND_HALF_UP).toString();
     }
 }
