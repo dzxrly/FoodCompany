@@ -11,7 +11,6 @@ public class ProductDetailPlan {
     private StringProperty goodsName = new SimpleStringProperty();
     private DoubleProperty quantity= new SimpleDoubleProperty();
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
-    private StringProperty endTime = new SimpleStringProperty();
     private StringProperty goodsUnit =new SimpleStringProperty();
 
     public String getGoodsUnit() {
@@ -110,17 +109,7 @@ public class ProductDetailPlan {
         this.stuffNumber.set(stuffNumber);
     }
 
-    public String getEndTime() {
-        return endTime.get();
-    }
 
-    public StringProperty endTimeProperty() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime.set(endTime);
-    }
 
     @Override
     public String toString() {
@@ -132,7 +121,7 @@ public class ProductDetailPlan {
                 ", goodsName=" + goodsName +
                 ", quantity=" + quantity +
                 ", stuffNumber=" + stuffNumber +
-                ", endTime=" + endTime +
+                ", endTime=" +
                 ", goodsUnit=" + goodsUnit +
                 '}';
     }

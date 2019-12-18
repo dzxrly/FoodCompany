@@ -25,7 +25,6 @@
         <property name="goodsName" column="goodsName" type="java.lang.String" length="20"></property>
         <property name="quantity" column="quantity" type="java.lang.Double" length="0"></property>
         <property name="stuffNumber" column="stuffNumber" type="java.lang.Integer" length="11"></property>
-        <property name="endTime" column="endTime" type="java.lang.String" length="20"></property>
         <property name="goodsUnit" column="goodsUnit" type="java.lang.String" length="10"></property>
     </class>
 </hibernate-mapping>

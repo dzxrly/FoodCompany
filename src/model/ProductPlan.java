@@ -13,6 +13,7 @@ public class ProductPlan {
     private IntegerProperty planType = new SimpleIntegerProperty(); //0为季度 1为预定
     private DoubleProperty productionCycle = new SimpleDoubleProperty();
     private IntegerProperty productionState = new SimpleIntegerProperty();//表示是否投入生产 0表示未投入生产 1表示投入生产 2表示正在生产 3表示完成生产
+    private StringProperty buildTime =new SimpleStringProperty();
 
     public int getProductionState() {
         return productionState.get();
@@ -112,6 +113,18 @@ public class ProductPlan {
 
     public void setProductionCycle(int productionCycle) {
         this.productionCycle.set(productionCycle);
+    }
+
+    public String getBuildTime() {
+        return buildTime.get();
+    }
+
+    public StringProperty buildTimeProperty() {
+        return buildTime;
+    }
+
+    public void setBuildTime(String buildTime) {
+        this.buildTime.set(buildTime);
     }
 
     @Override

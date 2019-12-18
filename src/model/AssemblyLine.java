@@ -9,7 +9,7 @@ public class AssemblyLine {
     private IntegerProperty lineNumber = new SimpleIntegerProperty(); //流水线编号
     private IntegerProperty planId = new SimpleIntegerProperty();
 
-    private IntegerProperty lineState = new SimpleIntegerProperty(); //0为工作 1为空闲 2为迨机
+    private IntegerProperty lineState = new SimpleIntegerProperty(); //0为工作 1为完成 2为空闲
     private StringProperty startWorkTime = new SimpleStringProperty();
     private StringProperty endWorkTime = new SimpleStringProperty();
 
