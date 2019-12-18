@@ -34,6 +34,29 @@ public class GoodsSearch {
         }
     }
 
+    public List searchGoodsByName(String name) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        List list = null;
+        String hql = null;
+        try {
+
+            tx = session.beginTransaction();
+            if (name != null)
+                hql = "from Goods where goodsName like '%" + name + "%'";
+            else
+                hql = "from Goods";
+
+            Query query = session.createQuery(hql);
+            list = query.list();
+        } catch (RuntimeException e) {
+            System.out.println("_____________Can not search_____________________");
+        } finally {
+            session.close();
+            return list;
+        }
+    }
+
     public Double searchExactGoods(String goodsId) {
         Session session = HibernateUtils.openSession();
         Double price = 0.0;
@@ -93,6 +116,23 @@ public class GoodsSearch {
         try {
             tx = session.beginTransaction();
             hql = "select g.goodsId,g.goodsName,g.goodsPrice,g.goodsQualityTime,s.stocks,g.goodsUnit,g.requiredQuantity from Goods as g,ShippingDepartment as s where g.goodsId=s.goodsId";
+            Query query = session.createQuery(hql);
+            list = query.list();
+        } catch (RuntimeException e) {
+            System.out.println("_____________Can not search_____________________");
+        } finally {
+            session.close();
+            return list;
+        }
+    }
+
+    public List getAllGoods() {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        List list = null;
+        String hql = null;
+        try {
+            hql = "from Goods";
             Query query = session.createQuery(hql);
             list = query.list();
         } catch (RuntimeException e) {
