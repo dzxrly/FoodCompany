@@ -48,6 +48,7 @@ public class ProductionPlanCreator {//生产计划管理界面
             DecimalFormat df = new DecimalFormat("#.00");
             cycle = Double.parseDouble(df.format(cycle));
 
+
             System.out.println(cycle);
             p.setProductionCycle(cycle);
             session.save(p);
