@@ -63,6 +63,7 @@ public class ProductionPlanCreator {//生产计划管理界面
             System.out.println("____________________Can not submit_________________");
             ans = 0;
             tx.rollback();
+            p = null;
             throw e;
         } finally {
             session.close();
@@ -72,17 +73,17 @@ public class ProductionPlanCreator {//生产计划管理界面
 
 
     //创建细节表
-    public void createProductionDetailPlan (ProductPlan p, String productionId) {//p是刚刚建好的ProductionPlan主表 productionId是productionDetailForm表的 生产编号
-        Session session=HibernateUtils.openSession();
-        Transaction tx =null;
+    public void createProductionDetailPlan(ProductPlan p, String productionId) {//p是刚刚建好的ProductionPlan主表 productionId是productionDetailForm表的 生产编号
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
 
-        try{
-            tx=session.beginTransaction();
+        try {
+            tx = session.beginTransaction();
             String hql = "from ProductionDetailForm  where productionId = " + productionId;
             List list = session.createQuery(hql).list();
-            for(int i=0;i<list.size();i++){
-                ProductDetailPlan pd =new ProductDetailPlan();
-                ProductionDetailForm pdf =(ProductionDetailForm) list.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                ProductDetailPlan pd = new ProductDetailPlan();
+                ProductionDetailForm pdf = (ProductionDetailForm) list.get(i);
                 pd.setPlanId(p.getPlanId());
                 pd.setPlanType(p.getPlanType());
                 pd.setGoodsId(pdf.getGoodsId());
@@ -93,11 +94,11 @@ public class ProductionPlanCreator {//生产计划管理界面
                 session.save(pd);
             }
             tx.commit();
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
 
 
             tx.rollback();
-        }finally {
+        } finally {
 
             session.close();
         }

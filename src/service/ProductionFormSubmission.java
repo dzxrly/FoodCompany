@@ -41,6 +41,7 @@ public class ProductionFormSubmission {
         } catch (RuntimeException e) {
             tx.rollback();
             System.out.println("____________________Can not submit 1_________________");
+            pf = null;
             throw e;
         } finally {
             session.close();
@@ -60,7 +61,7 @@ public class ProductionFormSubmission {
         pdf.setProductionQuantity(productionQuantity);
         pdf.setStocks(stocks);
 
-        GetUnit g =new GetUnit();
+        GetUnit g = new GetUnit();
         String goodsUnit = g.getGoodsUnit(goodId);
         pdf.setGoodsUnit(goodsUnit);
 

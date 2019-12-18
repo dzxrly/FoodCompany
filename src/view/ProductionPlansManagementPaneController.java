@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
+import model.ProductPlan;
 import model.ProductionForm;
 import service.*;
 
@@ -199,7 +200,7 @@ public class ProductionPlansManagementPaneController {
             service_upload.restart();
         } else {
             AlertDialog alertDialog = new AlertDialog();
-            alertDialog.createAlert(Alert.AlertType.ERROR,"失败","表单填写有误！","请重新填写！");
+            alertDialog.createAlert(Alert.AlertType.ERROR, "失败", "表单填写有误！", "请重新填写！");
             alertDialog.showAlert();
         }
     }
@@ -228,19 +229,20 @@ public class ProductionPlansManagementPaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-                    int flag = productionPlanCreator.createProdcutionPlan(currentProductionForm.getProductionId(), Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber")), beginDate.getValue().toString(), endDate.getValue().toString(), String.valueOf(currentProductionForm.getOrderId()));
-                    if (flag == 1) {
-                        Platform.runLater(()->{
+                    ProductPlan productPlan = productionPlanCreator.createProductionPlan(currentProductionForm.getProductionId(), Integer.valueOf(propertiesOperation.readValue("userConfig.properties", "LoginUserNumber")), beginDate.getValue().toString(), endDate.getValue().toString(), String.valueOf(currentProductionForm.getOrderId()));
+                    if (productPlan != null) {
+                        productionPlanCreator.createProductionDetailPlan(productPlan, String.valueOf(currentProductionForm.getProductionId()));
+                        Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();
-                            alertDialog.createAlert(Alert.AlertType.INFORMATION,"成功","提交成功！","提交成功！");
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
                             alertDialog.showAlert();
                             clearSidePane();
                             productionFormObservableList.clear();
                         });
                     } else {
-                        Platform.runLater(()->{
+                        Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();
-                            alertDialog.createAlert(Alert.AlertType.ERROR,"失败","提交失败！","请重新提交！");
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "失败", "提交失败！", "请重新提交！");
                             alertDialog.showAlert();
                         });
                     }
