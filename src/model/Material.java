@@ -7,7 +7,7 @@ public class Material {
     private IntegerProperty materialId = new SimpleIntegerProperty();
     private StringProperty materialName = new SimpleStringProperty();
     private DoubleProperty materialPrice = new SimpleDoubleProperty();
-    private  IntegerProperty stuffNumber = new SimpleIntegerProperty();
+    private IntegerProperty stuffNumber = new SimpleIntegerProperty();
     private IntegerProperty materialQualityTime = new SimpleIntegerProperty();//保质期
     private IntegerProperty materialType = new SimpleIntegerProperty();//0为添加剂，1为非添加剂
     private DoubleProperty stocks = new SimpleDoubleProperty();

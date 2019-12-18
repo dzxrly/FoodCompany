@@ -163,4 +163,15 @@ public class CustomerIndexAndStringSwitch {
                 return "女";
         }
     }
+
+    public String getMaterialTypeByIndex(int index) {
+        switch (index) {
+            default:
+                return "添加剂";
+            case 0:
+                return "添加剂";
+            case 1:
+                return "非添加剂";
+        }
+    }
 }

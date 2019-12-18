@@ -62,7 +62,7 @@ public class MaterialManagement {
         }
     }
 
-    public int AddMaterial(String materialName, double materialPrice, int stuffNumber, int materialQualityTime, int materialType, double stocks, String materialUnit) {
+    public int addMaterial(String materialName, double materialPrice, int stuffNumber, int materialQualityTime, int materialType, double stocks, String materialUnit) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         int ans = 0;
@@ -94,7 +94,7 @@ public class MaterialManagement {
         }
     }
 
-    public int UpdateMaterial(int materialId, String materialName, double materialPrice, int stuffNumber, int materialQualityTime, int materialType, double stocks, String materialUnit) {
+    public int updateMaterial(int materialId, String materialName, double materialPrice, int stuffNumber, int materialQualityTime, int materialType, double stocks, String materialUnit) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         int ans = 0;
