@@ -15,7 +15,6 @@ import java.util.List;
 
 public class ProductionPlanCreator {//生产计划管理界面
 
-
     public ProductPlan createProductionPlan(int productionId, int stuffNumber, String startTime, String endTime, String orderId) {// 创建生产计划表 更新productionForm的planState置1 更新productionState置1
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
@@ -28,7 +27,7 @@ public class ProductionPlanCreator {//生产计划管理界面
         p.setStartTime(startTime);
         p.setEndTime(endTime);
         p.setProductionState(0);
-
+        p.setOrderId(Integer.valueOf(orderId));
 
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String date = dt.format(new Date()).toString();//获得日期
@@ -48,6 +47,7 @@ public class ProductionPlanCreator {//生产计划管理界面
             double cycle = Double.parseDouble(ob.toString()) / 24;
             DecimalFormat df = new DecimalFormat("#.00");
             cycle = Double.parseDouble(df.format(cycle));
+
 
             System.out.println(cycle);
             p.setProductionCycle(cycle);
