@@ -204,9 +204,9 @@ public class OrderInfoSearchController {
                     saveChangeBtn.setVisible(false);
                     deleteOrderBtn.setDisable(true);
                     deleteOrderBtn.setVisible(false);
-                    customerNameText.setDisable(true);
+                    customerNameText.setDisable(false);
                     customerAddressText.setDisable(true);
-                    customerPhoneText.setDisable(true);
+                    customerPhoneText.setDisable(false);
                     orderDatePicker.setDisable(true);
                 }
             }

@@ -181,7 +181,13 @@ public class ProductionFiancePlanPaneController {
 
     @FXML
     private void handleUpload() {
-        //TODO
+        if (currentProductionForm != null) {
+            service_upload.restart();
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR,"失败","表单填写有误！","请重新填写！");
+            alertDialog.showAlert();
+        }
     }
 
     Service<Integer> service_search = new Service<Integer>() {
@@ -278,6 +284,39 @@ public class ProductionFiancePlanPaneController {
                     } else {
                         priceSum = 0.0;
                         rawMaterialLabel.setText(String.valueOf(priceSum));
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_upload = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    ProductionFinanceSubmission productionFinanceSubmission = new ProductionFinanceSubmission();
+                    PropertiesOperation propertiesOperation = new PropertiesOperation();
+                    if (productionFinanceSubmission.submitProductionFinance(Integer.valueOf(propertiesOperation.readValue("userConfig.properties","LoginUserNumber")),priceSum) == 1) {
+                        Platform.runLater(()->{
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION,"成功","提交成功！","提交成功！");
+                            alertDialog.showAlert();
+                            productionFormObservableList.clear();
+                            orderStocksObservableList.clear();
+                            materialToGoodsObservableList.clear();
+                            priceSum=0.0;
+                            planCountLabel.setText("");
+                            rawMaterialLabel.setText("");
+                        });
+                    } else {
+                        Platform.runLater(()->{
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR,"失败","提交失败！","请重新提交！");
+                            alertDialog.showAlert();
+                        });
                     }
                     return null;
                 }
