@@ -21,6 +21,7 @@
         -->
         <property name="stuffNumber" column="stuffNumber" type="java.lang.Integer" length="11"></property>
         <property name="productionId" column="productionId" type="java.lang.Integer" length="11"></property>
+        <property name="orderId" column="orderId" type="java.lang.Integer" length="11"></property>
         <property name="startTime" column="startTime" type="java.lang.String" length="20"></property>
         <property name="endTime" column="endTime" type="java.lang.String" length="20"></property>
         <property name="planType" column="planType" type="java.lang.Integer" length="11"></property>
