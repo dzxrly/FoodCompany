@@ -29,6 +29,7 @@ public class ProductionPlanCreator {//生产计划管理界面
         p.setProductionState(0);
         p.setOrderId(Integer.valueOf(orderId));
 
+
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String date = dt.format(new Date()).toString();//获得日期
         p.setBuildTime(date);
