@@ -27,6 +27,7 @@ public class UserInfoCheck {
                 System.out.println("_____________________________________" + ans);
                 //得到登录状态码和权限状态码组成最后输出的字符串
                 System.out.println("--------------------------------" + stuff.getType());
+                ans+=stuff.getLevel();
                 ans += stuff.getType();
                 //权限写进properties
                 PropertiesOperation propertiesOperation = new PropertiesOperation();
