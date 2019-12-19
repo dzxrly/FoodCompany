@@ -128,9 +128,9 @@ public class MainWindowController {
         itemWorkshop.getChildren().add(productDestruction);
         //侧边栏成品库
         TreeItem<String> itemFinishedProductionDep = new TreeItem<>("成品库");
+        itemFinishedProductionDep.getChildren().add(new TreeItem<>("交付接收管理"));
         itemFinishedProductionDep.getChildren().add(new TreeItem<>("出入库信息管理"));
         itemFinishedProductionDep.getChildren().add(new TreeItem<>("提货信息管理"));
-        itemFinishedProductionDep.getChildren().add(new TreeItem<>("生产入库数量管理"));
         //用户管理
         TreeItem<String> itemUserManagement = new TreeItem<>("用户管理");
         itemUserManagement.getChildren().add(new TreeItem<>("员工信息管理"));
@@ -293,7 +293,7 @@ public class MainWindowController {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    } else if (currentSelectedItem.getValue().equals("生产入库数量管理")) {
+                    } else if (currentSelectedItem.getValue().equals("交付接收管理")) {
                         try {
                             showInsidePane("InboundQuantityManagementPane.fxml");
                         } catch (IOException e) {

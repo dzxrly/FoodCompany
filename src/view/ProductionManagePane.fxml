@@ -23,17 +23,73 @@
       </HBox>
       <ScrollPane layoutX="14.0" layoutY="107.0" prefHeight="575.0" prefWidth="716.0">
          <content>
-            <TableView fx:id="planList" prefHeight="574.0" prefWidth="714.0" />
+            <TableView fx:id="planList" prefHeight="574.0" prefWidth="714.0">
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy></TableView>
          </content>
       </ScrollPane>
-      <Label layoutX="769.0" layoutY="280.0" text="生产计划信息">
+      <Label layoutX="774.0" layoutY="384.0" text="交付成品库">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="769.0" layoutY="324.0" spacing="15.0">
+      <VBox layoutX="774.0" layoutY="428.0" spacing="15.0">
          <children>
-            <HBox layoutX="756.0" layoutY="146.0">
+            <VBox spacing="10.0">
+               <children>
+                  <Label layoutX="792.0" layoutY="119.0" text="交付过程监督人：">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox layoutX="744.0" layoutY="170.0">
+                     <children>
+                        <TextField fx:id="stuffInfoInput" layoutX="744.0" layoutY="170.0" prefHeight="27.0" prefWidth="150.0" promptText="请输入员工编号" />
+                        <Button fx:id="searchStuff" layoutX="894.0" layoutY="172.0" mnemonicParsing="false" onAction="#handleSearchStuff" prefWidth="80.0" text="搜索" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="792.0" layoutY="223.0">
+                     <children>
+                        <Label layoutX="792.0" layoutY="223.0" prefWidth="100.0" text="监督人编号：">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="stuffIdLabel" layoutX="877.0" layoutY="225.0" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="824.0" layoutY="254.0">
+                     <children>
+                        <Label layoutX="824.0" layoutY="254.0" prefWidth="100.0" text="监督人姓名：">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="stuffNameLabel" layoutX="908.0" layoutY="285.0" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="uploadBtn" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="136.0" text="交付至成品库" />
+         </children>
+      </VBox>
+      <Label layoutX="774.0" layoutY="107.0" text="生产状态修改">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutX="778.0" layoutY="149.0" prefHeight="233.0" prefWidth="217.0" spacing="12.0">
+         <children>
+            <HBox layoutX="711.0" layoutY="151.0">
                <children>
                   <Label layoutX="756.0" layoutY="146.0" prefWidth="100.0" text="生产计划编号：">
                      <font>
@@ -47,23 +103,9 @@
                   </Label>
                </children>
             </HBox>
-            <HBox layoutX="756.0" layoutY="184.0">
+            <HBox layoutX="711.0" layoutY="185.0">
                <children>
-                  <Label layoutX="756.0" layoutY="184.0" prefWidth="100.0" text="商品种类数量：">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="numberLabel" layoutX="871.0" layoutY="186.0" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox layoutX="756.0" layoutY="234.0">
-               <children>
-                  <Label layoutX="756.0" layoutY="234.0" prefWidth="100.0" text="计划类型：">
+                  <Label prefWidth="100.0" text="计划类型：">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -75,7 +117,21 @@
                   </Label>
                </children>
             </HBox>
-            <HBox layoutX="779.0" layoutY="301.0">
+            <HBox>
+               <children>
+                  <Label layoutX="795.0" layoutY="289.0" prefWidth="100.0" text="当前状态：">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="planStatusLabel" layoutX="903.0" layoutY="291.0" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutX="711.0" layoutY="219.0">
                <children>
                   <Label layoutX="779.0" layoutY="308.0" prefWidth="100.0" text="生产周期：">
                      <font>
@@ -89,7 +145,13 @@
                   </Label>
                </children>
             </HBox>
-            <Button fx:id="uploadBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="136.0" text="交付至成品库" />
+            <Label prefHeight="23.0" prefWidth="100.0" text="修改状态：">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="planStatusComboBox" prefWidth="150.0" />
+            <Button fx:id="uploadStatusChange" mnemonicParsing="false" onAction="#handleStatusChange" prefHeight="23.0" prefWidth="70.0" text="提交" />
          </children>
       </VBox>
    </children>

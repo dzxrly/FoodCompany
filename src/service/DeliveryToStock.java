@@ -10,14 +10,14 @@ import java.util.Date;
 
 public class DeliveryToStock {
 
-    public int delivery(int planId,int planType,int orderId,int deliveryStuffNumber,double cycle){
-        Session session= HibernateUtils.openSession();
-        Transaction tx=null;
-        int ans=0;
-        String hql="";
-        WorkshopToStockRecord w =new WorkshopToStockRecord();
-        try{
-            tx=session.beginTransaction();
+    public int delivery(int planId, int planType, int orderId, int deliveryStuffNumber, double cycle) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        int ans = 0;
+        String hql = "";
+        WorkshopToStockRecord w = new WorkshopToStockRecord();
+        try {
+            tx = session.beginTransaction();
 
             w.setPlanId(planId);
             w.setPlanType(planType);
@@ -30,14 +30,14 @@ public class DeliveryToStock {
             w.setProductCycle(cycle);
 
             session.save(w);
-            ans=1;//1表示成功
+            ans = 1;//1表示成功
             tx.commit();
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
             System.out.println("____________________Can not submit_________________");
             tx.rollback();
-            ans =0 ;//0表示失败
+            ans = 0;//0表示失败
             throw e;
-        }finally {
+        } finally {
             session.close();
             return ans;
         }

@@ -2,6 +2,7 @@ package service;
 
 import DAO.HibernateUtils;
 import model.AssemblyLine;
+import model.ProductPlan;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -28,6 +29,27 @@ public class ProductionManagement {//用于生产分配界面
         } finally {
             session.close();
             return list;
+        }
+    }
+
+    public int updatePlanStatus(ProductPlan inputObj, int status) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        ProductPlan productPlan = inputObj;
+        productPlan.setProductionState(status);
+        int flag = 0;
+        try {
+            tx = session.beginTransaction();
+            session.update(productPlan);
+            tx.commit();
+            flag = 1;
+        } catch (RuntimeException e) {
+            flag = 0;
+            tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+            return flag;
         }
     }
 
@@ -66,6 +88,25 @@ public class ProductionManagement {//用于生产分配界面
         } finally {
             session.close();
             return list;
+        }
+    }
+
+    public int changeAssembleLine(AssemblyLine assemblyLine) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        int flag = 0;
+        try {
+            tx = session.beginTransaction();
+            session.update(assemblyLine);
+            tx.commit();
+            flag = 1;
+        } catch (RuntimeException e) {
+            tx.rollback();
+            flag = 0;
+            throw e;
+        } finally {
+            session.close();
+            return flag;
         }
     }
 
