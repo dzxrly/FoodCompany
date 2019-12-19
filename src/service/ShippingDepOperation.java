@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+
 //成品库的操作函数
 public class ShippingDepOperation {
     //出入库信息管理
