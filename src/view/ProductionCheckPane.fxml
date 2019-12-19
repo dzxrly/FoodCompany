@@ -27,7 +27,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label text="Label">
+            <Label fx:id="goodIdLabel" text="Label">
                <font>
                   <Font size="18.0" />
                </font>
@@ -97,7 +97,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label layoutX="414.0" layoutY="97.0" prefWidth="150.0" text="产品总数：">
+                  <Label layoutX="414.0" layoutY="97.0" prefWidth="150.0" text="商品种类数量：">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -116,7 +116,7 @@
             <Label layoutX="404.0" layoutY="83.0" text="商品列表：" />
             <ScrollPane layoutX="14.0" layoutY="101.0" prefHeight="504.0" prefWidth="642.0">
                <content>
-                  <TableView prefHeight="508.0" prefWidth="645.0">
+                  <TableView fx:id="goodsList" prefHeight="508.0" prefWidth="645.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>

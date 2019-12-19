@@ -40,7 +40,7 @@
          <children>
             <VBox layoutX="794.0" layoutY="153.0" spacing="10.0">
                <children>
-                  <Label layoutX="794.0" layoutY="153.0" text="批次编号：">
+                  <Label layoutX="794.0" layoutY="153.0" text="商品编号：">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -78,12 +78,17 @@
             </VBox>
             <VBox layoutX="785.0" layoutY="435.0" spacing="10.0">
                <children>
-                  <Label layoutX="794.0" layoutY="435.0" text="销毁备注：">
+                  <Label layoutX="794.0" layoutY="435.0" text="销毁原因：">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <TextArea fx:id="noteArea" layoutX="785.0" layoutY="466.0" prefHeight="145.0" prefWidth="278.0" />
+                  <Label fx:id="inputNumberMaxLabel" text="Label">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
             <Button fx:id="uploadBtn" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="91.0" text="提交" />

@@ -36,10 +36,6 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws ParseException {
-        SpotCheckSubmission s = new SpotCheckSubmission();
-        s.submitSpotCheck(1, "test", 100.0, "克拉", 100.0, 99.0, 0.01, 0, 10003, "2019-12-19");
-
-
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("登录");
         showUserLoginPane();

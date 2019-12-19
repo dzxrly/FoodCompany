@@ -4,18 +4,18 @@ import javafx.beans.property.*;
 
 //预定订单表
 public class OrderBookGoods {
-    private IntegerProperty bookId= new SimpleIntegerProperty();
+    private IntegerProperty bookId = new SimpleIntegerProperty();
     private IntegerProperty orderId = new SimpleIntegerProperty();
     //0表示现货订单 1表示预定订单
     private IntegerProperty orderType = new SimpleIntegerProperty();
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
     private IntegerProperty customerNumber = new SimpleIntegerProperty();
     private IntegerProperty goodsNumber = new SimpleIntegerProperty();
-    private StringProperty goodsName =new SimpleStringProperty();
+    private StringProperty goodsName = new SimpleStringProperty();
     private DoubleProperty orderQuantity = new SimpleDoubleProperty();//商品数量
     private StringProperty buildDate = new SimpleStringProperty();
-    private DoubleProperty producedQuantity =new SimpleDoubleProperty();
-    private StringProperty goodsUnit =  new SimpleStringProperty();
+    private DoubleProperty producedQuantity = new SimpleDoubleProperty();
+    private StringProperty goodsUnit = new SimpleStringProperty();
     private DoubleProperty goodsPrice = new SimpleDoubleProperty();
 
     public String getGoodsUnit() {

@@ -19,7 +19,7 @@ public class ProductionManagement {//用于生产分配界面
         List list = null;
 
         try {
-            hql = "from ProductPlan  where productionId = " + productionId;
+            hql = "from ProductPlan  where planId = " + productionId;
             list = session.createQuery(hql).list();
 
             System.out.println("____________________OK!_________________");
