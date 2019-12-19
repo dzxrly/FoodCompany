@@ -32,6 +32,8 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
 //        WorkshopToStockRecord wt= new WorkshopToStockRecord();
+//        ShippingDepOperation sdo= new ShippingDepOperation();
+//        System.out.println(sdo.stockUpdate(7,"入库",1000.0));
         launch(args);
     }
 
