@@ -65,6 +65,8 @@ public class ProductionManagePaneController {
         clearSidePane();
         planStatusComboBox.setItems(planStatusOptions);
         planStatusComboBox.getSelectionModel().select(0);
+        stuffNameLabel.setText("");
+        stuffIdLabel.setText("");
 
         TableColumn planId = new TableColumn("计划编号");
         planId.setSortable(true);
@@ -166,8 +168,6 @@ public class ProductionManagePaneController {
         planStatusLabel.setText("");
         cycleLebal.setText("");
         planStatusComboBox.getSelectionModel().select(0);
-        stuffNameLabel.setText("");
-        stuffIdLabel.setText("");
     }
 
     @FXML
@@ -192,12 +192,12 @@ public class ProductionManagePaneController {
 
     @FXML
     private void handleSearchStuff() {
-       if (!stuffInfoInput.getText().equals("")) service_searchStuff.restart();
-       else {
-           AlertDialog alertDialog = new AlertDialog();
-           alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "编号不能为空！");
-           alertDialog.showAlert();
-       }
+        if (!stuffInfoInput.getText().equals("")) service_searchStuff.restart();
+        else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "编号不能为空！");
+            alertDialog.showAlert();
+        }
     }
 
     @FXML
@@ -213,7 +213,12 @@ public class ProductionManagePaneController {
 
     @FXML
     private void handleUpload() {
-        //TODO
+        if (!stuffIdLabel.getText().equals("")) service_upload.restart();
+        else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "没有监督人!");
+            alertDialog.showAlert();
+        }
     }
 
     Service<Integer> service_searchProductionPlanById = new Service<Integer>() {
@@ -315,8 +320,31 @@ public class ProductionManagePaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-                    DeliveryToStock deliveryToStock = new DeliveryToStock();
-//                    int flag = deliveryToStock.delivery()
+                    if (currentPlan.getProductionState() == 3) {
+                        DeliveryToStock deliveryToStock = new DeliveryToStock();
+                        int flag = deliveryToStock.delivery(currentPlan.getPlanId(), currentPlan.getPlanType(), currentPlan.getOrderId(), currentStuff.getNumber(), currentPlan.getProductionCycle());
+                        if (flag == 1) {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                                alertDialog.showAlert();
+                                productPlanObservableList.clear();
+                                clearSidePane();
+                            });
+                        } else {
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "提交失败！");
+                                alertDialog.showAlert();
+                            });
+                        }
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "该订单仍在生产中！");
+                            alertDialog.showAlert();
+                        });
+                    }
                     return null;
                 }
             };

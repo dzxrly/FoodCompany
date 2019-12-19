@@ -79,7 +79,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="uploadBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="136.0" text="交付至成品库" />
+            <Button fx:id="uploadBtn" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="136.0" text="交付至成品库" />
          </children>
       </VBox>
       <Label layoutX="774.0" layoutY="107.0" text="生产状态修改">

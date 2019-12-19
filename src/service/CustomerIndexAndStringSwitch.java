@@ -211,6 +211,8 @@ public class CustomerIndexAndStringSwitch {
                 return "正在生产";
             case 3:
                 return "完成生产";
+            case 4:
+                return "已交付";
         }
     }
 }
