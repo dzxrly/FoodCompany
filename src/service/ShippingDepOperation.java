@@ -52,7 +52,7 @@ public class ShippingDepOperation {
     }
 
     //修改
-    public int stockUpdate(int goodsId, String state, double quantity) {
+    public int stockUpdate(int goodsId, int state, double quantity) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         String hql = "";
@@ -65,10 +65,10 @@ public class ShippingDepOperation {
             hql = "select stocks from ShippingDepartment where goodsId=" + String.valueOf(goodsId);
             list = session.createQuery(hql).list();
             Object ob = (Object) list.get(0);
-            if (state.equals("入库")) {
+            if (state == 1) {//入库
                 quantity = quantity + Double.valueOf(ob.toString());
                 sd.setStocks(quantity);
-            } else if (state.equals("出库")) {
+            } else if (state == 0) {//出库
                 quantity = Double.valueOf(ob.toString()) - quantity;
                 sd.setStocks(quantity);
             }

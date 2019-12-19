@@ -91,7 +91,6 @@
             <HBox fx:id="btnGroup" spacing="10.0">
                <children>
                   <Button fx:id="uploadBtn" layoutX="764.0" layoutY="682.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="100.0" text="提交" />
-                  <Button fx:id="deleteBtn" layoutX="913.0" layoutY="672.0" mnemonicParsing="false" onAction="#handleDelete" prefWidth="100.0" text="删除" />
                </children>
             </HBox>
          </children>
