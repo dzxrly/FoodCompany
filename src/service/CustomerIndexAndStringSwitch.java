@@ -174,4 +174,15 @@ public class CustomerIndexAndStringSwitch {
                 return "非添加剂";
         }
     }
+
+    public String getPlanTypeByIndex(int index) {
+        switch (index) {
+            default:
+                return "季度";
+            case 1:
+                return "季度";
+            case 2:
+                return "预定";
+        }
+    }
 }
