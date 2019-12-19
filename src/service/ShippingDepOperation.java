@@ -151,7 +151,7 @@ public class ShippingDepOperation {
     }
 
 
-    //生产入库数量管理
+    //支付接收管理
     public List searchPlanId(int planId) {
         Session session = HibernateUtils.openSession();
         List list = null;
@@ -208,8 +208,46 @@ public class ShippingDepOperation {
             workshopToStockRecord = null;
             throw e;
         } finally {
-            session.close();;
+            session.close();
+            ;
             return workshopToStockRecord;
+        }
+    }
+
+    //通过按钮点击后的数据库更新
+    public int updateIfPass(int planId) {
+        int res = 0;//修改成功是1 不成功是0
+        Session session = HibernateUtils.openSession();
+        List list = null;
+        String hql = "";
+        Transaction tx = null;
+        WorkshopToStockRecord wt = new WorkshopToStockRecord();
+        ProductPlan pp = new ProductPlan();
+        try {
+            tx = session.beginTransaction();
+            hql = "select recordId from WorkshopToStockRecord where planId=" + String.valueOf(planId);
+            list = session.createQuery(hql).list();
+            Object ob= (Object)list.get(0);
+            int recordId=Integer.valueOf(ob.toString());
+            System.out.println(recordId);
+
+            wt = session.get(WorkshopToStockRecord.class, recordId);
+            wt.setState(1);
+            session.update(wt);
+
+            pp = session.get(ProductPlan.class, planId);
+            pp.setProductionState(5);
+
+            session.update(pp);
+            tx.commit();
+            res = 1;
+        } catch (RuntimeException e) {
+            tx.rollback();
+            System.out.println("cannot update--");
+            throw e;
+        } finally {
+            session.close();
+            return res;
         }
     }
 
@@ -254,11 +292,11 @@ public class ShippingDepOperation {
             tx = session.beginTransaction();
             session.save(dr);
             tx.commit();
-            res=1;
+            res = 1;
         } catch (RuntimeException e) {
             tx.rollback();
             System.out.println("cannot create--");
-            res=0;
+            res = 0;
             throw e;
         } finally {
             session.close();
@@ -270,7 +308,7 @@ public class ShippingDepOperation {
         Session session = HibernateUtils.openSession();
         DeliveryRecord deliveryRecord = new DeliveryRecord();
         try {
-           deliveryRecord = session.get(DeliveryRecord.class, orderId);
+            deliveryRecord = session.get(DeliveryRecord.class, orderId);
         } catch (RuntimeException e) {
             deliveryRecord = null;
             throw e;
