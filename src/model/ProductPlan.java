@@ -7,14 +7,14 @@ public class ProductPlan {
 
     private IntegerProperty planId = new SimpleIntegerProperty();
     private IntegerProperty productionId = new SimpleIntegerProperty();
-    private IntegerProperty orderId= new SimpleIntegerProperty();
+    private IntegerProperty orderId = new SimpleIntegerProperty();
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
     private StringProperty startTime = new SimpleStringProperty();
-    private StringProperty endTime =new SimpleStringProperty();
+    private StringProperty endTime = new SimpleStringProperty();
     private IntegerProperty planType = new SimpleIntegerProperty(); //0为季度 1为预定
     private DoubleProperty productionCycle = new SimpleDoubleProperty();
     private IntegerProperty productionState = new SimpleIntegerProperty();//表示是否投入生产 0表示未投入生产 1表示投入生产 2表示正在生产 3表示完成生产
-    private StringProperty buildTime =new SimpleStringProperty();
+    private StringProperty buildTime = new SimpleStringProperty();
 
     public int getOrderId() {
         return orderId.get();

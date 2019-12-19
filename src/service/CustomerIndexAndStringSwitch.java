@@ -185,4 +185,32 @@ public class CustomerIndexAndStringSwitch {
                 return "预定";
         }
     }
+
+    public String getLineStatusByIndex(int index) {
+        switch (index) {
+            default:
+                return "工作中";
+            case 0:
+                return "工作中";
+            case 1:
+                return "已完成";
+            case 2:
+                return "空闲";
+        }
+    }
+
+    public String getPlanStatusByIndex(int index) {
+        switch (index) {
+            default:
+                return "未生产";
+            case 0:
+                return "未生产";
+            case 1:
+                return "待生产";
+            case 2:
+                return "正在生产";
+            case 3:
+                return "完成生产";
+        }
+    }
 }

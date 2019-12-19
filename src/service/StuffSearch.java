@@ -1,6 +1,7 @@
 package service;
 
 import DAO.HibernateUtils;
+import model.Stuff;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -55,6 +56,20 @@ public class StuffSearch {
         } finally {
             session.close();
             return list;
+        }
+    }
+
+    public Stuff getStuffById(int stuffNumber) {
+        Session session = HibernateUtils.openSession();
+        Stuff stuff = new Stuff();
+        try {
+            stuff = session.get(Stuff.class, stuffNumber);
+        } catch (RuntimeException e) {
+            stuff = null;
+            throw e;
+        } finally {
+            session.close();
+            return stuff;
         }
     }
 }
