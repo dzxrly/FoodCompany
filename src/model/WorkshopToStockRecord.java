@@ -11,6 +11,19 @@ public class WorkshopToStockRecord {
     private IntegerProperty deliverStuffNumber = new SimpleIntegerProperty();
     private StringProperty outTime = new SimpleStringProperty();
     private DoubleProperty productCycle = new SimpleDoubleProperty();//生产周期
+    private  IntegerProperty state =new SimpleIntegerProperty();//0表示已经出生产车间 1表示已经进入成品库
+
+    public int getState() {
+        return state.get();
+    }
+
+    public IntegerProperty stateProperty() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state.set(state);
+    }
 
     public int getRecordId() {
         return recordId.get();
@@ -106,6 +119,7 @@ public class WorkshopToStockRecord {
                 ", deliverStuffNumber=" + deliverStuffNumber +
                 ", outTime=" + outTime +
                 ", productCycle=" + productCycle +
+                ", state=" + state +
                 '}';
     }
 }

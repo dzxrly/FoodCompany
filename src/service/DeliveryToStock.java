@@ -28,6 +28,7 @@ public class DeliveryToStock {
             String outTime = df.format(new Date()).toString();//获得日期
             w.setOutTime(outTime);
             w.setProductCycle(cycle);
+            w.setState(0);
 
             session.save(w);
             ans = 1;//1表示成功
