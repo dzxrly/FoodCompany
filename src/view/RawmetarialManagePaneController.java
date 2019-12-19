@@ -221,7 +221,6 @@ public class RawmetarialManagePaneController {
                 timeText.setText(String.valueOf(currentMaterial.getMaterialQualityTime()));
             }
         });
-        //TODO
     }
 
     private void clearSidePane() {

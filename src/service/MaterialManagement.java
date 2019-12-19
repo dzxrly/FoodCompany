@@ -3,6 +3,7 @@ package service;
 import DAO.HibernateUtils;
 import com.mysql.cj.x.protobuf.MysqlxExpr;
 import model.Material;
+import model.MaterialToGoods;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -184,6 +185,66 @@ public class MaterialManagement {
 
     }
 
+    public int updateMaterialToGoods(MaterialToGoods inputObj, Double addCount) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        MaterialToGoods materialToGoods = inputObj;
+        materialToGoods.setPerQuantity(addCount);
+        int flag = 0;
+        try {
+            tx = session.beginTransaction();
+            session.update(materialToGoods);
+            tx.commit();
+            flag = 1;
+        } catch (RuntimeException e) {
+            flag = 0;
+            tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+            return flag;
+        }
+    }
+
+    public int addMaterialToGoods(MaterialToGoods inputObj) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        MaterialToGoods materialToGoods = inputObj;
+        int flag = 0;
+        try {
+            tx = session.beginTransaction();
+            session.save(materialToGoods);
+            tx.commit();
+            flag = 1;
+        } catch (RuntimeException e) {
+            flag = 0;
+            tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+            return flag;
+        }
+    }
+
+    public int delMaterialToGoods(int materialId) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        int flag = 0;
+        try {
+            tx = session.beginTransaction();
+            MaterialToGoods materialToGoods = session.get(MaterialToGoods.class, materialId);
+            session.delete(materialToGoods);
+            tx.commit();
+            flag = 1;
+        } catch (RuntimeException e) {
+            flag = 0;
+            tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+            return flag;
+        }
+    }
 }
 
 

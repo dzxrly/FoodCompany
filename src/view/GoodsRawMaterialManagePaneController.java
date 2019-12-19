@@ -17,6 +17,7 @@ import model.MaterialToGoods;
 import service.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class GoodsRawMaterialManagePaneController {
     @FXML
@@ -77,7 +78,9 @@ public class GoodsRawMaterialManagePaneController {
     private MaterialManagement materialManagement = new MaterialManagement();
     private ObservableList<String> materialSearchTypeOptions = FXCollections.observableArrayList("按编号查询", "按名称查询");
     private String regex = "[0-9]+";
+    private String doubleRegex = "[0-9.]+";
     private CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
+    private Material selectedMaterial = new Material();
 
     @FXML
     private void initialize() {
@@ -252,7 +255,13 @@ public class GoodsRawMaterialManagePaneController {
                 addCountText.setText(doubleFormatService.getSubstringInputDouble(currentMaterial.getPerQuantity(), 4));
             }
         });
-        //TODO
+
+        materialSearchResList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                selectedMaterial = materialObservableList.get((int) newValue);
+            }
+        });
     }
 
     private void clearSidePane() {
@@ -307,12 +316,35 @@ public class GoodsRawMaterialManagePaneController {
 
     @FXML
     private void handleSave() {
-        //TODO
+        if (changeModel.isSelected()) {
+            if (!addCountText.getText().equals("") && addCountText.getText().matches(doubleRegex)) {
+                service_updateMaterial.restart();
+            } else {
+                AlertDialog alertDialog = new AlertDialog();
+                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "输入有误！", "请重新输入！");
+                alertDialog.showAlert();
+            }
+        } else {
+            if (!addCountText.getText().equals("") && addCountText.getText().matches(doubleRegex)) {
+                service_addNewMaterial.restart();
+            } else {
+                AlertDialog alertDialog = new AlertDialog();
+                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "输入有误！", "请重新输入！");
+                alertDialog.showAlert();
+            }
+        }
     }
 
     @FXML
     private void handleDel() {
-        //TODO
+       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+       alert.setTitle("确认");
+       alert.setHeaderText("是否要移除该原料？");
+       alert.setContentText("移除后无法撤销!");
+        Optional<ButtonType> optionalButtonType = alert.showAndWait();
+        if (optionalButtonType.get() == ButtonType.OK) {
+            service_del.restart();
+        } else alert.close();
     }
 
     Service<Integer> service_searchByName = new Service<Integer>() {
@@ -429,6 +461,103 @@ public class GoodsRawMaterialManagePaneController {
                             materialObservableList.add(list.get(i));
                         }
                     } else Platform.runLater(() -> materialSearchResList.setPlaceholder(new Label("没有结果")));
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_updateMaterial = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int flag = materialManagement.updateMaterialToGoods(currentMaterial, Double.valueOf(addCountText.getText()));
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                            alertDialog.showAlert();
+                            materialToGoodsObservableList.clear();
+                            goodsObservableList.clear();
+                            clearSidePane();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "请重新提交！");
+                            alertDialog.showAlert();
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_addNewMaterial = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    MaterialToGoods materialToGoods = new MaterialToGoods();
+                    materialToGoods.setGoodsId(currentGoods.getGoodsId());
+                    materialToGoods.setMaterialId(selectedMaterial.getMaterialId());
+                    materialToGoods.setPerQuantity(Double.valueOf(addCountText.getText()));
+                    materialToGoods.setGoodsName(currentGoods.getGoodsName());
+                    materialToGoods.setGoodsUnit(currentGoods.getGoodsUnit());
+                    materialToGoods.setMaterialName(selectedMaterial.getMaterialName());
+                    materialToGoods.setMaterialStocks(selectedMaterial.getStocks());
+                    materialToGoods.setMaterialUnit(selectedMaterial.getMaterialUnit());
+                    materialToGoods.setMaterialPrice(selectedMaterial.getMaterialPrice());
+                    int flag = materialManagement.addMaterialToGoods(materialToGoods);
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                            alertDialog.showAlert();
+                            materialToGoodsObservableList.clear();
+                            goodsObservableList.clear();
+                            clearSidePane();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "请重新提交！");
+                            alertDialog.showAlert();
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_del = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int flag = materialManagement.delMaterialToGoods(currentMaterial.getMaterialId());
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                            alertDialog.showAlert();
+                            materialToGoodsObservableList.clear();
+                            goodsObservableList.clear();
+                            clearSidePane();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "请重新提交！");
+                            alertDialog.showAlert();
+                        });
+                    }
                     return null;
                 }
             };
