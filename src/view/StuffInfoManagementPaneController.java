@@ -17,12 +17,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import model.Stuff;
 import org.controlsfx.control.ToggleSwitch;
-import service.AlertDialog;
-import service.CustomerIndexAndStringSwitch;
-import service.StuffAdd;
-import service.StuffSearch;
+import service.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class StuffInfoManagementPaneController {
     @FXML
@@ -96,6 +94,8 @@ public class StuffInfoManagementPaneController {
     private Stuff currentStuff = new Stuff();
     private ObservableList<String> accLevelOptions = FXCollections.observableArrayList("老板", "经理", "员工");
     private StuffAdd stuffAdd = new StuffAdd();
+    private StuffOperation stuffOperation = new StuffOperation();
+    private PropertiesOperation propertiesOperation = new PropertiesOperation();
 
     @FXML
     private void initialize() {
@@ -355,7 +355,6 @@ public class StuffInfoManagementPaneController {
                 genderComboBox.getSelectionModel().select(currentStuff.getGender());
             }
         });
-        //TODO
     }
 
     private void clearSidePane() {
@@ -403,12 +402,35 @@ public class StuffInfoManagementPaneController {
 
     @FXML
     private void handleSaveBtn() {
-        //TODO
+        if (!stuffNameText.getText().equals("") &&
+                !idNumberText.getText().equals("") &&
+                !addressText.getText().equals("") &&
+                !emailText.getText().equals("") &&
+                !phoneText.getText().equals("")) {
+            service_update.restart();
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "表单填写错误！", "请重新填写！");
+            alertDialog.showAlert();
+        }
     }
 
     @FXML
     private void handleDeleteBtn() {
-        //TODO
+        if (!propertiesOperation.readValue("userConfig.properties","LoginUserNumber").equals(stuffNumberLabel.getText())) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("确认");
+            alert.setHeaderText("是否要删除该员工？");
+            alert.setContentText("删除后无法撤销！");
+            Optional<ButtonType> optionalButtonType = alert.showAndWait();
+            if (optionalButtonType.get() == ButtonType.OK) {
+                service_del.restart();
+            } else alert.close();
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "无法删除登陆中的员工！", "请更换账号操作！");
+            alertDialog.showAlert();
+        }
     }
 
     @FXML
@@ -428,11 +450,9 @@ public class StuffInfoManagementPaneController {
             service_addStuff.restart();
             clearSidePane();
         } else {
-            Platform.runLater(() -> {
-                AlertDialog alertDialog = new AlertDialog();
-                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "表单填写错误！", "请重新填写！");
-                alertDialog.showAlert();
-            });
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "表单填写错误！", "请重新填写！");
+            alertDialog.showAlert();
         }
     }
 
@@ -500,6 +520,62 @@ public class StuffInfoManagementPaneController {
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();
                             alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "添加失败！", "请重新添加！");
+                            alertDialog.showAlert();
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_update = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int flag = stuffOperation.StuffUpdate(currentStuff.getNumber(), stuffNameText.getText(), levelSelectComboBox.getSelectionModel().getSelectedIndex(), secondLevelComboBox.getSelectionModel().getSelectedIndex(), addressText.getText(), phoneText.getText(), emailText.getText(), idNumberText.getText(), genderComboBox.getSelectionModel().getSelectedIndex());
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                            alertDialog.showAlert();
+                            stuffObservableList.clear();
+                            clearSidePane();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "提交失败！");
+                            alertDialog.showAlert();
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_del = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int flag = stuffOperation.stuffDelete(currentStuff.getNumber());
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "删除成功！", "删除成功！");
+                            alertDialog.showAlert();
+                            stuffObservableList.clear();
+                            clearSidePane();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "删除失败！", "删除失败！");
                             alertDialog.showAlert();
                         });
                     }

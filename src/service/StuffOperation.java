@@ -9,11 +9,11 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class StuffOperation {
-    public List StuffUpdate(int Number, String name, int type, int level, String address, String phoneNumber, String email, String personalId, int gender) {
+    public int StuffUpdate(int Number, String name, int type, int level, String address, String phoneNumber, String email, String personalId, int gender) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         String hql = "";
-        List list = null;
+        int flag = 0;
         Stuff sf = new Stuff();
         try {
             tx = session.beginTransaction();
@@ -28,15 +28,15 @@ public class StuffOperation {
             sf.setPersonalID(personalId);
             session.update(sf);
             tx.commit();
-            hql = "from Stuff where number =" + String.valueOf(Number);
-            list = session.createQuery(hql).list();
+            flag = 1;
         } catch (RuntimeException e) {
             tx.rollback();
             System.out.println("--cannot update---");
+            flag = 0;
             throw e;
         } finally {
             session.close();
-            return list;
+            return flag;
         }
     }
 
