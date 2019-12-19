@@ -49,12 +49,14 @@ public class PickupInformationManagementPaneController {
     private PropertiesOperation propertiesOperation = new PropertiesOperation();
     private ObservableList<GoodsInfo> goodsInfos = FXCollections.observableArrayList();
     private String regex = "[0-9]+";
+    private String operatorNumber;
 
     @FXML
     private void initialize() {
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         uploadBtn.setGraphic((new AddImageForComponent("img/check.png", 14)).getImageView());
         operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
+        operatorNumber = propertiesOperation.readValue("userConfig.properties","LoginUserNumber");
 
         TableColumn idCol = new TableColumn("商品编号");
         idCol.setSortable(true);
@@ -102,6 +104,16 @@ public class PickupInformationManagementPaneController {
         goodsList.setItems(goodsInfos);
     }
 
+    private void clearSidePane() {
+        orderNumberLabel.setText("");
+        orderTypeLabel.setText("");
+        companyNameLabel.setText("");
+        customerNameLabel.setText("");
+        phoneLabel.setText("");
+        addressLabel.setText("");
+        totalCostLabel.setText("");
+    }
+
     @FXML
     private void handleSearch() {
         if (!orderInputText.getText().equals("") && orderInputText.getText().matches(regex)) {
@@ -116,7 +128,12 @@ public class PickupInformationManagementPaneController {
 
     @FXML
     private void handleUpload() {
-        //TODO
+        if (!orderNumberLabel.getText().equals("")) service_upload.restart();
+        else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有订单！", "请输入订单号!");
+            alertDialog.showAlert();
+        }
     }
 
     Service<Integer> service_search = new Service<Integer>() {
@@ -125,46 +142,83 @@ public class PickupInformationManagementPaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-                    currentOrder = shippingDepOperation.pickingManagement(Integer.valueOf(orderInputText.getText()));
-                    if (currentOrder != null) {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                orderNumberLabel.setText(String.valueOf(currentOrder.getOrderId()));
-                                orderTypeLabel.setText(customerIndexAndStringSwitch.returnOrderTypeByIndex(currentOrder.getOrderType()));
-                                if (currentOrder.getCompanyName() != null)
-                                    companyNameLabel.setText(currentOrder.getCompanyName());
-                                else companyNameLabel.setText("无");
-                                customerNameLabel.setText(currentOrder.getCustomerName());
-                                phoneLabel.setText(currentOrder.getCustomerPhone());
-                                addressLabel.setText(currentOrder.getCustomerAddress());
-                                totalCostLabel.setText(doubleFormatService.getSubstringInputDouble(currentOrder.getTotalSum(), 2));
-                            }
-                        });
-                        OrdersSearch ordersSearch = new OrdersSearch();
-                        if (currentOrder.getOrderType() == 0) {
-                            List<OrderSpotGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "0");
-                            if (!list.toString().equals("[]")) {
-                                for (int i = 0; i < list.size(); i++) {
-                                    goodsInfos.add(new GoodsInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getGoodsPrice(), 0, 0.0, list.get(i).getOrderQuantity(), list.get(i).getGoodsUnit()));
+                    int flag = shippingDepOperation.judgeExist(Integer.valueOf(orderInputText.getText()));
+                    if (flag == 0) {
+                        currentOrder = shippingDepOperation.pickingManagement(Integer.valueOf(orderInputText.getText()));
+                        if (currentOrder != null) {
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    orderNumberLabel.setText(String.valueOf(currentOrder.getOrderId()));
+                                    orderTypeLabel.setText(customerIndexAndStringSwitch.returnOrderTypeByIndex(currentOrder.getOrderType()));
+                                    if (currentOrder.getCompanyName() != null)
+                                        companyNameLabel.setText(currentOrder.getCompanyName());
+                                    else companyNameLabel.setText("无");
+                                    customerNameLabel.setText(currentOrder.getCustomerName());
+                                    phoneLabel.setText(currentOrder.getCustomerPhone());
+                                    addressLabel.setText(currentOrder.getCustomerAddress());
+                                    totalCostLabel.setText(doubleFormatService.getSubstringInputDouble(currentOrder.getTotalSum(), 2));
+                                }
+                            });
+                            OrdersSearch ordersSearch = new OrdersSearch();
+                            if (currentOrder.getOrderType() == 0) {
+                                List<OrderSpotGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "0");
+                                if (!list.toString().equals("[]")) {
+                                    for (int i = 0; i < list.size(); i++) {
+                                        goodsInfos.add(new GoodsInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getGoodsPrice(), 0, 0.0, list.get(i).getOrderQuantity(), list.get(i).getGoodsUnit()));
+                                    }
+                                } else {
+                                    Platform.runLater(() -> goodsList.setPlaceholder(new Label("没有结果")));
                                 }
                             } else {
-                                Platform.runLater(() -> goodsList.setPlaceholder(new Label("没有结果")));
+                                List<OrderBookGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "1");
+                                if (!list.toString().equals("[]")) {
+                                    for (int i = 0; i < list.size(); i++) {
+                                        goodsInfos.add(new GoodsInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getGoodsPrice(), 0, 0.0, list.get(i).getOrderQuantity(), list.get(i).getGoodsUnit()));
+                                    }
+                                } else {
+                                    Platform.runLater(() -> goodsList.setPlaceholder(new Label("没有结果")));
+                                }
                             }
                         } else {
-                            List<OrderBookGoods> list = ordersSearch.searchSpotOrBookOrder(String.valueOf(currentOrder.getOrderId()), "1");
-                            if (!list.toString().equals("[]")) {
-                                for (int i = 0; i < list.size(); i++) {
-                                    goodsInfos.add(new GoodsInfo(list.get(i).getGoodsNumber(), list.get(i).getGoodsName(), list.get(i).getGoodsPrice(), 0, 0.0, list.get(i).getOrderQuantity(), list.get(i).getGoodsUnit()));
-                                }
-                            } else {
-                                Platform.runLater(() -> goodsList.setPlaceholder(new Label("没有结果")));
-                            }
+                            Platform.runLater(() -> {
+                                AlertDialog alertDialog = new AlertDialog();
+                                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有结果！", "请确认订单号是否正确!");
+                                alertDialog.showAlert();
+                            });
                         }
                     } else {
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();
-                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有结果！", "请确认订单号是否正确!");
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有结果！", "该订单已被提货");
+                            alertDialog.showAlert();
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_upload = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int flag = shippingDepOperation.createDeliveryRecord(currentOrder.getOrderId(), Integer.valueOf(operatorNumber));
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                            alertDialog.showAlert();
+                            goodsInfos.clear();
+                            clearSidePane();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "提交失败！");
                             alertDialog.showAlert();
                         });
                     }

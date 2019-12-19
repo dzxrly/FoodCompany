@@ -63,6 +63,7 @@ public class StuffSearch {
         Session session = HibernateUtils.openSession();
         Stuff stuff = new Stuff();
         try {
+            System.out.println("!!!!!!!!!!!!!!");
             stuff = session.get(Stuff.class, stuffNumber);
         } catch (RuntimeException e) {
             stuff = null;

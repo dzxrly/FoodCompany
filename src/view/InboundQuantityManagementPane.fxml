@@ -16,7 +16,7 @@
       </Label>
       <HBox layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="359.0">
          <children>
-            <TextField fx:id="numberInputText" layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="150.0" promptText="请输入生产单号" />
+            <TextField fx:id="numberInputText" layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="150.0" promptText="请输入生产计划编号" />
             <Button fx:id="searchBtn" layoutX="192.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="80.0" text="搜索" />
             <Button fx:id="searchAllBtn" mnemonicParsing="false" onAction="#handleSearchAll" prefWidth="80.0" text="查询全部" />
          </children>

@@ -230,7 +230,8 @@ public class ProductionManagePaneController {
                     List<ProductPlan> list = productionManagement.searchProductionPlan(searchInputText.getText());
                     if (!list.toString().equals("[]")) {
                         for (int i = 0; i < list.size(); i++) {
-                            productPlanObservableList.add(list.get(i));
+                            if (list.get(i).getProductionState() != 4 && list.get(i).getProductionState() != 5)
+                                productPlanObservableList.add(list.get(i));
                         }
                     } else Platform.runLater(() -> planList.setPlaceholder(new Label("没有结果")));
                     return null;
@@ -248,7 +249,8 @@ public class ProductionManagePaneController {
                     List<ProductPlan> list = productionManagement.searchAllProductionPlan();
                     if (!list.toString().equals("[]")) {
                         for (int i = 0; i < list.size(); i++) {
-                            productPlanObservableList.add(list.get(i));
+                            if (list.get(i).getProductionState() != 4 && list.get(i).getProductionState() != 5)
+                                productPlanObservableList.add(list.get(i));
                         }
                     } else Platform.runLater(() -> planList.setPlaceholder(new Label("没有结果")));
                     return null;

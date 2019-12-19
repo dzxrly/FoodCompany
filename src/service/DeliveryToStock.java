@@ -4,6 +4,7 @@ import DAO.HibernateUtils;
 import model.WorkshopToStockRecord;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +32,10 @@ public class DeliveryToStock {
             w.setState(0);
 
             session.save(w);
+
+            hql = "update ProductPlan set productionState = 4 where planId =" + planId;
+            Query query = session.createQuery(hql);
+            query.executeUpdate();
             ans = 1;//1表示成功
             tx.commit();
         } catch (RuntimeException e) {

@@ -184,6 +184,20 @@ public class ShippingDepOperation {
         }
     }
 
+    public List getStuffByPlanIdHQL(String planId) {
+        Session session = HibernateUtils.openSession();
+        List list = null;
+        String hql = "";
+        try {
+            hql = "from WorkshopToStockRecord where planId =" + planId;
+            list = session.createQuery(hql).list();
+        } catch (RuntimeException e) {
+            throw e;
+        } finally {
+            session.close();
+            return list;
+        }
+    }
 
     public WorkshopToStockRecord getStuffByPlanId(int planId) {
         Session session = HibernateUtils.openSession();
@@ -194,7 +208,7 @@ public class ShippingDepOperation {
             workshopToStockRecord = null;
             throw e;
         } finally {
-            session.close();
+            session.close();;
             return workshopToStockRecord;
         }
     }
@@ -209,7 +223,7 @@ public class ShippingDepOperation {
         try {
             hql = "from DeliveryRecord where orderId=" + String.valueOf(orderId);
             list = session.createQuery(hql).list();
-            if (list != null) {
+            if (!list.toString().equals("[]")) {
                 res = 1;
             } else res = 0;
         } catch (RuntimeException e) {
@@ -249,6 +263,20 @@ public class ShippingDepOperation {
         } finally {
             session.close();
             return res;
+        }
+    }
+
+    public DeliveryRecord getStuffByOrderId(int orderId) {
+        Session session = HibernateUtils.openSession();
+        DeliveryRecord deliveryRecord = new DeliveryRecord();
+        try {
+           deliveryRecord = session.get(DeliveryRecord.class, orderId);
+        } catch (RuntimeException e) {
+            deliveryRecord = null;
+            throw e;
+        } finally {
+            session.close();
+            return deliveryRecord;
         }
     }
 }
