@@ -1,5 +1,7 @@
 package view;
 
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,28 +23,17 @@ public class InboundQuantityManagementPaneController {
     @FXML
     private Label typeLabel;
     @FXML
-    private Label pipeLineNumberLabel;
+    private Label stuffNumberLabel;
     @FXML
-    private Label expectedNumberLabel;
-    @FXML
-    private Label producedNumberLabel;
-    @FXML
-    private Label statusLabel;
-    @FXML
-    private Label warningTextChangeLabel;
-    @FXML
-    private Label warningLabel;
+    private Label stuffNameLabel;
     @FXML
     private Label operatorLabel;
-    @FXML
-    private Button markDONOTFinish;
     @FXML
     private Button markHasFinished;
 
     @FXML
     private void initialize() {
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png",14)).getImageView());
-        markDONOTFinish.setGraphic((new AddImageForComponent("img/close14x14.png",14)).getImageView());
         markHasFinished.setGraphic((new AddImageForComponent("img/check.png",14)).getImageView());
         //TODO
     }
@@ -66,4 +57,17 @@ public class InboundQuantityManagementPaneController {
     private void handleMarkHasFinished() {
         //TODO
     }
+
+    Service<Integer> service_search = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+
+                    return null;
+                }
+            };
+        }
+    };
 }

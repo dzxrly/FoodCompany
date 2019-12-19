@@ -21,8 +21,6 @@ public class InventoryQuantityManagementPaneController {
     @FXML
     private RadioButton changeModel;
     @FXML
-    private RadioButton addModel;
-    @FXML
     private ComboBox typeComboBox;
     @FXML
     private TextField inputText;
@@ -67,9 +65,6 @@ public class InventoryQuantityManagementPaneController {
         searchModel.setToggleGroup(toggleGroup);
         changeModel.setUserData(2);
         changeModel.setToggleGroup(toggleGroup);
-        addModel.setUserData(3);
-        addModel.setToggleGroup(toggleGroup);
-
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         uploadBtn.setGraphic((new AddImageForComponent("img/check.png", 14)).getImageView());
         stocksNumberLabel.setText("0");
@@ -138,13 +133,13 @@ public class InventoryQuantityManagementPaneController {
                     deleteBtn.setVisible(true);
                     uploadBtn.setVisible(true);
                 } else {
-                    numberLabel.setDisable(false);
-                    nameLabel.setDisable(false);
-                    stocksNumberLabel.setDisable(false);
-                    inOrOutTypeComboBox.setDisable(false);
-                    inputText.setDisable(false);
+                    numberLabel.setDisable(true);
+                    nameLabel.setDisable(true);
+                    stocksNumberLabel.setDisable(true);
+                    inOrOutTypeComboBox.setDisable(true);
+                    inputText.setDisable(true);
                     deleteBtn.setVisible(false);
-                    uploadBtn.setVisible(true);
+                    uploadBtn.setVisible(false);
                 }
             }
         });

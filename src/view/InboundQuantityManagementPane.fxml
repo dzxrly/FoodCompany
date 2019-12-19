@@ -21,9 +21,9 @@
             <Button fx:id="searchAllBtn" mnemonicParsing="false" onAction="#handleSearchAll" prefWidth="80.0" text="查询全部" />
          </children>
       </HBox>
-      <VBox layoutX="794.0" layoutY="143.0" prefHeight="483.0" prefWidth="271.0" spacing="10.0">
+      <VBox layoutX="786.0" layoutY="143.0" prefHeight="483.0" prefWidth="271.0" spacing="10.0">
          <children>
-            <Label layoutX="14.0" layoutY="111.0" text="生产单号：">
+            <Label layoutX="14.0" layoutY="111.0" text="计划编号：">
                <font>
                   <Font size="14.0" />
                </font>
@@ -43,48 +43,22 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="20.0" layoutY="251.0" text="流水线编号：">
+            <Label text="交付过程监督人编号：">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="pipeLineNumberLabel" layoutX="17.0" layoutY="290.0" text="Label">
+            <Label fx:id="stuffNumberLabel" text="Label">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="生产计划科预计生产数量：">
+            <Label text="交付过程监督人姓名：">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="expectedNumberLabel" text="Label">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label text="生产车间实际生产数量：">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="producedNumberLabel" text="Label">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label text="完成情况：">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="statusLabel" text="Label" />
-            <Label fx:id="warningTextChangeLabel" text="缺少情况：">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="warningLabel" text="Label">
+            <Label fx:id="stuffNameLabel" text="Label">
                <font>
                   <Font size="14.0" />
                </font>
@@ -99,12 +73,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <HBox spacing="10.0">
-               <children>
-                  <Button fx:id="markDONOTFinish" layoutX="802.0" layoutY="657.0" mnemonicParsing="false" onAction="#handleMarkDONOTFinish" prefHeight="23.0" prefWidth="90.0" text="标记未完成" />
-                  <Button fx:id="markHasFinished" layoutX="890.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleMarkHasFinished" prefWidth="90.0" text="标记已完成" />
-               </children>
-            </HBox>
+            <Button fx:id="markHasFinished" mnemonicParsing="false" onAction="#handleMarkHasFinished" prefWidth="90.0" text="通过" />
          </children>
       </VBox>
       <ScrollPane layoutX="14.0" layoutY="98.0" prefHeight="566.0" prefWidth="751.0">

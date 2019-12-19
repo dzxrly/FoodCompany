@@ -1,8 +1,10 @@
 package service;
 
 import DAO.HibernateUtils;
+import model.Orders;
 import model.ShippingDepartment;
 import model.Stuff;
+import model.WorkshopToStockRecord;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -71,7 +73,7 @@ public class ShippingDepOperation {
                 quantity = Double.valueOf(ob.toString()) - quantity;
                 sd.setStocks(quantity);
             }
-            res=1;
+            res = 1;
             session.update(sd);
             tx.commit();
         } catch (RuntimeException e) {
@@ -87,20 +89,18 @@ public class ShippingDepOperation {
 
     //提货信息管理
     // 第一个函数返回左边的各项信息 第二个函数返回右边的商品列表
-    public List pickingManagement(int orderId) {
+    public Orders pickingManagement(int orderId) {
         Session session = HibernateUtils.openSession();
-        List res = null;
-        String hql = "";
+        Orders orders = new Orders();
         try {
-            hql = "from Orders where orderId =" + orderId;
-            Query query = session.createQuery(hql);
-            res = query.list();
+            orders = session.get(Orders.class, orderId);
         } catch (RuntimeException e) {
             System.out.println("_____________________________Can not search___________________________");
+            orders = null;
             throw e;
         } finally {
             session.close();
-            return res;
+            return orders;
         }
     }
 
@@ -181,6 +181,22 @@ public class ShippingDepOperation {
         } finally {
             session.close();
             return list;
+        }
+    }
+
+
+
+    public WorkshopToStockRecord getStuffByPlanId(int planId) {
+        Session session = HibernateUtils.openSession();
+        WorkshopToStockRecord workshopToStockRecord = new WorkshopToStockRecord();
+        try {
+            workshopToStockRecord = session.get(WorkshopToStockRecord.class, planId);
+        } catch (RuntimeException e) {
+            workshopToStockRecord = null;
+            throw e;
+        } finally {
+            session.close();
+            return workshopToStockRecord;
         }
     }
 }
