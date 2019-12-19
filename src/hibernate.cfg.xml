@@ -43,5 +43,6 @@
         <mapping resource="model/ProductDetailPlan.hbm.xml"/>
         <mapping resource="model/WorkshopToStockRecord.hbm.xml"/>
         <mapping resource="model/SpotCheckForm.hbm.xml"/>
+        <mapping resource="model/DeliveryRecord.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
