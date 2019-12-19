@@ -36,12 +36,45 @@ public class MaterialManagement {
         }
     }
 
+    public Material searchMaterialById(int materialId) {
+        Session session = HibernateUtils.openSession();
+        Material material = new Material();
+        try {
+            material = session.get(Material.class, materialId);
+        } catch (RuntimeException e) {
+            material = null;
+            throw e;
+        } finally {
+            session.close();
+            return material;
+        }
+    }
 
-    public List searchMaterialAll() {
-
+    public List searchMaterialByName(String materialName) {//根据名称查询
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
-        int ans = 0;
+        String hql = "";
+        List list = null;
+
+        try {
+            tx = session.beginTransaction();
+            hql = "from Material where materialName like '%" + materialName + "%'";
+            list = session.createQuery(hql).list();
+            tx.commit();
+        } catch (RuntimeException e) {
+            System.out.println("____________________Can not submit_________________");
+            tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+            return list;
+        }
+    }
+
+
+    public List searchMaterialAll() {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
         String hql = "";
         List list = null;
 
@@ -49,12 +82,10 @@ public class MaterialManagement {
             tx = session.beginTransaction();
             hql = "from Material";
             list = session.createQuery(hql).list();
-            ans = 1;
             tx.commit();
         } catch (RuntimeException e) {
             System.out.println("____________________Can not submit_________________");
             tx.rollback();
-            ans = 0;
             throw e;
         } finally {
             session.close();

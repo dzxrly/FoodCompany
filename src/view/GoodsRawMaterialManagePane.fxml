@@ -56,6 +56,7 @@
             </HBox>
             <HBox fx:id="materialHBox" layoutX="596.0" layoutY="384.0">
                <children>
+                  <ComboBox fx:id="materialSearchTypeComboBox" prefHeight="23.0" prefWidth="135.0" />
                   <TextField fx:id="materialInfoInputText" layoutX="596.0" layoutY="384.0" prefHeight="27.0" prefWidth="150.0" promptText="请输入原料名或编号" />
                   <Button fx:id="materialSearchBtn" layoutX="757.0" layoutY="384.0" mnemonicParsing="false" onAction="#handleMaterialSearch" prefHeight="23.0" prefWidth="80.0" text="搜索" />
                   <Button fx:id="materialSearchAllBtn" mnemonicParsing="false" onAction="#handleMaterialSearchAll" prefWidth="80.0" text="查询全部" />
@@ -92,22 +93,10 @@
                   <Label fx:id="materialPriceLabel" layoutX="772.0" layoutY="717.0" text="Label" />
                </children>
             </HBox>
-            <HBox layoutX="596.0" layoutY="652.0">
-               <children>
-                  <Label layoutX="596.0" layoutY="652.0" prefWidth="80.0" text="保质期：" />
-                  <Label fx:id="materialTimeLabel" layoutX="692.0" layoutY="660.0" text="Label" />
-               </children>
-            </HBox>
             <HBox layoutX="596.0" layoutY="678.0">
                <children>
                   <Label layoutX="596.0" layoutY="678.0" prefWidth="80.0" text="库存：" />
                   <Label fx:id="stocksLabel" layoutX="652.0" layoutY="678.0" text="Label" />
-               </children>
-            </HBox>
-            <HBox layoutX="596.0" layoutY="702.0">
-               <children>
-                  <Label layoutX="596.0" layoutY="702.0" prefWidth="80.0" text="原料类型：" />
-                  <Label fx:id="materialTypeLabel" layoutX="676.0" layoutY="702.0" text="Label" />
                </children>
             </HBox>
          </children>

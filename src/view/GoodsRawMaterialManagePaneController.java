@@ -12,8 +12,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import model.Goods;
-import service.AlertDialog;
-import service.GoodsSearch;
+import model.Material;
+import model.MaterialToGoods;
+import service.*;
 
 import java.util.List;
 
@@ -51,11 +52,7 @@ public class GoodsRawMaterialManagePaneController {
     @FXML
     private Label materialPriceLabel;
     @FXML
-    private Label materialTimeLabel;
-    @FXML
     private Label stocksLabel;
-    @FXML
-    private Label materialTypeLabel;
     @FXML
     private TextField addCountText;
     @FXML
@@ -64,11 +61,23 @@ public class GoodsRawMaterialManagePaneController {
     private Button deleteBtn;
     @FXML
     private HBox materialHBox;
+    @FXML
+    private ComboBox materialSearchTypeComboBox;
 
     private ObservableList<String> searchTypeOptions = FXCollections.observableArrayList("按商品编号搜索", "按商品名称搜索");
     private ToggleGroup toggleGroup = new ToggleGroup();
     private GoodsSearch goodsSearch = new GoodsSearch();
     private ObservableList<Goods> goodsObservableList = FXCollections.observableArrayList();
+    private ObservableList<MaterialToGoods> materialToGoodsObservableList = FXCollections.observableArrayList();
+    private MaterialToGoodsSearch materialToGoodsSearch = new MaterialToGoodsSearch();
+    private Goods currentGoods = new Goods();
+    private DoubleFormatService doubleFormatService = new DoubleFormatService();
+    private MaterialToGoods currentMaterial = new MaterialToGoods();
+    private ObservableList<Material> materialObservableList = FXCollections.observableArrayList();
+    private MaterialManagement materialManagement = new MaterialManagement();
+    private ObservableList<String> materialSearchTypeOptions = FXCollections.observableArrayList("按编号查询", "按名称查询");
+    private String regex = "[0-9]+";
+    private CustomerIndexAndStringSwitch customerIndexAndStringSwitch = new CustomerIndexAndStringSwitch();
 
     @FXML
     private void initialize() {
@@ -85,9 +94,12 @@ public class GoodsRawMaterialManagePaneController {
         deleteBtn.setVisible(false);
         materialHBox.setDisable(true);
         materialSearchResList.setDisable(true);
+        clearSidePane();
 
         searchTypeComboBox.setItems(searchTypeOptions);
         searchTypeComboBox.getSelectionModel().select(0);
+        materialSearchTypeComboBox.setItems(materialSearchTypeOptions);
+        materialSearchTypeComboBox.getSelectionModel().select(0);
 
         TableColumn idCol = new TableColumn("商品编号");
         idCol.setSortable(true);
@@ -103,6 +115,96 @@ public class GoodsRawMaterialManagePaneController {
         unitCol.setCellValueFactory(new PropertyValueFactory<>("goodsUnit"));
         searchList.getColumns().addAll(idCol, nameCol, timeCol, unitCol);
         searchList.setItems(goodsObservableList);
+
+        TableColumn materialIdCol = new TableColumn("原料编号");
+        materialIdCol.setSortable(true);
+        materialIdCol.setCellValueFactory(new PropertyValueFactory<>("materialId"));
+        TableColumn materialNameCol = new TableColumn("原料名称");
+        materialNameCol.setSortable(false);
+        materialNameCol.setCellValueFactory(new PropertyValueFactory<>("materialName"));
+        TableColumn materialPerQuantityCol = new TableColumn("所需原料数量");
+        materialPerQuantityCol.setSortable(false);
+        materialPerQuantityCol.setCellValueFactory(new PropertyValueFactory<>("perQuantity"));
+        materialPerQuantityCol.setCellFactory(col -> {
+            TableCell<MaterialToGoods, Double> cell = new TableCell<>() {
+                @Override
+                public void updateItem(Double item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+                    if (!empty) {
+                        int rowIndex = getIndex();
+                        this.setText(doubleFormatService.getSubstringInputDouble(materialToGoodsObservableList.get(rowIndex).getPerQuantity(), 3) + materialToGoodsObservableList.get(rowIndex).getMaterialUnit());
+                    }
+                }
+            };
+            return cell;
+        });
+        TableColumn materialStockCol = new TableColumn("库存");
+        materialStockCol.setSortable(false);
+        materialStockCol.setCellValueFactory(new PropertyValueFactory<>("materialStocks"));
+        materialStockCol.setCellFactory(col -> {
+            TableCell<MaterialToGoods, Double> cell = new TableCell<>() {
+                @Override
+                public void updateItem(Double item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+                    if (!empty) {
+                        int rowIndex = getIndex();
+                        this.setText(doubleFormatService.getSubstringInputDouble(materialToGoodsObservableList.get(rowIndex).getMaterialStocks(), 3) + materialToGoodsObservableList.get(rowIndex).getMaterialUnit());
+                    }
+                }
+            };
+            return cell;
+        });
+        materialList.getColumns().addAll(materialIdCol, materialNameCol, materialPerQuantityCol, materialStockCol);
+        materialList.setItems(materialToGoodsObservableList);
+
+        TableColumn search_materialIdCol = new TableColumn("原料编号");
+        search_materialIdCol.setSortable(true);
+        search_materialIdCol.setCellValueFactory(new PropertyValueFactory<>("materialId"));
+        TableColumn search_materialNameCol = new TableColumn("原料名称");
+        search_materialNameCol.setSortable(false);
+        search_materialNameCol.setCellValueFactory(new PropertyValueFactory<>("materialName"));
+        TableColumn search_materialStockCol = new TableColumn("库存");
+        search_materialStockCol.setSortable(false);
+        search_materialStockCol.setCellValueFactory(new PropertyValueFactory<>("stocks"));
+        search_materialStockCol.setCellFactory(col -> {
+            TableCell<MaterialToGoods, Double> cell = new TableCell<>() {
+                @Override
+                public void updateItem(Double item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+                    if (!empty) {
+                        int rowIndex = getIndex();
+                        this.setText(doubleFormatService.getSubstringInputDouble(materialObservableList.get(rowIndex).getStocks(), 3) + materialObservableList.get(rowIndex).getMaterialUnit());
+                    }
+                }
+            };
+            return cell;
+        });
+        TableColumn search_type = new TableColumn("原料类型");
+        search_type.setSortable(false);
+        search_type.setCellValueFactory(new PropertyValueFactory<>("materialType"));
+        search_type.setCellFactory(col -> {
+            TableCell<MaterialToGoods, Integer> cell = new TableCell<>() {
+                @Override
+                public void updateItem(Integer item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+                    if (!empty) {
+                        int rowIndex = getIndex();
+                        this.setText(customerIndexAndStringSwitch.getMaterialTypeByIndex(materialObservableList.get(rowIndex).getMaterialType()));
+                    }
+                }
+            };
+            return cell;
+        });
+        materialSearchResList.getColumns().addAll(search_materialIdCol, search_materialNameCol, search_materialStockCol, search_type);
+        materialSearchResList.setItems(materialObservableList);
 
         toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
@@ -128,7 +230,37 @@ public class GoodsRawMaterialManagePaneController {
                 }
             }
         });
+
+        searchList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                materialToGoodsObservableList.clear();
+                currentGoods = goodsObservableList.get((int) newValue);
+                service_getMaterialByGoodsId.restart();
+            }
+        });
+
+        materialList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                clearSidePane();
+                currentMaterial = materialToGoodsObservableList.get((int) newValue);
+                materialNumberLabel.setText(String.valueOf(currentMaterial.getMaterialId()));
+                materialNameLabel.setText(currentMaterial.getMaterialName());
+                materialPriceLabel.setText(doubleFormatService.getSubstringInputDouble(currentMaterial.getMaterialPrice(), 3));
+                stocksLabel.setText(doubleFormatService.getSubstringInputDouble(currentMaterial.getMaterialStocks(), 3));
+                addCountText.setText(doubleFormatService.getSubstringInputDouble(currentMaterial.getPerQuantity(), 4));
+            }
+        });
         //TODO
+    }
+
+    private void clearSidePane() {
+        materialNumberLabel.setText("");
+        materialNameLabel.setText("");
+        materialPriceLabel.setText("");
+        stocksLabel.setText("");
+        addCountText.setText("");
     }
 
     @FXML
@@ -152,12 +284,25 @@ public class GoodsRawMaterialManagePaneController {
 
     @FXML
     private void handleMaterialSearch() {
-        //TODO
+        if (materialSearchTypeComboBox.getSelectionModel().getSelectedIndex() == 0) {
+            if (!materialInfoInputText.getText().equals("") && materialInfoInputText.getText().matches(regex)) {
+                materialObservableList.clear();
+                service_materialById.restart();
+            } else {
+                AlertDialog alertDialog = new AlertDialog();
+                alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "输入有误！", "请重新输入！");
+                alertDialog.showAlert();
+            }
+        } else {
+            materialObservableList.clear();
+            service_materialByName.restart();
+        }
     }
 
     @FXML
     private void handleMaterialSearchAll() {
-        //TODO
+        materialObservableList.clear();
+        service_allMaterial.restart();
     }
 
     @FXML
@@ -216,6 +361,74 @@ public class GoodsRawMaterialManagePaneController {
                             goodsObservableList.add(list.get(i));
                         }
                     } else Platform.runLater(() -> searchList.setPlaceholder(new Label("没有结果")));
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_getMaterialByGoodsId = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    List<MaterialToGoods> list = materialToGoodsSearch.searchMaterialToGoods(String.valueOf(currentGoods.getGoodsId()));
+                    if (!list.toString().equals("[]")) {
+                        for (int i = 0; i < list.size(); i++) materialToGoodsObservableList.add(list.get(i));
+                    } else Platform.runLater(() -> searchList.setPlaceholder(new Label("没有结果")));
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_materialById = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    Material material = materialManagement.searchMaterialById(Integer.valueOf(materialInfoInputText.getText()));
+                    if (material != null) {
+                        materialObservableList.add(material);
+                    } else Platform.runLater(() -> materialSearchResList.setPlaceholder(new Label("没有结果")));
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_materialByName = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    List<Material> list = materialManagement.searchMaterialByName(materialInfoInputText.getText());
+                    if (!list.toString().equals("[]")) {
+                        for (int i = 0; i < list.size(); i++) {
+                            materialObservableList.add(list.get(i));
+                        }
+                    } else Platform.runLater(() -> materialSearchResList.setPlaceholder(new Label("没有结果")));
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_allMaterial = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    List<Material> list = materialManagement.searchMaterialAll();
+                    if (!list.toString().equals("[]")) {
+                        for (int i = 0; i < list.size(); i++) {
+                            materialObservableList.add(list.get(i));
+                        }
+                    } else Platform.runLater(() -> materialSearchResList.setPlaceholder(new Label("没有结果")));
                     return null;
                 }
             };
