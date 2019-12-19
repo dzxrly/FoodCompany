@@ -129,6 +129,7 @@ public class StuffInfoManagementPaneController {
         modelLebel.setText("查询模式");
         stuffNameText.setDisable(true);
         stuffLevelComboBox.setDisable(true);
+        secondLevelComboBox.setDisable(true);
         addressText.setDisable(true);
         phoneText.setDisable(true);
         emailText.setDisable(true);
@@ -236,6 +237,7 @@ public class StuffInfoManagementPaneController {
                     printBtn.setVisible(false);
                     btnGroup.setVisible(true);
                     addAllStuffBtn.setDisable(true);
+                    secondLevelComboBox.setDisable(false);
                 } else {
                     modelLebel.setText("查询模式");
                     stuffNameText.setDisable(true);
@@ -248,6 +250,7 @@ public class StuffInfoManagementPaneController {
                     printBtn.setVisible(true);
                     btnGroup.setVisible(false);
                     addAllStuffBtn.setDisable(true);
+                    secondLevelComboBox.setDisable(true);
                 }
             }
         });
@@ -535,7 +538,7 @@ public class StuffInfoManagementPaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-                    int flag = stuffOperation.StuffUpdate(currentStuff.getNumber(), stuffNameText.getText(), levelSelectComboBox.getSelectionModel().getSelectedIndex(), secondLevelComboBox.getSelectionModel().getSelectedIndex(), addressText.getText(), phoneText.getText(), emailText.getText(), idNumberText.getText(), genderComboBox.getSelectionModel().getSelectedIndex());
+                    int flag = stuffOperation.StuffUpdate(currentStuff.getNumber(), stuffNameText.getText(), stuffLevelComboBox.getSelectionModel().getSelectedIndex(), secondLevelComboBox.getSelectionModel().getSelectedIndex(), addressText.getText(), phoneText.getText(), emailText.getText(), idNumberText.getText(), genderComboBox.getSelectionModel().getSelectedIndex());
                     if (flag == 1) {
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();

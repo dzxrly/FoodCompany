@@ -21,6 +21,9 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import jfxtras.styles.jmetro.JMetro;
@@ -28,9 +31,17 @@ import jfxtras.styles.jmetro.Style;
 import service.AddImageForComponent;
 import service.PropertiesOperation;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainWindowController {
     //主页面控制类
@@ -55,9 +66,11 @@ public class MainWindowController {
     private String userLevel;
     private String userName;
     private String userNumber;
+    private Timer timer = new Timer();
 
     @FXML
     private void initialize() {
+        service_checkNet.restart();
         //读取权限姓名和编号
         userLevel = propertiesOperation.readValue("userConfig.properties", "UserLevel");
         userName = propertiesOperation.readValue("userConfig.properties", "LoginUserName");
@@ -136,7 +149,7 @@ public class MainWindowController {
         itemUserManagement.getChildren().add(new TreeItem<>("员工信息管理"));
         itemUserManagement.getChildren().add(new TreeItem<>("考勤管理"));
         //权限处理
-        if (userLevel.equals("0")) {
+        if (userLevel.substring(0, 1).equals("0")) {
             rootItem.getChildren().add(itemSaleDep);
             rootItem.getChildren().add(itemFianceDep);
             rootItem.getChildren().add(itemRawMaterial);
@@ -144,14 +157,24 @@ public class MainWindowController {
             rootItem.getChildren().add(itemWorkshop);
             rootItem.getChildren().add(itemFinishedProductionDep);
             rootItem.getChildren().add(itemUserManagement);
-        } else if (userLevel.equals("1")) {
+        } else if (userLevel.substring(0, 1).equals("1")) {
             rootItem.getChildren().add(itemSaleDep);
-            rootItem.getChildren().add(itemFinishedProductionDep);
-        } else if (userLevel.equals("2")) {
-            rootItem.getChildren().add(itemSaleDep);
+            if (userLevel.substring(1).equals("1")) rootItem.getChildren().add(itemUserManagement);
+        } else if (userLevel.substring(0, 1).equals("2")) {
             rootItem.getChildren().add(itemFianceDep);
+            if (userLevel.substring(1).equals("1")) rootItem.getChildren().add(itemUserManagement);
+        } else if (userLevel.substring(0, 1).equals("3")) {
             rootItem.getChildren().add(itemProductionPlanDep);
+            if (userLevel.substring(1).equals("1")) rootItem.getChildren().add(itemUserManagement);
+        } else if (userLevel.substring(0, 1).equals("4")) {
+            rootItem.getChildren().add(itemWorkshop);
+            if (userLevel.substring(1).equals("1")) rootItem.getChildren().add(itemUserManagement);
+        } else if (userLevel.substring(0, 1).equals("5")) {
             rootItem.getChildren().add(itemFinishedProductionDep);
+            if (userLevel.substring(1).equals("1")) rootItem.getChildren().add(itemUserManagement);
+        } else if (userLevel.substring(0, 1).equals("6")) {
+            rootItem.getChildren().add(itemRawMaterial);
+            if (userLevel.substring(1).equals("1")) rootItem.getChildren().add(itemUserManagement);
         } else {
             rootItem.getChildren().add(itemWarning);
         }
@@ -381,13 +404,79 @@ public class MainWindowController {
         //TODO
     }
 
+    public boolean ping(String ipAddress, int pingTimes, int timeOut) {
+        BufferedReader in = null;
+        Runtime r = Runtime.getRuntime();  // 将要执行的ping命令,此命令是windows格式的命令
+        String pingCommand = "ping " + ipAddress + " -n " + pingTimes + " -w " + timeOut;
+        try {   // 执行命令并获取输出
+            Process p = r.exec(pingCommand);
+            if (p == null) {
+                return false;
+            }
+            in = new BufferedReader(new InputStreamReader(p.getInputStream()));   // 逐行检查输出,计算类似出现=23ms TTL=62字样的次数
+            int connectedCount = 0;
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                connectedCount += getCheckResult(line);
+            }   // 如果出现类似=23ms TTL=62这样的字样,出现的次数=测试次数则返回真
+            return connectedCount == pingTimes;
+        } catch (Exception ex) {
+            ex.printStackTrace();   // 出现异常则返回假
+            return false;
+        } finally {
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private int getCheckResult(String line) {  // System.out.println("控制台输出的结果为:"+line);
+        Pattern pattern = Pattern.compile("(\\d+ms)(\\s+)(TTL=\\d+)", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(line);
+        while (matcher.find()) {
+            return 1;
+        }
+        return 0;
+    }
+
     Service<Integer> service_checkNet = new Service<Integer>() {
         @Override
         protected Task<Integer> createTask() {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
-                    //TODO
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            boolean[] booleans = new boolean[4];
+                            int number = 0;
+                            for (int i = 0; i < 4; i++) booleans[i] = ping("www.baidu.com", 1, 5000);
+                            for (int i = 0; i < 4; i++) if (booleans[i]) number++;
+                            if (number == 4 || number == 3) {
+                                Platform.runLater(()->{
+                                    netStatus.setText("网络质量良好");
+                                    netStatus.setTextFill(Color.web("#67C23A"));
+                                });
+                            } else if (number == 2) {
+                                Platform.runLater(()->{
+                                    netStatus.setText("网络质量一般");
+                                    netStatus.setTextFill(Color.web("#E6A23C"));
+                                });
+                            } else if (number == 1) {
+                                Platform.runLater(()->{
+                                    netStatus.setText("网络质量很差");
+                                    netStatus.setTextFill(Color.web("#F56C6C"));
+                                });
+                            } else {
+                                Platform.runLater(()->{
+                                    netStatus.setText("网络已断开，请检查网络连接状况！");
+                                    netStatus.setTextFill(Color.web("#F56C6C"));
+                                });
+                            }
+                        }
+                    }, 100, 30000);
                     return null;
                 }
             };

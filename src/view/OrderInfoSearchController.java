@@ -62,11 +62,8 @@ public class OrderInfoSearchController {
     @FXML
     private HBox hBox;
     @FXML
-    private Label modelLabel;
-    @FXML
     private Label orderTypeLabel;
 
-    private ToggleSwitch toggleSwitch = new ToggleSwitch();
     private ObservableList<String> searchTypeOptions = FXCollections.observableArrayList("订单号", "客户名称", "公司/企业名称");
     private ObservableList<Orders> searchData = FXCollections.observableArrayList();
     private final String pattern = "yyyy-MM-dd";
@@ -78,10 +75,8 @@ public class OrderInfoSearchController {
     private void initialize() {
         searchIndexComboBox.setItems(searchTypeOptions);
         searchIndexComboBox.getSelectionModel().select(0);
-        toggleSwitch.setSelected(false);
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         printBtn.setGraphic((new AddImageForComponent("img/download.png", 14)).getImageView());
-        hBox.getChildren().add(1, toggleSwitch);
         printBtn.setDisable(false);
         printBtn.setVisible(true);
         saveChangeBtn.setDisable(true);
@@ -93,7 +88,6 @@ public class OrderInfoSearchController {
         customerAddressText.setDisable(true);
         customerPhoneText.setDisable(true);
         orderDatePicker.setDisable(true);
-        modelLabel.setText("查询模式");
 
         TableColumn orderIdCol = new TableColumn("订单编号");
         orderIdCol.setSortable(true);
@@ -181,37 +175,6 @@ public class OrderInfoSearchController {
         orderDatePicker.setConverter(converter);
         orderDatePicker.setPromptText(pattern.toLowerCase());
 
-        toggleSwitch.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    modelLabel.setText("修改模式");
-                    printBtn.setDisable(true);
-                    printBtn.setVisible(false);
-                    saveChangeBtn.setDisable(false);
-                    saveChangeBtn.setVisible(true);
-                    deleteOrderBtn.setDisable(false);
-                    deleteOrderBtn.setVisible(true);
-                    customerNameText.setDisable(false);
-                    customerAddressText.setDisable(false);
-                    customerPhoneText.setDisable(false);
-                    orderDatePicker.setDisable(false);
-                } else {
-                    modelLabel.setText("查询模式");
-                    printBtn.setDisable(false);
-                    printBtn.setVisible(true);
-                    saveChangeBtn.setDisable(true);
-                    saveChangeBtn.setVisible(false);
-                    deleteOrderBtn.setDisable(true);
-                    deleteOrderBtn.setVisible(false);
-                    customerNameText.setDisable(false);
-                    customerAddressText.setDisable(true);
-                    customerPhoneText.setDisable(false);
-                    orderDatePicker.setDisable(true);
-                }
-            }
-        });
-
         orderListTable.getSelectionModel().getSelectedCells().addListener(new ListChangeListener() {
             @Override
             public void onChanged(Change c) {
@@ -253,16 +216,6 @@ public class OrderInfoSearchController {
 
     @FXML
     private void handlePrint() {
-        //TODO
-    }
-
-    @FXML
-    private void handleSave() {
-        //TODO
-    }
-
-    @FXML
-    private void handleDelete() {
         //TODO
     }
 

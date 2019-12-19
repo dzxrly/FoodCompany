@@ -20,7 +20,7 @@ public class StuffAdd {
         s.setPhoneNumber(phoneNumber);
         s.setEmail(email);
         s.setGender(gender);
-        s.setLevel(type);
+        s.setType(type);
         try {
             tx = session.beginTransaction();
             session.save(s);

@@ -27,11 +27,10 @@ public class UserInfoCheck {
                 System.out.println("_____________________________________" + ans);
                 //得到登录状态码和权限状态码组成最后输出的字符串
                 System.out.println("--------------------------------" + stuff.getType());
-                ans+=stuff.getLevel();
-                ans += stuff.getType();
+                ans += (String.valueOf(stuff.getType()) + String.valueOf(stuff.getLevel()));
                 //权限写进properties
                 PropertiesOperation propertiesOperation = new PropertiesOperation();
-                propertiesOperation.writeProperties("userConfig.properties", "UserLevel", String.valueOf(stuff.getType()));
+                propertiesOperation.writeProperties("userConfig.properties", "UserLevel", String.valueOf(stuff.getType()) + String.valueOf(stuff.getLevel()));
                 propertiesOperation.writeProperties("userConfig.properties", "LoginUserName", stuff.getPersonalName());
                 propertiesOperation.writeProperties("userConfig.properties", "LoginUserNumber", String.valueOf(stuff.getNumber()));
             } else if (!stuff.getPassword().equals(pw)) ans = "2";

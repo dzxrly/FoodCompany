@@ -73,7 +73,8 @@ public class UserLoginPaneController {
         propertiesOperation.writeProperties("userConfig.properties", "LoginUserName", "null");
         propertiesOperation.writeProperties("userConfig.properties", "LoginUserNumber", "null");
 
-        if (propertiesOperation.readValue("userConfig.properties", "isRememberedPW").equals("true")) rememberAccount.setSelected(true);
+        if (propertiesOperation.readValue("userConfig.properties", "isRememberedPW").equals("true"))
+            rememberAccount.setSelected(true);
         else rememberAccount.setSelected(false);
 
         String flag = propertiesOperation.readValue("userConfig.properties", "LastLoginUserNumber");
@@ -89,11 +90,11 @@ public class UserLoginPaneController {
         if (rememberAccount.isSelected()) {
             PropertiesOperation propertiesOperation = new PropertiesOperation();
             propertiesOperation.writeProperties("userConfig.properties", "LastLoginUserNumber", inputNumber.getText());
-            propertiesOperation.writeProperties("userConfig.properties","isRememberedPW", "true");
+            propertiesOperation.writeProperties("userConfig.properties", "isRememberedPW", "true");
         } else {
             PropertiesOperation propertiesOperation = new PropertiesOperation();
             propertiesOperation.writeProperties("userConfig.properties", "LastLoginUserNumber", "NOT_ACCOUNT");
-            propertiesOperation.writeProperties("userConfig.properties","isRememberedPW", "false");
+            propertiesOperation.writeProperties("userConfig.properties", "isRememberedPW", "false");
         }
         progressBar.setVisible(true);
         loginBtn.setDisable(true);
@@ -104,8 +105,18 @@ public class UserLoginPaneController {
             progressBar.setVisible(false);
             loginBtn.setDisable(false);
         } else {
-//            LoginTimeOutCheck loginTimeOutCheck = new LoginTimeOutCheck();
-//            timer.schedule(loginTimeOutCheck, 500, 90000);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> {
+                        AlertDialog alertDialog = new AlertDialog();
+                        alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "无法连接数据库", "请检查网络连接！");
+                        alertDialog.showAlert();
+                        progressBar.setVisible(false);
+                        loginBtn.setDisable(false);
+                    });
+                }
+            }, 90000);
             userNumber = inputNumber.getText();
             userPassword = inputPW.getText();
             service.restart();
@@ -217,24 +228,4 @@ public class UserLoginPaneController {
             };
         }
     };
-
-    class LoginTimeOutCheck extends TimerTask {
-        private int timedOutCheckCount = 0;
-
-        @Override
-        public void run() {
-            if (timedOutCheckCount < 1) {
-                Platform.runLater(() -> {
-                    AlertDialog alertDialog = new AlertDialog();
-                    alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "无法连接数据库", "请检查网络连接！");
-                    alertDialog.show();
-                });
-                timedOutCheckCount++;
-            } else {
-                progressBar.setVisible(false);
-                loginBtn.setDisable(false);
-                timer.cancel();
-            }
-        }
-    }
 }
