@@ -8,8 +8,7 @@ import javafx.beans.property.StringProperty;
 //销毁表
 public class DestroyRecord {
     private IntegerProperty recordId = new SimpleIntegerProperty();
-    private IntegerProperty destroyNumber = new SimpleIntegerProperty();
-    private StringProperty destroyReason = new SimpleStringProperty();
+    private StringProperty goodsName = new SimpleStringProperty();
     private IntegerProperty stuffNumber = new SimpleIntegerProperty();
     private StringProperty destroyTime = new SimpleStringProperty();
     private StringProperty destroyNote = new SimpleStringProperty();
@@ -26,28 +25,16 @@ public class DestroyRecord {
         this.recordId.set(recordId);
     }
 
-    public int getDestroyNumber() {
-        return destroyNumber.get();
+    public String getGoodsName() {
+        return goodsName.get();
     }
 
-    public IntegerProperty destroyNumberProperty() {
-        return destroyNumber;
+    public StringProperty goodsNameProperty() {
+        return goodsName;
     }
 
-    public void setDestroyNumber(int destroyNumber) {
-        this.destroyNumber.set(destroyNumber);
-    }
-
-    public String getDestroyReason() {
-        return destroyReason.get();
-    }
-
-    public StringProperty destroyReasonProperty() {
-        return destroyReason;
-    }
-
-    public void setDestroyReason(String destroyReason) {
-        this.destroyReason.set(destroyReason);
+    public void setGoodsName(String goodsName) {
+        this.goodsName.set(goodsName);
     }
 
     public int getStuffNumber() {
@@ -90,8 +77,7 @@ public class DestroyRecord {
     public String toString() {
         return "DestroyRecord{" +
                 "recordId=" + recordId +
-                ", destroyNumber=" + destroyNumber +
-                ", destroyReason=" + destroyReason +
+                ", goodsName=" + goodsName +
                 ", stuffNumber=" + stuffNumber +
                 ", destroyTime=" + destroyTime +
                 ", destroyNote=" + destroyNote +

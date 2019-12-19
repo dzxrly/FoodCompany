@@ -19,8 +19,7 @@
             使用property来描述属性与字段的对应关系
             如果length忽略不写，且你的表是自动创建这种方案，那么length的默认长度是255
         -->
-        <property name="destroyNumber" column="destroyNumber" type="java.lang.Integer" length="11"></property>
-        <property name="destroyReason" column="destroyReason" type="java.lang.String" length="50"></property>
+        <property name="goodsName" column="goodsName" type="java.lang.String" length="20"></property>
         <property name="stuffNumber" column="stuffNumber" type="java.lang.Integer" length="11"></property>
         <property name="destroyTime" column="destroyTime" type="java.lang.String" length="20"></property>
         <property name="destroyNote" column="destroyNote" type="java.lang.String" length="255"></property>

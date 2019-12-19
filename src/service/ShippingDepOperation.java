@@ -1,14 +1,13 @@
 package service;
 
 import DAO.HibernateUtils;
-import model.Orders;
-import model.ShippingDepartment;
-import model.Stuff;
-import model.WorkshopToStockRecord;
+import model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -151,6 +150,7 @@ public class ShippingDepOperation {
         }
     }
 
+
     //生产入库数量管理
     public List searchPlanId(int planId) {
         Session session = HibernateUtils.openSession();
@@ -185,7 +185,6 @@ public class ShippingDepOperation {
     }
 
 
-
     public WorkshopToStockRecord getStuffByPlanId(int planId) {
         Session session = HibernateUtils.openSession();
         WorkshopToStockRecord workshopToStockRecord = new WorkshopToStockRecord();
@@ -197,6 +196,59 @@ public class ShippingDepOperation {
         } finally {
             session.close();
             return workshopToStockRecord;
+        }
+    }
+
+    //判断是否订单已经被提了 0表示没有被提 1表示被提了
+    public int judgeExist(int orderId) {
+        Session session = HibernateUtils.openSession();
+        String hql = "";
+        int res = 0;
+        List list = null;
+
+        try {
+            hql = "from DeliveryRecord where orderId=" + String.valueOf(orderId);
+            list = session.createQuery(hql).list();
+            if (list != null) {
+                res = 1;
+            } else res = 0;
+        } catch (RuntimeException e) {
+            System.out.println("cannot judge--");
+            throw e;
+        } finally {
+            session.close();
+            return res;
+        }
+    }
+
+    //创建提货记录单 0表示失败 1表示成功
+    public int createDeliveryRecord(int orderId, int stuffNumber) {
+        Session session = HibernateUtils.openSession();
+        Transaction tx = null;
+        List list = null;
+        String hql = "";
+        int res = 0;
+
+        DeliveryRecord dr = new DeliveryRecord();
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String date = dt.format(new Date()).toString();//获得日期
+        dr.setOrderId(orderId);
+        dr.setStuffNumber(stuffNumber);
+        dr.setOutTime(date);
+        try {
+            //System.out.println(time);
+            tx = session.beginTransaction();
+            session.save(dr);
+            tx.commit();
+            res=1;
+        } catch (RuntimeException e) {
+            tx.rollback();
+            System.out.println("cannot create--");
+            res=0;
+            throw e;
+        } finally {
+            session.close();
+            return res;
         }
     }
 }
