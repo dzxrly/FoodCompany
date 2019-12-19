@@ -10,7 +10,7 @@ public class WorkshopToStockRecord {
     private IntegerProperty orderId = new SimpleIntegerProperty();
     private IntegerProperty deliverStuffNumber = new SimpleIntegerProperty();
     private StringProperty outTime = new SimpleStringProperty();
-    private DoubleProperty productCycle = new SimpleDoubleProperty();
+    private DoubleProperty productCycle = new SimpleDoubleProperty();//生产周期
 
     public int getRecordId() {
         return recordId.get();
