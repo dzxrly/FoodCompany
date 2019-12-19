@@ -14,30 +14,20 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <HBox layoutX="14.0" layoutY="58.0">
+      <HBox layoutX="14.0" layoutY="56.0">
          <children>
-            <TextField fx:id="numberInputText" layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="200.0" promptText="请输入批次编号" />
+            <TextField fx:id="numberInputText" layoutX="14.0" layoutY="59.0" prefHeight="27.0" prefWidth="200.0" promptText="请输入生产计划编号" />
             <Button fx:id="searchBtn" layoutX="214.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="23.0" prefWidth="83.0" text="查询" />
          </children>
       </HBox>
-      <VBox fx:id="vBox" layoutX="14.0" layoutY="94.0" prefHeight="639.0" prefWidth="337.0" spacing="10.0">
+      <VBox fx:id="vBox" layoutX="692.0" layoutY="153.0" prefHeight="537.0" prefWidth="337.0" spacing="10.0">
          <children>
-            <Label layoutX="306.0" layoutY="44.0" prefWidth="120.0" text="批次编号：">
+            <Label text="商品编号：">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="numberLabel" layoutX="327.0" layoutY="73.0" text="Label">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="286.0" layoutY="108.0" prefWidth="120.0" text="产品总数：">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="sumLabel" layoutX="331.0" layoutY="138.0" text="Label">
+            <Label text="Label">
                <font>
                   <Font size="18.0" />
                </font>
@@ -87,6 +77,52 @@
             </Label>
             <DatePicker fx:id="datePicker" prefHeight="23.0" prefWidth="200.0" />
             <Button fx:id="uploadBtn" mnemonicParsing="false" onAction="#handleUpload" prefHeight="23.0" prefWidth="96.0" text="提交" />
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="94.0" prefHeight="53.0" prefWidth="303.0" spacing="5.0">
+         <children>
+            <HBox>
+               <children>
+                  <Label layoutX="339.0" layoutY="29.0" prefHeight="24.0" prefWidth="150.0" text="生产计划编号：">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="numberLabel" layoutX="339.0" layoutY="63.0" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label layoutX="414.0" layoutY="97.0" prefWidth="150.0" text="产品总数：">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="sumLabel" layoutX="414.0" layoutY="131.0" text="Label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="153.0" prefHeight="525.0" prefWidth="642.0">
+         <children>
+            <Label layoutX="404.0" layoutY="83.0" text="商品列表：" />
+            <ScrollPane layoutX="14.0" layoutY="101.0" prefHeight="504.0" prefWidth="642.0">
+               <content>
+                  <TableView prefHeight="508.0" prefWidth="645.0">
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </content>
+            </ScrollPane>
          </children>
       </VBox>
    </children>
