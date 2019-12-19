@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SpotCheckSubmission {
-    public int submitSpotCheck(int planId, String goodsName,double sumQuantity, String goodsUnit,double checkQuantity, double unqualifiedQuantity, double passRate, int isQualified, int stuffNumber, String date) {
+    public int submitSpotCheck(int planId, String goodsName, double sumQuantity, String goodsUnit, double checkQuantity, double unqualifiedQuantity, double passRate, int isQualified, int stuffNumber, String date) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
         int ans = 0;
@@ -41,7 +41,7 @@ public class SpotCheckSubmission {
         } catch (RuntimeException e) {
             System.out.println("____________________Can not submit_________________");
             tx.rollback();
-            ans =0;// 0表示提交失败
+            ans = 0;// 0表示提交失败
             throw e;
         } finally {
             session.close();

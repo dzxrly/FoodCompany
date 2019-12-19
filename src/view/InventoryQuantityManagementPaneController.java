@@ -127,7 +127,7 @@ public class InventoryQuantityManagementPaneController {
                 } else if (newValue.getUserData().toString().equals("2")) {
                     numberLabel.setDisable(true);
                     nameLabel.setDisable(true);
-                    stocksNumberLabel.setDisable(false);
+                    stocksNumberLabel.setDisable(true);
                     inOrOutTypeComboBox.setDisable(false);
                     inputText.setDisable(false);
                     deleteBtn.setVisible(true);

@@ -12,10 +12,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.util.StringConverter;
 import model.OrderBookGoods;
 import model.ProductPlan;
 import service.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -55,16 +58,27 @@ public class ProductionCheckPaneController {
     private ObservableList<OrderBookGoods> orderBookGoods = FXCollections.observableArrayList();
     private DoubleFormatService doubleFormatService = new DoubleFormatService();
     private OrderBookGoods currentGood = new OrderBookGoods();
+    private SpotCheckSubmission spotCheckSubmission = new SpotCheckSubmission();
+    private PropertiesOperation propertiesOperation = new PropertiesOperation();
+    private Double passRate = 0.0;
+    private String operatorNumber;
+    private final String pattern = "yyyy-MM-dd";
+    private ObservableList<String> isPassedOptions = FXCollections.observableArrayList("不合格","合格");
 
     @FXML
     private void initialize() {
         searchBtn.setGraphic((new AddImageForComponent("img/search14x14.png", 14)).getImageView());
         uploadBtn.setGraphic((new AddImageForComponent("img/check.png", 14)).getImageView());
-        passRateLabel.setText("");
         passRateLabel.setTextFill(Color.BLACK);
         numberLabel.setText("");
         sumLabel.setText("");
-        passRateLabel.setText("");
+        checkNumberText.setText("0");
+        disqualifiedNumberText.setText("0");
+        operatorLabel.setText(propertiesOperation.returnOperatorFromProperties("userConfig.properties"));
+        operatorNumber = propertiesOperation.readValue("userConfig.properties", "LoginUserNumber");
+        clearSidePane();
+        isCheckedComboBox.setItems(isPassedOptions);
+        isCheckedComboBox.getSelectionModel().select(0);
 
         TableColumn goodsIdCol = new TableColumn("商品编号");
         goodsIdCol.setSortable(true);
@@ -111,14 +125,40 @@ public class ProductionCheckPaneController {
         goodsList.getColumns().addAll(goodsIdCol, goodsNameCol, orderQuantityCol, priceCol);
         goodsList.setItems(orderBookGoods);
 
+        StringConverter converter = new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter =
+                    DateTimeFormatter.ofPattern(pattern);
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        };
+        datePicker.setConverter(converter);
+        datePicker.setPromptText(pattern.toLowerCase());
+
         checkNumberText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if ((isInteger(newValue) || isDouble(newValue)) && (isInteger(disqualifiedNumberText.getText()) || isDouble(disqualifiedNumberText.getText()))) {
                     if (Double.valueOf(disqualifiedNumberText.getText()) >= Double.valueOf(newValue)) {
                         Double disqualifiedRate = Double.valueOf(disqualifiedNumberText.getText()) / Double.valueOf(newValue);
-                        passRateLabel.setText(String.valueOf((1.0 - disqualifiedRate) * 100).substring(0, 6) + "%");
+                        passRateLabel.setText(doubleFormatService.getSubstringInputDouble((1.0 - disqualifiedRate) * 100, 5) + "%");
                         passRateLabel.setTextFill(Color.BLACK);
+                        passRate = 1 - disqualifiedRate;
                     } else {
                         passRateLabel.setText("抽检数量不能小于不合格数！");
                         passRateLabel.setTextFill(Color.web("#F56C6C"));
@@ -136,8 +176,9 @@ public class ProductionCheckPaneController {
                 if ((isInteger(newValue) || isDouble(newValue)) && (isInteger(checkNumberText.getText()) || isDouble(checkNumberText.getText()))) {
                     if (Double.valueOf(checkNumberText.getText()) >= Double.valueOf(newValue)) {
                         Double disqualifiedRate = Double.valueOf(newValue) / Double.valueOf(checkNumberText.getText());
-                        passRateLabel.setText(String.valueOf((1.0 - disqualifiedRate) * 100).substring(0, 6) + "%");
+                        passRateLabel.setText(doubleFormatService.getSubstringInputDouble((1.0 - disqualifiedRate) * 100, 5) + "%");
                         passRateLabel.setTextFill(Color.BLACK);
+                        passRate = 1 - disqualifiedRate;
                     } else {
                         passRateLabel.setText("抽检数量不能小于不合格数！");
                         passRateLabel.setTextFill(Color.web("#F56C6C"));
@@ -156,7 +197,15 @@ public class ProductionCheckPaneController {
                 goodIdLabel.setText(String.valueOf(currentGood.getGoodsNumber()));
             }
         });
-        //TODO
+    }
+
+    private void clearSidePane() {
+        goodIdLabel.setText("");
+        checkNumberText.setText("0");
+        disqualifiedNumberText.setText("0");
+        passRateLabel.setText("");
+        isCheckedComboBox.getSelectionModel().select(0);
+        datePicker.setValue(LocalDate.now());
     }
 
     @FXML
@@ -173,7 +222,13 @@ public class ProductionCheckPaneController {
 
     @FXML
     private void handleUpload() {
-        //TODO
+        if (!numberLabel.getText().equals("") && !datePicker.getValue().toString().equals("") && !passRateLabel.getText().equals("")) {
+            service_upload.restart();
+        } else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "表单填写有误！", "请检查表单正确性！");
+            alertDialog.showAlert();
+        }
     }
 
     //判断整数（int）
@@ -216,6 +271,33 @@ public class ProductionCheckPaneController {
                         Platform.runLater(() -> {
                             AlertDialog alertDialog = new AlertDialog();
                             alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有结果！", "请确认订单号是否正确！");
+                            alertDialog.showAlert();
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_upload = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int flag = spotCheckSubmission.submitSpotCheck(productPlan.getPlanId(), currentGood.getGoodsName(), currentGood.getOrderQuantity(), currentGood.getGoodsUnit(), Double.valueOf(checkNumberText.getText()), Double.valueOf(disqualifiedNumberText.getText()), passRate, isCheckedComboBox.getSelectionModel().getSelectedIndex(), Integer.valueOf(operatorNumber), datePicker.getValue().toString());
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                            alertDialog.showAlert();
+                            clearSidePane();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "提交失败！");
                             alertDialog.showAlert();
                         });
                     }

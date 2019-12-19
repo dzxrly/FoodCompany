@@ -37,7 +37,6 @@
                <children>
                   <RadioButton fx:id="searchModel" layoutX="711.0" layoutY="63.0" mnemonicParsing="false" text="查询" />
                   <RadioButton fx:id="changeModel" layoutX="817.0" layoutY="63.0" mnemonicParsing="false" text="修改" />
-                  <RadioButton fx:id="addModel" layoutX="931.0" layoutY="63.0" mnemonicParsing="false" text="添加" />
                </children>
             </HBox>
             <Label layoutX="749.0" layoutY="187.0" text="成品编号：">
