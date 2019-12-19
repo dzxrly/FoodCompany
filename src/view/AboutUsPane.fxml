@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AboutUsPaneController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="关于我们">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="52.0" text="FoodCompany食品公司管理系统">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="80.0" text="Powered By" />
+      <Label layoutX="95.0" layoutY="80.0" text="Java 11 &amp; JavaFX 11 &amp; JMetro 8 &amp; Hibernate 5">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <VBox layoutX="14.0" layoutY="110.0" prefHeight="355.0" prefWidth="551.0" spacing="10.0">
+         <children>
+            <Label text="我们的团队：">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox spacing="5.0">
+               <children>
+                  <ImageView fx:id="imageView1" fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox layoutX="122.0" layoutY="135.0" spacing="5.0">
+                     <children>
+                        <Label layoutX="122.0" layoutY="135.0" text="EggTargaryen">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Hyperlink fx:id="hyperlink1" layoutX="122.0" layoutY="158.0" text="https://github.com/dzxrly">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox spacing="5.0">
+               <children>
+                  <ImageView fx:id="imageView2" fitHeight="100.0" fitWidth="100.0" layoutX="82.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox layoutX="222.0" layoutY="251.0" spacing="5.0">
+                     <children>
+                        <Label layoutX="222.0" layoutY="251.0" text="Abraham cb">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Hyperlink fx:id="hyperlink2" layoutX="233.0" layoutY="291.0" text="https://github.com/Miraclecb">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <ImageView fx:id="imageView3" fitHeight="100.0" fitWidth="100.0" layoutX="112.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox layoutX="245.0" layoutY="364.0" spacing="5.0">
+                     <children>
+                        <Label layoutX="245.0" layoutY="364.0" text="LiDayDay">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Hyperlink fx:id="hyperlink3" layoutX="262.0" layoutY="413.0" text="https://github.com/LiDayDay">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

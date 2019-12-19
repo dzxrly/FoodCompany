@@ -70,6 +70,7 @@ public class MainWindowController {
 
     @FXML
     private void initialize() {
+        netStatus.setText("检测中...");
         service_checkNet.restart();
         //读取权限姓名和编号
         userLevel = propertiesOperation.readValue("userConfig.properties", "UserLevel");
@@ -147,7 +148,7 @@ public class MainWindowController {
         //用户管理
         TreeItem<String> itemUserManagement = new TreeItem<>("用户管理");
         itemUserManagement.getChildren().add(new TreeItem<>("员工信息管理"));
-        itemUserManagement.getChildren().add(new TreeItem<>("考勤管理"));
+//        itemUserManagement.getChildren().add(new TreeItem<>("考勤管理"));
         //权限处理
         if (userLevel.substring(0, 1).equals("0")) {
             rootItem.getChildren().add(itemSaleDep);
@@ -178,7 +179,6 @@ public class MainWindowController {
         } else {
             rootItem.getChildren().add(itemWarning);
         }
-        //TODO
         sideMenu.setRoot(rootItem);
 
         //侧边栏监听器
@@ -356,10 +356,6 @@ public class MainWindowController {
 
     }
 
-    private void reReadPropertiesFile() {
-        System.out.println("!!!");
-    }
-
     //显示内部页面
     private void showInsidePane(String fxmlPath) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -383,6 +379,25 @@ public class MainWindowController {
             stage.setScene(scene);
             stage.setTitle("个人信息");
             stage.setResizable(false);
+            stage.getIcons().add(new Image("img/icon.png"));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showAboutUsPane() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("AboutUsPane.fxml"));
+            AnchorPane anchorPane = (AnchorPane) fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
+            new JMetro(scene, Style.LIGHT);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("关于");
+            stage.setResizable(false);
+            stage.getIcons().add(new Image("img/icon.png"));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -401,7 +416,7 @@ public class MainWindowController {
 
     @FXML
     private void handleAbout() {
-        //TODO
+        showAboutUsPane();
     }
 
     public boolean ping(String ipAddress, int pingTimes, int timeOut) {
@@ -455,22 +470,22 @@ public class MainWindowController {
                             for (int i = 0; i < 4; i++) booleans[i] = ping("www.baidu.com", 1, 5000);
                             for (int i = 0; i < 4; i++) if (booleans[i]) number++;
                             if (number == 4 || number == 3) {
-                                Platform.runLater(()->{
+                                Platform.runLater(() -> {
                                     netStatus.setText("网络质量良好");
                                     netStatus.setTextFill(Color.web("#67C23A"));
                                 });
                             } else if (number == 2) {
-                                Platform.runLater(()->{
+                                Platform.runLater(() -> {
                                     netStatus.setText("网络质量一般");
                                     netStatus.setTextFill(Color.web("#E6A23C"));
                                 });
                             } else if (number == 1) {
-                                Platform.runLater(()->{
+                                Platform.runLater(() -> {
                                     netStatus.setText("网络质量很差");
                                     netStatus.setTextFill(Color.web("#F56C6C"));
                                 });
                             } else {
-                                Platform.runLater(()->{
+                                Platform.runLater(() -> {
                                     netStatus.setText("网络已断开，请检查网络连接状况！");
                                     netStatus.setTextFill(Color.web("#F56C6C"));
                                 });

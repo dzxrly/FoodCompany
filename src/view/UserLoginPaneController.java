@@ -134,6 +134,7 @@ public class UserLoginPaneController {
             settingStage.setScene(scene);
             settingStage.setResizable(false);
             settingStage.setTitle("设置");
+            settingStage.getIcons().add(new Image("img/icon.png"));
             settingStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -153,6 +154,7 @@ public class UserLoginPaneController {
             mainWindowStage.setTitle("食品公司管理系统");
             mainWindowStage.setMinHeight(788);
             mainWindowStage.setMinWidth(1280);
+            mainWindowStage.getIcons().add(new Image("img/icon.png"));
             mainWindowStage.show();
             mainWindowStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override

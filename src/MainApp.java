@@ -7,6 +7,7 @@ import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -58,6 +59,7 @@ public class MainApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.setTitle("登录");
+        primaryStage.getIcons().add(new Image("img/icon.png"));
         primaryStage.show();
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
