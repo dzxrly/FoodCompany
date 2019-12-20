@@ -204,6 +204,7 @@ public class UserLoginPaneController {
                         Platform.runLater(() -> {
                             loginInfoLabel.setTextFill(Color.web("#67C23A"));
                             loginInfoLabel.setText("登陆成功！");
+                            timer.cancel();
                             Stage nowStage = (Stage) loginUI.getScene().getWindow();
                             nowStage.hide();
                             showMainPane();
