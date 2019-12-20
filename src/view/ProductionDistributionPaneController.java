@@ -375,6 +375,7 @@ public class ProductionDistributionPaneController {
             return new Task<Integer>() {
                 @Override
                 protected Integer call() throws Exception {
+                    System.out.println(beginDate.getValue().toString());
                     int flag = productionManagement.submitProductionPlanToAssemblyLine(String.valueOf(pipelineAllocationComboBox.getSelectionModel().getSelectedIndex()), String.valueOf(currentPlan.getPlanId()), beginDate.getValue().toString(), endDate.getValue().toString(), String.valueOf(currentPlan.getPlanType()), operatorNumber);
                     if (flag == 1) {
                         Platform.runLater(() -> {

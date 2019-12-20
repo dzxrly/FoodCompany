@@ -119,10 +119,11 @@ public class ProductionManagement {//用于生产分配界面
             tx = session.beginTransaction();
             SimpleDateFormat df = new SimpleDateFormat(" HH:mm:ss");//设置日期格式
             String Date = df.format(new Date()).toString();//获得当前的时分秒
-//            startWorkTime = startWorkTime + Date;
+            startWorkTime = startWorkTime + Date;
+            endWorkTime = endWorkTime + Date;
 
 
-            hql = "update AssemblyLine set planId =" + planId + ",lineState = 0,startWorkTime = " + startWorkTime + ",endWorkTime = " + endWorkTime + ",priority =" + priority + ",stuffNumber =" + stuffNumber + " where lineNumber  =" + lineNumber;
+            hql = "update AssemblyLine set planId = " + planId + ",lineState = 0,startWorkTime = " + "'" + startWorkTime + "'" + ",endWorkTime = " + "'" +  endWorkTime + "'" + ",priority = " + priority + ",stuffNumber = " + stuffNumber + " where lineNumber  = " + lineNumber;
             Query query = session.createQuery(hql);
             query.executeUpdate();
             System.out.println("____________________Update AssemblyLine_________________");

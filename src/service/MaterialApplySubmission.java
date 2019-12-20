@@ -17,7 +17,7 @@ public class MaterialApplySubmission {//用于生产车间 原料申请的提交
 
         try {
             tx = session.beginTransaction();
-            hql = "update Material set stocks = stocks -" + quantity + "where materialId =  " + materialId;
+            hql = "update Material set stocks = stocks - " + quantity + " where materialId = " + materialId;
             session.createQuery(hql).executeUpdate();
 
             ans = 1;

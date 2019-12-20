@@ -182,7 +182,7 @@ public class OrderInfoSearchController {
                 orderBookGoodsList.clear();
                 currentSelected = searchData.get(orderListTable.getSelectionModel().getSelectedIndex());
                 orderNumber.setText(String.valueOf(currentSelected.getOrderId()));
-                if (currentSelected.getOrderType() == 1) orderTypeLabel.setText("现货订单");
+                if (currentSelected.getOrderType() == 0) orderTypeLabel.setText("现货订单");
                 else orderTypeLabel.setText("预定订单");
                 if (!currentSelected.getCompanyName().equals(""))
                     customerNameText.setText(currentSelected.getCompanyName());
