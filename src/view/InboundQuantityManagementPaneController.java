@@ -165,7 +165,12 @@ public class InboundQuantityManagementPaneController {
 
     @FXML
     private void handleMarkHasFinished() {
-        //TODO
+        if (!numberLabel.getText().equals("")) service_upload.restart();
+        else {
+            AlertDialog alertDialog = new AlertDialog();
+            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "没有选中订单！", "请选择一个订单!");
+            alertDialog.showAlert();
+        }
     }
 
     Service<Integer> service_search = new Service<Integer>() {
@@ -234,6 +239,34 @@ public class InboundQuantityManagementPaneController {
                             alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "该订单没有被交付!", "请查询其他订单！");
                             alertDialog.showAlert();
                             clearSidePane();
+                        });
+                    }
+                    return null;
+                }
+            };
+        }
+    };
+
+    Service<Integer> service_upload = new Service<Integer>() {
+        @Override
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int flag = shippingDepOperation.updateIfPass(currentPlan.getPlanId());
+                    if (flag == 1) {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "提交成功！", "提交成功！");
+                            alertDialog.showAlert();
+                            productPlanObservableList.clear();
+                            clearSidePane();
+                        });
+                    } else {
+                        Platform.runLater(() -> {
+                            AlertDialog alertDialog = new AlertDialog();
+                            alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "提交失败！", "提交失败！");
+                            alertDialog.showAlert();
                         });
                     }
                     return null;

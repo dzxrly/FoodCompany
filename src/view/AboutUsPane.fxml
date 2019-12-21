@@ -15,7 +15,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="52.0" text="FoodCompany食品公司管理系统">
+      <Label layoutX="14.0" layoutY="52.0" text="FoodCompany食品公司管理系统 Ver1.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
