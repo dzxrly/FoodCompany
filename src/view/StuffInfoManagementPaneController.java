@@ -270,6 +270,7 @@ public class StuffInfoManagementPaneController {
                     emailText.setDisable(false);
                     idNumberText.setDisable(false);
                     genderComboBox.setDisable(false);
+                    secondLevelComboBox.setDisable(false);
                     printBtn.setVisible(false);
                     btnGroup.setVisible(false);
                     addAllStuffBtn.setDisable(false);
@@ -288,6 +289,7 @@ public class StuffInfoManagementPaneController {
                     genderComboBox.setDisable(true);
                     printBtn.setVisible(true);
                     btnGroup.setVisible(false);
+                    secondLevelComboBox.setDisable(true);
                     addAllStuffBtn.setDisable(true);
                     printSaveDeleteBtnGroup.setVisible(true);
                     infoInputVBox.getChildren().remove(19);
@@ -451,7 +453,6 @@ public class StuffInfoManagementPaneController {
                 !emailText.getText().equals("") &&
                 !phoneText.getText().equals("")) {
             service_addStuff.restart();
-            clearSidePane();
         } else {
             AlertDialog alertDialog = new AlertDialog();
             alertDialog.createAlert(Alert.AlertType.ERROR, "错误", "表单填写错误！", "请重新填写！");
@@ -518,6 +519,7 @@ public class StuffInfoManagementPaneController {
                             AlertDialog alertDialog = new AlertDialog();
                             alertDialog.createAlert(Alert.AlertType.INFORMATION, "成功", "添加成功！", "员工已添加！");
                             alertDialog.showAlert();
+                            clearSidePane();
                         });
                     } else {
                         Platform.runLater(() -> {
